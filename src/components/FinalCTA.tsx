@@ -1,0 +1,84 @@
+import { motion } from 'motion/react';
+import React from 'react';
+import { Rocket, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const FinalCTA = () => {
+  return (
+    <>
+      {/* The "Under" Section that gets revealed */}
+      <footer className="fixed bottom-0 left-0 w-full h-screen bg-ink text-paper text-center flex flex-col justify-center -z-10 py-12">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full space-y-8 md:space-y-12">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-[10px] uppercase tracking-[0.6em] font-bold text-accent block mb-2"
+          >
+            POST-FOOTER
+          </motion.span>
+          
+          {/* Availability Pill */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-2 rounded-full"
+          >
+            <Rocket size={14} className="text-accent" />
+            <span className="text-[10px] uppercase font-bold tracking-[0.2em] opacity-100">Limited spots available for Q1 2026</span>
+          </motion.div>
+
+          {/* Main Heading */}
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
+            className="text-5xl md:text-7xl lg:text-[8vw] font-display leading-[0.85] uppercase tracking-tighter"
+          >
+            Let's build<br />something<br />extraordinary.
+          </motion.h2>
+
+          {/* Buttons */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4"
+          >
+            <Link 
+              to="/contact" 
+              className="px-10 py-5 bg-paper text-ink rounded-full font-display text-lg uppercase hover:bg-accent transition-all duration-300 transform hover:-translate-y-1"
+            >
+              Start your project
+            </Link>
+            <Link 
+              to="/portfolio" 
+              className="text-xs font-display uppercase tracking-widest border-b border-transparent hover:border-paper transition-all py-2"
+            >
+              View our work
+            </Link>
+          </motion.div>
+
+          {/* Trust Section */}
+          <div className="pt-16 border-t border-white/5 space-y-8">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-8 opacity-20">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-pointer group">
+                  <Globe size={32} className="group-hover:text-accent transition-colors" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-8 text-[10px] uppercase tracking-[0.4em] font-semibold opacity-60">
+            © 2026 ICONIK STUDIOS. ALL RIGHTS RESERVED.
+          </div>
+        </div>
+      </footer>
+
+      {/* The Spacer that allows the reveal to happen */}
+      <div className="h-screen pointer-events-none" />
+    </>
+  );
+};
+
+export default FinalCTA;

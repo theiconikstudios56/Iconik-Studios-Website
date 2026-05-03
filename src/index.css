@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Anton", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-tan: #ffffff;
+  --color-steel: #F0F4F8; /* Light gray with a slight blue tint */
+  --color-burnt-orange: #cd7f32; /* Bronze accent */
+  --color-deep-green: #2D3A1A;
+  --color-ink: #000000; /* Pure Black */
+  --color-accent: #cd7f32;
+  --color-paper: #ffffff;
+  --color-logo-blue: #0000FF;
+  
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* Elegant Carousel Styles */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ffffff; /* white (formerly tan) */
+}
+
+.carousel-bg-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transition: opacity 1s ease;
+}
+
+.carousel-inner {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .carousel-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.carousel-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 2rem 2rem;
+  z-index: 20;
+}
+
+@media (min-width: 768px) {
+  .carousel-content {
+    padding: 2rem 4rem 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-content {
+    padding: 2rem 6rem 6rem;
+  }
+}
+
+.carousel-content-inner {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-collection-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #000000;
+}
+
+.carousel-num-line {
+  width: 2rem;
+  height: 1px;
+  background-color: #000000;
+}
+
+.carousel-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+  color: #000000; /* ink */
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .carousel-title {
+    font-size: 5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .carousel-title {
+    font-size: 6.5rem;
+  }
+}
+
+.carousel-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.carousel-description {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.8);
+  max-width: 440px;
+  margin-bottom: 0;
+}
+
+.carousel-image-container {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.carousel-image-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.transitioning {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+@layer base {
+  :root {
+    --text-color: #000000;
+  }
+  * {
+    cursor: none !important;
+  }
+  a, button, input, select, textarea, [role="button"] {
+    cursor: none !important;
+  }
+  body {
+    color: var(--text-color);
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+    @apply font-sans antialiased overflow-x-hidden;
+  }
+  
+  h1, h2, h3 {
+    @apply font-display uppercase tracking-tighter;
+  }
+}
+
+.grain-overlay {
+  display: none;
+}
+
+.horizontal-scroll-container {
+  @apply flex overflow-x-auto snap-x snap-mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-item {
+  @apply snap-center shrink-0;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
+.text-outline-ink {
+  -webkit-text-stroke: 1px #000000;
+  color: transparent;
+}
+
+.mask-fade-up {
+  mask-image: linear-gradient(to top, black 0%, transparent 100%);
+}
