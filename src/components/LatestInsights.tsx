@@ -5,33 +5,33 @@ import { ArrowUpRight } from 'lucide-react';
 const insights = [
   {
     id: 1,
-    title: "AIR JORDAN 5 \"WOLF GREY\"",
+    title: "How to Automate Lead Capture on a New Website",
     date: "26.02.26",
-    category: "DESIGN",
+    category: "AI",
     image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200",
     link: "/blog"
   },
   {
     id: 2,
-    title: "AIR JORDAN 6 \"SALESMAN\"",
+    title: "Automate Client Onboarding Website Setup",
     date: "18.02.26",
-    category: "AI",
+    category: "STRATEGY",
     image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1200",
     link: "/blog"
   },
   {
     id: 3,
-    title: "BASS CLUB FOR AJ4 FLIGHT CLUB",
+    title: "Connect CRM to Website for Automated Follow Ups",
     date: "21.01.26",
-    category: "STRATEGY",
+    category: "AUTOMATION",
     image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1200",
     link: "/blog"
   },
   {
     id: 4,
-    title: "NEW BALANCE GATOR RUN",
+    title: "Why Your Website Is Losing You Leads (And How to Fix It)",
     date: "19.01.26",
-    category: "BRANDING",
+    category: "DESIGN",
     image: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1200",
     link: "/blog"
   }

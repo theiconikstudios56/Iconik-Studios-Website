@@ -13,8 +13,26 @@ const Maintenance = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Iconik Studios Website Guardianship",
+    "description": "Comprehensive website management, 24/7 monitoring, security patching, and performance tuning.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "offerCount": "3",
+      "lowPrice": "499",
+      "highPrice": "1999",
+      "priceCurrency": "USD"
+    }
+  };
+
   return (
-    <Layout>
+    <Layout
+      title="Website Management Services & Guardianship | Iconik Studios"
+      description="Secure your digital assets with Iconik Studios. We offer comprehensive website management services, 24/7 monitoring, and performance tuning."
+    >
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="bg-ink min-h-screen">
         {/* Hero Section */}
         <section className="relative px-6 lg:px-12 pt-40 pb-32 overflow-hidden">
@@ -33,7 +51,7 @@ const Maintenance = () => {
                 Peace <br /> Of Mind <br /> <span className="text-burnt-orange italic">Guaranteed.</span>
               </h1>
               <p className="max-w-xl text-paper text-xl leading-relaxed mb-12">
-                Your digital asset is too valuable to leave to chance. We provide 24/7 monitoring, critical security patching, and proactive performance tuning.
+                Your digital asset is too valuable to leave to chance. We offer comprehensive website management services, including 24/7 monitoring, critical security patching, and proactive performance tuning. Never worry about uptime or outdated plugins again.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                 <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]">

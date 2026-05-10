@@ -76,7 +76,10 @@ function Home() {
   }, []);
 
   return (
-    <Layout>
+    <Layout 
+      title="AI Powered User Experience Design Agency | Iconik Studios" 
+      description="Iconik Studios is a boutique design and automation agency. We engineer digital legacies with high-end aesthetic strategy and robust backend automation."
+    >
       <div className="relative z-10 bg-ink">
         <Hero />
         <PropertyShowcase />

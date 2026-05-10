@@ -77,6 +77,11 @@ export default function ProjectPage() {
                 </span>
               ))}
             </div>
+            {project.description && (
+              <p className="mt-6 text-sm text-ink opacity-80 leading-relaxed font-mono">
+                {project.description}
+              </p>
+            )}
           </motion.div>
 
           <motion.div

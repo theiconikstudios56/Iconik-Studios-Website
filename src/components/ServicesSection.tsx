@@ -8,10 +8,10 @@ export default function ServicesSection() {
         <div className="md:col-span-9">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16">
             {[
-              { title: 'Bespoke Web Design', desc: 'Crafting unique digital experiences that resonate with your brand identity and captivate your audience.' },
-              { title: 'AI Automation', desc: 'Implementing intelligent workflows that streamline your operations and scale your business growth.' },
-              { title: 'Brand Strategy', desc: 'Defining your brand voice and positioning to ensure you stand out in a crowded digital landscape.' },
-              { title: 'Digital Orchestration', desc: 'Managing your entire digital ecosystem for seamless performance and maximum impact.' },
+              { title: 'Web Design', desc: 'Modern, responsive websites engineered to engage your audience and turn visitors into customers. Built to convert, not just impress.' },
+              { title: 'AI Automation', desc: 'Autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time.' },
+              { title: 'Marketing', desc: 'Strategic marketing assets that amplify your reach and directly support growth. From digital ads to automated review generation.' },
+              { title: 'Brand Identity', desc: 'Cohesive brand identities that communicate purpose, personality, and credibility from the first impression.' },
             ].map((service, i) => (
               <div key={service.title} className="flex flex-col gap-6">
                 <span className="text-2xl font-display uppercase tracking-tight text-burnt-orange">{service.title}</span>

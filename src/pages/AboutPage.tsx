@@ -9,7 +9,10 @@ import FinalCTA from '../components/FinalCTA';
 
 export default function AboutPage() {
   return (
-    <Layout>
+    <Layout
+      title="About Iconik Studios | Elite Web Design & Automation"
+      description="Learn about Iconik Studios, our philosophy, and how we engineer digital legacies for discerning brands."
+    >
       <div className="bg-tan text-ink selection:bg-burnt-orange selection:text-tan">
         <AboutHero />
         <AboutStory />

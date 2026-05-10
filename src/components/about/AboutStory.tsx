@@ -24,13 +24,13 @@ export default function AboutStory() {
               </h3>
               <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-100 italic">
                 <p>
-                  "We believe that the internet has become too loud and too similar. Our mission is to strip away the noise and return to intentional, purposeful design that moves the needle. Every pixel we place and every line of code we write is driven by a commitment to longevity and impact."
+                  "We believe the internet has become too loud and too similar. Our mission is to strip away the noise and return to intentional, purposeful design that moves the needle. Every pixel we place and every line of code we write is driven by a commitment to longevity and measurable impact."
                 </p>
                 <p>
-                  "At Iconik, we don't just build websites; we engineer digital legacy. We understand that in a world of fleeting attention, depth is the ultimate differentiator. Our approach combines old-school craftsmanship with forward-thinking technical precision to ensure your brand doesn't just exist online—it dominates."
+                  "At Iconik, we don't just build websites—we engineer digital legacies. In a world of fleeting attention, depth is the ultimate differentiator. Our approach combines old-school craftsmanship with forward-thinking technical precision. By blending high-end aesthetic strategy with robust backend automation, we ensure your brand doesn't just exist online—it dominates."
                 </p>
                 <p>
-                  "We are a small, elite collective focused on quality over quantity. This allows us to provide undivided attention to every partner, ensuring that the results we ship are nothing short of extraordinary."
+                  "We operate as a small, elite collective—quality over quantity, always. That focus means every partner receives our full attention, and every project we ship is a 'done-for-you' masterpiece built to scale."
                 </p>
               </div>
             </motion.div>

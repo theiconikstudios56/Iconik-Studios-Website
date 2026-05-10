@@ -51,7 +51,7 @@ export default function Hero() {
               className="text-sm md:text-base font-light max-w-2xl text-tan leading-relaxed font-mono"
             >
               [SYSTEM_STATUS: ACTIVE] <br />
-              WE BUILD HIGH-CONVERTING WEBSITES AND AI AUTOMATION SYSTEMS FOR BUSINESSES THAT VALUE PRECISION, AESTHETICS, AND THE ART OF THE CHILL.
+              We build high-converting websites and AI automation systems for businesses that value precision, aesthetics, and results that actually move the needle. As a premier ai powered user experience design agency, we ensure your digital presence is built to scale your revenue while reducing manual labor.
             </motion.p>
 
             <motion.div

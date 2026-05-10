@@ -6,38 +6,38 @@ import IconikLogo from '../components/IconikLogo';
 const BLOG_POSTS = [
   {
     id: 1,
-    title: "AIR JORDAN 5 \"WOLF GREY\"",
-    excerpt: "EXPLORING THE INTERSECTION OF LUXURY AESTHETICS AND CUTTING-EDGE AI AUTOMATION.",
+    title: "How to Automate Lead Capture on a New Website",
+    excerpt: "If your team is still manually handling lead follow-up, you're leaving serious money on the table. Discover how automated lead capture transforms your website.",
     date: "26.02.26",
     author: "ICONIK TEAM",
-    category: "DESIGN",
+    category: "AI",
     image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200"
   },
   {
     id: 2,
-    title: "AIR JORDAN 6 \"SALESMAN\"",
-    excerpt: "WHY EVERY MODERN VISIONARY NEEDS A CUSTOM AI WORKFLOW TO HANDLE THE HEAVY LIFTING.",
+    title: "Automate Client Onboarding Website Setup",
+    excerpt: "A seamless client onboarding experience shouldn't require endless emails. Learn how to design an autonomous onboarding flow that delights clients and saves hours.",
     date: "18.02.26",
     author: "ICONIK TEAM",
-    category: "AI",
+    category: "STRATEGY",
     image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1200"
   },
   {
     id: 3,
-    title: "BASS CLUB FOR AJ4 FLIGHT CLUB",
-    excerpt: "HOW TO DESIGN WEBSITES THAT DON'T JUST LOOK GOOD, BUT ACTUALLY DRIVE GROWTH.",
+    title: "Connect CRM to Website for Automated Follow Ups",
+    excerpt: "Your website is only as powerful as the systems behind it. We break down the exact strategies to sync your site with GoHighLevel or HubSpot for instant nurturing.",
     date: "21.01.26",
     author: "ICONIK TEAM",
-    category: "STRATEGY",
+    category: "AUTOMATION",
     image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1200"
   },
   {
     id: 4,
-    title: "NEW BALANCE GATOR RUN",
-    excerpt: "DEFINING YOUR DIGITAL IDENTITY WITH A MASCULINE EDGE AND STRATEGIC POSITIONING.",
+    title: "Why Your Website Is Losing You Leads (And How to Fix It)",
+    excerpt: "Are visitors bouncing before they convert? We explore the top design mistakes that kill conversion rates and how to engineer a frictionless user journey.",
     date: "19.01.26",
     author: "ICONIK TEAM",
-    category: "BRANDING",
+    category: "DESIGN",
     image: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1200"
   },
   {
@@ -80,7 +80,10 @@ const BLOG_POSTS = [
 
 export default function BlogPage() {
   return (
-    <Layout>
+    <Layout
+      title="Insights & Strategies | AI Automation Blog | Iconik Studios"
+      description="Read the latest insights on AI automation, web development, and digital strategy to scale your business effortlessly."
+    >
       <div className="bg-[#000000] min-h-screen text-white font-sans selection:bg-burnt-orange selection:text-white" data-bg="black">
         {/* Navigation spacer */}
         <div className="h-24 md:h-32" />

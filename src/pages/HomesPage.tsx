@@ -316,7 +316,10 @@ export default function HomesPage() {
   }, []);
 
   return (
-    <Layout>
+    <Layout
+      title="Real Estate Web Design | Iconik Homes | Iconik Studios"
+      description="Premium web design and AI property search solutions tailored for luxury real estate professionals."
+    >
       <div className="relative z-10 bg-ink text-paper selection:bg-accent selection:text-ink overflow-x-hidden min-h-screen">
         <Hero />
         <Showcase />

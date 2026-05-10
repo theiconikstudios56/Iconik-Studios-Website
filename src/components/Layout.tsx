@@ -1,13 +1,29 @@
 import { motion, useScroll, useSpring } from 'motion/react';
 import Navbar from './Navbar';
 import BackgroundTransition from './BackgroundTransition';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 interface LayoutProps {
   children: ReactNode;
+  title?: string;
+  description?: string;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, title, description }: LayoutProps) {
+  useEffect(() => {
+    if (title) {
+      document.title = title;
+    }
+    if (description) {
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.setAttribute('content', description);
+    }
+  }, [title, description]);
   const { scrollYProgress } = useScroll();
   
   const scaleX = useSpring(scrollYProgress, {

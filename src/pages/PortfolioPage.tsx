@@ -12,6 +12,17 @@ export default function PortfolioPage() {
   const [activeIndex, setActiveIndex] = useState(1);
   const [itemWidth, setItemWidth] = useState(0);
 
+  useEffect(() => {
+    document.title = "Our Work | Case Studies & Portfolio | Iconik Studios";
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', "Explore our portfolio of high-performing websites, automated workflows, and CRM integrations for elite brands.");
+  }, []);
+
   // Scroll Progress
   const { scrollYProgress } = useScroll({
     target: targetRef,

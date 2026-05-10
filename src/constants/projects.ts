@@ -10,17 +10,19 @@ export interface Project {
   gallery: string[];
   nextId: string;
   prevId: string;
+  description?: string;
 }
 
 export const PROJECT_DATA: Record<string, Project> = {
   'kinetic-solutions-group': {
     id: 'kinetic-solutions-group',
     shortName: 'KSG',
-    title: 'KINETIC SOLUTIONS GROUP',
+    title: 'KINETIC SOLUTIONS',
     category: 'REBRAND / WEB SUITE',
     client: 'KINETIC SOLUTIONS',
-    services: ['BRANDING', 'WEB', 'WORDPRESS'],
+    services: ['BRANDING', 'WEB', 'AUTOMATION'],
     year: '2024',
+    description: 'A custom Med Spa automation workflow that increased bookings by 30%. We implemented seamless CRM syncing and automated follow-ups to eliminate manual lead handling.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000',
     gallery: [
       'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600',
@@ -38,6 +40,7 @@ export const PROJECT_DATA: Record<string, Project> = {
     client: 'LUXE GLOBAL',
     services: ['WEB DESIGN', 'AI', 'UX/UI'],
     year: '2024',
+    description: 'An AI-powered search tool and custom web platform for high-end properties. The new architecture significantly reduced bounce rates and improved qualified lead capture.',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000',
     gallery: [
       'https://images.unsplash.com/photo-1600607687940-4e2a09695d51?auto=format&fit=crop&q=80&w=1600',

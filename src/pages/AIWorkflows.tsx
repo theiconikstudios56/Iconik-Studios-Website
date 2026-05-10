@@ -14,7 +14,10 @@ const AIWorkflows = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout
+      title="AI Automation Agency | Custom Zapier & Make.com Integrations | Iconik"
+      description="As a premier ai automation agency, we build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time."
+    >
       <div className="bg-ink min-h-screen">
         {/* Hero Section */}
         <section className="relative px-6 lg:px-12 pt-40 pb-32 overflow-hidden">
@@ -33,7 +36,7 @@ const AIWorkflows = () => {
                 Scale <br /> Without <br /> <span className="text-burnt-orange italic">Friction.</span>
               </h1>
               <p className="max-w-xl text-paper text-xl leading-relaxed mb-12">
-                We bridge the gap between static operations and intelligent systems. Our custom AI agents handle the repetitive, so your experts can focus on the visionary.
+                Stop drowning in manual tasks. As a premier ai automation agency, we build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time. We bridge the gap between static operations and intelligent systems, allowing your experts to focus on visionary work.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                 <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]">

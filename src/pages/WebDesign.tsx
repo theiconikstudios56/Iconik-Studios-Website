@@ -15,7 +15,10 @@ const WebDesign = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout 
+      title="Website Development for Workflow Automation | Iconik Studios" 
+      description="Turn your website into an automated lead generation machine with Iconik Studios. We specialize in custom web design with zapier automation."
+    >
       <div className="bg-ink min-h-screen">
         {/* Hero Section - The Hook */}
         <section className="relative px-6 lg:px-12 pt-40 pb-32 overflow-hidden">
@@ -34,7 +37,7 @@ const WebDesign = () => {
                 Stop Losing <br /> Leads To <br /> <span className="text-burnt-orange italic">Bad Design.</span>
               </h1>
               <p className="max-w-xl text-paper text-xl leading-relaxed mb-12">
-                We replace exploratory "UX" with Conversion-Centered Architecture. Every pixel is engineered to systematically nudge your visitors toward a single, business-driven objective.
+                Most websites are built to look good in a portfolio. Ours are built to convert. We specialize in website development for workflow automation, bridging the gap between stunning web design and backend AI efficiency. Every layout decision is engineered to systematically move your visitors toward a single, business-driven objective.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                 <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]">
@@ -87,17 +90,17 @@ const WebDesign = () => {
               {[
                 {
                   title: "Cognitive Load Reduction",
-                  desc: "We break complex data into manageable chunks, facilitating rapid scanning and instant decision-making.",
+                  desc: "We break complex information into scannable, digestible sections—making it effortless for visitors to understand your value and take the next step.",
                   icon: MousePointer2
                 },
                 {
-                  title: "Leak Prevention",
-                  desc: "We ruthlessly remove global navigation and sidebars that tempt users away from the conversion path.",
+                  title: "Automated Lead Capture",
+                  desc: "Our designs feature deep integration with Zapier and Make.com. Get custom web design with zapier automation that instantly routes prospects to your CRM the moment they click submit.",
                   icon: Target
                 },
                 {
                   title: "1:1 Goal Alignment",
-                  desc: "Every pixel on the page is aligned with a single campaign goal. No distractions, no '99-cent hotdogs'.",
+                  desc: "Every element on the page is aligned with one campaign objective. No distractions. No competing messages. Just a clear path from visitor to customer.",
                   icon: LayoutIcon
                 }
               ].map((benefit, i) => (

@@ -4,12 +4,27 @@ import { useState } from 'react';
 
 export const Pricing = () => {
   const plans = [
-    { name: 'Starter', price: '$2,000', items: ['Tailored layouts', 'Core SEO', 'Mobile-first', 'UI Framework'] },
-    { name: 'Growth', price: '$4,000', items: ['Neural interactions', 'Complete SEO', 'Adaptive design', 'CMS Setup', 'Optimsation'], featured: true },
+    { name: 'Starter', price: '$2,500', items: ['Custom Web Design', 'Core SEO Setup', 'Mobile Responsive', 'Basic Lead Capture'] },
+    { name: 'Growth', price: '$5,000', items: ['Advanced Web Design', 'Complete SEO Strategy', 'Make.com Integrations', 'CRM Setup', 'Copywriting'], featured: true },
   ];
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Iconik Studios Services",
+    "description": "Premium Web Design and AI Automation services.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "offerCount": "2",
+      "lowPrice": "2500",
+      "highPrice": "5000",
+      "priceCurrency": "USD"
+    }
+  };
 
   return (
     <section id="pricing" className="py-32 px-6 lg:px-12 bg-ink">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center space-y-4">
           <h2 className="text-7xl md:text-9xl text-paper">Pricing</h2>
@@ -53,13 +68,28 @@ export const Pricing = () => {
 export const FAQ = () => {
   const [active, setActive] = useState<number | null>(0);
   const questions = [
-    { q: "What services do you offer?", a: "We specialize in branding, website design, and AI-powered workflow automation." },
-    { q: "How long is a project timeline?", a: "Standard builds take 4-8 weeks depending on integration complexity." },
-    { q: "Do you work with any industry?", a: "Yes, our strategy is sector-agnostic, focusing on growth fundamentals." },
+    { q: "Do you only work with Med Spas and Real Estate?", a: "While we have specialized systems for Med Spas, Real Estate, HVAC, and Consultants, our core methodology—Conversion-Centered Architecture—applies to any service-based business looking to scale." },
+    { q: "What makes your websites different from a template?", a: "Templates are built to look pretty. Our websites are custom-engineered to convert. We focus on cognitive load reduction, 1:1 goal alignment, and seamless integration with your CRM." },
+    { q: "How long does a website or automation build take?", a: "Standard website builds typically take 4-6 weeks. Complex AI automation systems and custom agent integrations can take 6-8 weeks, depending on the scope of your operations." },
+    { q: "Do you offer ongoing support?", a: "Absolutely. We offer tiered 'Guardianship' maintenance packages that include 24/7 monitoring, security patching, and strategic performance tuning." },
   ];
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": questions.map(q => ({
+      "@type": "Question",
+      "name": q.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": q.a
+      }
+    }))
+  };
 
   return (
     <section className="py-32 px-6 lg:px-12 bg-ink">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-8 sticky top-32 h-fit">
           <h2 className="text-7xl md:text-9xl text-paper">FAQ</h2>
