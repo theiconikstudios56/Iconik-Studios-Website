@@ -43,6 +43,7 @@ import SMBEmpowerment from './components/SMBEmpowerment';
 import FuzzyLineupSection from './components/FuzzyLineupSection';
 import HomesContact from './components/HomesContact';
 import LatestInsights from './components/LatestInsights';
+import BlogArticlePage from './pages/BlogArticlePage';
 
 function StaticSection({ children, index }: { children: React.ReactNode, index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -186,6 +187,7 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/homes" element={<HomesPage />} />
         <Route path="/project/:id" element={<ProjectPage />} />
+        <Route path="/blog/:slug" element={<BlogArticlePage />} />
       </Routes>
     </Router>
   );
