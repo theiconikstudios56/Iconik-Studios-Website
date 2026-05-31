@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { useRef } from 'react';
+import mascotImg from '../../assets/images/fuzzy-squad.png';
 
 export default function AboutStory() {
   const container = useRef(null);
@@ -22,15 +23,18 @@ export default function AboutStory() {
               <h3 className="text-5xl md:text-7xl font-display uppercase leading-none tracking-tighter">
                 The <span className="text-burnt-orange italic">Philosophy</span>
               </h3>
-              <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-100 italic">
+              <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-90 font-mono">
                 <p>
-                  "We believe the internet has become too loud and too similar. Our mission is to strip away the noise and return to intentional, purposeful design that moves the needle. Every pixel we place and every line of code we write is driven by a commitment to longevity and measurable impact."
+                  The internet is loud. Everyone looks the same, sounds the same, and builds the same.
                 </p>
                 <p>
-                  "At Iconik, we don't just build websites—we engineer digital legacies. In a world of fleeting attention, depth is the ultimate differentiator. Our approach combines old-school craftsmanship with forward-thinking technical precision. By blending high-end aesthetic strategy with robust backend automation, we ensure your brand doesn't just exist online—it dominates."
+                  Iconik Studios was founded in 2019 with one conviction: intentional engineering beats generic output, every time. For over six years, we've been quietly building something different — a studio where creative craftsmanship and technical precision aren't in tension, they're inseparable.
                 </p>
                 <p>
-                  "We operate as a small, elite collective—quality over quantity, always. That focus means every partner receives our full attention, and every project we ship is a 'done-for-you' masterpiece built to scale."
+                  We're a high-end web design and AI automation agency, but that title barely covers it. We don't just build websites — we engineer growth systems. For small to medium-sized businesses ready to operate at a higher level, we blend striking visual design with intelligent backend automation so that every visitor is captured, every lead is nurtured, and every opportunity converts.
+                </p>
+                <p className="text-burnt-orange font-bold uppercase tracking-wider">
+                  No missed leads. No wasted traffic. Just results.
                 </p>
               </div>
             </motion.div>
@@ -41,12 +45,11 @@ export default function AboutStory() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="flex items-center justify-center"
             >
-               <div className="w-full aspect-[4/5] bg-white/5 relative grayscale group overflow-hidden rounded-2xl">
+               <div className="w-full aspect-[4/5] bg-white/5 relative group overflow-hidden rounded-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200" 
-                    alt="Abstract Architecture" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-60"
-                    referrerPolicy="no-referrer"
+                    src={mascotImg} 
+                    alt="Iconik Fuzzies Mascot" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-90"
                   />
                   <div className="absolute inset-0 bg-burnt-orange/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   
@@ -56,8 +59,6 @@ export default function AboutStory() {
                </div>
             </motion.div>
           </div>
-
-          {/* Bottom scrolling text removed or kept? User only said top. I'll remove it to keep it clean on black background */}
         </div>
       </div>
     </section>

@@ -284,7 +284,7 @@ const FAQ = () => {
               >
                 <div className="flex items-center gap-8 text-paper">
                   <span className="font-display opacity-30">0{i + 1}</span>
-                  <span className="text-xl md:text-2xl font-medium">{item.q}</span>
+                  <span className="text-base md:text-lg font-mono uppercase">{item.q}</span>
                 </div>
                 <motion.div animate={{ rotate: active === i ? 45 : 0 }} className="text-paper">
                   <X size={24} />

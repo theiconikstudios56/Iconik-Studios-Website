@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import Layout from '../components/Layout';
 import { Shield, Clock, HardDrive, RefreshCw, CheckCircle2, Lock, Monitor, Zap, HeartPulse, ChevronRight } from 'lucide-react';
-import AboutProcess from '../components/about/AboutProcess';
+import MaintenanceProcess from '../components/MaintenanceProcess';
 import ParallaxLogoSection from '../components/ParallaxLogoSection';
 import HomesContact from '../components/HomesContact';
 import LatestInsights from '../components/LatestInsights';
 import FinalCTA from '../components/FinalCTA';
+import fuzzyMaintenanceImage from '../assets/images/funny-maintain.png';
+import fuzzyClosingImage from '../assets/images/fuzzy-closing.png';
 
 const Maintenance = () => {
   useEffect(() => {
@@ -21,8 +23,8 @@ const Maintenance = () => {
     "offers": {
       "@type": "AggregateOffer",
       "offerCount": "3",
-      "lowPrice": "499",
-      "highPrice": "1999",
+      "lowPrice": "500",
+      "highPrice": "2000",
       "priceCurrency": "USD"
     }
   };
@@ -35,50 +37,38 @@ const Maintenance = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="bg-ink min-h-screen">
         {/* Hero Section */}
-        <section className="relative px-6 lg:px-12 pt-40 pb-32 overflow-hidden">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <section className="relative px-6 lg:px-12 pt-24 pb-12 overflow-hidden min-h-[100svh] flex items-center">
+          <div className="absolute inset-0 z-0">
+            <img
+              src={fuzzyMaintenanceImage}
+              alt="Iconik Website Guardianship"
+              className="w-full h-full object-cover brightness-[0.4]"
+            />
+            <div className="absolute inset-0 bg-ink/30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink" />
+          </div>
+
+          <div className="max-w-7xl mx-auto relative z-10 w-full">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="lg:col-span-7 z-10"
+              className="max-w-4xl"
             >
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-[1px] bg-burnt-orange" />
                 <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]">Vigilance / 03</span>
               </div>
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-display text-tan uppercase leading-[0.8] mb-12 tracking-tighter">
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85">
                 Peace <br /> Of Mind <br /> <span className="text-burnt-orange italic">Guaranteed.</span>
               </h1>
-              <p className="max-w-xl text-paper text-xl leading-relaxed mb-12">
-                Your digital asset is too valuable to leave to chance. We offer comprehensive website management services, including 24/7 monitoring, critical security patching, and proactive performance tuning. Never worry about uptime or outdated plugins again.
+              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8">
+                Your website and automation systems are living assets that power your business every single day. We provide comprehensive maintenance for both your website and AI workflows — including 24/7 monitoring, security patching, performance tuning, and ongoing optimization of your Fuzzy agents — so everything stays protected, sharp, and running at full capacity while you focus on growing your business.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                 <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]">
                   Secure My Website
                 </button>
-                <div className="flex flex-col justify-center text-paper font-mono text-[10px] uppercase tracking-widest italic">
-                  *24/7 Monitoring included in all tiers
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="lg:col-span-5 relative"
-            >
-              <div className="aspect-square bg-tan rounded-3xl overflow-hidden flex items-center justify-center p-12">
-                 <div className="w-full h-full border-2 border-burnt-orange/20 rounded-2xl flex flex-col items-center justify-center gap-8 relative overflow-hidden group">
-                    <HeartPulse size={120} className="text-burnt-orange animate-pulse" />
-                    <div className="text-center">
-                      <p className="font-display text-2xl uppercase text-ink">System Status</p>
-                      <p className="font-mono text-xs uppercase tracking-widest opacity-100">All Nodes Nominal</p>
-                    </div>
-                    {/* Decorative Rings */}
-                    <div className="absolute inset-0 border border-burnt-orange/10 rounded-full scale-150 animate-[spin_20s_linear_infinite]" />
-                 </div>
               </div>
             </motion.div>
           </div>
@@ -90,32 +80,31 @@ const Maintenance = () => {
             <h2 className="text-5xl md:text-7xl font-display uppercase mb-24 max-w-4xl tracking-tighter leading-none text-center mx-auto">
               Proactive Protection <br /> For High-Value Assets.
             </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
                   title: "Iron-Clad Security",
-                  desc: "Weekly security audits and immediate critical patching. We keep your customer data behind a impenetrable digital fortress.",
+                  desc: "We run weekly security audits and deploy critical patches the moment a vulnerability is identified. Your website and Fuzzy agents are continuously monitored to keep your customer data, automation workflows, and business operations locked down behind a solid layer of protection — 24/7, no exceptions.",
                   icon: Shield
                 },
                 {
                   title: "Performance Tuning",
-                  desc: "Web standards evolve. We constantly tune your server environment and database queries for maximum velocity.",
+                  desc: "Web standards evolve and so do your automation systems. We continuously tune your server environment, database queries, and AI workflow sequences to make sure everything is running at maximum velocity. We keep the engine clean and the performance sharp.",
                   icon: Zap
                 },
                 {
                   title: "Daily Snapshots",
-                  desc: "Redundancy is king. We perform daily off-site cloud backups ensuring your site can be restored in seconds, not hours.",
+                  desc: "Redundancy is everything. We perform daily off-site cloud backups of your website and automation configurations so that if anything ever goes wrong, your entire digital ecosystem — site, workflows, and Fuzzy agents — can be fully restored in seconds, not hours.",
                   icon: HardDrive
                 }
               ].map((benefit, i) => (
-                <div key={i} className="p-12 border border-ink/10 rounded-3xl space-y-8 hover:bg-ink hover:text-tan transition-all duration-700 h-full">
+                <div key={i} className="p-6 border border-ink/10 rounded-3xl space-y-6 hover:bg-ink hover:text-tan transition-all duration-700 h-full">
                   <div className="w-16 h-16 bg-ink text-tan rounded-2xl flex items-center justify-center">
                     <benefit.icon size={32} />
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <h3 className="text-2xl font-display uppercase leading-tight">{benefit.title}</h3>
-                    <p className="opacity-100 leading-relaxed italic">"{benefit.desc}"</p>
+                    <p className="opacity-100 leading-relaxed italic">{benefit.desc}</p>
                   </div>
                 </div>
               ))}
@@ -133,9 +122,49 @@ const Maintenance = () => {
              
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                {[
-                 { tier: "Foundation", price: "$499", features: ["24/7 Uptime Monitoring", "Weekly Security Patching", "Daily Cloud Backups", "1hr Technical Support"] },
-                 { tier: "Performance", price: "$999", features: ["Everything in Foundation", "Core Vitals Optimization", "Priority Support Desk", "4hr Technical Support"], highlighted: true },
-                 { tier: "Enterprise", price: "$1999+", features: ["Everything in Performance", "Real-time Malware Defense", "Dedicated Account Mgr", "12hr Technical Support"] }
+                 {
+                   tier: "Foundation",
+                   price: "$500",
+                   features: [
+                     "Up to 2 website update requests per month (text changes, image swaps, minor layout adjustments)",
+                     "Monthly chatbot performance check and minor configuration tweaks",
+                     "24/7 uptime monitoring with instant alerts",
+                     "Monthly security audit and critical patch deployment",
+                     "Daily off-site cloud backups with rapid restore capability",
+                     "1 monthly check-in call (30 minutes) to review performance and address any concerns",
+                     "48-hour response time on all support requests"
+                   ]
+                 },
+                 {
+                   tier: "Performance",
+                   price: "$1000",
+                   features: [
+                     "Everything in the Maintenance Plan",
+                     "Up to 3 website update requests per month (text, images, new sections, or page edits)",
+                     "Chatbot monitoring and optimization — responses refined monthly based on real conversation data",
+                     "2 email marketing campaigns per month (written, designed, and deployed)",
+                     "12 social media posts per month (graphics and captions created and scheduled)",
+                     "Monthly lead performance report showing traffic, leads captured, and conversion data",
+                     "Automation workflow monitoring — all active Fuzzy agents reviewed and fine-tuned monthly",
+                     "24-hour response time on all support requests"
+                   ],
+                   highlighted: true
+                 },
+                 {
+                   tier: "Enterprise",
+                   price: "$2000",
+                   features: [
+                     "Everything in the Growth Plan",
+                     "Up to 3 website update requests per month plus 1 larger structural update (new landing page, new service section, or funnel adjustment)",
+                     "Advanced automation management — all Fuzzy agents monitored, tested, and optimized continuously",
+                     "Full sales pipeline automation review and refinement each month",
+                     "A/B testing on key website pages and email campaigns to continuously improve conversion rates",
+                     "Monthly strategy session (60 minutes) with your Iconik Studios team to review results and plan next steps",
+                     "Comprehensive monthly performance dashboard covering website traffic, lead flow, automation performance, and email campaign results",
+                     "Priority response time — all support requests handled within 12 hours",
+                     "Quarterly automation audit to identify new opportunities to save time and scale faster"
+                   ]
+                 }
                ].map((plan, i) => (
                  <div key={i} className={`p-16 rounded-3xl flex flex-col justify-between border-2 ${plan.highlighted ? 'bg-ink text-tan border-ink scale-105 z-10 shadow-2xl' : 'bg-tan/30 border-ink/5'} transition-all hover:scale-[1.02] duration-500`}>
                    <div className="space-y-12">
@@ -147,7 +176,7 @@ const Maintenance = () => {
                      <div className={`h-[1px] ${plan.highlighted ? 'bg-burnt-orange/30' : 'bg-ink/10'} w-full`} />
                      <ul className="space-y-6">
                        {plan.features.map((f, j) => (
-                         <li key={j} className="flex items-start gap-4 text-sm font-bold uppercase tracking-tight leading-tight">
+                         <li key={j} className="flex items-start gap-4 text-sm font-sans font-normal normal-case tracking-normal leading-relaxed text-left">
                            <CheckCircle2 size={18} className={plan.highlighted ? 'text-burnt-orange shrink-0 mt-0.5' : 'text-ink shrink-0 mt-0.5'} />
                            {f}
                          </li>
@@ -162,10 +191,10 @@ const Maintenance = () => {
         </section>
 
         {/* Parallax Interstitial */}
-        <ParallaxLogoSection />
+        <ParallaxLogoSection bgImage={fuzzyClosingImage} />
 
         {/* Process Section */}
-        <AboutProcess />
+        <MaintenanceProcess />
 
         {/* Final CTA */}
         <section className="py-48 text-center px-6 relative overflow-hidden bg-burnt-orange text-white">
@@ -174,16 +203,16 @@ const Maintenance = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-7xl md:text-[10vw] font-display uppercase tracking-tighter leading-[0.8] mb-16">
-              Total <br /> <span className="italic">Vigilance.</span>
+            <h2 className="text-7xl md:text-[10vw] font-display uppercase tracking-tighter leading-[0.95] mb-16">
+              We Got <br /> <span className="italic">Your Back.</span>
             </h2>
             <div className="flex flex-col items-center gap-8">
               <button className="bg-white text-burnt-orange px-16 py-8 rounded-full font-display text-2xl tracking-[0.2em] font-bold hover:bg-ink hover:text-tan transition-all duration-500 uppercase shadow-2xl">
-                Start My Health Check
+                Start Your Protection
               </button>
               <div className="flex items-center justify-center gap-4 text-white opacity-80">
                 <Lock size={20} />
-                <span className="font-mono text-xs uppercase tracking-widest">Secure by protocol.</span>
+                <span className="font-mono text-xs uppercase tracking-widest">Secured by Iconik Studios.</span>
               </div>
             </div>
           </motion.div>

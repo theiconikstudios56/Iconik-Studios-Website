@@ -22,6 +22,7 @@ import PortfolioPage from './pages/PortfolioPage';
 import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 import HomesPage from './pages/HomesPage';
+import focusedFuzzyImage from './assets/images/focused-fuzzy.png';
 
 // Modular Sections
 import AboutHero from './components/AboutHero';
@@ -37,6 +38,8 @@ import { ServicesGrid } from './components/HomesServices';
 import HomesPortfolio from './components/HomesPortfolio';
 import ClientLogos from './components/ClientLogos';
 import SuccessSection from './components/SuccessSection';
+import SMBEmpowerment from './components/SMBEmpowerment';
+import FuzzyLineupSection from './components/FuzzyLineupSection';
 import HomesContact from './components/HomesContact';
 import LatestInsights from './components/LatestInsights';
 
@@ -51,7 +54,7 @@ function StaticSection({ children, index }: { children: React.ReactNode, index: 
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="sticky top-0 w-full h-screen overflow-hidden"
     >
@@ -61,23 +64,11 @@ function StaticSection({ children, index }: { children: React.ReactNode, index: 
 }
 
 function Home() {
-  const [currentImage, setCurrentImage] = useState(0);
-  const carouselImages = [
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200",
-    "https://images.unsplash.com/photo-1581291518064-9eb9c4a16175?auto=format&fit=crop&q=80&w=1200"
-  ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % carouselImages.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
-    <Layout 
-      title="AI Powered User Experience Design Agency | Iconik Studios" 
+    <Layout
+      title="AI Powered User Experience Design Agency | Iconik Studios"
       description="Iconik Studios is a boutique design and automation agency. We engineer digital legacies with high-end aesthetic strategy and robust backend automation."
     >
       <div className="relative z-10 bg-ink">
@@ -96,51 +87,59 @@ function Home() {
                   <span className="text-accent font-mono text-sm tracking-[0.3em]">SERVICES / 01</span>
                   <div className="w-12 h-[1px] bg-accent/30" />
                 </div>
-                <h1 className="text-6xl md:text-[6.5vw] font-display text-tan uppercase tracking-tighter leading-[0.8] mb-12">
+                <h2 className="text-6xl md:text-[6.5vw] font-display text-tan uppercase tracking-tighter leading-[1.05] mb-12">
                   Turn Visions <br /> Into <span className="text-accent italic">Visuals.</span>
-                </h1>
-                <p className="max-w-2xl text-paper text-xl leading-relaxed mb-12">
-                  We craft high-performance digital experiences that bridge the gap between aesthetic excellence and technical precision. Your website isn't just a placeholder; it's your most powerful sales asset.
+                </h2>
+                <p className="max-w-2xl text-paper text-base leading-relaxed mb-12">
+                  We design jaw-dropping, high-converting digital storefronts, but we don't stop at aesthetics. Iconik Studios engineers the underlying automation workflows that capture every incoming inquiry, follow up instantly, and sync lead data directly to your CRM—saving you hours of manual labor, reducing marketing costs, and guaranteeing that zero opportunities slip through the cracks.
                 </p>
-                <button className="bg-accent text-ink px-10 py-5 rounded-full font-display text-base tracking-[0.2em] font-bold hover:bg-tan transition-all duration-500 uppercase">
-                  Unlock Your Potential
-                </button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl mt-8">
+                  <div className="bg-accent text-ink py-5 px-6 rounded-none border border-accent/20 flex flex-col justify-between hover:scale-[1.02] hover:bg-tan transition-all duration-300">
+                    <div>
+                      <h3 className="font-display text-lg tracking-[0.1em] font-bold uppercase mb-2">
+                        Elite Web Design
+                      </h3>
+                      <p className="text-ink text-xs leading-relaxed font-mono">
+                        We design visually stunning user experiences tailored to convert visitors into clients.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="bg-accent text-ink py-5 px-6 rounded-none border border-accent/20 flex flex-col justify-between hover:scale-[1.02] hover:bg-tan transition-all duration-300">
+                    <div>
+                      <h3 className="font-display text-lg tracking-[0.1em] font-bold uppercase mb-2">
+                        Intelligent Automation
+                      </h3>
+                      <p className="text-ink text-xs leading-relaxed font-mono">
+                        We build custom backend workflows to follow up 24/7 and automate your operations.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
 
               <div className="relative aspect-[4/5] md:aspect-square lg:aspect-auto lg:h-[600px] rounded-[40px] overflow-hidden group">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentImage}
-                    initial={{ opacity: 0, scale: 1.1, rotate: 2 }}
-                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, rotate: -2 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-0"
-                  >
-                    <img 
-                      src={carouselImages[currentImage]} 
-                      alt="Web Design Service"
-                      className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
-                  </motion.div>
-                </AnimatePresence>
-                
+                <motion.div
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={focusedFuzzyImage}
+                    alt="Web Design Service"
+                    className="w-full h-full object-cover transition-all duration-1000"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
+                </motion.div>
+
                 {/* Decorative Elements */}
                 <div className="absolute inset-0 border-[20px] border-ink/40 pointer-events-none" />
                 <div className="absolute top-12 left-12 w-12 h-12 border-t-2 border-l-2 border-accent" />
                 <div className="absolute bottom-12 right-12 w-12 h-12 border-b-2 border-r-2 border-accent" />
-                
-                {/* Pagination Dots */}
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-                  {carouselImages.map((_, i) => (
-                    <div 
-                      key={i} 
-                      className={`h-1 transition-all duration-500 ${i === currentImage ? 'w-8 bg-accent' : 'w-4 bg-white/20'}`}
-                    />
-                  ))}
-                </div>
+
+
               </div>
             </div>
           </div>
@@ -148,6 +147,8 @@ function Home() {
         <ServicesShowcase />
         <StackedServices />
         <ZoomParallaxSection />
+        <SuccessSection />
+        <SMBEmpowerment />
         <div className="relative">
           <StaticSection index={0}>
             <ElegantCarousel />
@@ -159,7 +160,7 @@ function Home() {
         <HomesPortfolio />
         <ClientLogos />
         <FAQ />
-        <SuccessSection />
+        <FuzzyLineupSection />
         <LatestInsights />
         <HomesContact />
       </div>

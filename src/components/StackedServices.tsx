@@ -1,41 +1,34 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import { Link } from 'react-router-dom';
+import imgWeb from '../assets/images/fuzzy-web.png';
+import imgAi from '../assets/images/ai-automations.png';
+import imgMaintenance from '../assets/images/fuzzy-maintenance.png';
 
 const SERVICES = [
   {
     id: "001",
-    title: "Web Design",
+    title: "Website Design",
     description: "We design modern, responsive websites engineered to engage your audience and turn visitors into customers. Every layout decision is intentional—built to convert, not just impress.",
     categories: ["Wireframe", "Website", "Web Design", "Dashboard", "Product"],
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1200",
+    image: imgWeb,
+    link: "/services/web-design"
   },
   {
     id: "002",
-    title: "AI Automation",
+    title: "AI Automations",
     description: "We build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time. Scale your operations without scaling your headcount.",
     categories: ["AI", "Automation", "Make.com", "Lead Capture", "CRM"],
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1200",
+    image: imgAi,
+    link: "/services/ai-automation"
   },
   {
     id: "003",
-    title: "Marketing",
-    description: "We develop strategic marketing assets that amplify your brand's reach and directly support growth. From digital ads to automated review generation—everything we create has a purpose.",
-    categories: ["Campaign", "Digital Ads", "Reputation Management", "Performance"],
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1200",
-  },
-  {
-    id: "004",
-    title: "Brand Identity",
-    description: "We craft cohesive brand identities that communicate purpose, personality, and credibility from the first impression. Your brand isn't just a logo—it's a complete, elite language.",
-    categories: ["Brand", "Visual", "Logo Design", "Typography", "Brand Guidelines"],
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-  },
-  {
-    id: "005",
-    title: "Content",
-    description: "We produce content that communicates clearly, connects emotionally, and performs strategically. We leverage the same AI systems internally that we build for you to deliver lightning-fast results.",
-    categories: ["Copywriting", "Visual", "Motion", "Editorial", "Storytelling"],
-    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=1200",
+    title: "Maintenance",
+    description: "We keep your digital assets running flawlessly. From routine updates to proactive monitoring, our maintenance ensures your systems are secure, fast, and always online.",
+    categories: ["Support", "Updates", "Security", "Optimization", "Hosting"],
+    image: imgMaintenance,
+    link: "/services/maintenance"
   }
 ];
 
@@ -46,12 +39,13 @@ interface CardProps {
   categories: string[];
   image: string;
   id: string;
+  link: string;
   progress: any;
   range: [number, number];
   targetScale: number;
 }
 
-const Card: React.FC<CardProps> = ({ i, title, description, categories, image, id, progress, range, targetScale }) => {
+const Card: React.FC<CardProps> = ({ i, title, description, categories, image, id, link, progress, range, targetScale }) => {
   const container = useRef(null);
   const scale = useTransform(progress, range, [1, targetScale]);
   
@@ -89,7 +83,7 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
         {/* Content Area */}
         <div className="w-full md:w-3/5 flex flex-col gap-8 md:gap-14 order-2 md:order-1">
             <div className="space-y-6">
-              <h3 className="text-5xl md:text-7xl lg:text-9xl font-display text-white uppercase tracking-tighter leading-[0.75]">
+              <h3 className="text-5xl md:text-7xl lg:text-9xl font-display text-white uppercase tracking-tighter leading-[0.95]">
                 {title}
               </h3>
               <p className="text-lg md:text-2xl text-white opacity-100 max-w-lg font-light leading-relaxed">
@@ -110,10 +104,10 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
             </div>
             
             <div className="hidden md:block">
-              <button className="group flex items-center gap-4 text-burnt-orange font-display tracking-[0.3em] uppercase text-sm">
-                Explore Service
+              <Link to={link} className="group flex items-center gap-4 text-burnt-orange font-display tracking-[0.3em] uppercase text-sm w-fit">
+                Explore {title}
                 <div className="w-12 h-[1px] bg-burnt-orange transform group-hover:scale-x-150 transition-transform origin-left duration-500" />
-              </button>
+              </Link>
             </div>
         </div>
 
@@ -122,7 +116,7 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
            <img 
              src={image} 
              alt={title} 
-             className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000"
+             className="w-full h-full object-cover"
              referrerPolicy="no-referrer"
            />
            <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-white/5" />
@@ -167,6 +161,7 @@ export default function StackedServices() {
                description={service.description}
                categories={service.categories}
                image={service.image}
+               link={service.link}
                progress={scrollYProgress} 
                range={[i * 0.15, 1]} 
                targetScale={targetScale} 

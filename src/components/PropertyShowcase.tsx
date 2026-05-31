@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
+import convoFuzzyImage from '../assets/images/convo-fuzzy.png';
+import fuzzySetupImage from '../assets/images/fuzzy-setup.png';
 
 export default function PropertyShowcase() {
   return (
@@ -15,7 +17,7 @@ export default function PropertyShowcase() {
           transition={{ delay: 0.1 }}
           className="max-w-[280px] text-sm font-medium leading-relaxed opacity-100"
         >
-          A trusted team committed to providing luxury service and exceptional results.
+          A premium agency fusing high-end brand aesthetics with intelligent backend automation.
         </motion.p>
 
         {/* Heading */}
@@ -23,10 +25,12 @@ export default function PropertyShowcase() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-5xl"
+          className="max-w-none"
         >
-          <h2 className="text-5xl md:text-7xl lg:text-[6vw] font-display font-medium leading-[1.1] uppercase tracking-tight">
-            WHETHER <span className="italic font-serif normal-case text-burnt-orange">cozy</span> OR GRAND, WE'LL FIND THE <span className="opacity-100">PROPERTY</span> THAT SUITS YOU BEST.
+          <h2 className="text-5xl md:text-7xl lg:text-[4.2vw] font-display font-medium leading-[1.1] uppercase tracking-tight">
+            SYSTEMS BUILT <br className="hidden md:block" />
+            TO CAPTURE LEADS AND <span className="italic font-serif normal-case text-burnt-orange">convert</span>, <br className="hidden md:block" />
+            NOT JUST LOOK GOOD.
           </h2>
         </motion.div>
 
@@ -42,7 +46,7 @@ export default function PropertyShowcase() {
           </motion.div>
           
           <p className="max-w-[300px] text-sm font-medium opacity-100 uppercase tracking-[0.2em] leading-relaxed">
-            listings — let us guide you to the property that fits your vision.
+            we streamline your intake pipeline to grow your bookings automatically.
           </p>
         </div>
       </div>
@@ -58,11 +62,12 @@ export default function PropertyShowcase() {
           className="absolute hidden lg:block w-56 h-72 rounded-[40px] overflow-hidden shadow-2xl border border-white/10"
         >
           <img 
-            src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=600" 
-            alt="Interior 2" 
-            className="w-full h-full object-cover grayscale brightness-50 opacity-20 lg:opacity-40"
+            src={fuzzySetupImage} 
+            alt="Fuzzy Setup" 
+            className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
+          <div className="absolute inset-0 bg-black/20" />
         </motion.div>
 
         {/* Image 3: Mid Right Large Landscape */}
@@ -74,11 +79,12 @@ export default function PropertyShowcase() {
           className="absolute hidden md:block w-[25vw] h-[35vh] rounded-[48px] overflow-hidden shadow-2xl border border-white/10"
         >
           <img 
-            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1200" 
-            alt="Interior 3" 
-            className="w-full h-full object-cover grayscale brightness-50 opacity-20 md:opacity-40"
+            src={convoFuzzyImage} 
+            alt="Convo Fuzzy" 
+            className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
+          <div className="absolute inset-0 bg-black/20" />
         </motion.div>
       </div>
     </section>

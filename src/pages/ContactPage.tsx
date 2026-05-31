@@ -1,23 +1,100 @@
 import Layout from '../components/Layout';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useEffect } from 'react';
-import { ArrowUpRight, Mail, Phone, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowUpRight, Mail, Phone, MapPin, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
 
 export default function ContactPage() {
   const [index, setIndex] = useState(0);
   const words = ['create', 'work', 'live', 'love'];
+
+  // Form states
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [subject, setSubject] = useState('General Inquiry');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
     }, 2500);
 
-    // No scroll lock to ensure form accessibility
-    
     return () => {
       clearInterval(interval);
     };
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !phone || !message) {
+      setStatus('error');
+      setErrorMessage('Please fill out all required fields.');
+      return;
+    }
+
+    setStatus('submitting');
+
+    setErrorMessage('');
+
+    const webhookUrl = import.meta.env.VITE_CONTACT_WEBHOOK_URL;
+
+    if (!webhookUrl) {
+      // If webhook URL is not configured yet, let's show a helpful error
+      setStatus('error');
+      setErrorMessage(
+        'Webhook URL is not configured. Please define VITE_CONTACT_WEBHOOK_URL in your .env.local file.'
+      );
+      return;
+    }
+
+    try {
+      const trimmedName = name.trim();
+      const spaceIndex = trimmedName.indexOf(' ');
+      let firstName = trimmedName;
+      let lastName = '';
+
+      if (spaceIndex !== -1) {
+        firstName = trimmedName.substring(0, spaceIndex);
+        lastName = trimmedName.substring(spaceIndex + 1).trim();
+      }
+
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: trimmedName,
+          firstName,
+          lastName,
+          email,
+          phone,
+          subject,
+          message,
+          submittedAt: new Date().toISOString(),
+          source: 'Contact Page Form'
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setName('');
+        setEmail('');
+        setPhone('');
+        setMessage('');
+      } else {
+        throw new Error(`Server returned status code ${response.status}`);
+      }
+    } catch (err: any) {
+      console.error('Submission error:', err);
+      setStatus('error');
+      setErrorMessage(
+        err.message || 'Something went wrong while submitting the form. Please try again.'
+      );
+    }
+  };
 
   return (
     <Layout
@@ -105,53 +182,131 @@ export default function ContactPage() {
               <div className="max-w-xl">
                 <span className="font-mono text-[10px] tracking-[0.4em] uppercase opacity-100 mb-8 block">/ Send a Message</span>
                 
-                <form className="space-y-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Full Name</label>
-                      <input 
-                        type="text" 
-                        placeholder="Your Name"
-                        className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm placeholder:text-white/20"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Email Address</label>
-                      <input 
-                        type="email" 
-                        placeholder="hello@example.com"
-                        className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm placeholder:text-white/20"
-                      />
-                    </div>
-                  </div>
+                <AnimatePresence mode="wait">
+                  {status === 'success' ? (
+                    <motion.div 
+                      key="success"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      className="py-12 flex flex-col items-center text-center space-y-6"
+                    >
+                      <CheckCircle2 className="text-burnt-orange w-16 h-16" />
+                      <h3 className="text-3xl font-display uppercase tracking-tight">We've Got It.</h3>
+                      <p className="text-white/60 text-sm leading-relaxed max-w-sm">
+                        Thanks for taking the time to fill this out. The Iconik Studios team will be in touch within 1–2 business days.
+                      </p>
+                      <button 
+                        onClick={() => setStatus('idle')}
+                        className="mt-4 px-6 py-3 border border-white/20 hover:border-white font-mono text-[10px] uppercase tracking-widest transition-colors"
+                      >
+                        Send Another Message
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <motion.form 
+                      key="form"
+                      onSubmit={handleSubmit} 
+                      className="space-y-8"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Full Name <span className="text-burnt-orange">*</span></label>
+                        <input 
+                          type="text" 
+                          placeholder="Your Name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                          disabled={status === 'submitting'}
+                          className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm placeholder:text-white/20 disabled:opacity-50"
+                        />
+                      </div>
 
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Subject</label>
-                    <select className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm appearance-none cursor-pointer">
-                      <option className="bg-black">General Inquiry</option>
-                      <option className="bg-black">Project Proposal</option>
-                      <option className="bg-black">Partnership</option>
-                      <option className="bg-black">Other</option>
-                    </select>
-                  </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Email Address <span className="text-burnt-orange">*</span></label>
+                          <input 
+                            type="email" 
+                            placeholder="hello@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            disabled={status === 'submitting'}
+                            className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm placeholder:text-white/20 disabled:opacity-50"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Phone Number <span className="text-burnt-orange">*</span></label>
+                          <input 
+                            type="tel" 
+                            placeholder="+1 (000) 000-0000"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            required
+                            disabled={status === 'submitting'}
+                            className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm placeholder:text-white/20 disabled:opacity-50"
+                          />
+                        </div>
+                      </div>
 
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Message</label>
-                    <textarea 
-                      rows={3}
-                      placeholder="Tell us about your project..."
-                      className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors resize-none font-sans text-sm placeholder:text-white/20"
-                    />
-                  </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Subject</label>
+                        <select 
+                          value={subject}
+                          onChange={(e) => setSubject(e.target.value)}
+                          disabled={status === 'submitting'}
+                          className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm appearance-none cursor-pointer disabled:opacity-50"
+                        >
+                          <option className="bg-black" value="General Inquiry">General Inquiry</option>
+                          <option className="bg-black" value="Project Proposal">Project Proposal</option>
+                          <option className="bg-black" value="Partnership">Partnership</option>
+                          <option className="bg-black" value="Other">Other</option>
+                        </select>
+                      </div>
 
-                  <motion.button 
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-5 bg-burnt-orange text-white font-mono text-xs tracking-[0.4em] uppercase hover:bg-white hover:text-black transition-all flex items-center justify-center gap-4 group"
-                  >
-                    Send Message <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </motion.button>
-                </form>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Message <span className="text-burnt-orange">*</span></label>
+                        <textarea 
+                          rows={3}
+                          placeholder="Tell us about your project..."
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          required
+                          disabled={status === 'submitting'}
+                          className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors resize-none font-sans text-sm placeholder:text-white/20 disabled:opacity-50"
+                        />
+                      </div>
+
+                      {status === 'error' && (
+                        <div className="bg-burnt-orange/10 border border-burnt-orange/30 p-4 text-xs font-sans text-burnt-orange flex items-start gap-3">
+                          <AlertTriangle className="w-5 h-5 flex-shrink-0" />
+                          <span>{errorMessage}</span>
+                        </div>
+                      )}
+
+                      <motion.button 
+                        type="submit"
+                        disabled={status === 'submitting'}
+                        whileHover={status !== 'submitting' ? { scale: 1.02 } : undefined}
+                        whileTap={status !== 'submitting' ? { scale: 0.98 } : undefined}
+                        className="w-full py-5 bg-burnt-orange text-white font-mono text-xs tracking-[0.4em] uppercase hover:bg-white hover:text-black transition-all flex items-center justify-center gap-4 group disabled:bg-white/20 disabled:text-white/40 disabled:cursor-not-allowed"
+                      >
+                        {status === 'submitting' ? (
+                          <>
+                            Sending... <Loader2 size={18} className="animate-spin" />
+                          </>
+                        ) : (
+                          <>
+                            Send Message <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                          </>
+                        )}
+                      </motion.button>
+                    </motion.form>
+                  )}
+                </AnimatePresence>
 
                 <div className="mt-8 text-[10px] font-mono opacity-80 uppercase tracking-widest">
                   * We usually respond within 24-48 hours.
@@ -165,3 +320,4 @@ export default function ContactPage() {
     </Layout>
   );
 }
+

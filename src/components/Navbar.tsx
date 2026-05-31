@@ -40,9 +40,9 @@ export default function Navbar() {
             <motion.div 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="bg-ink w-24 h-24 flex items-center justify-center group"
+              className="w-28 h-28 flex items-center justify-center group"
             >
-              <div className="w-14 h-14 text-accent group-hover:scale-110 transition-transform duration-500">
+              <div className="w-24 h-24 text-accent group-hover:scale-110 transition-transform duration-500">
                  <IconikLogo color="#F5F2ED" />
               </div>
             </motion.div>

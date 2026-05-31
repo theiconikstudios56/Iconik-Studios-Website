@@ -3,24 +3,25 @@ import React from 'react';
 import { cn } from '../lib/utils';
 import Lenis from '@studio-freight/lenis'
 import { ZoomParallax } from "./ui/zoom-parallax";
+import heroBg from '../assets/images/final-fuzzy-hero.png';
 
 export default function ZoomParallaxSection() {
 	React.useEffect(() => {
-        const lenis = new Lenis()
-       
-        function raf(time: number) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
+		const lenis = new Lenis()
 
-        requestAnimationFrame(raf)
-        return () => lenis.destroy();
-    }, [])
+		function raf(time: number) {
+			lenis.raf(time)
+			requestAnimationFrame(raf)
+		}
+
+		requestAnimationFrame(raf)
+		return () => lenis.destroy();
+	}, [])
 
 	const images = [
 		{
-			src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
-			alt: 'Modern architecture building',
+			src: heroBg,
+			alt: 'Iconik Fuzzy Hero',
 		},
 		{
 			src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',

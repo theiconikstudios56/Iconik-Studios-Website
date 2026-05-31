@@ -1,39 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { PROJECT_DATA } from '../constants/projects';
 
-const PORTFOLIO_ITEMS = [
-  {
-    id: 1,
-    title: "Luxury Estate",
-    category: "Real Estate",
-    image: "https://images.unsplash.com/photo-1600585154340-be6199f7d009?auto=format&fit=crop&q=80&w=1200"
-  },
-  {
-    id: 2,
-    title: "E-Commerce Rebirth",
-    category: "Retail",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1200"
-  },
-  {
-    id: 3,
-    title: "SaaS Dashboard",
-    category: "Technology",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200"
-  },
-  {
-    id: 4,
-    title: "Creative Agency",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=1200"
-  },
-  {
-    id: 5,
-    title: "Mobile App Design",
-    category: "Product",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1200"
-  }
-];
-
+const PORTFOLIO_ITEMS = Object.values(PROJECT_DATA);
 const ITEMS = [...PORTFOLIO_ITEMS, ...PORTFOLIO_ITEMS, ...PORTFOLIO_ITEMS];
 
 export default function PortfolioCarousel() {
@@ -61,8 +32,6 @@ export default function PortfolioCarousel() {
     const scrollSpeed = 0.5; // slow speed
 
     const step = () => {
-      // Offset skip when dragging - we check velocity to see if user is interacting
-      // Or we can use a state to pause it. Let's just add to x.
       if (containerWidth > 0) {
         const currentX = x.get();
         x.set(currentX - scrollSpeed);
@@ -92,7 +61,7 @@ export default function PortfolioCarousel() {
   }, [containerWidth, x, velocity]);
 
   return (
-    <div className="relative w-full overflow-hidden py-12 select-none cursor-grab active:cursor-grabbing">
+    <div className="relative w-full overflow-hidden py-4 select-none cursor-grab active:cursor-grabbing">
       {/* SVG Filter for Water Effect */}
       <svg className="absolute w-0 h-0">
         <defs>
@@ -123,25 +92,45 @@ export default function PortfolioCarousel() {
         {ITEMS.map((item, i) => (
           <div 
             key={`${item.id}-${i}`}
-            className="flex-shrink-0 w-[70vw] md:w-[40vw] aspect-video relative group overflow-hidden rounded-lg md:rounded-2xl bg-white/5"
+            className="flex-shrink-0 w-[70vw] md:w-[40vw] aspect-video relative group overflow-hidden rounded-sm bg-white/5"
           >
-            <img 
-              src={item.image} 
-              alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              draggable="false"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 md:p-10">
-              <span className="font-mono text-[10px] text-burnt-orange uppercase tracking-widest mb-2">{item.category}</span>
-              <h3 className="text-xl md:text-3xl font-display text-tan uppercase tracking-tight">{item.title}</h3>
-            </div>
+            <Link 
+              to={`/project/${item.id}`}
+              className="block w-full h-full relative"
+            >
+              <img 
+                src={item.image} 
+                alt={item.title}
+                className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0 group-hover:scale-110"
+                draggable="false"
+                referrerPolicy="no-referrer"
+              />
+              
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-700" />
+
+              <div className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none">
+                <h3 className="text-6xl md:text-[6vw] leading-none font-display font-black uppercase text-white/5 group-hover:text-white transition-all duration-700 tracking-[-0.05em] drop-shadow-2xl">
+                  {item.shortName}
+                </h3>
+              </div>
+
+              <div className="absolute bottom-6 left-6 md:left-10 text-left pointer-events-none">
+                <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white opacity-100 mb-1">{item.category}</p>
+                <p className="font-display text-sm text-white opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">{item.year}</p>
+              </div>
+
+              <div className="absolute top-6 right-6 md:right-10 opacity-0 group-hover:opacity-100 transition-all duration-700 -translate-y-2 group-hover:translate-y-0">
+                <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white backdrop-blur-md">
+                  <ArrowUpRight size={18} />
+                </div>
+              </div>
+            </Link>
           </div>
         ))}
       </motion.div>
       
       {/* Scroll indicator or instructions */}
-      <div className="mt-8 flex justify-center">
+      <div className="mt-6 flex justify-center">
         <div className="flex items-center gap-4 text-white opacity-100 font-mono text-[9px] uppercase tracking-[0.4em]">
           <div className="w-8 md:w-16 h-[1px] bg-white/10" />
           <span>Slide to Discover</span>

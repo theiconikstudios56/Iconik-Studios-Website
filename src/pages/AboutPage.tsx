@@ -1,6 +1,7 @@
 import Layout from '../components/Layout';
 import AboutHero from '../components/AboutHero';
 import AboutStory from '../components/about/AboutStory';
+import AboutFuzzies from '../components/about/AboutFuzzies';
 import AboutPillars from '../components/about/AboutPillars';
 import LogoParallax from '../components/LogoParallax';
 import LatestInsights from '../components/LatestInsights';
@@ -16,6 +17,7 @@ export default function AboutPage() {
       <div className="bg-tan text-ink selection:bg-burnt-orange selection:text-tan">
         <AboutHero />
         <AboutStory />
+        <AboutFuzzies />
         <LogoParallax />
         <AboutPillars />
         <LatestInsights />

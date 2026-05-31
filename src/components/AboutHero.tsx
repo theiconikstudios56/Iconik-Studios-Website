@@ -1,19 +1,20 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
+import studioFuzzyImage from '../assets/images/studio-fuzzy.png';
 
 export default function AboutHero() {
   const heroRef = useRef<HTMLElement>(null);
   
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end end"]
   });
 
   // Image expansion transforms
-  const stripWidth = useTransform(scrollYProgress, [0, 0.6], ["20vw", "100vw"]);
-  const stripHeight = useTransform(scrollYProgress, [0, 0.6], ["60vh", "100vh"]);
+  const stripWidth = useTransform(scrollYProgress, [0, 0.8], ["20vw", "100vw"]);
+  const stripHeight = useTransform(scrollYProgress, [0, 0.8], ["60vh", "100vh"]);
   const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
-  const textScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.1]);
+  const textScale = useTransform(scrollYProgress, [0, 0.8], [1, 1.1]);
 
   return (
     <section 
@@ -22,31 +23,16 @@ export default function AboutHero() {
       className="h-[200vh] bg-black text-white relative"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* Corners Content - Top Left */}
-        <div className="absolute top-10 left-10 z-30 mix-blend-difference">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center">
-              <div className="w-1 h-1 bg-burnt-orange rounded-full" />
-            </div>
-            <span className="font-display font-bold text-xl tracking-tighter uppercase">Iconik</span>
-          </div>
-        </div>
 
-        {/* Corners Content - Top Right (Simulated Nav vibe) */}
-        <div className="absolute top-10 right-10 z-30 hidden md:block">
-          <div className="flex flex-col items-end gap-1 font-mono text-[10px] uppercase tracking-widest text-white">
-            <span>The Crew</span>
-            <span>Services</span>
-            <span>Contact</span>
-          </div>
-        </div>
+
+
 
         {/* Main Text Content - Positions IN FRONT of the expanding image */}
         <motion.div 
           style={{ scale: textScale }}
           className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none"
         >
-          <h1 className="text-[22vw] font-display font-black leading-none tracking-tight mix-blend-difference">
+          <h1 className="text-[20vw] font-display font-black leading-none tracking-normal mix-blend-difference opacity-85">
             ABOUT
           </h1>
         </motion.div>
@@ -61,9 +47,9 @@ export default function AboutHero() {
         >
           <motion.img 
             style={{ scale: imageScale }}
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920" 
-            alt="Iconik Workspace" 
-            className="w-full h-full object-cover grayscale brightness-75 contrast-125"
+            src={studioFuzzyImage}
+            alt="Studio Fuzzy Workspace" 
+            className="w-full h-full object-cover brightness-75 contrast-125"
             referrerPolicy="no-referrer"
           />
           {/* Overlay to keep it moody */}

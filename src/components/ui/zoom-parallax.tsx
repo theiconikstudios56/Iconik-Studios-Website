@@ -3,6 +3,7 @@
 import { useScroll, useTransform, motion } from 'framer-motion';
 import { useRef } from 'react';
 import { Instagram, Twitter, Mail, MessageCircle, Globe, Circle, Target, Zap, Crosshair } from "lucide-react";
+import { Link } from 'react-router-dom';
 import IconikLogo from "../IconikLogo";
 
 interface Image {
@@ -25,7 +26,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 	// Scale the text mask massively to "walk through" it
 	// We zoom into the center of the word
 	const textScale = useTransform(scrollYProgress, [0, 0.8], [1, 35]);
-	
+
 	// Zoom in on the background image as we zoom through the text
 	// Stops zooming at 0.7
 	const imageScale = useTransform(scrollYProgress, [0, 0.2, 0.7], [1, 1.05, 1.3]);
@@ -40,21 +41,21 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 		<div ref={container} className="relative h-[400vh]">
 			<div className="sticky top-0 h-screen overflow-hidden bg-ink">
 				{/* The Background Image (The one we zoom into) */}
-				<motion.div 
+				<motion.div
 					style={{ scale: imageScale, y: imageCoverY }}
 					className="absolute inset-0 z-0"
 				>
-					<img 
-						src={images[0]?.src || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80'} 
+					<img
+						src={images[0]?.src || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80'}
 						alt="Background"
-						className="w-full h-full object-cover opacity-50 grayscale"
+						className="w-full h-full object-cover opacity-50"
 						referrerPolicy="no-referrer"
 					/>
 				</motion.div>
 
 				{/* The Text Mask Overlay - only visible while zooming */}
-				<motion.div 
-					style={{ 
+				<motion.div
+					style={{
 						scale: textScale,
 						opacity: useTransform(scrollYProgress, [0.7, 0.8], [1, 0])
 					}}
@@ -64,14 +65,14 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						<defs>
 							<mask id="iconikMask">
 								<rect width="1000" height="1000" fill="white" />
-								<text 
-									x="475" 
-									y="500" 
-									textAnchor="middle" 
-									dominantBaseline="middle" 
+								<text
+									x="475"
+									y="500"
+									textAnchor="middle"
+									dominantBaseline="middle"
 									fill="black"
-									style={{ 
-										fontFamily: 'Anton, sans-serif', 
+									style={{
+										fontFamily: 'Anton, sans-serif',
 										fontSize: '240px',
 										fontWeight: '900',
 										letterSpacing: '1px'
@@ -86,7 +87,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 				</motion.div>
 
 				{/* The Content Reveal (COVERS THE IMAGE) */}
-				<motion.div 
+				<motion.div
 					style={{ y: contentRevealY }}
 					className="absolute inset-0 z-20 bg-ink flex flex-col items-center justify-center text-center p-6 md:p-12 shadow-[0_-50px_100px_rgba(0,0,0,0.5)]"
 				>
@@ -96,18 +97,18 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 					<div className="absolute bottom-6 left-8 text-tan/40"><Zap size={20} /></div>
 					<div className="absolute bottom-6 right-8 text-tan/40"><Crosshair size={20} /></div>
 
-					{/* Top Logo */}
-					<motion.div 
+					{/* "We Are" text styled exactly like '04 / THE COLLECTIVE' */}
+					<motion.span
 						initial={{ opacity: 0, y: 10 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
-						className="mb-8 w-16 h-16 md:w-24 md:h-24"
+						className="font-mono text-xs font-bold text-burnt-orange mb-6 block tracking-[0.4em] uppercase"
 					>
-						<IconikLogo color="#cd7f32" />
-					</motion.div>
+						we / are
+					</motion.span>
 
 					{/* Massive Title */}
-					<motion.h2 
+					<motion.h2
 						initial={{ opacity: 0, scale: 0.95 }}
 						whileInView={{ opacity: 1, scale: 1 }}
 						viewport={{ once: true }}
@@ -115,11 +116,11 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						className="text-[12vw] md:text-[10vw] font-display text-tan leading-[0.85] uppercase mb-8 tracking-tighter flex flex-col gap-1"
 					>
 						<span>ICONIK</span>
-						<span className="text-burnt-orange">REJECTION</span>
+						<span className="text-burnt-orange">STUDIOS</span>
 					</motion.h2>
 
 					{/* Description */}
-					<motion.div 
+					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
@@ -127,38 +128,36 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						className="max-w-xl mb-10"
 					>
 						<p className="text-base md:text-lg font-medium leading-tight text-tan opacity-100">
-							A unique collection of 10,000 digital artifacts brought to life.
-							Created by Iconik Studios, The Rejects live in a universe
-							crafted by their own community.
+							A premium design and automation agency. We fuse high-end branding
+							aesthetics with intelligent backend workflows to streamline your business
+							and scale your bookings automatically.
 						</p>
 					</motion.div>
-					
+
 					{/* CTA Button */}
-					<motion.div 
+					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						transition={{ delay: 0.4 }}
 						className="mb-12"
 					>
-						<a 
-							href="https://opensea.io" 
-							target="_blank" 
-							rel="noopener noreferrer"
+						<Link
+							to="/about"
 							className="relative group/btn inline-block"
 						>
 							<div className="absolute inset-0 bg-burnt-orange blur-2xl opacity-0 group-hover/btn:opacity-20 transition-opacity" />
 							<div className="relative px-10 py-5 border border-tan/20 rounded-none hover:border-burnt-orange transition-all duration-500 overflow-hidden">
 								<div className="absolute inset-0 bg-burnt-orange translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
 								<span className="relative z-10 text-[10px] uppercase tracking-[0.3em] font-bold text-tan group-hover/btn:text-ink transition-colors">
-									VIEW ON OPENSEA
+									ABOUT ICONIK
 								</span>
 							</div>
-						</a>
+						</Link>
 					</motion.div>
 
 					{/* Social Icons */}
-					<motion.div 
+					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
@@ -169,10 +168,10 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 							<motion.a
 								key={i}
 								href="#"
-								whileHover={{ 
-									scale: 1.1, 
-									backgroundColor: "#cd7f32", 
-									color: "#000000", 
+								whileHover={{
+									scale: 1.1,
+									backgroundColor: "#cd7f32",
+									color: "#000000",
 									borderColor: "#cd7f32"
 								}}
 								className={`w-10 h-10 rounded-full border border-tan/20 flex items-center justify-center transition-all duration-300 text-tan ${i === 2 ? 'bg-burnt-orange text-ink border-burnt-orange' : ''}`}

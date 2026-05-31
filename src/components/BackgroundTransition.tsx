@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 const COLORS = {
   dark: "#000000",
   tan: "#ffffff",
-  white: "#ffffff"
+  white: "#E9E8E6"
 };
 
 export default function BackgroundTransition() {
@@ -40,11 +40,11 @@ export default function BackgroundTransition() {
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       className="fixed inset-0 z-0 pointer-events-none"
       animate={{ backgroundColor: activeColor }}
-      transition={{ 
-        duration: 0.6, 
+      transition={{
+        duration: 0.6,
         delay: 0.2,
         ease: [0.22, 1, 0.36, 1] // Quintic ease out
       }}

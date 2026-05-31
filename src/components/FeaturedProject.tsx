@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Instagram, Twitter, Mail, MessageCircle, Globe, Circle, Target, Zap, Crosshair } from "lucide-react";
+import { Link } from 'react-router-dom';
 import IconikLogo from "./IconikLogo";
 
 interface FeaturedProjectProps {
@@ -36,14 +37,14 @@ export default function FeaturedProject({ dark = false }: FeaturedProjectProps) 
 
       {/* Main Content */}
       <div className="max-w-5xl w-full flex flex-col items-center text-center z-10">
-        {/* Top Icon/Logo */}
-        <motion.div 
+        {/* "We Are" text styled exactly like '04 / THE COLLECTIVE' */}
+        <motion.span 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="mb-6 w-16 h-16 md:w-20 md:h-20"
+          className="font-mono text-xs font-bold text-burnt-orange mb-6 block tracking-[0.4em] uppercase"
         >
-          <IconikLogo color={dark ? "#cd7f32" : "#000000"} />
-        </motion.div>
+          we / are
+        </motion.span>
 
         {/* Massive Title */}
         <motion.h2 
@@ -53,7 +54,7 @@ export default function FeaturedProject({ dark = false }: FeaturedProjectProps) 
           className="text-[12vw] md:text-[10vw] font-display leading-[0.85] uppercase mb-8 tracking-tighter flex flex-col gap-1"
         >
           <span>ICONIK</span>
-          <span className={dark ? "text-burnt-orange" : ""}>REJECTION</span>
+          <span className={dark ? "text-burnt-orange" : ""}>STUDIOS</span>
         </motion.h2>
 
         {/* Description */}
@@ -64,9 +65,9 @@ export default function FeaturedProject({ dark = false }: FeaturedProjectProps) 
           className="max-w-xl mb-10"
         >
           <p className={`text-base md:text-lg font-medium leading-tight ${dark ? 'opacity-100' : ''}`}>
-            A unique collection of 10,000 digital artifacts brought to life.
-            Created by Iconik Studios, The Rejects live in a universe
-            crafted by their own community.
+            A premium design and automation agency. We fuse high-end branding
+            aesthetics with intelligent backend workflows to streamline your business
+            and scale your bookings automatically.
           </p>
         </motion.div>
 
@@ -77,20 +78,18 @@ export default function FeaturedProject({ dark = false }: FeaturedProjectProps) 
           transition={{ delay: 0.6 }}
           className="mb-12"
         >
-          <a 
-            href="https://opensea.io" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <Link 
+            to="/about" 
             className="relative group inline-block"
           >
             <div className="absolute inset-0 bg-burnt-orange blur-2xl opacity-0 group-hover:opacity-20 transition-opacity" />
             <div className={`relative px-10 py-5 border ${dark ? 'border-tan/20' : 'border-ink/20'} rounded-none hover:border-burnt-orange transition-all duration-500 overflow-hidden`}>
               <div className="absolute inset-0 bg-burnt-orange translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               <span className={`relative z-10 text-[10px] uppercase tracking-[0.3em] font-bold ${dark ? 'group-hover:text-ink' : 'group-hover:text-tan'} transition-colors`}>
-                VIEW ON OPENSEA
+                ABOUT ICONIK
               </span>
             </div>
-          </a>
+          </Link>
         </motion.div>
 
         {/* Social Icons */}
