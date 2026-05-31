@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/Hero';
 import PropertyShowcase from './components/PropertyShowcase';
 import ScrollReveal from './components/ScrollReveal';
@@ -172,6 +173,7 @@ function Home() {
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <GlobalCursor />
       <Routes>
         <Route path="/" element={<Home />} />

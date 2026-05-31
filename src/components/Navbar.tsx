@@ -3,6 +3,7 @@ import { Menu, X, Globe, Instagram, Linkedin, Twitter, ChevronDown } from 'lucid
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IconikLogo from './IconikLogo';
+import fuzzFuzzyImage from '../assets/images/fuzz_fuzzy.png';
 
 const MENU_ITEMS = [
   { name: 'Home', path: '/' },
@@ -24,6 +25,7 @@ const MENU_ITEMS = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
+  const [isServicesHovered, setIsServicesHovered] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -122,12 +124,13 @@ export default function Navbar() {
             </div>
 
             {/* Left: Background image/pattern */}
-            <div className="hidden lg:block w-1/2 relative bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center">
-              <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" />
-            </div>
+            <div 
+              className="hidden lg:block w-1/2 relative bg-[#FAF9F7] bg-contain bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${fuzzFuzzyImage})` }}
+            />
 
             {/* Right: Links */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-center p-12 lg:p-24 space-y-8 overflow-y-auto">
+            <div className="w-full lg:w-1/2 flex flex-col justify-start lg:justify-center p-12 lg:p-24 py-20 lg:py-24 space-y-8 overflow-y-auto">
               <span className="text-accent font-serif italic text-xl">Menu</span>
               <div className="space-y-6">
                 {MENU_ITEMS.map((link, i) => (
@@ -151,20 +154,44 @@ export default function Navbar() {
                         />
                       </Link>
                     ) : (
-                      <div className="space-y-4 py-4">
-                        <span className="block text-2xl font-mono text-accent uppercase tracking-widest">{link.name}</span>
-                        <div className="flex flex-col gap-4">
-                          {link.subItems.map((sub) => (
-                            <Link
-                              key={sub.name}
-                              to={sub.path}
-                              onClick={toggleMenu}
-                              className="block text-4xl md:text-7xl font-display text-paper hover:text-accent transition-colors tracking-tighter"
-                            >
-                              {sub.name}
-                            </Link>
-                          ))}
+                      <div 
+                        onMouseEnter={() => setIsServicesHovered(true)}
+                        onMouseLeave={() => setIsServicesHovered(false)}
+                        onClick={() => setIsServicesHovered(!isServicesHovered)}
+                        className="group relative cursor-default py-2"
+                      >
+                        <div className="block text-5xl md:text-8xl font-display relative">
+                          <span className={`relative z-10 transition-colors duration-300 ${isServicesHovered ? 'text-accent' : 'text-paper'}`}>
+                            {link.name}
+                          </span>
+                          <motion.div 
+                            className="absolute bottom-0 left-0 h-1 bg-accent"
+                            initial={{ width: 0 }}
+                            animate={{ width: isServicesHovered ? '100%' : '0%' }}
+                            transition={{ duration: 0.3 }}
+                          />
                         </div>
+                        
+                        {isServicesHovered && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="flex flex-col gap-6 pl-8 border-l-2 border-accent/20 mt-4"
+                          >
+                            {link.subItems.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                to={sub.path}
+                                onClick={toggleMenu}
+                                className="block text-3xl md:text-5xl font-display text-paper hover:text-accent transition-colors tracking-tighter"
+                              >
+                                {sub.name}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
                       </div>
                     )}
                   </motion.div>
