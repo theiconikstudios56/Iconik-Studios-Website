@@ -15,7 +15,6 @@ const DEFAULT_IMAGES = [
   "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&q=80&w=1200",
 ];
 
-// Standard categories — fixed, clean, never grows infinitely
 const CATEGORIES = [
   { label: 'AI', keywords: ['ai', 'artificial intelligence', 'machine learning', 'claude', 'chatgpt', 'llm'] },
   { label: 'Automation', keywords: ['automation', 'automated', 'automate', 'workflow', 'make.com', 'zapier', 'gohighlevel', 'no-code'] },
@@ -31,6 +30,7 @@ interface Article {
   slug: string;
   tags: string[];
   meta_description: string;
+  image_url: string | null;
   published: boolean;
   created_at: string;
 }
@@ -91,7 +91,6 @@ export default function BlogPage() {
     fetchArticles();
   }, []);
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -137,17 +136,12 @@ export default function BlogPage() {
             {/* Filter Bar */}
             {!loading && (
               <div className="flex items-center justify-between mb-16">
-
-                {/* Left — article count */}
                 <p className="font-mono text-[10px] text-white/30 tracking-widest uppercase">
                   {filteredArticles.length} {filteredArticles.length === 1 ? 'Article' : 'Articles'}
                   {activeCategory ? ` in ${activeCategory}` : ''}
                 </p>
 
-                {/* Right — Filter dropdown */}
                 <div className="relative" ref={dropdownRef}>
-
-                  {/* Filter Button */}
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className={`flex items-center gap-3 px-6 py-3 font-mono text-[10px] tracking-widest uppercase border transition-all duration-300 ${
@@ -168,7 +162,6 @@ export default function BlogPage() {
                     )}
                   </button>
 
-                  {/* Dropdown */}
                   <AnimatePresence>
                     {dropdownOpen && (
                       <motion.div
@@ -178,7 +171,6 @@ export default function BlogPage() {
                         transition={{ duration: 0.2 }}
                         className="absolute right-0 top-full mt-2 w-56 bg-[#111] border border-white/10 z-50"
                       >
-                        {/* Search input */}
                         <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
                           <Search size={11} className="text-white/30 flex-shrink-0" />
                           <input
@@ -191,7 +183,6 @@ export default function BlogPage() {
                           />
                         </div>
 
-                        {/* All option */}
                         <button
                           onClick={clearFilter}
                           className={`w-full text-left px-4 py-3 font-mono text-[10px] tracking-widest uppercase transition-colors border-b border-white/5 ${
@@ -201,7 +192,6 @@ export default function BlogPage() {
                           All Articles
                         </button>
 
-                        {/* Category options */}
                         {filteredCategories.length > 0 ? (
                           filteredCategories.map(cat => (
                             <button
@@ -217,9 +207,7 @@ export default function BlogPage() {
                             </button>
                           ))
                         ) : (
-                          <p className="px-4 py-3 font-mono text-[10px] text-white/20 tracking-widest uppercase">
-                            No results
-                          </p>
+                          <p className="px-4 py-3 font-mono text-[10px] text-white/20 tracking-widest uppercase">No results</p>
                         )}
                       </motion.div>
                     )}
@@ -236,9 +224,7 @@ export default function BlogPage() {
             ) : filteredArticles.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-40 gap-4">
                 <p className="font-mono text-xs tracking-widest text-white/40 uppercase">No Articles Found</p>
-                <button onClick={clearFilter} className="font-mono text-[10px] tracking-widest text-burnt-orange uppercase hover:underline">
-                  Clear Filter
-                </button>
+                <button onClick={clearFilter} className="font-mono text-[10px] tracking-widest text-burnt-orange uppercase hover:underline">Clear Filter</button>
               </div>
             ) : (
               <AnimatePresence mode="wait">
@@ -259,7 +245,7 @@ export default function BlogPage() {
                       className="group cursor-pointer"
                       onClick={() => navigate(`/blog/${article.slug}`)}
                     >
-                      <div className="relative aspect-[3/4] overflow-hidden bg-[#000] mb-6">
+                      <div className="relative aspect-[3/4] overflow-hidden bg-[#111] mb-6">
                         <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
                           <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] sm:text-[11px] font-bold tracking-widest whitespace-nowrap border border-black/5">
                             RELEASES — {formatDate(article.created_at)}
@@ -267,10 +253,13 @@ export default function BlogPage() {
                         </div>
 
                         <motion.img
-                          src={DEFAULT_IMAGES[idx % DEFAULT_IMAGES.length]}
+                          src={article.image_url || DEFAULT_IMAGES[idx % DEFAULT_IMAGES.length]}
                           alt={article.title}
                           className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:brightness-110"
                           referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = DEFAULT_IMAGES[idx % DEFAULT_IMAGES.length];
+                          }}
                         />
 
                         {article.tags && article.tags[0] && (
@@ -303,7 +292,6 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Footer CTA */}
         <section className="py-40 px-6 md:px-12 text-center">
           <div className="max-w-4xl mx-auto">
             <span className="text-[10px] font-mono text-burnt-orange tracking-[0.6em] block mb-12 uppercase">Join the Inner Circle</span>

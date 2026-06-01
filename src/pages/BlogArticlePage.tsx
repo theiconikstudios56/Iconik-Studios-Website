@@ -4,6 +4,13 @@ import Layout from '../components/Layout';
 import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 
+const DEFAULT_IMAGES = [
+  "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1600",
+  "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1600",
+  "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1600",
+  "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1600",
+];
+
 interface Article {
   id: number;
   title: string;
@@ -11,100 +18,17 @@ interface Article {
   slug: string;
   tags: string[];
   meta_description: string;
+  image_url: string | null;
   published: boolean;
   created_at: string;
 }
 
 function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-}
-
-function formatDateISO(dateString: string): string {
-  return new Date(dateString).toISOString();
-}
-
-function injectSEOTags(article: Article) {
-  document.title = `${article.title} | Iconik Studios`;
-
-  const setMeta = (name: string, content: string, property = false) => {
-    const attr = property ? 'property' : 'name';
-    let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
-    if (!el) {
-      el = document.createElement('meta');
-      el.setAttribute(attr, name);
-      document.head.appendChild(el);
-    }
-    el.content = content;
-  };
-
-  const url = `https://iconik-studios-website.vercel.app/blog/${article.slug}`;
-
-  setMeta('description', article.meta_description);
-  setMeta('keywords', article.tags.join(', '));
-  setMeta('author', 'Iconik Studios');
-  setMeta('robots', 'index, follow');
-
-  setMeta('og:title', article.title, true);
-  setMeta('og:description', article.meta_description, true);
-  setMeta('og:type', 'article', true);
-  setMeta('og:url', url, true);
-  setMeta('og:site_name', 'Iconik Studios', true);
-  setMeta('og:image', 'https://iconik-studios-website.vercel.app/og-image.jpg', true);
-
-  setMeta('twitter:card', 'summary_large_image');
-  setMeta('twitter:title', article.title);
-  setMeta('twitter:description', article.meta_description);
-  setMeta('twitter:image', 'https://iconik-studios-website.vercel.app/og-image.jpg');
-
-  let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  if (!canonical) {
-    canonical = document.createElement('link');
-    canonical.rel = 'canonical';
-    document.head.appendChild(canonical);
-  }
-  canonical.href = url;
-
-  setMeta('article:published_time', formatDateISO(article.created_at), true);
-  setMeta('article:author', 'Iconik Studios', true);
-
-  const existingScript = document.querySelector('#article-schema');
-  if (existingScript) existingScript.remove();
-
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: article.title,
-    description: article.meta_description,
-    author: {
-      '@type': 'Organization',
-      name: 'Iconik Studios',
-      url: 'https://iconik-studios-website.vercel.app',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Iconik Studios',
-      url: 'https://iconik-studios-website.vercel.app',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://iconik-studios-website.vercel.app/logo.png',
-      },
-    },
-    datePublished: formatDateISO(article.created_at),
-    dateModified: formatDateISO(article.created_at),
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': url,
-    },
-    keywords: article.tags.join(', '),
-    url,
-  };
-
-  const script = document.createElement('script');
-  script.id = 'article-schema';
-  script.type = 'application/ld+json';
-  script.text = JSON.stringify(schema);
-  document.head.appendChild(script);
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 }
 
 export default function BlogArticlePage() {
@@ -112,6 +36,7 @@ export default function BlogArticlePage() {
   const navigate = useNavigate();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     async function fetchArticle() {
@@ -126,20 +51,19 @@ export default function BlogArticlePage() {
           }
         );
         const data = await res.json();
-        const found = data[0] || null;
-        setArticle(found);
-        if (found) injectSEOTags(found);
+        if (!data || data.length === 0) {
+          setNotFound(true);
+        } else {
+          setArticle(data[0]);
+        }
       } catch (err) {
         console.error('Failed to fetch article:', err);
+        setNotFound(true);
       } finally {
         setLoading(false);
       }
     }
     fetchArticle();
-
-    return () => {
-      document.title = 'Iconik Studios';
-    };
   }, [slug]);
 
   if (loading) {
@@ -150,117 +74,114 @@ export default function BlogArticlePage() {
     );
   }
 
-  if (!article) {
+  if (notFound || !article) {
     return (
-      <div className="bg-black min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="font-mono text-xs tracking-widest text-white/40 uppercase mb-6">Article Not Found</p>
-          <button onClick={() => navigate('/blog')} className="font-mono text-xs tracking-widest text-burnt-orange uppercase">
-            Back to Blog
-          </button>
-        </div>
+      <div className="bg-black min-h-screen flex flex-col items-center justify-center gap-6">
+        <p className="font-mono text-xs tracking-widest text-white/40 uppercase">Article Not Found</p>
+        <button onClick={() => navigate('/blog')} className="font-mono text-[10px] text-burnt-orange tracking-widest uppercase hover:underline">
+          Back to Blog
+        </button>
       </div>
     );
   }
+
+  const heroImage = article.image_url || DEFAULT_IMAGES[article.id % DEFAULT_IMAGES.length];
+  const siteUrl = 'https://iconik-studios-website.vercel.app';
+  const canonicalUrl = `${siteUrl}/blog/${article.slug}`;
 
   return (
     <Layout
       title={`${article.title} | Iconik Studios`}
       description={article.meta_description}
+      canonicalUrl={canonicalUrl}
+      ogImage={heroImage}
     >
-      <div className="bg-[#000000] min-h-screen text-white font-sans">
-        <div className="h-24 md:h-32" />
+      <div className="bg-[#000000] min-h-screen text-white" data-bg="black">
 
-        <article
-          className="max-w-3xl mx-auto px-6 py-16"
-          itemScope
-          itemType="https://schema.org/BlogPosting"
-        >
-          <meta itemProp="headline" content={article.title} />
-          <meta itemProp="description" content={article.meta_description} />
-          <meta itemProp="datePublished" content={formatDateISO(article.created_at)} />
-          <meta itemProp="author" content="Iconik Studios" />
-          <meta itemProp="keywords" content={article.tags.join(', ')} />
+        {/* Hero Image */}
+        <div className="relative w-full h-[55vh] md:h-[70vh] overflow-hidden">
+          <img
+            src={heroImage}
+            alt={article.title}
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = DEFAULT_IMAGES[0];
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black" />
 
-          <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+          {/* Back button */}
+          <button
             onClick={() => navigate('/blog')}
-            className="flex items-center gap-2 font-mono text-xs tracking-widest text-white/40 uppercase hover:text-burnt-orange transition-colors mb-16"
-            aria-label="Back to blog"
+            className="absolute top-8 left-6 md:left-12 flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-white/70 hover:text-white transition-colors z-10 mt-16"
           >
-            <ArrowLeft size={14} />
+            <ArrowLeft size={12} />
             Back to Blog
-          </motion.button>
+          </button>
+        </div>
 
+        {/* Article Content */}
+        <div className="max-w-3xl mx-auto px-6 md:px-8 pb-32 -mt-24 relative z-10">
+
+          {/* Tags */}
           {article.tags && article.tags.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex flex-wrap gap-2 mb-8"
-              aria-label="Article categories"
-            >
-              {article.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-burnt-orange text-white px-3 py-1 font-mono text-[9px] tracking-widest uppercase"
-                  itemProp="keywords"
-                >
+            <div className="flex flex-wrap gap-2 mb-8">
+              {article.tags.map(tag => (
+                <span key={tag} className="bg-burnt-orange text-white px-3 py-1 font-mono text-[9px] tracking-widest uppercase">
                   {tag}
                 </span>
               ))}
-            </motion.div>
+            </div>
           )}
 
+          {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl font-display font-black leading-[1.05] uppercase tracking-tight mb-6"
-            itemProp="name"
+            transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
+            className="text-4xl md:text-6xl font-display font-black uppercase leading-[1.05] tracking-tight mb-6"
           >
             {article.title}
           </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="flex items-center gap-4 font-mono text-xs text-white/40 tracking-widest uppercase mb-16 border-b border-white/10 pb-8"
-          >
-            <span itemProp="author">Iconik Team</span>
-            <span>—</span>
-            <time dateTime={formatDateISO(article.created_at)} itemProp="datePublished">
-              {formatDate(article.created_at)}
-            </time>
-          </motion.div>
+          {/* Date */}
+          <p className="font-mono text-[10px] text-white/30 tracking-widest uppercase mb-16">
+            {formatDate(article.created_at)}
+          </p>
 
+          <div className="border-t border-white/10 mb-16" />
+
+          {/* Body */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="prose prose-invert prose-lg max-w-none
-              prose-h2:font-display prose-h2:font-black prose-h2:uppercase prose-h2:tracking-tight prose-h2:text-white prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
-              prose-p:text-white/70 prose-p:leading-relaxed prose-p:font-light
-              prose-li:text-white/70 prose-li:font-light
-              prose-strong:text-white prose-strong:font-bold
-              prose-a:text-burnt-orange prose-a:no-underline hover:prose-a:underline"
-            itemProp="articleBody"
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
+            className="article-body text-white/80 text-lg leading-relaxed"
             dangerouslySetInnerHTML={{ __html: article.body }}
           />
-        </article>
 
-        <section className="max-w-3xl mx-auto px-6 pb-24 mt-16 border-t border-white/10 pt-16">
-          <p className="font-mono text-xs tracking-widest text-white/40 uppercase mb-6">Continue Reading</p>
+          <div className="border-t border-white/10 mt-24 mb-16" />
+
+          {/* Back link */}
           <button
             onClick={() => navigate('/blog')}
-            className="text-2xl font-display font-black uppercase tracking-tight hover:text-burnt-orange transition-colors"
+            className="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-white/40 hover:text-burnt-orange transition-colors"
           >
-            View All Articles →
+            <ArrowLeft size={12} />
+            Back to All Articles
           </button>
-        </section>
+        </div>
       </div>
+
+      <style>{`
+        .article-body p { margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin-top: 3rem; margin-bottom: 1rem; color: #ffffff; }
+        .article-body ul { margin-bottom: 1.5rem; padding-left: 1.5rem; list-style: disc; }
+        .article-body li { margin-bottom: 0.75rem; }
+        .article-body strong { color: #ffffff; font-weight: 700; }
+        .article-body a { color: var(--burnt-orange, #c84b11); text-decoration: underline; }
+      `}</style>
     </Layout>
   );
 }
