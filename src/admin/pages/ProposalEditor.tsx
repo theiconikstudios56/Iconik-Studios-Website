@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabaseClient';
 import { useProposals } from '../hooks/useProposals';
 import AdminGuard from '../components/AdminGuard';
 import GenerateForm from '../components/GenerateForm';
+import ProposalPreviewPanel from '../../components/proposals/ProposalPreviewPanel';
 import { Proposal } from '../../types/proposal';
 
 const SITE_URL = 'https://www.theiconikstudios.com';
@@ -109,6 +110,7 @@ export default function ProposalEditor() {
   useEffect(() => {
     if (!isNew && id) {
       fetchProposal(id);
+      setTab('content'); // reset from 'generate' when navigating from /new to /:id
     }
   }, [id, isNew]);
 
@@ -526,19 +528,9 @@ export default function ProposalEditor() {
               </div>
             )}
 
-            {/* Preview tab */}
+            {/* Preview tab — renders components directly, no fetch, works on drafts */}
             {tab === 'preview' && !isNew && (
-              <div style={{ background: '#050505' }}>
-                <iframe
-                  src={`/proposals/${proposal.slug}?preview=true`}
-                  style={{
-                    width: '100%',
-                    height: 'calc(100vh - 120px)',
-                    border: 'none',
-                  }}
-                  title="Proposal Preview"
-                />
-              </div>
+              <ProposalPreviewPanel proposal={proposal} />
             )}
           </>
         )}
