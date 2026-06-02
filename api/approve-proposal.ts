@@ -5,7 +5,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY!
 );
 
-const ADMIN_EMAIL = 'ricky@theiconikstudios.com';
+const ADMIN_EMAIL = 'remedy@theiconikstudios.com';
 const SITE_URL = 'https://www.theiconikstudios.com';
 
 export default async function handler(req: any, res: any) {
