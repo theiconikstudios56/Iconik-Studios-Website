@@ -31,6 +31,7 @@ export default function ProposalCTA({ proposal }: Props) {
   const alreadyApproved = !!proposal.approved_at;
   const [approvalState, setApprovalState] = useState<ApprovalState>(alreadyApproved ? 'success' : 'idle');
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState('');
 
@@ -68,7 +69,7 @@ export default function ProposalCTA({ proposal }: Props) {
   const tier = TIER_DISPLAY[(proposal.selected_tier || 'growth').toLowerCase()] ?? TIER_DISPLAY.growth;
 
   async function handleApprove() {
-    if (!name.trim() || !agreed) return;
+    if (!name.trim() || !email.trim() || !agreed) return;
     setApprovalState('loading');
     setError('');
     try {
@@ -82,18 +83,16 @@ export default function ProposalCTA({ proposal }: Props) {
       setApprovalState('success');
 
       // Fire GHL update — silent fail, never blocks the confirmation screen
-      if (proposal.client_email) {
-        fetch('/api/proposal-approved', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: proposal.client_email,
-            full_name: name.trim(),
-            package: proposal.selected_tier,
-            proposal_id: proposal.id,
-          }),
-        }).catch(err => console.error('GHL proposal-approved call failed:', err));
-      }
+      fetch('/api/proposal-approved', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          full_name: name.trim(),
+          package: proposal.selected_tier,
+          proposal_id: proposal.id,
+        }),
+      }).catch(err => console.error('GHL proposal-approved call failed:', err));
     } catch (err: any) {
       setError(err.message);
       setApprovalState('form');
@@ -328,7 +327,42 @@ export default function ProposalCTA({ proposal }: Props) {
                           transition: 'border-color 0.2s',
                           letterSpacing: '0.03em',
                         }}
-                        onKeyDown={e => e.key === 'Enter' && agreed && name.trim() && handleApprove()}
+                        onKeyDown={e => e.key === 'Enter' && agreed && name.trim() && email.trim() && handleApprove()}
+                      />
+                    </div>
+
+                    <div style={{ marginBottom: '16px' }}>
+                      <label style={{
+                        display: 'block',
+                        fontSize: '10px',
+                        color: '#555',
+                        letterSpacing: '0.14em',
+                        textTransform: 'uppercase',
+                        fontFamily: "'JetBrains Mono', monospace",
+                        marginBottom: '8px',
+                      }}>
+                        Your Email Address
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        placeholder="e.g. alex@company.com"
+                        disabled={approvalState === 'loading'}
+                        style={{
+                          width: '100%',
+                          background: '#0a0a0a',
+                          border: '1px solid #222',
+                          borderBottom: email.trim() ? '2px solid #D98235' : '1px solid #222',
+                          color: '#fff',
+                          padding: '14px 16px',
+                          fontSize: '14px',
+                          fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+                          outline: 'none',
+                          boxSizing: 'border-box' as const,
+                          transition: 'border-color 0.2s',
+                        }}
+                        onKeyDown={e => e.key === 'Enter' && agreed && name.trim() && email.trim() && handleApprove()}
                       />
                     </div>
 
@@ -379,10 +413,10 @@ export default function ProposalCTA({ proposal }: Props) {
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                       <button
                         onClick={handleApprove}
-                        disabled={!name.trim() || !agreed || approvalState === 'loading'}
+                        disabled={!name.trim() || !email.trim() || !agreed || approvalState === 'loading'}
                         style={{
-                          background: (!name.trim() || !agreed) ? '#1a1a1a' : '#D98235',
-                          color: (!name.trim() || !agreed) ? '#444' : '#000',
+                          background: (!name.trim() || !email.trim() || !agreed) ? '#1a1a1a' : '#D98235',
+                          color: (!name.trim() || !email.trim() || !agreed) ? '#444' : '#000',
                           border: 'none',
                           padding: '14px 32px',
                           fontSize: '11px',
@@ -398,7 +432,7 @@ export default function ProposalCTA({ proposal }: Props) {
                       </button>
                       {approvalState !== 'loading' && (
                         <button
-                          onClick={() => { setApprovalState('idle'); setName(''); setAgreed(false); setError(''); }}
+                          onClick={() => { setApprovalState('idle'); setName(''); setEmail(''); setAgreed(false); setError(''); }}
                           style={{
                             background: 'transparent',
                             color: '#444',
