@@ -163,7 +163,7 @@ async function sendApprovalEmail({
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Iconik Studios <onboarding@resend.dev>',
+      from: 'Iconik Studios <notifications@theiconikstudios.com>',
       to: [ADMIN_EMAIL],
       subject: `Proposal Approved — ${displayName} (${tierLabel})`,
       html,
