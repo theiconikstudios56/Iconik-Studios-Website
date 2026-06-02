@@ -11,7 +11,7 @@ export default function ContactPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [subject, setSubject] = useState('General Inquiry');
+  const [company, setCompany] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -71,7 +71,8 @@ export default function ContactPage() {
           lastName,
           email,
           phone,
-          subject,
+          company,
+          subject: company || 'General Inquiry',
           message,
           submittedAt: new Date().toISOString(),
           source: 'Contact Page Form'
@@ -83,6 +84,7 @@ export default function ContactPage() {
         setName('');
         setEmail('');
         setPhone('');
+        setCompany('');
         setMessage('');
       } else {
         throw new Error(`Server returned status code ${response.status}`);
@@ -253,18 +255,15 @@ export default function ContactPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Subject</label>
-                        <select 
-                          value={subject}
-                          onChange={(e) => setSubject(e.target.value)}
+                        <label className="text-[10px] font-mono uppercase tracking-widest opacity-80">Business Name</label>
+                        <input 
+                          type="text" 
+                          placeholder="Your Company / Business"
+                          value={company}
+                          onChange={(e) => setCompany(e.target.value)}
                           disabled={status === 'submitting'}
-                          className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm appearance-none cursor-pointer disabled:opacity-50"
-                        >
-                          <option className="bg-black" value="General Inquiry">General Inquiry</option>
-                          <option className="bg-black" value="Project Proposal">Project Proposal</option>
-                          <option className="bg-black" value="Partnership">Partnership</option>
-                          <option className="bg-black" value="Other">Other</option>
-                        </select>
+                          className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors font-sans text-sm placeholder:text-white/20 disabled:opacity-50"
+                        />
                       </div>
 
                       <div className="space-y-2">
