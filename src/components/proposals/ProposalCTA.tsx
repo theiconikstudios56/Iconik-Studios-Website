@@ -202,10 +202,11 @@ export default function ProposalCTA({ proposal }: Props) {
             </div>
 
             {/*
-              All interactive content in ONE wrapper that fades in once.
-              State changes (idle ↔ form) happen inside — no animation re-triggering.
+              Interactive content — no opacity animation on this wrapper.
+              State changes (idle ↔ form) just swap React content; animation
+              on the wrapper would re-trigger on children changes.
             */}
-            <div style={fadeIn(slideVisible, 0.2)}>
+            <div style={{ marginBottom: '8px' }}>
 
               {/* ── IDLE ── */}
               {approvalState === 'idle' && (
@@ -299,7 +300,6 @@ export default function ProposalCTA({ proposal }: Props) {
                         onChange={e => setName(e.target.value)}
                         placeholder="e.g. Alex Rivera"
                         disabled={approvalState === 'loading'}
-                        autoFocus
                         style={{
                           width: '100%',
                           background: '#0a0a0a',
