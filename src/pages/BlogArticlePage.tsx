@@ -86,7 +86,7 @@ export default function BlogArticlePage() {
   }
 
   const heroImage = article.image_url || DEFAULT_IMAGES[article.id % DEFAULT_IMAGES.length];
-  const siteUrl = 'https://iconik-studios-website.vercel.app';
+  const siteUrl = 'https://www.theiconikstudios.com';
   const canonicalUrl = `${siteUrl}/blog/${article.slug}`;
 
   return (

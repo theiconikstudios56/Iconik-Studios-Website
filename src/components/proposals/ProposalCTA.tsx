@@ -89,7 +89,7 @@ export default function ProposalCTA({ proposal }: Props) {
           <StaggerChild>
             <div style={{ marginBottom: '56px' }}>
               <a
-                href="https://iconikstudios.com/contact"
+                href="https://www.theiconikstudios.com/contact"
                 style={{
                   display: 'inline-block',
                   background: '#D98235',
@@ -161,7 +161,7 @@ export default function ProposalCTA({ proposal }: Props) {
               gap: '24px',
               flexWrap: 'wrap',
             }}>
-              {['ricky@iconikstudios.com', 'iconikstudios.com', 'Phoenix, AZ'].map((item, i) => (
+              {['ricky@theiconikstudios.com', 'theiconikstudios.com', 'Phoenix, AZ'].map((item, i) => (
                 <span key={i} style={{
                   fontSize: '11px',
                   color: '#444',

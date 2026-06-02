@@ -39,11 +39,11 @@ export default function Contact() {
               </p>
               
               <div className="pt-8 space-y-4">
-                <a href="mailto:hello@iconikstudios.com" className="flex items-center gap-4 group">
+                <a href="mailto:hello@theiconikstudios.com" className="flex items-center gap-4 group">
                   <div className="w-10 h-10 rounded-full border border-tan/20 flex items-center justify-center group-hover:bg-burnt-orange group-hover:border-burnt-orange transition-all">
                     <Mail size={16} />
                   </div>
-                  <span className="font-mono text-sm tracking-widest uppercase group-hover:text-burnt-orange transition-colors">hello@iconikstudios.com</span>
+                  <span className="font-mono text-sm tracking-widest uppercase group-hover:text-burnt-orange transition-colors">hello@theiconikstudios.com</span>
                 </a>
                 <div className="flex items-center gap-4 group">
                   <div className="w-10 h-10 rounded-full border border-tan/20 flex items-center justify-center">

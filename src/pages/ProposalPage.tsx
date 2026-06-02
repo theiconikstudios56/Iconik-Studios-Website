@@ -73,7 +73,7 @@ function NotFoundState() {
         fontSize: '12px',
         fontFamily: "'JetBrains Mono', monospace",
       }}>
-        ricky@iconikstudios.com · iconikstudios.com
+        ricky@theiconikstudios.com · theiconikstudios.com
       </p>
     </div>
   );
@@ -146,7 +146,7 @@ function ExpiredState() {
         alignItems: 'center',
       }}>
         <a
-          href="mailto:ricky@iconikstudios.com"
+          href="mailto:ricky@theiconikstudios.com"
           style={{
             color: '#D98235',
             fontSize: '14px',
@@ -154,10 +154,10 @@ function ExpiredState() {
             fontFamily: "'JetBrains Mono', monospace",
           }}
         >
-          ricky@iconikstudios.com
+          ricky@theiconikstudios.com
         </a>
         <span style={{ color: '#333', fontFamily: "'JetBrains Mono', monospace", fontSize: '12px' }}>
-          iconikstudios.com
+          theiconikstudios.com
         </span>
       </div>
     </div>

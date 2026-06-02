@@ -4,7 +4,7 @@ import { supabase } from '../../lib/supabaseClient';
 import { useProposals } from '../hooks/useProposals';
 import AdminGuard from '../components/AdminGuard';
 
-const SITE_URL = 'https://iconikstudios.com';
+const SITE_URL = 'https://www.theiconikstudios.com';
 
 function StatusBadge({ status, expiresAt }: { status: string; expiresAt: string | null }) {
   const isExpired = expiresAt && new Date(expiresAt) < new Date();

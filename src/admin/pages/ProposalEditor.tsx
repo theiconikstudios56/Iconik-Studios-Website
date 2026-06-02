@@ -6,7 +6,7 @@ import AdminGuard from '../components/AdminGuard';
 import GenerateForm from '../components/GenerateForm';
 import { Proposal } from '../../types/proposal';
 
-const SITE_URL = 'https://iconikstudios.com';
+const SITE_URL = 'https://www.theiconikstudios.com';
 
 type Tab = 'generate' | 'content' | 'preview';
 

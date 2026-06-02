@@ -103,7 +103,7 @@ export default function ProposalEndSlide({ onScrollToSign }: Props) {
               letterSpacing: '0.08em',
               fontFamily: "'JetBrains Mono', monospace",
             }}>
-              ricky@iconikstudios.com · iconikstudios.com · Phoenix, AZ
+              ricky@theiconikstudios.com · theiconikstudios.com · Phoenix, AZ
             </p>
           </StaggerChild>
         </StaggerContainer>
