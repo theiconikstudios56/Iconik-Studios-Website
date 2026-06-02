@@ -6,21 +6,25 @@ import AdminGuard from '../components/AdminGuard';
 
 const SITE_URL = 'https://www.theiconikstudios.com';
 
-function StatusBadge({ status, expiresAt }: { status: string; expiresAt: string | null }) {
+function StatusBadge({ status, expiresAt, approvedAt }: { status: string; expiresAt: string | null; approvedAt?: string | null }) {
   const isExpired = expiresAt && new Date(expiresAt) < new Date();
   const resolved = isExpired ? 'expired' : status;
 
   const styles: Record<string, React.CSSProperties> = {
-    draft: { background: '#1a1a1a', color: '#888', border: '1px solid #333' },
-    published: { background: '#0a1f0a', color: '#4ade80', border: '1px solid #166534' },
-    expired: { background: '#1a0a0a', color: '#f87171', border: '1px solid #7f1d1d' },
+    draft:    { background: '#1a1a1a', color: '#888',    border: '1px solid #333'    },
+    published:{ background: '#0a1f0a', color: '#4ade80', border: '1px solid #166534' },
+    expired:  { background: '#1a0a0a', color: '#f87171', border: '1px solid #7f1d1d' },
+    approved: { background: '#1a0f00', color: '#D98235', border: '1px solid #D98235' },
   };
 
   const labels: Record<string, string> = {
-    draft: 'Draft',
-    published: 'Published',
-    expired: 'Expired',
+    draft:    'Draft',
+    published:'Published',
+    expired:  'Expired',
+    approved: 'Approved ✓',
   };
+
+  const display = (resolved === 'published' && approvedAt) ? 'approved' : resolved;
 
   return (
     <span style={{
@@ -29,9 +33,9 @@ function StatusBadge({ status, expiresAt }: { status: string; expiresAt: string 
       textTransform: 'uppercase',
       padding: '3px 10px',
       fontWeight: 600,
-      ...styles[resolved],
+      ...styles[display],
     }}>
-      {labels[resolved]}
+      {labels[display]}
     </span>
   );
 }
@@ -228,7 +232,7 @@ export default function ProposalList() {
                   </div>
 
                   <div>
-                    <StatusBadge status={p.status} expiresAt={p.expires_at} />
+                    <StatusBadge status={p.status} expiresAt={p.expires_at} approvedAt={p.approved_at} />
                   </div>
 
                   <div style={{ color: '#555', fontSize: '12px' }}>

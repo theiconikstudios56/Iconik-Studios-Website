@@ -70,6 +70,9 @@ export interface Proposal {
   cta_headline: string;
   raw_notes: string;
 
+  approved_at: string | null;
+  approved_by_name: string | null;
+
   created_at: string;
   updated_at: string;
 }
