@@ -255,7 +255,6 @@ export default function ProposalPage() {
           flex: 1,
           overflowY: 'auto',
           scrollSnapType: 'y mandatory',
-          scrollBehavior: 'smooth',
           position: 'relative',
         }}
         className="proposal-scroll"
