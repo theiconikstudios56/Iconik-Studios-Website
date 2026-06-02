@@ -45,6 +45,13 @@ import HomesContact from './components/HomesContact';
 import LatestInsights from './components/LatestInsights';
 import BlogArticlePage from './pages/BlogArticlePage';
 
+// Proposal system
+import ProposalPage from './pages/ProposalPage';
+import AdminLogin from './admin/pages/AdminLogin';
+import ProposalList from './admin/pages/ProposalList';
+import ProposalEditor from './admin/pages/ProposalEditor';
+import AdminGuard from './admin/components/AdminGuard';
+
 function StaticSection({ children, index }: { children: React.ReactNode, index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -188,6 +195,10 @@ export default function App() {
         <Route path="/homes" element={<HomesPage />} />
         <Route path="/project/:id" element={<ProjectPage />} />
         <Route path="/blog/:slug" element={<BlogArticlePage />} />
+        <Route path="/proposals/:slug" element={<ProposalPage />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/proposals" element={<AdminGuard><ProposalList /></AdminGuard>} />
+        <Route path="/admin/proposals/:id" element={<AdminGuard><ProposalEditor /></AdminGuard>} />
       </Routes>
     </Router>
   );
