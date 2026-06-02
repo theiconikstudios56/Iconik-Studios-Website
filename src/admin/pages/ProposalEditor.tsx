@@ -174,7 +174,18 @@ export default function ProposalEditor() {
     try {
       const updated = await publishProposal(savedId);
       setProposal(updated);
-      // TODO: Wire up email notification to client when published
+
+      // Move GHL opportunity to Proposal Sent — silent fail, never blocks admin
+      if (updated.client_email) {
+        fetch('/api/proposal-published', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: updated.client_email,
+            proposal_id: savedId,
+          }),
+        }).catch(err => console.error('GHL proposal-published call failed:', err));
+      }
     } catch (err) {
       console.error('Publish error:', err);
     } finally {
@@ -377,6 +388,7 @@ export default function ProposalEditor() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                   <Field label="Client Name" value={proposal.client_name || ''} onChange={v => set('client_name', v)} />
                   <Field label="Client Company" value={proposal.client_company || ''} onChange={v => set('client_company', v)} />
+                  <Field label="Client Email" value={proposal.client_email || ''} onChange={v => set('client_email', v)} />
                   <Field label="Client Industry" value={proposal.client_industry || ''} onChange={v => set('client_industry', v)} />
                   <div style={{ marginBottom: '16px' }}>
                     <label style={labelStyle}>Slug</label>

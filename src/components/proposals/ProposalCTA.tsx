@@ -80,6 +80,20 @@ export default function ProposalCTA({ proposal }: Props) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Something went wrong');
       setApprovalState('success');
+
+      // Fire GHL update — silent fail, never blocks the confirmation screen
+      if (proposal.client_email) {
+        fetch('/api/proposal-approved', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: proposal.client_email,
+            full_name: name.trim(),
+            package: proposal.selected_tier,
+            proposal_id: proposal.id,
+          }),
+        }).catch(err => console.error('GHL proposal-approved call failed:', err));
+      }
     } catch (err: any) {
       setError(err.message);
       setApprovalState('form');

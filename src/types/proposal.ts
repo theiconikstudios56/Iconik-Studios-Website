@@ -31,6 +31,7 @@ export interface Proposal {
   id: string;
   slug: string;
   client_name: string;
+  client_email: string | null;
   client_industry: string;
   client_company: string;
   status: 'draft' | 'published' | 'expired';
