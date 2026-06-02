@@ -54,15 +54,20 @@ export default async function handler(req: any, res: any) {
     return res.status(500).json({ error: 'Failed to record approval' });
   }
 
-  // Send email notification — non-blocking, failure doesn't affect the client response
-  sendApprovalEmail({
-    clientName: proposal.client_name,
-    clientCompany: proposal.client_company,
-    approverName: approverName.trim(),
-    tier: proposal.selected_tier,
-    slug,
-    approvedAt,
-  }).catch(err => console.error('Email notification failed:', err));
+  // Send email notification — awaited so errors surface in Vercel logs
+  try {
+    await sendApprovalEmail({
+      clientName: proposal.client_name,
+      clientCompany: proposal.client_company,
+      approverName: approverName.trim(),
+      tier: proposal.selected_tier,
+      slug,
+      approvedAt,
+    });
+    console.log('Approval email sent successfully');
+  } catch (err) {
+    console.error('Email notification failed:', err);
+  }
 
   res.status(200).json({ success: true });
 }
@@ -82,6 +87,8 @@ async function sendApprovalEmail({
   slug: string;
   approvedAt: string;
 }) {
+  console.log('sendApprovalEmail called, RESEND_API_KEY present:', !!process.env.RESEND_API_KEY);
+
   if (!process.env.RESEND_API_KEY) {
     console.warn('RESEND_API_KEY not set — skipping email');
     return;
