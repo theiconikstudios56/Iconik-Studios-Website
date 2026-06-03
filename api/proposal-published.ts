@@ -61,18 +61,25 @@ export default async function handler(req: any, res: any) {
     }
 
     // Step 3: Move the opportunity to Proposal Sent stage
-    await fetch(
+    const oppUpdate = await fetch(
       `https://services.leadconnectorhq.com/opportunities/${opportunity.id}`,
       {
         method: 'PUT',
         headers,
         body: JSON.stringify({
+          locationId: GHL_LOCATION_ID,
           pipelineId: GHL_PIPELINE_ID,
           pipelineStageId: GHL_PROPOSAL_SENT_STAGE_ID,
           status: 'open',
         }),
       }
     );
+
+    if (!oppUpdate.ok) {
+      const errBody = await oppUpdate.text();
+      console.error(`GHL opportunity update failed (${oppUpdate.status}):`, errBody);
+      return res.status(200).json({ success: true, warning: `GHL stage update failed: ${oppUpdate.status}` });
+    }
 
     console.log(`GHL opportunity moved to Proposal Sent for contact ${contact.id} (${email}), proposal ${proposal_id}`);
     return res.status(200).json({ success: true });
