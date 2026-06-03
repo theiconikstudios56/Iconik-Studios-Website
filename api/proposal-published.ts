@@ -67,7 +67,6 @@ export default async function handler(req: any, res: any) {
         method: 'PUT',
         headers,
         body: JSON.stringify({
-          locationId: GHL_LOCATION_ID,
           pipelineId: GHL_PIPELINE_ID,
           pipelineStageId: GHL_PROPOSAL_SENT_STAGE_ID,
           status: 'open',
