@@ -43,7 +43,7 @@ export default function Services() {
             <div className="flex items-center justify-center gap-4 mb-2">
               <span className="text-[10px] font-mono text-burnt-orange tracking-[0.5em]">02 // SERVICES</span>
             </div>
-            <h2 className={`text-7xl md:text-[10vw] font-display leading-[0.65] mb-2 ${textColor} ${transitionClass}`}>
+            <h2 className={`text-5xl sm:text-7xl md:text-[10vw] font-display leading-[0.65] mb-2 ${textColor} ${transitionClass}`}>
               DIGITAL <br />
               <span className="text-outline">WARFARE.</span>
             </h2>
@@ -61,7 +61,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className={`p-12 md:p-16 border-r border-b h-full ${borderColor} hover:bg-ink hover:text-tan transition-all duration-500 group ${transitionClass}`}
+                className={`p-8 sm:p-12 md:p-16 border-r border-b h-full ${borderColor} hover:bg-ink hover:text-tan transition-all duration-500 group ${transitionClass}`}
               >
                 <service.icon className="w-8 h-8 mb-12 text-burnt-orange group-hover:text-tan transition-colors" />
                 <h3 className={`text-2xl font-display mb-6 tracking-tight ${textColor} ${transitionClass}`}>{service.title}</h3>

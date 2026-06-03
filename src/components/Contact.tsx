@@ -14,7 +14,7 @@ export default function Contact() {
 
       <div className="flex-1 flex flex-col lg:flex-row z-10">
         {/* Left Side: Info & Branding */}
-        <div className="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-tan/10">
+        <div className="lg:w-1/2 p-8 sm:p-10 md:p-12 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-tan/10">
           <div>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ export default function Contact() {
               <span className="text-[10px] font-mono text-burnt-orange tracking-[0.5em] uppercase">04 // CONTACT</span>
             </motion.div>
 
-            <h2 className="text-7xl md:text-[8vw] font-display leading-[0.85] mb-12 tracking-tighter uppercase">
+            <h2 className="text-5xl sm:text-7xl md:text-[8vw] font-display leading-[0.85] mb-12 tracking-tighter uppercase">
               LET'S START <br />
               <span className="text-burnt-orange">SOMETHING.</span>
             </h2>
@@ -70,7 +70,7 @@ export default function Contact() {
         </div>
 
         {/* Right Side: Form */}
-        <div className="lg:w-1/2 p-8 md:p-12 lg:p-16 bg-tan/5 backdrop-blur-sm">
+        <div className="lg:w-1/2 p-8 sm:p-10 md:p-12 lg:p-16 bg-tan/5 backdrop-blur-sm">
           <div className="max-w-xl mx-auto">
             <div className="mb-16 flex justify-between items-end">
               <h3 className="text-4xl font-display tracking-tight uppercase">Send Inquiry</h3>

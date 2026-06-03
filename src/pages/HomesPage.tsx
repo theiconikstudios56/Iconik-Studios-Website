@@ -13,7 +13,7 @@ import FinalCTA from '../components/FinalCTA';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[110vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+    <section className="relative min-h-[110vh] min-h-[500px] flex flex-col items-center justify-center px-6 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -93,7 +93,7 @@ const ProjectCard = ({
     <motion.div 
       ref={containerRef}
       style={{ scale }}
-      className="relative group h-[80vh] w-full mt-[10vh] overflow-hidden rounded-[40px] sticky top-[10vh]"
+      className="relative group h-[60vh] sm:h-[80vh] w-full mt-[10vh] overflow-hidden rounded-[40px] sticky top-[10vh]"
     >
       <motion.img 
         style={{ y }}
@@ -117,7 +117,7 @@ const ProjectCard = ({
               <span className="font-display text-2xl text-accent">0{index + 1}</span>
               <div className="w-12 h-[1px] bg-paper/50" />
             </div>
-            <h2 className="text-6xl md:text-8xl tracking-tighter text-paper">{project.title}</h2>
+            <h2 className="text-4xl sm:text-6xl md:text-8xl tracking-tighter text-paper">{project.title}</h2>
             <p className="text-xl font-light tracking-wide text-paper">{project.category}</p>
           </div>
           <motion.button 
@@ -161,7 +161,7 @@ const ServiceMarquee = () => {
           <div key={i} className="flex items-center gap-24 mx-12">
             {services.map((service) => (
               <div key={service} className="flex items-center gap-12">
-                <span className="text-8xl md:text-[10vw] font-display uppercase leading-none tracking-tighter hover:text-accent transition-colors cursor-pointer">{service}</span>
+                <span className="text-5xl sm:text-8xl md:text-[10vw] font-display uppercase leading-none tracking-tighter hover:text-accent transition-colors cursor-pointer">{service}</span>
                 <div className="w-8 h-8 rounded-full bg-accent animate-pulse" />
               </div>
             ))}
@@ -222,7 +222,7 @@ const Pricing = () => {
     <section id="pricing" className="py-32 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center space-y-4">
-          <h2 className="text-7xl md:text-9xl text-paper">Pricing</h2>
+          <h2 className="text-4xl sm:text-7xl md:text-9xl text-paper">Pricing</h2>
           <p className="max-w-xl mx-auto text-xl font-light text-paper opacity-100">Basics to high-performance ecosystems.</p>
         </div>
 
@@ -236,7 +236,7 @@ const Pricing = () => {
               <div className="space-y-4">
                 <h3 className={`text-4xl font-display ${!plan.featured ? 'text-paper' : ''}`}>{plan.name}</h3>
                 <div className="flex items-baseline gap-2">
-                  <span className={`text-7xl font-display ${!plan.featured ? 'text-paper' : ''}`}>{plan.price}</span>
+                  <span className={`text-4xl sm:text-7xl font-display ${!plan.featured ? 'text-paper' : ''}`}>{plan.price}</span>
                   <span className={`text-sm opacity-100 ${!plan.featured ? 'text-paper' : ''}`}>/project</span>
                 </div>
               </div>
@@ -272,7 +272,7 @@ const FAQ = () => {
     <section className="py-32 px-6 lg:px-12 bg-ink">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-8 sticky top-32 h-fit">
-          <h2 className="text-7xl md:text-9xl text-paper">FAQ</h2>
+          <h2 className="text-4xl sm:text-7xl md:text-9xl text-paper">FAQ</h2>
           <p className="max-w-sm text-xl font-light text-paper opacity-100">Everything you need to know before we launch.</p>
         </div>
         <div className="space-y-4">

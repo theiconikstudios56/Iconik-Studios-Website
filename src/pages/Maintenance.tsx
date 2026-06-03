@@ -170,7 +170,7 @@ const Maintenance = () => {
                    <div className="space-y-12">
                      <div>
                        <span className={`text-xs font-mono uppercase tracking-[0.3em] mb-4 block ${plan.highlighted ? 'text-burnt-orange' : 'text-ink'}`}>{plan.tier}</span>
-                       <h3 className="text-7xl font-display">{plan.price}</h3>
+                       <h3 className="text-4xl sm:text-7xl font-display">{plan.price}</h3>
                        <span className="text-xs uppercase tracking-[0.2em] opacity-100 block mt-2">Per Calendar Month</span>
                      </div>
                      <div className={`h-[1px] ${plan.highlighted ? 'bg-burnt-orange/30' : 'bg-ink/10'} w-full`} />
