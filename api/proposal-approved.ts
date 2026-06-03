@@ -28,8 +28,16 @@ export default async function handler(req: any, res: any) {
   try {
     // Step 1: Find the contact by email
     const contactSearch = await fetch(
-      `https://services.leadconnectorhq.com/contacts/?locationId=${GHL_LOCATION_ID}&email=${encodeURIComponent(email)}`,
-      { headers }
+      `https://services.leadconnectorhq.com/contacts/search`,
+      {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          locationId: GHL_LOCATION_ID,
+          pageLimit: 1,
+          filters: [{ field: 'email', operator: 'eq', value: email }],
+        }),
+      }
     );
     const contactData = await contactSearch.json();
     const contact = contactData.contacts?.[0];
