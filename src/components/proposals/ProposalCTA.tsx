@@ -66,7 +66,11 @@ export default function ProposalCTA({ proposal }: Props) {
     }
   }, [approvalState]);
 
-  const tier = TIER_DISPLAY[(proposal.selected_tier || 'growth').toLowerCase()] ?? TIER_DISPLAY.growth;
+  const selectedKey = (proposal.selected_tier || 'growth').toLowerCase();
+  const matchedTier = proposal.pricing_tiers?.find(t => t.label.toLowerCase() === selectedKey);
+  const tier = matchedTier
+    ? { label: matchedTier.label, price: matchedTier.price }
+    : (TIER_DISPLAY[selectedKey] ?? TIER_DISPLAY.growth);
 
   async function handleApprove() {
     if (!name.trim() || !email.trim() || !agreed) return;
