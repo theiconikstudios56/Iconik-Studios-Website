@@ -1,5 +1,6 @@
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal } from '../../types/proposal';
+import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props {
   proposal: Proposal;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export default function ProposalEndSlide({ onScrollToSign }: Props) {
+  const { isMobile } = useBreakpoint();
   return (
     <Slide index={9} id="end" style={{ background: '#000000' }}>
       <div style={{
@@ -15,16 +17,16 @@ export default function ProposalEndSlide({ onScrollToSign }: Props) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '64px 80px',
+        padding: isMobile ? '28px 20px' : '64px 80px',
         textAlign: 'center',
         position: 'relative',
         fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
       }}>
         {/* Decorative corner marks */}
-        <div style={{ position: 'absolute', top: '40px', left: '60px', width: '24px', height: '24px', borderTop: '2px solid #D98235', borderLeft: '2px solid #D98235', opacity: 0.4 }} />
-        <div style={{ position: 'absolute', top: '40px', right: '60px', width: '24px', height: '24px', borderTop: '2px solid #D98235', borderRight: '2px solid #D98235', opacity: 0.4 }} />
-        <div style={{ position: 'absolute', bottom: '40px', left: '60px', width: '24px', height: '24px', borderBottom: '2px solid #D98235', borderLeft: '2px solid #D98235', opacity: 0.4 }} />
-        <div style={{ position: 'absolute', bottom: '40px', right: '60px', width: '24px', height: '24px', borderBottom: '2px solid #D98235', borderRight: '2px solid #D98235', opacity: 0.4 }} />
+        <div style={{ display: isMobile ? 'none' : 'block', position: 'absolute', top: '40px', left: '60px', width: '24px', height: '24px', borderTop: '2px solid #D98235', borderLeft: '2px solid #D98235', opacity: 0.4 }} />
+        <div style={{ display: isMobile ? 'none' : 'block', position: 'absolute', top: '40px', right: '60px', width: '24px', height: '24px', borderTop: '2px solid #D98235', borderRight: '2px solid #D98235', opacity: 0.4 }} />
+        <div style={{ display: isMobile ? 'none' : 'block', position: 'absolute', bottom: '40px', left: '60px', width: '24px', height: '24px', borderBottom: '2px solid #D98235', borderLeft: '2px solid #D98235', opacity: 0.4 }} />
+        <div style={{ display: isMobile ? 'none' : 'block', position: 'absolute', bottom: '40px', right: '60px', width: '24px', height: '24px', borderBottom: '2px solid #D98235', borderRight: '2px solid #D98235', opacity: 0.4 }} />
 
         <StaggerContainer style={{ maxWidth: '640px' }}>
           <StaggerChild>
@@ -69,7 +71,7 @@ export default function ProposalEndSlide({ onScrollToSign }: Props) {
             <button
               onClick={onScrollToSign}
               style={{
-                padding: '18px 56px',
+                padding: isMobile ? '14px 28px' : '18px 56px',
                 background: '#D98235',
                 color: '#000',
                 border: 'none',

@@ -1,10 +1,12 @@
 import { Proposal } from '../../types/proposal';
+import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface ProposalHeaderProps {
   proposal: Proposal;
 }
 
 export default function ProposalHeader({ proposal }: ProposalHeaderProps) {
+  const { isMobile } = useBreakpoint();
   return (
     <div style={{
       height: '56px',
@@ -42,7 +44,7 @@ export default function ProposalHeader({ proposal }: ProposalHeaderProps) {
       </div>
 
       {/* Right — client info */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
         <span style={{
           fontSize: '10px',
           color: '#555',
