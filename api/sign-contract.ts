@@ -1,6 +1,5 @@
 import { Resend } from 'resend';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const PDFDocument = require('pdfkit');
+import PDFDocument from 'pdfkit';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -233,7 +232,7 @@ interface PDFData {
 
 function generateContractPDF(data: PDFData): Promise<Buffer> {
   return new Promise((resolve, reject) => {
-    const doc = new PDFDocument({ margin: 72, size: 'LETTER' });
+    const doc = new (PDFDocument as any)({ margin: 72, size: 'LETTER' });
     const chunks: Buffer[] = [];
 
     doc.on('data', (chunk: Buffer) => chunks.push(chunk));
