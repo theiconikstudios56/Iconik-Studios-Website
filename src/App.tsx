@@ -45,6 +45,9 @@ import HomesContact from './components/HomesContact';
 import LatestInsights from './components/LatestInsights';
 import BlogArticlePage from './pages/BlogArticlePage';
 
+// Contract system
+import ContractPage from './pages/ContractPage';
+
 // Proposal system
 import ProposalPage from './pages/ProposalPage';
 import AdminLogin from './admin/pages/AdminLogin';
@@ -196,6 +199,7 @@ export default function App() {
         <Route path="/project/:id" element={<ProjectPage />} />
         <Route path="/blog/:slug" element={<BlogArticlePage />} />
         <Route path="/proposals/:slug" element={<ProposalPage />} />
+        <Route path="/contract" element={<ContractPage />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/proposals" element={<AdminGuard><ProposalList /></AdminGuard>} />
         <Route path="/admin/proposals/:id" element={<AdminGuard><ProposalEditor /></AdminGuard>} />
