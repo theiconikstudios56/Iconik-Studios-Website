@@ -344,7 +344,7 @@ export default function ContractPageUI({
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-black/10">
           <p className="text-xs text-[#aaa] leading-relaxed font-mono">
-            Iconik Studios LLC &nbsp;·&nbsp; theiconikstudios@gmail.com &nbsp;·&nbsp; iconikstudios.com
+            Iconik Studios LLC &nbsp;·&nbsp; theiconikstudios@gmail.com &nbsp;·&nbsp; theiconikstudios.com
             <br />
             This document was presented electronically. Your typed signature and checkbox confirmation constitute a valid electronic signature under the ESIGN Act.
           </p>

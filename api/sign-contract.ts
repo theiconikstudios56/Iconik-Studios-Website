@@ -62,7 +62,7 @@ export default async function handler(req: any, res: any) {
   // Step 2: Send confirmation to client
   try {
     await resend.emails.send({
-      from: 'Iconik Studios <hello@iconikstudios.com>',
+      from: 'Iconik Studios <hello@theiconikstudios.com>',
       to: contactEmail,
       subject: 'Your Iconik Studios Contract is Signed ✓',
       html: `
@@ -110,7 +110,7 @@ export default async function handler(req: any, res: any) {
 
         <!-- Footer -->
         <tr><td style="padding-top:32px;border-top:1px solid #ffffff0d;">
-          <p style="margin:0;font-size:12px;color:#555;letter-spacing:0.1em;">ICONIK STUDIOS &nbsp;·&nbsp; iconikstudios.com &nbsp;·&nbsp; theiconikstudios@gmail.com</p>
+          <p style="margin:0;font-size:12px;color:#555;letter-spacing:0.1em;">ICONIK STUDIOS &nbsp;·&nbsp; theiconikstudios.com &nbsp;·&nbsp; theiconikstudios@gmail.com</p>
         </td></tr>
       </table>
     </td></tr>
@@ -125,7 +125,7 @@ export default async function handler(req: any, res: any) {
   // Step 3: Notify Ricky
   try {
     await resend.emails.send({
-      from: 'Iconik Studios System <hello@iconikstudios.com>',
+      from: 'Iconik Studios System <hello@theiconikstudios.com>',
       to: 'theiconikstudios@gmail.com',
       subject: `🎉 New Contract Signed — ${contactName}`,
       html: `
@@ -188,7 +188,7 @@ export default async function handler(req: any, res: any) {
           </table>
         </td></tr>
         <tr><td style="padding-top:32px;border-top:1px solid #ffffff0d;">
-          <p style="margin:0;font-size:12px;color:#555;letter-spacing:0.1em;">ICONIK STUDIOS SYSTEM &nbsp;·&nbsp; iconikstudios.com</p>
+          <p style="margin:0;font-size:12px;color:#555;letter-spacing:0.1em;">ICONIK STUDIOS SYSTEM &nbsp;·&nbsp; theiconikstudios.com</p>
         </td></tr>
       </table>
     </td></tr>
