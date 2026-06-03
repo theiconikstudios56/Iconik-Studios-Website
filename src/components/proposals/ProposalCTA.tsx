@@ -89,7 +89,9 @@ export default function ProposalCTA({ proposal }: Props) {
         body: JSON.stringify({
           email: email.trim(),
           full_name: name.trim(),
-          package: proposal.selected_tier,
+          package: tier.label,
+          price: tier.price,
+          business: proposal.client_company || proposal.client_name || '',
           proposal_id: proposal.id,
         }),
       }).catch(err => console.error('GHL proposal-approved call failed:', err));
