@@ -8,6 +8,7 @@ interface GenerateFormProps {
 export default function GenerateForm({ onGenerated }: GenerateFormProps) {
   const [notes, setNotes] = useState('');
   const [clientName, setClientName] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
   const [clientIndustry, setClientIndustry] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -31,7 +32,7 @@ export default function GenerateForm({ onGenerated }: GenerateFormProps) {
       }
 
       const { proposal } = await res.json();
-      onGenerated(proposal);
+      onGenerated({ ...proposal, client_email: clientEmail.trim() || undefined });
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
     } finally {
@@ -110,7 +111,7 @@ export default function GenerateForm({ onGenerated }: GenerateFormProps) {
           />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '28px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
           <div>
             <label style={labelStyle}>Client Name (optional)</label>
             <input
@@ -135,6 +136,19 @@ export default function GenerateForm({ onGenerated }: GenerateFormProps) {
               onBlur={e => e.target.style.borderColor = '#1e1e1e'}
             />
           </div>
+        </div>
+
+        <div style={{ marginBottom: '28px' }}>
+          <label style={labelStyle}>Client Email (required for pipeline automation)</label>
+          <input
+            type="email"
+            value={clientEmail}
+            onChange={e => setClientEmail(e.target.value)}
+            placeholder="client@company.com"
+            style={inputStyle}
+            onFocus={e => e.target.style.borderColor = '#D98235'}
+            onBlur={e => e.target.style.borderColor = '#1e1e1e'}
+          />
         </div>
 
         {error && (
