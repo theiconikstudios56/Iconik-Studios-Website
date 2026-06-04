@@ -80,7 +80,7 @@ export default function PortfolioPage() {
           <motion.div
             ref={containerRef}
             style={{ x }}
-            className="flex gap-16 items-center px-[20vw] h-full"
+            className="flex gap-16 items-center px-[5vw] md:px-[15vw] lg:px-[20vw] h-full"
           >
             {projects.map((project, index) => (
               <ProjectSlide 
@@ -92,7 +92,7 @@ export default function PortfolioPage() {
           </motion.div>
 
           {/* Dynamic Progress Indicator */}
-          <div className="absolute bottom-12 left-0 w-full px-[15vw] z-50 pointer-events-none">
+          <div className="absolute bottom-12 left-0 w-full px-[5vw] md:px-[10vw] lg:px-[15vw] z-50 pointer-events-none">
             <div className="flex flex-col gap-6 max-w-sm ml-auto bg-black/20 backdrop-blur-sm p-6 border border-white/5">
               <div className="flex items-end justify-between font-mono text-[9px] uppercase tracking-[0.4em] text-white">
                 <span className="text-burnt-orange font-bold font-mono">

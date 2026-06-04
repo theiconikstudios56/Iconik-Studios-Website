@@ -48,7 +48,7 @@ export default function SMBEmpowerment() {
                 </span>
                 <div className="w-12 h-[1px] bg-burnt-orange/30" />
               </div>
-              <h2 className="text-5xl md:text-7xl font-display leading-[0.95] uppercase tracking-tighter text-paper">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display leading-[0.95] uppercase tracking-tighter text-paper">
                 ENGINEERING<br />
                 LEVERAGE FOR THE<br />
                 <span className="text-burnt-orange italic">UNDERDOG.</span>
@@ -77,7 +77,7 @@ export default function SMBEmpowerment() {
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {points.map((point, index) => {
             const Icon = point.icon;
             return (

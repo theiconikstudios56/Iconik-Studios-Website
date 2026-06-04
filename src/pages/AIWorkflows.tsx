@@ -227,10 +227,10 @@ const AIWorkflows = () => {
                 <div className="w-12 h-[1px] bg-burnt-orange" />
                 <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]">Automation / 02</span>
               </div>
-              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85">
+              <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85">
                 Scale <br /> Without <br /> <span className="text-burnt-orange italic">Friction.</span>
               </h1>
-              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8">
+              <p className="max-w-xl text-paper text-base sm:text-xl leading-relaxed mb-8">
                 Stop drowning in manual tasks. As a premier ai automation agency, we build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time. We bridge the gap between static operations and intelligent systems, allowing your experts to focus on visionary work.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
@@ -248,7 +248,7 @@ const AIWorkflows = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 items-end">
               <div className="lg:col-span-8">
                 <span className="font-mono text-xs uppercase tracking-widest text-ink/80 block mb-6">Business Intelligence</span>
-                <h2 className="text-5xl md:text-7xl font-display uppercase tracking-tighter leading-[0.9]">
+                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display uppercase tracking-tighter leading-[0.9]">
                   Efficiency <br /> By Pure Design.
                 </h2>
               </div>
