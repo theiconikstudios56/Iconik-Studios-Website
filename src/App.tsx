@@ -47,6 +47,7 @@ import BlogArticlePage from './pages/BlogArticlePage';
 
 // Contract system
 import ContractPage from './pages/ContractPage';
+import IntakePage from './pages/IntakePage';
 
 // Proposal system
 import ProposalPage from './pages/ProposalPage';
@@ -203,6 +204,7 @@ export default function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/proposals" element={<AdminGuard><ProposalList /></AdminGuard>} />
         <Route path="/admin/proposals/:id" element={<AdminGuard><ProposalEditor /></AdminGuard>} />
+        <Route path="/intake" element={<IntakePage />} />
       </Routes>
     </Router>
   );
