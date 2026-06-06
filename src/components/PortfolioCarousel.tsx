@@ -61,7 +61,7 @@ export default function PortfolioCarousel() {
   }, [containerWidth, x, velocity]);
 
   return (
-    <div className="relative w-full overflow-x-hidden py-4 select-none cursor-grab active:cursor-grabbing">
+    <div className="relative w-full overflow-hidden py-4 select-none cursor-grab active:cursor-grabbing">
       {/* SVG Filter for Water Effect */}
       <svg className="absolute w-0 h-0">
         <defs>
@@ -92,7 +92,7 @@ export default function PortfolioCarousel() {
         {ITEMS.map((item, i) => (
           <div 
             key={`${item.id}-${i}`}
-            className="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[40vw] aspect-video relative group overflow-hidden rounded-sm bg-white/5"
+            className="flex-shrink-0 w-[70vw] md:w-[40vw] aspect-video relative group overflow-hidden rounded-sm bg-white/5"
           >
             <Link 
               to={`/project/${item.id}`}

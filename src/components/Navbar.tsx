@@ -42,7 +42,7 @@ export default function Navbar() {
             <motion.div 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center group"
+              className="w-28 h-28 flex items-center justify-center group"
             >
               <div className="w-24 h-24 text-accent group-hover:scale-110 transition-transform duration-500">
                  <IconikLogo color="#F5F2ED" />
@@ -130,7 +130,7 @@ export default function Navbar() {
             />
 
             {/* Right: Links */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-start lg:justify-center p-6 sm:p-12 lg:p-24 py-20 lg:py-24 space-y-8 overflow-y-auto">
+            <div className="w-full lg:w-1/2 flex flex-col justify-start lg:justify-center p-12 lg:p-24 py-20 lg:py-24 space-y-8 overflow-y-auto">
               <span className="text-accent font-serif italic text-xl">Menu</span>
               <div className="space-y-6">
                 {MENU_ITEMS.map((link, i) => (
@@ -144,7 +144,7 @@ export default function Navbar() {
                       <Link
                         to={link.path}
                         onClick={toggleMenu}
-                        className="block text-4xl sm:text-5xl md:text-8xl font-display group relative"
+                        className="block text-5xl md:text-8xl font-display group relative"
                       >
                         <span className={`relative z-10 group-hover:text-accent transition-colors ${location.pathname === link.path ? 'text-accent' : 'text-paper'}`}>
                           {link.name}
@@ -160,7 +160,7 @@ export default function Navbar() {
                         onClick={() => setIsServicesHovered(!isServicesHovered)}
                         className="group relative cursor-default py-2"
                       >
-                        <div className="block text-4xl sm:text-5xl md:text-8xl font-display relative">
+                        <div className="block text-5xl md:text-8xl font-display relative">
                           <span className={`relative z-10 transition-colors duration-300 ${isServicesHovered ? 'text-accent' : 'text-paper'}`}>
                             {link.name}
                           </span>

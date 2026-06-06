@@ -38,7 +38,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 	const imageCoverY = useTransform(scrollYProgress, [0.7, 1], ["0%", "-10%"]);
 
 	return (
-		<div ref={container} className="relative h-[400vh] min-h-screen">
+		<div ref={container} className="relative h-[400vh]">
 			<div className="sticky top-0 h-screen overflow-hidden bg-ink">
 				{/* The Background Image (The one we zoom into) */}
 				<motion.div

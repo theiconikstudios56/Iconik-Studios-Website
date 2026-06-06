@@ -188,16 +188,6 @@
   transition: all 0.4s ease;
 }
 
-html, body {
-  overflow-x: hidden;
-}
-
-@media (max-height: 500px) and (orientation: landscape) {
-  .min-h-screen {
-    min-height: 100dvh;
-  }
-}
-
 @layer base {
   :root {
     --text-color: #000000;
