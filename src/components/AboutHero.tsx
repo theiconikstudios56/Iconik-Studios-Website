@@ -57,18 +57,18 @@ export default function AboutHero() {
         </motion.div>
 
         {/* Corners Content - Bottom Left */}
-        <div className="absolute bottom-4 left-4 sm:bottom-10 sm:left-10 z-30 max-w-[220px] sm:max-w-[280px]">
+        <div className="absolute bottom-10 left-10 z-30 max-w-[280px]">
           <p className="font-mono text-[10px] uppercase tracking-widest leading-relaxed text-white">
             A boutique creative studio dedicated to architecting digital legacies for pioneering brands.
           </p>
         </div>
 
         {/* Corners Content - Bottom Right */}
-        <div className="absolute bottom-4 right-4 sm:bottom-10 sm:right-10 z-30">
+        <div className="absolute bottom-10 right-10 z-30">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-burnt-orange flex flex-col items-center justify-center text-center p-3 sm:p-4 rounded-sm"
+            className="w-32 h-32 bg-burnt-orange flex flex-col items-center justify-center text-center p-4 rounded-sm"
           >
             <span className="font-mono text-[10px] font-bold text-black uppercase leading-tight">
               Colab <br /> With Us

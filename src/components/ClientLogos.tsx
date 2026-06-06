@@ -31,7 +31,7 @@ export default function ClientLogos() {
               {CLIENTS.map((client, i) => (
                 <div 
                   key={`${outerIndex}-${i}`} 
-                  className="flex items-center justify-center gap-6 px-8 sm:px-16 md:px-28 py-12 border-r border-white/10 opacity-30 hover:opacity-100 transition-all duration-1000 cursor-pointer group/logo"
+                  className="flex items-center justify-center gap-6 px-16 md:px-28 py-12 border-r border-white/10 opacity-30 hover:opacity-100 transition-all duration-1000 cursor-pointer group/logo"
                 >
                   <client.icon size={36} strokeWidth={1.5} className="text-paper shrink-0" />
                   <span className="text-3xl md:text-4xl font-display text-paper tracking-tighter uppercase">

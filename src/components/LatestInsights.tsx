@@ -67,10 +67,10 @@ const LatestInsights = () => {
       <div className="max-w-[1800px] mx-auto space-y-24">
         {/* Header Section */}
         <div className="text-center space-y-6">
-          <motion.h2
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl sm:text-6xl md:text-9xl font-display uppercase tracking-tighter"
+            className="text-7xl md:text-9xl font-display uppercase tracking-tighter"
           >
             Latest Insights
           </motion.h2>

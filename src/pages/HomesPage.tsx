@@ -51,7 +51,7 @@ const Hero = () => {
       </div>
 
       {/* Floating Meta Details */}
-      <div className="absolute bottom-6 sm:bottom-12 w-full px-4 sm:px-8 md:px-12 flex flex-col md:flex-row justify-between items-end gap-4 md:gap-8 opacity-80 text-paper">
+      <div className="absolute bottom-12 w-full px-12 flex flex-col md:flex-row justify-between items-end gap-8 opacity-80 text-paper">
         <div className="space-y-1">
           <p className="text-[10px] uppercase tracking-widest font-semibold">Our Expertise</p>
           <p className="text-sm">Web / AI / Automation</p>

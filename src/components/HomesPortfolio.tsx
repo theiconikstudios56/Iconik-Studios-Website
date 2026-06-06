@@ -68,7 +68,7 @@ export default function HomesPortfolio() {
               </span>
               <div className="w-12 h-[1px] bg-burnt-orange/30" />
             </div>
-            <h2 className="text-3xl sm:text-5xl md:text-[6vw] font-display text-white uppercase tracking-tighter leading-[0.8] transition-all duration-500">
+            <h2 className="text-5xl md:text-[6vw] font-display text-white uppercase tracking-tighter leading-[0.8] transition-all duration-500">
               Portfolio Showcase
             </h2>
           </motion.div>
@@ -97,7 +97,7 @@ export default function HomesPortfolio() {
               <div className="absolute inset-0 bg-ink/40" />
 
               {/* Content */}
-              <div className="absolute bottom-0 left-0 w-full p-5 sm:p-8 md:p-16 lg:p-24 z-20">
+              <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 lg:p-24 z-20">
                 <div className="flex justify-between items-end">
                   <div className="space-y-4 text-paper">
                     <motion.div 
@@ -113,7 +113,7 @@ export default function HomesPortfolio() {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
-                      className="text-3xl sm:text-5xl md:text-8xl tracking-tighter uppercase font-display"
+                      className="text-5xl md:text-8xl tracking-tighter uppercase font-display"
                     >
                       {PROJECTS[activeProject].title}
                     </motion.h2>

@@ -59,10 +59,10 @@ const Maintenance = () => {
                 <div className="w-12 h-[1px] bg-burnt-orange" />
                 <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]">Vigilance / 03</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85">
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85">
                 Peace <br /> Of Mind <br /> <span className="text-burnt-orange italic">Guaranteed.</span>
               </h1>
-              <p className="max-w-xl text-paper text-base sm:text-xl leading-relaxed mb-8">
+              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8">
                 Your website and automation systems are living assets that power your business every single day. We provide comprehensive maintenance for both your website and AI workflows — including 24/7 monitoring, security patching, performance tuning, and ongoing optimization of your Fuzzy agents — so everything stays protected, sharp, and running at full capacity while you focus on growing your business.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
@@ -77,7 +77,7 @@ const Maintenance = () => {
         {/* Core Pillars */}
         <section className="px-6 lg:px-12 py-32 bg-tan text-ink rounded-t-[32px]">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-display uppercase mb-16 sm:mb-24 max-w-4xl tracking-tighter leading-none text-center mx-auto">
+            <h2 className="text-5xl md:text-7xl font-display uppercase mb-24 max-w-4xl tracking-tighter leading-none text-center mx-auto">
               Proactive Protection <br /> For High-Value Assets.
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

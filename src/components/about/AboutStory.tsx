@@ -6,10 +6,10 @@ export default function AboutStory() {
   const container = useRef(null);
   
   return (
-    <section ref={container} className="py-20 md:py-40 bg-ink text-paper overflow-hidden border-b border-white/5">
+    <section ref={container} className="py-40 bg-ink text-paper overflow-hidden border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col gap-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -20,7 +20,7 @@ export default function AboutStory() {
                 <div className="w-12 h-[1px] bg-burnt-orange" />
                 <span className="font-mono text-xs text-burnt-orange uppercase tracking-[0.3em]">Story</span>
               </div>
-              <h3 className="text-4xl sm:text-5xl md:text-7xl font-display uppercase leading-none tracking-tighter">
+              <h3 className="text-5xl md:text-7xl font-display uppercase leading-none tracking-tighter">
                 The <span className="text-burnt-orange italic">Philosophy</span>
               </h3>
               <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-90 font-mono">

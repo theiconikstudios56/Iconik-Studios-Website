@@ -73,7 +73,7 @@ const SuccessSection = () => {
               <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em] font-semibold">Scale System / 05</span>
               <div className="w-12 h-[1px] bg-burnt-orange/30" />
             </div>
-            <h2 className="text-4xl sm:text-6xl md:text-8xl leading-[0.9] font-display uppercase tracking-tighter">
+            <h2 className="text-6xl md:text-8xl leading-[0.9] font-display uppercase tracking-tighter">
               Built for<br/><span className="text-burnt-orange">Success.</span>
             </h2>
           </div>
@@ -251,10 +251,10 @@ const SuccessSection = () => {
           </div>
 
           {/* Floater Success Badge */}
-          <motion.div
+          <motion.div 
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-4 -right-4 sm:-top-8 sm:-right-8 bg-burnt-orange p-4 sm:p-6 rounded-full flex flex-col items-center justify-center text-white w-20 h-20 sm:w-28 sm:h-28 shadow-2xl border-4 border-white z-20"
+            className="absolute -top-8 -right-8 bg-burnt-orange p-6 rounded-full flex flex-col items-center justify-center text-white w-28 h-28 shadow-2xl border-4 border-white z-20"
           >
             <span className="font-display text-2xl">99%</span>
             <span className="text-[9px] font-bold uppercase tracking-tight font-sans">Conversion</span>

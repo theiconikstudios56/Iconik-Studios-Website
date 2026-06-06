@@ -114,9 +114,9 @@ export default function ContactPage() {
                 
                 {/* Animated Text CTA */}
                 <div className="mb-12">
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display uppercase tracking-tight leading-[1.1] flex flex-wrap items-center gap-x-4">
+                  <h2 className="text-5xl md:text-6xl lg:text-7xl font-display uppercase tracking-tight leading-[1.1] flex flex-wrap items-center gap-x-4">
                     <span>let’s</span>
-                    <span className="relative inline-block h-[1.3em] overflow-hidden min-w-[130px] sm:min-w-[220px] md:min-w-[350px] lg:min-w-[450px]">
+                    <span className="relative inline-block h-[1.3em] overflow-hidden min-w-[250px] md:min-w-[350px] lg:min-w-[450px]">
                       <AnimatePresence mode="wait">
                         <motion.span
                           key={words[index]}

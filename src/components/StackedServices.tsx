@@ -83,10 +83,10 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
         {/* Content Area */}
         <div className="w-full md:w-3/5 flex flex-col gap-8 md:gap-14 order-2 md:order-1">
             <div className="space-y-6">
-              <h3 className="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-display text-white uppercase tracking-tighter leading-[0.95]">
+              <h3 className="text-5xl md:text-7xl lg:text-9xl font-display text-white uppercase tracking-tighter leading-[0.95]">
                 {title}
               </h3>
-              <p className="text-sm sm:text-lg md:text-2xl text-white opacity-100 max-w-lg font-light leading-relaxed">
+              <p className="text-lg md:text-2xl text-white opacity-100 max-w-lg font-light leading-relaxed">
                 {description}
               </p>
             </div>

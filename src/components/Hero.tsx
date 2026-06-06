@@ -48,7 +48,7 @@ export default function Hero() {
           transition={{ duration: 1 }}
           className="flex flex-col items-start text-left"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5vw] xl:text-[5vw] font-display uppercase tracking-tighter leading-[1.05] mb-2 max-w-[95%] sm:max-w-[85%] lg:max-w-[60%]">
+          <h1 className="text-5xl md:text-6xl lg:text-[4.5vw] xl:text-[5vw] font-display uppercase tracking-tighter leading-[1.05] mb-2 max-w-[90%] lg:max-w-[60%]">
             <motion.span
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 0.85 }}
