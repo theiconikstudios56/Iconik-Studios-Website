@@ -1,11 +1,9 @@
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
 export default function ProposalProblem({ proposal }: Props) {
-  const { isMobile } = useBreakpoint();
   const [para1, para2] = (proposal.problem_body || '').split(/\n\n/);
 
   const symptoms = [
@@ -19,7 +17,7 @@ export default function ProposalProblem({ proposal }: Props) {
     <Slide index={2} id="reference" style={{ background: '#ffffff', overflowY: 'auto' }}>
       <div style={{
         minHeight: '100%',
-        padding: isMobile ? '28px 20px' : '56px 80px',
+        padding: '56px 80px',
         color: '#000000',
         fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
       }}>
@@ -60,7 +58,7 @@ export default function ProposalProblem({ proposal }: Props) {
           <StaggerChild>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+              gridTemplateColumns: '1fr 1fr',
               gap: '32px',
               marginBottom: '40px',
             }}>
@@ -89,7 +87,7 @@ export default function ProposalProblem({ proposal }: Props) {
               }}>
                 Revenue Leakage vs. Captured Inquiries
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto 1fr', gap: '16px', alignItems: 'center' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '16px', alignItems: 'center' }}>
                 {/* Template approach */}
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '18px', color: '#cc4444', marginBottom: '8px' }}>
@@ -125,7 +123,7 @@ export default function ProposalProblem({ proposal }: Props) {
             <StaggerChild>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                gridTemplateColumns: '1fr 1fr',
                 gap: '2px',
                 marginBottom: '32px',
               }}>

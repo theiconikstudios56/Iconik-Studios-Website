@@ -1,18 +1,15 @@
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
 export default function ProposalCover({ proposal }: Props) {
-  const { isMobile } = useBreakpoint();
   const year = new Date().getFullYear();
 
   return (
     <Slide index={0} id="cover" style={{ background: '#000000', position: 'relative', overflow: 'hidden' }}>
       {/* Decorative vertical bars — right side */}
       <div style={{
-        display: isMobile ? 'none' : 'block',
         position: 'absolute',
         right: '72px',
         top: 0,
@@ -22,7 +19,6 @@ export default function ProposalCover({ proposal }: Props) {
         opacity: 0.8,
       }} />
       <div style={{
-        display: isMobile ? 'none' : 'block',
         position: 'absolute',
         right: '84px',
         top: 0,
@@ -46,7 +42,7 @@ export default function ProposalCover({ proposal }: Props) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: isMobile ? '28px 20px' : '0 80px',
+        padding: '0 80px',
         maxWidth: '900px',
         position: 'relative',
         zIndex: 1,

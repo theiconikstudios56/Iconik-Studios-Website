@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Check } from 'lucide-react';
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal, ProposalPricingTier } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
@@ -61,7 +60,6 @@ const DEFAULT_TIERS: ProposalPricingTier[] = [
 ];
 
 export default function ProposalPricing({ proposal }: Props) {
-  const { isMobile, isTablet } = useBreakpoint();
   const tiers = proposal.pricing_tiers?.length ? proposal.pricing_tiers : DEFAULT_TIERS;
   const [selectedTier, setSelectedTier] = useState(proposal.selected_tier || 'growth');
   const [paymentPlan, setPaymentPlan] = useState('50-50');
@@ -74,7 +72,7 @@ export default function ProposalPricing({ proposal }: Props) {
     <Slide index={7} id="pricing" style={{ background: '#ffffff', overflowY: 'auto' }}>
       <div style={{
         minHeight: '100%',
-        padding: isMobile ? '28px 20px' : isTablet ? '40px 48px' : '56px 80px',
+        padding: '56px 80px',
         fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
         color: '#000000',
       }}>
@@ -120,7 +118,7 @@ export default function ProposalPricing({ proposal }: Props) {
           <StaggerChild>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+              gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '12px',
               marginBottom: '40px',
             }}>
@@ -236,7 +234,7 @@ export default function ProposalPricing({ proposal }: Props) {
           <StaggerChild>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+              gridTemplateColumns: '1fr 1fr',
               gap: '24px',
             }}>
               {/* Payment plan selector */}

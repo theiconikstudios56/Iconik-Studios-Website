@@ -1,6 +1,5 @@
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
@@ -23,22 +22,18 @@ const CARDS = [
 ];
 
 export default function ProposalExecSummary({ proposal }: Props) {
-  const { isMobile } = useBreakpoint();
   return (
     <Slide index={1} id="manifesto" style={{ background: '#0c0c0d' }}>
       <div style={{
         height: '100%',
-        display: isMobile ? 'flex' : 'grid',
-        flexDirection: isMobile ? 'column' : undefined,
-        gridTemplateColumns: isMobile ? undefined : '1fr 2fr',
+        display: 'grid',
+        gridTemplateColumns: '1fr 2fr',
         gap: 0,
-        overflowY: isMobile ? 'auto' : undefined,
       }}>
         {/* Left column */}
         <div style={{
-          borderRight: isMobile ? 'none' : '1px solid #111',
-          borderBottom: isMobile ? '1px solid #111' : 'none',
-          padding: isMobile ? '28px 20px' : '64px 48px',
+          borderRight: '1px solid #111',
+          padding: '64px 48px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -80,7 +75,7 @@ export default function ProposalExecSummary({ proposal }: Props) {
 
         {/* Right column — three cards */}
         <div style={{
-          padding: isMobile ? '28px 20px' : '48px 56px',
+          padding: '48px 56px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',

@@ -3,7 +3,6 @@ import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal } from '../../types/proposal';
 import { CLIENT_DELIVERABLES } from '../../data/proposalDeliverables';
 import { Check } from 'lucide-react';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props {
   proposal: Proposal;
@@ -13,17 +12,14 @@ interface Props {
 export default function ProposalSolution({ isAdminPreview = false }: Props) {
   const [activeId, setActiveId] = useState(CLIENT_DELIVERABLES[0].id);
   const active = CLIENT_DELIVERABLES.find(d => d.id === activeId) || CLIENT_DELIVERABLES[0];
-  const { isMobile, isTablet } = useBreakpoint();
 
   return (
     <Slide index={4} id="problem" style={{ background: '#F8F9FA' }}>
       <div style={{
         height: '100%',
-        display: isMobile ? 'flex' : 'grid',
-        flexDirection: isMobile ? 'column' : undefined,
-        gridTemplateColumns: isMobile ? undefined : isTablet ? '220px 1fr' : '300px 1fr',
+        display: 'grid',
+        gridTemplateColumns: '300px 1fr',
         fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
-        overflowY: isMobile ? 'auto' : undefined,
       }}>
         {/* Left — module list */}
         <div style={{
@@ -105,7 +101,7 @@ export default function ProposalSolution({ isAdminPreview = false }: Props) {
 
         {/* Right — detail panel */}
         <div style={{
-          padding: isMobile ? '28px 20px' : isTablet ? '40px 48px' : '56px 64px',
+          padding: '56px 64px',
           overflowY: 'auto',
           background: '#F8F9FA',
         }}>
@@ -153,7 +149,7 @@ export default function ProposalSolution({ isAdminPreview = false }: Props) {
             <StaggerChild>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                gridTemplateColumns: '1fr 1fr',
                 gap: '10px',
                 marginBottom: '32px',
               }}>

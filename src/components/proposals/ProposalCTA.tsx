@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 import { Slide } from './Slide';
 import { Proposal } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
@@ -29,7 +28,6 @@ function fadeIn(show: boolean, delay = 0): React.CSSProperties {
 }
 
 export default function ProposalCTA({ proposal }: Props) {
-  const { isMobile, isTablet } = useBreakpoint();
   const alreadyApproved = !!proposal.approved_at;
   const [approvalState, setApprovalState] = useState<ApprovalState>(alreadyApproved ? 'success' : 'idle');
   const [name, setName] = useState('');
@@ -120,7 +118,7 @@ export default function ProposalCTA({ proposal }: Props) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          padding: isMobile ? '28px 20px' : isTablet ? '40px 48px' : '64px 80px',
+          padding: '64px 80px',
           fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
           overflowY: 'auto',
         }}
@@ -259,7 +257,7 @@ export default function ProposalCTA({ proposal }: Props) {
                     </button>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)', gap: '24px', marginBottom: '40px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '40px' }}>
                     {NEXT_STEPS.map(step => (
                       <div key={step.num}>
                         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: '#D98235', letterSpacing: '0.12em', marginBottom: '6px' }}>

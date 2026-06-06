@@ -1,6 +1,5 @@
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
@@ -23,7 +22,6 @@ const STATS = [
 ];
 
 export default function ProposalProof({ proposal: _ }: Props) {
-  const { isMobile, isTablet } = useBreakpoint();
   return (
     <Slide index={6} id="proof" style={{ background: '#000000' }}>
       <div style={{
@@ -32,10 +30,9 @@ export default function ProposalProof({ proposal: _ }: Props) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: isMobile ? '28px 20px' : isTablet ? '40px 48px' : '64px 80px',
+        padding: '64px 80px',
         textAlign: 'center',
         position: 'relative',
-        overflowY: isMobile ? 'auto' : undefined,
       }}>
         {/* Subtle accent lines */}
         <div style={{
@@ -93,7 +90,7 @@ export default function ProposalProof({ proposal: _ }: Props) {
           <StaggerChild>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+              gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '2px',
               marginBottom: '56px',
             }}>

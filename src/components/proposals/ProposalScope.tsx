@@ -1,6 +1,5 @@
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal, ProposalScopePhase } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
@@ -29,14 +28,13 @@ const DEFAULT_PHASES: ProposalScopePhase[] = [
 ];
 
 export default function ProposalScope({ proposal }: Props) {
-  const { isMobile } = useBreakpoint();
   const phases = (proposal.scope_phases?.length ? proposal.scope_phases : DEFAULT_PHASES) as ProposalScopePhase[];
 
   return (
     <Slide index={5} id="scope" style={{ background: '#000000', overflowY: 'auto' }}>
       <div style={{
         minHeight: '100%',
-        padding: isMobile ? '28px 20px' : '56px 80px',
+        padding: '56px 80px',
         fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
       }}>
         <StaggerContainer>
@@ -77,8 +75,8 @@ export default function ProposalScope({ proposal }: Props) {
               <div style={{ marginBottom: '2px' }}>
                 <div style={{
                   display: 'grid',
-                  gridTemplateColumns: isMobile ? '1fr' : '80px 1fr',
-                  gap: isMobile ? '8px' : '32px',
+                  gridTemplateColumns: '80px 1fr',
+                  gap: '32px',
                   background: '#0a0a0a',
                   border: '1px solid #111',
                   padding: '32px',

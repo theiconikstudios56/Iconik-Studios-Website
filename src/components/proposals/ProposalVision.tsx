@@ -1,12 +1,10 @@
 import { TrendingUp, Clock, Sparkles } from 'lucide-react';
 import { Slide, StaggerContainer, StaggerChild } from './Slide';
 import { Proposal } from '../../types/proposal';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 interface Props { proposal: Proposal; }
 
 export default function ProposalVision({ proposal }: Props) {
-  const { isMobile, isTablet } = useBreakpoint();
   const cards = [
     {
       badge: '01 / REVENUE',
@@ -35,8 +33,7 @@ export default function ProposalVision({ proposal }: Props) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: isMobile ? '28px 20px' : isTablet ? '40px 48px' : '56px 80px',
-        overflowY: isMobile ? 'auto' : undefined,
+        padding: '56px 80px',
       }}>
         <StaggerContainer>
           {/* Tag */}
@@ -73,7 +70,7 @@ export default function ProposalVision({ proposal }: Props) {
           {/* Cards */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '2px',
           }}>
             {cards.map((card, i) => (
