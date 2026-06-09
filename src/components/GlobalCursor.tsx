@@ -12,14 +12,38 @@ export default function GlobalCursor() {
   const springY = useSpring(mouseY, { stiffness: 1000, damping: 50, mass: 0.1 });
 
   useEffect(() => {
+    const isWidgetElement = (target: HTMLElement | null) => {
+      if (!target) return false;
+      return target.closest('iframe') || 
+             target.closest('chat-widget') ||
+             target.tagName === 'CHAT-WIDGET' ||
+             target.closest('[id*="chat-widget"]') ||
+             target.closest('[class*="chat-widget"]') ||
+             target.closest('[id*="lc-chat"]') ||
+             target.closest('[class*="lc-chat"]') ||
+             target.closest('[id*="leadconnector"]') ||
+             target.closest('[class*="leadconnector"]');
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isVisible) setIsVisible(true);
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      const target = e.target as HTMLElement;
+      if (isWidgetElement(target)) {
+        setIsVisible(false);
+      } else {
+        if (!isVisible) setIsVisible(true);
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      }
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+      
+      if (isWidgetElement(target)) {
+        setIsVisible(false);
+        return;
+      }
+
       // Detect if hovering over orange sections or elements specifically
       const isOrange = target?.closest('.bg-burnt-orange') || 
                        target?.classList.contains('bg-burnt-orange') ||
@@ -47,7 +71,7 @@ export default function GlobalCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 z-[9999] pointer-events-none"
+      className="global-cursor fixed top-0 left-0 z-[9999] pointer-events-none"
       animate={{
         opacity: isVisible ? 1 : 0,
       }}

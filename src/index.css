@@ -198,6 +198,16 @@
   a, button, input, select, textarea, [role="button"] {
     cursor: none !important;
   }
+  /* Restore default/browser cursor on chat widgets and iframes */
+  chat-widget,
+  iframe,
+  [id*="chat-widget"],
+  [class*="chat-widget"],
+  [id*="lc-chat"],
+  [class*="lc-chat"],
+  [id*="leadconnector"] {
+    cursor: auto !important;
+  }
   body {
     color: var(--text-color);
     transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;

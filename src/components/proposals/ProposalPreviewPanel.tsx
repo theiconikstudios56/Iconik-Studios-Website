@@ -22,6 +22,7 @@ function withDefaults(p: Partial<Proposal>): Proposal {
     id: p.id ?? '',
     slug: p.slug ?? '',
     client_name: p.client_name ?? 'Client Name',
+    client_email: p.client_email ?? null,
     client_industry: p.client_industry ?? 'Industry',
     client_company: p.client_company ?? 'Company',
     status: p.status ?? 'draft',
