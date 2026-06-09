@@ -91,14 +91,14 @@ export default function Navbar() {
 
         {/* Action Area - Right */}
         <div className="flex-1 lg:flex-none flex items-center justify-end gap-5 pointer-events-auto">
-          <Link to="/contact">
+          <Link to="/contact" className="hidden lg:block">
             <button className="bg-paper text-ink px-10 py-5 rounded-full font-display text-base tracking-widest hover:bg-accent transition-all hover:-translate-y-1">
               LET'S TALK
             </button>
           </Link>
           <button 
             onClick={toggleMenu}
-            className="w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-colors text-paper"
+            className="w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-colors text-paper shrink-0"
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>

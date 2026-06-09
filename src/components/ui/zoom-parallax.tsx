@@ -61,8 +61,28 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 					}}
 					className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
 				>
-					<svg className="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+					<svg className="w-full h-full zoom-parallax-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
 						<defs>
+							<style>{`
+								.zoom-parallax-svg {
+									--parallax-font-size: 240px;
+								}
+								@media (max-aspect-ratio: 1/1) {
+									.zoom-parallax-svg {
+										--parallax-font-size: 200px;
+									}
+								}
+								@media (max-aspect-ratio: 3/4) {
+									.zoom-parallax-svg {
+										--parallax-font-size: 160px;
+									}
+								}
+								@media (max-aspect-ratio: 1/2) {
+									.zoom-parallax-svg {
+										--parallax-font-size: 130px;
+									}
+								}
+							`}</style>
 							<mask id="iconikMask">
 								<rect width="1000" height="1000" fill="white" />
 								<text
@@ -73,7 +93,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 									fill="black"
 									style={{
 										fontFamily: 'Anton, sans-serif',
-										fontSize: '240px',
+										fontSize: 'var(--parallax-font-size, 240px)',
 										fontWeight: '900',
 										letterSpacing: '1px'
 									}}
