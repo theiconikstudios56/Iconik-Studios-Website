@@ -144,13 +144,13 @@ export default function ContactPage() {
                     <div>
                       <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-3 block">/ write to us</span>
                       <div className="space-y-4">
-                        <a href="tel:7049007150" className="group block">
+                        <a href="tel:6232618824" className="group block">
                           <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-1 block">Phone</span>
-                          <span className="text-lg font-display group-hover:text-burnt-orange transition-colors">704.900.7150</span>
+                          <span className="text-lg font-display group-hover:text-burnt-orange transition-colors">623.261.8824</span>
                         </a>
-                        <a href="mailto:hello@iconik.com" className="group block">
+                        <a href="mailto:remedy@theiconikstudios.com" className="group block">
                           <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-1 block">General Inquiry</span>
-                          <span className="text-lg font-display group-hover:text-burnt-orange transition-colors">hello@iconik.com</span>
+                          <span className="text-lg font-display group-hover:text-burnt-orange transition-colors">remedy@theiconikstudios.com</span>
                         </a>
                       </div>
                     </div>
@@ -160,8 +160,7 @@ export default function ContactPage() {
                         <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 block">Address</span>
                         <p className="text-lg font-display uppercase tracking-tight leading-tight">
                           Iconik Studios<br />
-                          704 Morris Street<br />
-                          Charlotte, NC 28202
+                          Metaverse
                         </p>
                       </div>
                     </div>
