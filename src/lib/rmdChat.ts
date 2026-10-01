@@ -39,7 +39,9 @@ async function call<T>(body: object): Promise<T> {
   return data as T
 }
 
-export const getConfig = () => call<{ enabled: boolean; greeting: string }>({ t: 'config' })
+export type ChatConfig = { enabled: boolean; greeting: string; assistant?: boolean }
+
+export const getConfig = () => call<ChatConfig>({ t: 'config' })
 
 export const startChat = (input: { name: string; email: string; company: string; message: string; page: string; turnstile: string; website: string }) =>
   call<{ id: string; secret: string; status: string; messages: ChatMessage[] }>({ t: 'start', ...input })
@@ -47,7 +49,10 @@ export const startChat = (input: { name: string; email: string; company: string;
 export const sendMessage = (chat: SavedChat, body: string) => call<{ message: ChatMessage }>({ t: 'send', id: chat.id, secret: chat.secret, body })
 
 export const poll = (chat: SavedChat, after: string | null) =>
-  call<{ status: string; messages: ChatMessage[] }>({ t: 'poll', id: chat.id, secret: chat.secret, ...(after ? { after } : {}) })
+  call<{ status: string; messages: ChatMessage[]; typing?: boolean }>({ t: 'poll', id: chat.id, secret: chat.secret, ...(after ? { after } : {}) })
+
+/** The AI assistant's reply to the visitor's latest message, when it's on (null when it shouldn't answer). */
+export const askAssistant = (chat: SavedChat) => call<{ message: ChatMessage | null }>({ t: 'answer', id: chat.id, secret: chat.secret })
 
 const KEY = 'iconik-chat'
 

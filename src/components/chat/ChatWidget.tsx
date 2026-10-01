@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { MessageCircle, Send, X } from 'lucide-react';
 import { trackLead } from '../../lib/rmdTracking';
 import {
+  askAssistant,
   ChatError,
   getConfig,
   loadChat,
@@ -11,6 +12,7 @@ import {
   sendMessage,
   startChat,
   TURNSTILE_SITE_KEY,
+  type ChatConfig,
   type ChatMessage,
   type SavedChat,
 } from '../../lib/rmdChat';
@@ -26,10 +28,14 @@ const RECENT_MS = 3600000;
 /**
  * The website chat (RMD Step 5.4d), replacing GoHighLevel's widget. Visitors
  * give name, email and business name, pass Turnstile, and the chat lands in
- * RMD's Conversations. The team answers there.
+ * RMD's Conversations. The team answers there. When RMD's AI assistant is
+ * switched on, it answers first (the widget asks for its reply after each
+ * message and shows "typing…"), and the team can take over at any time.
  */
 export default function ChatWidget() {
-  const [config, setConfig] = useState<{ enabled: boolean; greeting: string } | null>(null);
+  const [config, setConfig] = useState<ChatConfig | null>(null);
+  const [typing, setTyping] = useState(false);
+  const asking = useRef(false);
   const [open, setOpen] = useState(false);
   const [chat, setChat] = useState<SavedChat | null>(() => loadChat());
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -80,6 +86,7 @@ export default function ChatWidget() {
         try {
           const result = await poll(chat, lastAt.current);
           setProblem(null);
+          if (!asking.current) setTyping(Boolean(result.typing));
           // The first check after a reload brings the whole chat back; it isn't "new".
           addMessages(result.messages, lastAt.current !== null);
         } catch (e) {
@@ -122,6 +129,22 @@ export default function ChatWidget() {
     setChat(next);
   };
 
+  // The assistant's reply to what the visitor just wrote (when it's on).
+  const ask = async (target: SavedChat) => {
+    if (!config?.assistant) return;
+    asking.current = true;
+    setTyping(true);
+    try {
+      const { message } = await askAssistant(target);
+      if (message) addMessages([message], false);
+    } catch {
+      // The team is told as usual, and the automatic reply covers the wait.
+    } finally {
+      asking.current = false;
+      setTyping(false);
+    }
+  };
+
   return (
     <div className="iconik-chat-widget fixed right-4 bottom-4 z-[90] flex flex-col items-end gap-3 sm:right-6 sm:bottom-6">
       {open && (
@@ -134,7 +157,9 @@ export default function ChatWidget() {
           <header className="flex items-start justify-between gap-3 border-b border-white/10 bg-burnt-orange px-5 py-4 text-ink">
             <div>
               <h2 className="font-display text-3xl uppercase leading-none tracking-tight">Talk to Iconik</h2>
-              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em]">Real people · usually quick</p>
+              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em]">
+                {config?.assistant ? 'AI assistant · a person can take over' : 'Real people · usually quick'}
+              </p>
             </div>
             <button
               type="button"
@@ -150,18 +175,22 @@ export default function ChatWidget() {
           </header>
 
           {chat ? (
-            <Conversation chat={chat} messages={messages} problem={problem} onSent={(m) => {
+            <Conversation chat={chat} messages={messages} problem={problem} typing={typing} onSent={(m) => {
               addMessages([m], false);
               lastNew.current = Date.now(); // back to quick checks
               remember({ ...chat, lastActivity: Date.now() });
+              void ask(chat);
             }} onNewChat={forget} />
           ) : (
             <StartForm
               greeting={config?.greeting ?? ''}
+              assistant={Boolean(config?.assistant)}
               onStarted={(started, firstName) => {
                 addMessages(started.messages, false);
-                remember({ id: started.id, secret: started.secret, firstName, lastActivity: Date.now() });
+                const next = { id: started.id, secret: started.secret, firstName, lastActivity: Date.now() };
+                remember(next);
                 trackLead('chat');
+                void ask(next);
               }}
             />
           )}
@@ -190,7 +219,15 @@ export default function ChatWidget() {
 const field =
   'w-full border border-white/15 bg-white/5 px-3 py-2.5 font-mono text-sm text-paper placeholder:text-white/40 focus:border-burnt-orange focus:outline-none';
 
-function StartForm({ greeting, onStarted }: { greeting: string; onStarted: (started: { id: string; secret: string; messages: ChatMessage[] }, firstName: string) => void }) {
+function StartForm({
+  greeting,
+  assistant,
+  onStarted,
+}: {
+  greeting: string;
+  assistant: boolean;
+  onStarted: (started: { id: string; secret: string; messages: ChatMessage[] }, firstName: string) => void;
+}) {
   const [values, setValues] = useState({ name: '', email: '', company: '', message: '', website: '' });
   const [token, setToken] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -242,6 +279,9 @@ function StartForm({ greeting, onStarted }: { greeting: string; onStarted: (star
   return (
     <form onSubmit={submit} className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-5">
       <p className="font-mono text-sm leading-relaxed text-tan">{greeting}</p>
+      {assistant && (
+        <p className="font-mono text-[11px] leading-relaxed text-white/60">An AI assistant answers first. Ask for a person any time and someone from Iconik will pick it up.</p>
+      )}
       <label className="sr-only" htmlFor="chat-name">Your name</label>
       <input id="chat-name" className={field} placeholder="Your name" autoComplete="name" required maxLength={120} value={values.name} onChange={set('name')} />
       <label className="sr-only" htmlFor="chat-email">Email</label>
@@ -272,12 +312,14 @@ function Conversation({
   chat,
   messages,
   problem,
+  typing,
   onSent,
   onNewChat,
 }: {
   chat: SavedChat;
   messages: ChatMessage[];
   problem: string | null;
+  typing: boolean;
   onSent: (m: ChatMessage) => void;
   onNewChat: () => void;
 }) {
@@ -288,7 +330,7 @@ function Conversation({
 
   useEffect(() => {
     end.current?.scrollIntoView({ block: 'end' });
-  }, [messages.length]);
+  }, [messages.length, typing]);
 
   const send = async (e?: FormEvent) => {
     e?.preventDefault();
@@ -317,18 +359,29 @@ function Conversation({
           const mine = m.kind === 'visitor';
           return (
             <div key={m.id} className={`flex flex-col ${mine ? 'items-end' : 'items-start'}`}>
-              {!mine && <span className="mb-1 font-mono text-[10px] uppercase tracking-[0.2em] text-burnt-orange">{m.kind === 'team' ? `${m.author} · Iconik` : 'Iconik'}</span>}
+              {!mine && <span className="mb-1 font-mono text-[10px] uppercase tracking-[0.2em] text-burnt-orange">{m.kind === 'team' ? `${m.author} · Iconik` : m.kind === 'ai' ? 'Iconik · AI assistant' : 'Iconik'}</span>}
               <p
                 className={`max-w-[85%] whitespace-pre-wrap break-words px-3.5 py-2.5 text-sm leading-relaxed ${
                   mine ? 'bg-burnt-orange text-ink' : 'border border-white/10 bg-white/[0.06] text-paper'
                 }`}
               >
-                {m.body}
+                {mine ? m.body : <Linked text={m.body} />}
               </p>
             </div>
           );
         })}
-        {waiting && <p className="font-mono text-[11px] text-white/50">Thanks, {chat.firstName}! Someone from the team will be with you shortly.</p>}
+        {typing ? (
+          <p className="flex items-center gap-2 font-mono text-[11px] text-white/60" role="status">
+            <span className="flex gap-1" aria-hidden>
+              <span className="size-1.5 animate-bounce rounded-full bg-burnt-orange [animation-delay:-0.3s]" />
+              <span className="size-1.5 animate-bounce rounded-full bg-burnt-orange [animation-delay:-0.15s]" />
+              <span className="size-1.5 animate-bounce rounded-full bg-burnt-orange" />
+            </span>
+            Iconik is typing…
+          </p>
+        ) : (
+          waiting && <p className="font-mono text-[11px] text-white/50">Thanks, {chat.firstName}! Someone from the team will be with you shortly.</p>
+        )}
         <div ref={end} />
       </div>
       <form onSubmit={send} className="border-t border-white/10 p-3">
@@ -366,3 +419,25 @@ function Conversation({
     </>
   );
 }
+
+/** Web addresses in Iconik's messages become links (the booking page, for one). */
+function Linked({ text }: { text: string }) {
+  const parts = text.split(/(https?:\/\/[^\s<>"']+)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (i % 2 === 0) return part;
+        const url = part.replace(/[.,;:!?)]+$/, '');
+        return (
+          <span key={i}>
+            <a href={url} target="_blank" rel="noopener noreferrer" className="underline decoration-burnt-orange underline-offset-2 hover:text-burnt-orange">
+              {url}
+            </a>
+            {part.slice(url.length)}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
