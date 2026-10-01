@@ -7,9 +7,9 @@ import ParallaxLogoSection from '../components/ParallaxLogoSection';
 import HomesContact from '../components/HomesContact';
 import LatestInsights from '../components/LatestInsights';
 import FinalCTA from '../components/FinalCTA';
-import aiAutomationsImage from '../assets/images/fuzzy-automation.png';
-import fuzzyWorkImage from '../assets/images/fuzzy-work.png';
-import poolFuzzyImage from '../assets/images/pool-fuzzy.png';
+import aiAutomationsImage from '../assets/images/web/fuzzy-automation.webp';
+import fuzzyWorkImage from '../assets/images/web/fuzzy-work.webp';
+import poolFuzzyImage from '../assets/images/web/pool-fuzzy.webp';
 
 const AnimatedWorkflowDiagram = () => {
   const [activeStep, setActiveStep] = useState(0);

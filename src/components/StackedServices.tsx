@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
-import imgWeb from '../assets/images/fuzzy-web.png';
-import imgAi from '../assets/images/ai-automations.png';
-import imgMaintenance from '../assets/images/fuzzy-maintenance.png';
+import imgWeb from '../assets/images/web/fuzzy-web.webp';
+import imgAi from '../assets/images/web/ai-automations.webp';
+import imgMaintenance from '../assets/images/web/fuzzy-maintenance.webp';
 
 const SERVICES = [
   {
@@ -113,7 +113,9 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
 
         {/* Image Container */}
         <div className="w-full md:w-2/5 aspect-[4/3] md:aspect-square relative group overflow-hidden rounded-[12px] md:rounded-[16px] flex-shrink-0 order-1 md:order-2">
-           <img 
+           <img
+             loading="lazy"
+             decoding="async"
              src={image} 
              alt={title} 
              className="w-full h-full object-cover"

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import defaultHeroBg from '../assets/images/fuzzy-chillin.png';
+import defaultHeroBg from '../assets/images/web/fuzzy-chillin.webp';
 
 interface ParallaxLogoSectionProps {
   bgImage?: string;
@@ -36,6 +36,8 @@ export default function ParallaxLogoSection({ bgImage = defaultHeroBg }: Paralla
         <div className="absolute inset-0 bg-ink/10 z-10" />
 
         <img
+          loading="lazy"
+          decoding="async"
           src={bgImage}
           alt="Parallax Background"
           className="w-full h-full object-cover brightness-[0.9] contrast-105"

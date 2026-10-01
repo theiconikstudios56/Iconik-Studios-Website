@@ -9,8 +9,8 @@ import PortfolioCarousel from '../components/PortfolioCarousel';
 import HomesContact from '../components/HomesContact';
 import LatestInsights from '../components/LatestInsights';
 import FinalCTA from '../components/FinalCTA';
-import fuzzyWebDesignImage from '../assets/images/fuzzy-web-design.png';
-import homeOfficeFuzzyImage from '../assets/images/home-office-fuzzy.png';
+import fuzzyWebDesignImage from '../assets/images/web/fuzzy-web-design.webp';
+import homeOfficeFuzzyImage from '../assets/images/web/home-office-fuzzy.webp';
 
 const WebDesign = () => {
   useEffect(() => {
@@ -165,6 +165,8 @@ const WebDesign = () => {
               <div className="lg:w-1/2 relative group lg:sticky lg:top-32">
                 <div className="aspect-square bg-tan rounded-3xl overflow-hidden transition-all duration-1000">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={homeOfficeFuzzyImage}
                     alt="Web Design Showcase"
                     className="w-full h-full object-cover"

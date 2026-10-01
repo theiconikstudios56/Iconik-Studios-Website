@@ -1,9 +1,9 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import finalFuzzyHero from '../assets/images/chill-office.png';
-import rooftopFuzzies from '../assets/images/rooftop-fuzzy-hd.png';
-import fuzzyCollab from '../assets/images/fuzzy-collab.png';
+import finalFuzzyHero from '../assets/images/web/chill-office.webp';
+import rooftopFuzzies from '../assets/images/web/rooftop-fuzzy-hd.webp';
+import fuzzyCollab from '../assets/images/web/fuzzy-collab.webp';
 
 const HERO_IMAGES = [
   finalFuzzyHero,
@@ -25,7 +25,9 @@ export default function Hero() {
     <section data-bg="dark" className="relative h-screen w-full flex flex-col items-center justify-center px-6 overflow-hidden text-tan">
       {/* Background Atmosphere Carousel */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-ink">
-        <AnimatePresence>
+        {/* The first photo is there from the start (no fade-in) and loads first: it's the
+            first thing visitors see, and what Google times as "main content shown". */}
+        <AnimatePresence initial={false}>
           <motion.img
             key={currentImageIndex}
             initial={{ scale: 1.05, opacity: 0 }}
@@ -33,6 +35,7 @@ export default function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             src={HERO_IMAGES[currentImageIndex]}
+            fetchPriority={currentImageIndex === 0 ? 'high' : 'auto'}
             alt="Iconik Lounge"
             className="absolute inset-0 w-full h-full object-cover brightness-[.60]"
             referrerPolicy="no-referrer"

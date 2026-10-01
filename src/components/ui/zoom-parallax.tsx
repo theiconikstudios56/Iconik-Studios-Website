@@ -46,6 +46,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 					className="absolute inset-0 z-0"
 				>
 					<img
+						loading="lazy"
+						decoding="async"
 						src={images[0]?.src || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80'}
 						alt="Background"
 						className="w-full h-full object-cover opacity-50"

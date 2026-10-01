@@ -1,5 +1,5 @@
 import React from 'react';
-import iconikLogoWhite from '../assets/images/Brand/iconik-white-logo.png';
+import iconikLogoWhite from '../assets/images/web/iconik-white-logo.webp';
 
 interface IconikLogoProps {
   className?: string;

@@ -3,7 +3,7 @@ import React from 'react';
 import { cn } from '../lib/utils';
 import Lenis from '@studio-freight/lenis'
 import { ZoomParallax } from "./ui/zoom-parallax";
-import heroBg from '../assets/images/final-fuzzy-hero.png';
+import heroBg from '../assets/images/web/final-fuzzy-hero.webp';
 
 export default function ZoomParallaxSection() {
 	React.useEffect(() => {

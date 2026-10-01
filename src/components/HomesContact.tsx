@@ -1,7 +1,7 @@
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import fuzzySuccessImg from '../assets/images/fuzzy-success.png';
+import fuzzySuccessImg from '../assets/images/web/fuzzy-success.webp';
 
 const REVIEWS = [
   {
@@ -102,7 +102,9 @@ const HomesContact = () => {
     >
       {/* Background Parallax Image */}
       <div className="absolute inset-0 z-0">
-        <motion.img 
+        <motion.img
+          loading="lazy"
+          decoding="async"
           style={{ y }}
           src={fuzzySuccessImg} 
           alt="Success Pre-Footer" 

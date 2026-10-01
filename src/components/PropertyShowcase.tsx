@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import convoFuzzyImage from '../assets/images/convo-fuzzy.png';
-import fuzzySetupImage from '../assets/images/fuzzy-setup.png';
+import convoFuzzyImage from '../assets/images/web/convo-fuzzy.webp';
+import fuzzySetupImage from '../assets/images/web/fuzzy-setup.webp';
 
 export default function PropertyShowcase() {
   return (
@@ -61,7 +61,9 @@ export default function PropertyShowcase() {
           style={{ top: '20%', left: '10%' }}
           className="absolute hidden lg:block w-56 h-72 rounded-[40px] overflow-hidden shadow-2xl border border-white/10"
         >
-          <img 
+          <img
+            loading="lazy"
+            decoding="async"
             src={fuzzySetupImage} 
             alt="Fuzzy Setup" 
             className="w-full h-full object-cover"
@@ -78,7 +80,9 @@ export default function PropertyShowcase() {
           style={{ bottom: '15%', right: '8%' }}
           className="absolute hidden md:block w-[25vw] h-[35vh] rounded-[48px] overflow-hidden shadow-2xl border border-white/10"
         >
-          <img 
+          <img
+            loading="lazy"
+            decoding="async"
             src={convoFuzzyImage} 
             alt="Convo Fuzzy" 
             className="w-full h-full object-cover"

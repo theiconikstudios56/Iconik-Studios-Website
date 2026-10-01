@@ -8,23 +8,13 @@ import ScrollReveal from './components/ScrollReveal';
 import FeaturedProject from './components/FeaturedProject';
 import ElegantCarousel from './components/ui/ElegantCarousel';
 import ZoomParallaxSection from './components/ZoomParallaxSection';
-import ProjectPage from './components/ProjectPage';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'motion/react';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { lazy, Suspense, useRef, useState, useEffect } from 'react';
 
 import BackgroundTransition from './components/BackgroundTransition';
 import FinalCTA from './components/FinalCTA';
 
-// New Pages
-import AboutPage from './pages/AboutPage';
-import WebDesign from './pages/WebDesign';
-import AIWorkflows from './pages/AIWorkflows';
-import Maintenance from './pages/Maintenance';
-import PortfolioPage from './pages/PortfolioPage';
-import BlogPage from './pages/BlogPage';
-import ContactPage from './pages/ContactPage';
-import HomesPage from './pages/HomesPage';
-import focusedFuzzyImage from './assets/images/focused-fuzzy.png';
+import focusedFuzzyImage from './assets/images/web/focused-fuzzy.webp';
 
 // Modular Sections
 import AboutHero from './components/AboutHero';
@@ -44,18 +34,27 @@ import SMBEmpowerment from './components/SMBEmpowerment';
 import FuzzyLineupSection from './components/FuzzyLineupSection';
 import HomesContact from './components/HomesContact';
 import LatestInsights from './components/LatestInsights';
-import BlogArticlePage from './pages/BlogArticlePage';
 
-// Contract system
-import ContractPage from './pages/ContractPage';
-import IntakePage from './pages/IntakePage';
-
-// Proposal system
-import ProposalPage from './pages/ProposalPage';
-import AdminLogin from './admin/pages/AdminLogin';
-import ProposalList from './admin/pages/ProposalList';
-import ProposalEditor from './admin/pages/ProposalEditor';
-import AdminGuard from './admin/components/AdminGuard';
+// Every page but the homepage loads its own code when it's opened, so the
+// first visit downloads only what the homepage needs.
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const WebDesign = lazy(() => import('./pages/WebDesign'));
+const AIWorkflows = lazy(() => import('./pages/AIWorkflows'));
+const Maintenance = lazy(() => import('./pages/Maintenance'));
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const HomesPage = lazy(() => import('./pages/HomesPage'));
+const ProjectPage = lazy(() => import('./components/ProjectPage'));
+const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
+const ContractPage = lazy(() => import('./pages/ContractPage'));
+const IntakePage = lazy(() => import('./pages/IntakePage'));
+const ProposalPage = lazy(() => import('./pages/ProposalPage'));
+const AdminLogin = lazy(() => import('./admin/pages/AdminLogin'));
+const ProposalList = lazy(() => import('./admin/pages/ProposalList'));
+const ProposalEditor = lazy(() => import('./admin/pages/ProposalEditor'));
+const AdminGuard = lazy(() => import('./admin/components/AdminGuard'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function StaticSection({ children, index }: { children: React.ReactNode, index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -140,6 +139,8 @@ function Home() {
                   className="absolute inset-0"
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={focusedFuzzyImage}
                     alt="Web Design Service"
                     className="w-full h-full object-cover transition-all duration-1000"
@@ -200,6 +201,8 @@ export default function App() {
       <RmdTracking />
       <ScrollToTop />
       <GlobalCursor />
+      {/* While a page's code loads: the site's dark background, no flash of white. */}
+      <Suspense fallback={<div className="min-h-screen bg-ink" />}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
@@ -218,7 +221,9 @@ export default function App() {
         <Route path="/admin/proposals" element={<AdminGuard><ProposalList /></AdminGuard>} />
         <Route path="/admin/proposals/:id" element={<AdminGuard><ProposalEditor /></AdminGuard>} />
         <Route path="/intake" element={<IntakePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </Suspense>
     </Router>
   );
 }

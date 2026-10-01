@@ -1,6 +1,6 @@
 import React from 'react';
-import strategySeshImg from '../../assets/images/strategy-sesh.png';
-import aiGameplanImg from '../../assets/images/ai-gameplan.png';
+import strategySeshImg from '../../assets/images/web/strategy-sesh.webp';
+import aiGameplanImg from '../../assets/images/web/ai-gameplan.webp';
 
 interface SlideData {
   title: string;
@@ -78,6 +78,8 @@ export default function ElegantCarousel({ reversed = false }: { reversed?: boole
         <div className={`carousel-image-container ${reversed ? 'lg:order-1' : 'lg:order-2'}`}>
           <div className="carousel-image-frame visible">
             <img
+              loading="lazy"
+              decoding="async"
               src={currentSlide.imageUrl}
               alt={currentSlide.title}
               className="carousel-image"

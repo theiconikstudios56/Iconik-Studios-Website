@@ -7,8 +7,8 @@ import ParallaxLogoSection from '../components/ParallaxLogoSection';
 import HomesContact from '../components/HomesContact';
 import LatestInsights from '../components/LatestInsights';
 import FinalCTA from '../components/FinalCTA';
-import fuzzyMaintenanceImage from '../assets/images/funny-maintain.png';
-import fuzzyClosingImage from '../assets/images/fuzzy-closing.png';
+import fuzzyMaintenanceImage from '../assets/images/web/funny-maintain.webp';
+import fuzzyClosingImage from '../assets/images/web/fuzzy-closing.webp';
 
 const Maintenance = () => {
   useEffect(() => {

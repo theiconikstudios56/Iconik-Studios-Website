@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { useRef } from 'react';
-import mascotImg from '../../assets/images/fuzzy-squad.png';
+import mascotImg from '../../assets/images/web/fuzzy-squad.webp';
 
 export default function AboutStory() {
   const container = useRef(null);
@@ -46,7 +46,9 @@ export default function AboutStory() {
               className="flex items-center justify-center"
             >
                <div className="w-full aspect-[4/5] bg-white/5 relative group overflow-hidden rounded-2xl">
-                  <img 
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     src={mascotImg} 
                     alt="Iconik Fuzzies Mascot" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-90"

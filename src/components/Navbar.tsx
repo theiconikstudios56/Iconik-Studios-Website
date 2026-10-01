@@ -3,7 +3,7 @@ import { Menu, X, Globe, Instagram, Linkedin, Twitter, ChevronDown } from 'lucid
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IconikLogo from './IconikLogo';
-import fuzzFuzzyImage from '../assets/images/fuzz_fuzzy.png';
+import fuzzFuzzyImage from '../assets/images/web/fuzz_fuzzy.webp';
 
 const MENU_ITEMS = [
   { name: 'Home', path: '/' },

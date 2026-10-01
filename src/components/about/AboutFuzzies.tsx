@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import fuzziesTeamImg from '../../assets/images/fuzzy-collab.png';
+import fuzziesTeamImg from '../../assets/images/web/fuzzy-collab.webp';
 
 export default function AboutFuzzies() {
   return (
@@ -54,7 +54,9 @@ export default function AboutFuzzies() {
               transition={{ duration: 0.8 }}
               className="w-full aspect-square md:aspect-[4/5] overflow-hidden rounded-2xl bg-ink/5 border border-ink/10 relative group"
             >
-              <img 
+              <img
+                loading="lazy"
+                decoding="async"
                 src={fuzziesTeamImg} 
                 alt="Iconik Fuzzies AI Team" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"

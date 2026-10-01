@@ -87,7 +87,9 @@ export default function HomesPortfolio() {
             >
               <Link to={`/project/${PROJECTS[activeProject].id}`} className="absolute inset-0 z-30 cursor-pointer" />
               
-              <img 
+              <img
+                loading="lazy"
+                decoding="async"
                 src={PROJECTS[activeProject].image} 
                 alt={PROJECTS[activeProject].title}
                 className="absolute inset-0 w-full h-full object-cover grayscale brightness-50 transition-all duration-1000 group-hover:grayscale-0"

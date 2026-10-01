@@ -115,7 +115,9 @@ const LatestInsights = () => {
                     </div>
                   </div>
 
-                  <motion.img 
+                  <motion.img
+                    loading="lazy"
+                    decoding="async"
                     src={item.image_url || DEFAULT_IMAGES[index % DEFAULT_IMAGES.length]} 
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:brightness-110"

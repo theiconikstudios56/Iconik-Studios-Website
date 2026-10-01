@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
-import studioFuzzyImage from '../assets/images/studio-fuzzy.png';
+import studioFuzzyImage from '../assets/images/web/studio-fuzzy.webp';
 
 export default function AboutHero() {
   const heroRef = useRef<HTMLElement>(null);
