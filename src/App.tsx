@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { trackPage } from './lib/rmdTracking';
+import { chatAvailable } from './lib/rmdChat';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/Hero';
@@ -55,6 +56,32 @@ const ProposalList = lazy(() => import('./admin/pages/ProposalList'));
 const ProposalEditor = lazy(() => import('./admin/pages/ProposalEditor'));
 const AdminGuard = lazy(() => import('./admin/components/AdminGuard'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
+
+// Pages where the chat bubble doesn't belong (the same ones visits aren't counted on).
+const NO_CHAT = /^\/(admin|proposals|contract|intake)(\/|$)/;
+
+/** The chat bubble, loaded once the page has finished loading, so it never slows the first view. */
+function ChatLauncher() {
+  const { pathname } = useLocation();
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    if (!chatAvailable) return;
+    const start = () => setReady(true);
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(start, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(start, 2500);
+    return () => window.clearTimeout(id);
+  }, []);
+  if (!ready || NO_CHAT.test(pathname)) return null;
+  return (
+    <Suspense fallback={null}>
+      <ChatWidget />
+    </Suspense>
+  );
+}
 
 function StaticSection({ children, index }: { children: React.ReactNode, index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -224,6 +251,7 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </Suspense>
+      <ChatLauncher />
     </Router>
   );
 }
