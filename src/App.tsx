@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { trackPage } from './lib/rmdTracking';
 import { chatAvailable } from './lib/rmdChat';
 import Navbar from './components/Navbar';
@@ -48,18 +48,12 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const HomesPage = lazy(() => import('./pages/HomesPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
-const ContractPage = lazy(() => import('./pages/ContractPage'));
 const IntakePage = lazy(() => import('./pages/IntakePage'));
-const ProposalPage = lazy(() => import('./pages/ProposalPage'));
-const AdminLogin = lazy(() => import('./admin/pages/AdminLogin'));
-const ProposalList = lazy(() => import('./admin/pages/ProposalList'));
-const ProposalEditor = lazy(() => import('./admin/pages/ProposalEditor'));
-const AdminGuard = lazy(() => import('./admin/components/AdminGuard'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
 
-// Pages where the chat bubble doesn't belong (the same ones visits aren't counted on).
-const NO_CHAT = /^\/(admin|proposals|contract|intake)(\/|$)/;
+// Pages where the chat bubble doesn't belong.
+const NO_CHAT = /^\/intake(\/|$)/;
 
 /** The chat bubble, loaded once the page has finished loading, so it never slows the first view. */
 function ChatLauncher() {
@@ -242,11 +236,11 @@ export default function App() {
         <Route path="/homes" element={<HomesPage />} />
         <Route path="/project/:id" element={<ProjectPage />} />
         <Route path="/blog/:slug" element={<BlogArticlePage />} />
-        <Route path="/proposals/:slug" element={<ProposalPage />} />
-        <Route path="/contract" element={<ContractPage />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/proposals" element={<AdminGuard><ProposalList /></AdminGuard>} />
-        <Route path="/admin/proposals/:id" element={<AdminGuard><ProposalEditor /></AdminGuard>} />
+        {/* The old proposal, contract and admin pages were retired: proposals and
+            contracts now live in RMD. Old links land on the contact page. */}
+        <Route path="/proposals/*" element={<Navigate to="/contact" replace />} />
+        <Route path="/contract" element={<Navigate to="/contact" replace />} />
+        <Route path="/admin/*" element={<Navigate to="/contact" replace />} />
         <Route path="/intake" element={<IntakePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
