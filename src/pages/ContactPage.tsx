@@ -2,6 +2,7 @@ import Layout from '../components/Layout';
 import { motion, AnimatePresence } from 'motion/react';
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, Mail, Phone, MapPin, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { trackLead } from '../lib/rmdTracking';
 
 export default function ContactPage() {
   const [index, setIndex] = useState(0);
@@ -80,6 +81,7 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
+        trackLead('contact-form');
         setStatus('success');
         setName('');
         setEmail('');

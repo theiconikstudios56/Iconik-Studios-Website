@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { trackPage } from './lib/rmdTracking';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/Hero';
@@ -182,9 +183,21 @@ function Home() {
   );
 }
 
+/** Sends each page view to RMD's visitor statistics (see lib/rmdTracking). */
+function RmdTracking() {
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    trackPage(pathname, search);
+    // A new page is a new view; a changed query string on the same page isn't.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <RmdTracking />
       <ScrollToTop />
       <GlobalCursor />
       <Routes>
