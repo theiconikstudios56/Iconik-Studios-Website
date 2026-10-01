@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { trackPage } from './lib/rmdTracking';
 import { chatAvailable } from './lib/rmdChat';
+import './lib/rmdContact'; // notes where the visit came from, for the contact form
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/Hero';

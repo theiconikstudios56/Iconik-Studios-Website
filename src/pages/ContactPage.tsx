@@ -1,8 +1,10 @@
 import Layout from '../components/Layout';
 import { motion, AnimatePresence } from 'motion/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, Mail, Phone, MapPin, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { trackLead } from '../lib/rmdTracking';
+import { loadTurnstile, TURNSTILE_SITE_KEY } from '../lib/rmdChat';
+import { ContactError, sendContact } from '../lib/rmdContact';
 
 export default function ContactPage() {
   const [index, setIndex] = useState(0);
@@ -16,6 +18,12 @@ export default function ContactPage() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [website, setWebsite] = useState(''); // honeypot: people never see it
+
+  // Cloudflare Turnstile (the same spam check as the chat): usually invisible.
+  const [token, setToken] = useState('');
+  const [turnstileBox, setTurnstileBox] = useState<HTMLDivElement | null>(null); // set once the form is on screen
+  const widget = useRef<string | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,76 +35,72 @@ export default function ContactPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!turnstileBox) return;
+    let cancelled = false;
+    loadTurnstile()
+      .then(() => {
+        if (cancelled || !window.turnstile) return;
+        widget.current = window.turnstile.render(turnstileBox, {
+          sitekey: TURNSTILE_SITE_KEY,
+          theme: 'dark',
+          size: 'flexible',
+          appearance: 'interaction-only',
+          callback: (t: string) => setToken(t),
+          'expired-callback': () => setToken(''),
+          'error-callback': () => setToken(''),
+        });
+      })
+      .catch(() => {
+        setStatus('error');
+        setErrorMessage('The spam check couldn’t load. Please refresh the page, or email remedy@theiconikstudios.com.');
+      });
+    return () => {
+      cancelled = true;
+      if (widget.current) window.turnstile?.remove(widget.current);
+      widget.current = null;
+      setToken('');
+    };
+  }, [turnstileBox]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !phone || !message) {
+    if (!name.trim() || !email.trim() || !phone.trim() || !message.trim()) {
       setStatus('error');
       setErrorMessage('Please fill out all required fields.');
       return;
     }
-
-    setStatus('submitting');
-
-    setErrorMessage('');
-
-    const webhookUrl = import.meta.env.VITE_CONTACT_WEBHOOK_URL;
-
-    if (!webhookUrl) {
-      // If webhook URL is not configured yet, let's show a helpful error
+    if (!token) {
       setStatus('error');
-      setErrorMessage(
-        'Webhook URL is not configured. Please define VITE_CONTACT_WEBHOOK_URL in your .env.local file.'
-      );
+      setErrorMessage('One moment: the spam check is still running. Please try again in a few seconds.');
       return;
     }
 
+    setStatus('submitting');
+    setErrorMessage('');
+
     try {
-      const trimmedName = name.trim();
-      const spaceIndex = trimmedName.indexOf(' ');
-      let firstName = trimmedName;
-      let lastName = '';
-
-      if (spaceIndex !== -1) {
-        firstName = trimmedName.substring(0, spaceIndex);
-        lastName = trimmedName.substring(spaceIndex + 1).trim();
-      }
-
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: trimmedName,
-          firstName,
-          lastName,
-          email,
-          phone,
-          company,
-          subject: company || 'General Inquiry',
-          message,
-          submittedAt: new Date().toISOString(),
-          source: 'Contact Page Form'
-        }),
-      });
-
-      if (response.ok) {
-        trackLead('contact-form');
-        setStatus('success');
-        setName('');
-        setEmail('');
-        setPhone('');
-        setCompany('');
-        setMessage('');
-      } else {
-        throw new Error(`Server returned status code ${response.status}`);
-      }
-    } catch (err: any) {
-      console.error('Submission error:', err);
-      setStatus('error');
-      setErrorMessage(
-        err.message || 'Something went wrong while submitting the form. Please try again.'
+      await sendContact(
+        { name: name.trim(), email: email.trim(), phone: phone.trim(), company: company.trim(), message: message.trim() },
+        token,
+        website
       );
+      trackLead('contact-form');
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCompany('');
+      setMessage('');
+    } catch (err) {
+      setStatus('error');
+      const fields = err instanceof ContactError ? Object.values(err.fields).filter(Boolean) : [];
+      setErrorMessage(
+        fields.length > 0 ? fields.join(' ') : err instanceof Error ? err.message : 'Something went wrong. Please try again.'
+      );
+      // A Turnstile token works once: get a fresh one for the next try.
+      setToken('');
+      if (widget.current) window.turnstile?.reset(widget.current);
     }
   };
 
@@ -279,6 +283,18 @@ export default function ContactPage() {
                           className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors resize-none font-sans text-sm placeholder:text-white/20 disabled:opacity-50"
                         />
                       </div>
+
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden
+                        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                        value={website}
+                        onChange={(e) => setWebsite(e.target.value)}
+                      />
+                      <div ref={setTurnstileBox} />
 
                       {status === 'error' && (
                         <div className="bg-burnt-orange/10 border border-burnt-orange/30 p-4 text-xs font-sans text-burnt-orange flex items-start gap-3">
