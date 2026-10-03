@@ -194,15 +194,25 @@
   a, button, input, select, textarea, [role="button"] {
     cursor: none !important;
   }
-  /* Restore default/browser cursor on chat widgets and iframes */
+  /* Restore the normal pointer on chat widgets and iframes, and on everything
+     inside them (the custom dot hides there): a hand on buttons and links, a
+     text cursor in the fields. Without the inner rule, the chat box's own
+     messages, fields and buttons kept "none" and the pointer vanished. */
   chat-widget,
   iframe,
   [id*="chat-widget"],
   [class*="chat-widget"],
   [id*="lc-chat"],
   [class*="lc-chat"],
-  [id*="leadconnector"] {
+  [id*="leadconnector"],
+  :is(chat-widget, [id*="chat-widget"], [class*="chat-widget"], [id*="lc-chat"], [class*="lc-chat"], [id*="leadconnector"]) * {
     cursor: auto !important;
+  }
+  :is(chat-widget, [id*="chat-widget"], [class*="chat-widget"]) :is(a, button, [role="button"], summary) {
+    cursor: pointer !important;
+  }
+  :is(chat-widget, [id*="chat-widget"], [class*="chat-widget"]) :is(button, input, textarea):disabled {
+    cursor: not-allowed !important;
   }
   body {
     color: var(--text-color);
