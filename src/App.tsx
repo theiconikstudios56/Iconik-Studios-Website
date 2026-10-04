@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { trackPage } from './lib/rmdTracking';
+import { Img, inEditor, reportRoute, T } from './content';
 import { chatAvailable } from './lib/rmdChat';
 import './lib/rmdContact'; // notes where the visit came from, for the contact form
 import Navbar from './components/Navbar';
@@ -70,7 +71,7 @@ function ChatLauncher() {
     const id = window.setTimeout(start, 2500);
     return () => window.clearTimeout(id);
   }, []);
-  if (!ready || NO_CHAT.test(pathname)) return null;
+  if (!ready || inEditor || NO_CHAT.test(pathname)) return null;
   return (
     <Suspense fallback={null}>
       <ChatWidget />
@@ -103,6 +104,7 @@ function Home() {
 
   return (
     <Layout
+      page="home"
       title="AI Powered User Experience Design Agency | Iconik Studios"
       description="Iconik Studios is a boutique design and automation agency. We engineer digital legacies with high-end aesthetic strategy and robust backend automation."
     >
@@ -119,33 +121,33 @@ function Home() {
                 transition={{ duration: 0.8 }}
               >
                 <div className="flex items-center gap-4 mb-8">
-                  <span className="text-accent font-mono text-sm tracking-[0.3em]">SERVICES / 01</span>
+                  <span className="text-accent font-mono text-sm tracking-[0.3em]"><T k="home.services.eyebrow">{"SERVICES / 01"}</T></span>
                   <div className="w-12 h-[1px] bg-accent/30" />
                 </div>
                 <h2 className="text-6xl md:text-[6.5vw] font-display text-tan uppercase tracking-tighter leading-[1.05] mb-12">
-                  Turn Visions <br /> Into <span className="text-accent italic">Visuals.</span>
+                  <T k="home.services.title" em="text-accent italic">{"Turn Visions\nInto *Visuals.*"}</T>
                 </h2>
                 <p className="max-w-2xl text-paper text-base leading-relaxed mb-12">
-                  We design jaw-dropping, high-converting digital storefronts, but we don't stop at aesthetics. Iconik Studios engineers the underlying automation workflows that capture every incoming inquiry, follow up instantly, and sync lead data directly to your CRM—saving you hours of manual labor, reducing marketing costs, and guaranteeing that zero opportunities slip through the cracks.
+                  <T k="home.services.text">{"We design jaw-dropping, high-converting digital storefronts, but we don't stop at aesthetics. Iconik Studios engineers the underlying automation workflows that capture every incoming inquiry, follow up instantly, and sync lead data directly to your CRM—saving you hours of manual labor, reducing marketing costs, and guaranteeing that zero opportunities slip through the cracks."}</T>
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl mt-8">
                   <div className="bg-accent text-ink py-5 px-6 rounded-none border border-accent/20 flex flex-col justify-between hover:scale-[1.02] hover:bg-tan transition-all duration-300">
                     <div>
                       <h3 className="font-display text-lg tracking-[0.1em] font-bold uppercase mb-2">
-                        Elite Web Design
+                        <T k="home.services.card1-title">{"Elite Web Design"}</T>
                       </h3>
                       <p className="text-ink text-xs leading-relaxed font-mono">
-                        We design visually stunning user experiences tailored to convert visitors into clients.
+                        <T k="home.services.card1-text">{"We design visually stunning user experiences tailored to convert visitors into clients."}</T>
                       </p>
                     </div>
                   </div>
                   <div className="bg-accent text-ink py-5 px-6 rounded-none border border-accent/20 flex flex-col justify-between hover:scale-[1.02] hover:bg-tan transition-all duration-300">
                     <div>
                       <h3 className="font-display text-lg tracking-[0.1em] font-bold uppercase mb-2">
-                        Intelligent Automation
+                        <T k="home.services.card2-title">{"Intelligent Automation"}</T>
                       </h3>
                       <p className="text-ink text-xs leading-relaxed font-mono">
-                        We build custom backend workflows to follow up 24/7 and automate your operations.
+                        <T k="home.services.card2-text">{"We build custom backend workflows to follow up 24/7 and automate your operations."}</T>
                       </p>
                     </div>
                   </div>
@@ -160,7 +162,9 @@ function Home() {
                   transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute inset-0"
                 >
-                  <img
+                  <Img
+                    k="home.services.image"
+                    label="Services picture"
                     loading="lazy"
                     decoding="async"
                     src={focusedFuzzyImage}
@@ -210,6 +214,8 @@ function Home() {
 function RmdTracking() {
   const { pathname, search } = useLocation();
   useEffect(() => {
+    // Inside RMD's website editor, nothing is counted as a visit.
+    if (inEditor) return reportRoute(pathname);
     trackPage(pathname, search);
     // A new page is a new view; a changed query string on the same page isn't.
     // eslint-disable-next-line react-hooks/exhaustive-deps

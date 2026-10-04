@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { T } from '../content';
 
 interface Article {
   id: number;
@@ -71,17 +72,13 @@ const LatestInsights = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-7xl md:text-9xl font-display uppercase tracking-tighter"
-          >
-            Latest Insights
-          </motion.h2>
+          ><T k="shared.insights.latest-insights">{"Latest Insights"}</T></motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="max-w-md mx-auto text-lg opacity-100 font-light uppercase tracking-widest text-white italic"
-          >
-            "Deep dives into the intersection of design and technology."
-          </motion.p>
+          ><T k="shared.insights.deep-dives-into-the">{"\"Deep dives into the intersection of design and technology.\""}</T></motion.p>
         </div>
 
         {/* Grid Section - Matching Blog Style */}
@@ -110,8 +107,7 @@ const LatestInsights = () => {
                 <div className="relative aspect-[3/4] overflow-hidden bg-white/5 mb-8">
                   {/* Release Badge */}
                   <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-                    <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] font-bold tracking-widest whitespace-nowrap">
-                      RELEASES — {formatDate(item.created_at)}
+                    <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] font-bold tracking-widest whitespace-nowrap"><T k="shared.insights.releases">{"RELEASES —"}</T>{" "}{formatDate(item.created_at)}
                     </div>
                   </div>
 
@@ -152,8 +148,7 @@ const LatestInsights = () => {
             <Link 
                 to="/blog"
                 className="inline-flex items-center gap-4 text-xs font-mono uppercase tracking-[0.4em] text-white hover:text-burnt-orange transition-colors duration-300"
-            >
-                View all articles <ArrowUpRight size={14} />
+            ><T k="shared.insights.view-all-articles" label="Link or button">{"View all articles"}</T>{" "}<ArrowUpRight size={14} />
             </Link>
         </div>
       </div>

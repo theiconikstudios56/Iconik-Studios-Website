@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import convoFuzzyImage from '../assets/images/web/convo-fuzzy.webp';
 import fuzzySetupImage from '../assets/images/web/fuzzy-setup.webp';
+import { Img, T } from '../content';
 
 export default function PropertyShowcase() {
   return (
@@ -17,7 +18,7 @@ export default function PropertyShowcase() {
           transition={{ delay: 0.1 }}
           className="max-w-[280px] text-sm font-medium leading-relaxed opacity-100"
         >
-          A premium agency fusing high-end brand aesthetics with intelligent backend automation.
+          <T k="home.intro.lead">{"A premium agency fusing high-end brand aesthetics with intelligent backend automation."}</T>
         </motion.p>
 
         {/* Heading */}
@@ -28,9 +29,7 @@ export default function PropertyShowcase() {
           className="max-w-none"
         >
           <h2 className="text-5xl md:text-7xl lg:text-[4.2vw] font-display font-medium leading-[1.1] uppercase tracking-tight">
-            SYSTEMS BUILT <br className="hidden md:block" />
-            TO CAPTURE LEADS AND <span className="italic font-serif normal-case text-burnt-orange">convert</span>, <br className="hidden md:block" />
-            NOT JUST LOOK GOOD.
+            <T k="home.intro.title" em="italic font-serif normal-case text-burnt-orange" br="hidden md:block">{"SYSTEMS BUILT\nTO CAPTURE LEADS AND *convert*,\nNOT JUST LOOK GOOD."}</T>
           </h2>
         </motion.div>
 
@@ -46,7 +45,7 @@ export default function PropertyShowcase() {
           </motion.div>
           
           <p className="max-w-[300px] text-sm font-medium opacity-100 uppercase tracking-[0.2em] leading-relaxed">
-            we streamline your intake pipeline to grow your bookings automatically.
+            <T k="home.intro.note">{"we streamline your intake pipeline to grow your bookings automatically."}</T>
           </p>
         </div>
       </div>
@@ -61,7 +60,7 @@ export default function PropertyShowcase() {
           style={{ top: '20%', left: '10%' }}
           className="absolute hidden lg:block w-56 h-72 rounded-[40px] overflow-hidden shadow-2xl border border-white/10"
         >
-          <img
+          <Img k="home.intro.image1" label="Intro picture, left (large screens)"
             loading="lazy"
             decoding="async"
             src={fuzzySetupImage} 
@@ -80,7 +79,7 @@ export default function PropertyShowcase() {
           style={{ bottom: '15%', right: '8%' }}
           className="absolute hidden md:block w-[25vw] h-[35vh] rounded-[48px] overflow-hidden shadow-2xl border border-white/10"
         >
-          <img
+          <Img k="home.intro.image2" label="Intro picture, right"
             loading="lazy"
             decoding="async"
             src={convoFuzzyImage} 

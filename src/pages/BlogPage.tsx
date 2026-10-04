@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { motion, AnimatePresence } from 'motion/react';
 import { SlidersHorizontal, X, Search } from 'lucide-react';
+import { T } from '../content';
 
 const DEFAULT_IMAGES = [
   "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200",
@@ -124,6 +125,7 @@ export default function BlogPage() {
 
   return (
     <Layout
+      page="blog"
       title="Insights & Strategies | AI Automation Blog | Iconik Studios"
       description="Read the latest insights on AI automation, web development, and digital strategy to scale your business effortlessly."
     >
@@ -188,9 +190,7 @@ export default function BlogPage() {
                           className={`w-full text-left px-4 py-3 font-mono text-[10px] tracking-widest uppercase transition-colors border-b border-white/5 ${
                             !activeCategory ? 'text-burnt-orange' : 'text-white/50 hover:text-white'
                           }`}
-                        >
-                          All Articles
-                        </button>
+                        ><T k="blog.all-articles" label="Button">{"All Articles"}</T></button>
 
                         {filteredCategories.length > 0 ? (
                           filteredCategories.map(cat => (
@@ -207,7 +207,7 @@ export default function BlogPage() {
                             </button>
                           ))
                         ) : (
-                          <p className="px-4 py-3 font-mono text-[10px] text-white/20 tracking-widest uppercase">No results</p>
+                          <p className="px-4 py-3 font-mono text-[10px] text-white/20 tracking-widest uppercase"><T k="blog.no-results">{"No results"}</T></p>
                         )}
                       </motion.div>
                     )}
@@ -219,12 +219,12 @@ export default function BlogPage() {
             {/* Grid */}
             {loading ? (
               <div className="flex items-center justify-center py-40">
-                <p className="font-mono text-xs tracking-widest text-white/40 uppercase">Loading Articles...</p>
+                <p className="font-mono text-xs tracking-widest text-white/40 uppercase"><T k="blog.loading-articles">{"Loading Articles..."}</T></p>
               </div>
             ) : filteredArticles.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-40 gap-4">
-                <p className="font-mono text-xs tracking-widest text-white/40 uppercase">No Articles Found</p>
-                <button onClick={clearFilter} className="font-mono text-[10px] tracking-widest text-burnt-orange uppercase hover:underline">Clear Filter</button>
+                <p className="font-mono text-xs tracking-widest text-white/40 uppercase"><T k="blog.no-articles-found">{"No Articles Found"}</T></p>
+                <button onClick={clearFilter} className="font-mono text-[10px] tracking-widest text-burnt-orange uppercase hover:underline"><T k="blog.clear-filter" label="Button">{"Clear Filter"}</T></button>
               </div>
             ) : (
               <AnimatePresence mode="wait">
@@ -247,8 +247,7 @@ export default function BlogPage() {
                     >
                       <div className="relative aspect-[3/4] overflow-hidden bg-[#111] mb-6">
                         <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-                          <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] sm:text-[11px] font-bold tracking-widest whitespace-nowrap border border-black/5">
-                            RELEASES — {formatDate(article.created_at)}
+                          <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] sm:text-[11px] font-bold tracking-widest whitespace-nowrap border border-black/5"><T k="blog.releases">{"RELEASES —"}</T>{" "}{formatDate(article.created_at)}
                           </div>
                         </div>
 
@@ -294,13 +293,9 @@ export default function BlogPage() {
 
         <section className="py-40 px-6 md:px-12 text-center">
           <div className="max-w-4xl mx-auto">
-            <span className="text-[10px] font-mono text-burnt-orange tracking-[0.6em] block mb-12 uppercase">Join the Inner Circle</span>
-            <h2 className="text-5xl md:text-8xl font-display mb-12 leading-none uppercase tracking-tighter">
-              READY TO <span className="italic font-light">EVOLVE?</span>
-            </h2>
-            <p className="text-lg md:text-xl font-light text-white mb-12 max-w-xl mx-auto leading-relaxed">
-              SUBSCRIBE TO OUR DISPATCH FOR EXCLUSIVE INSIGHTS INTO AI, DESIGN, AND THE FUTURE OF DIGITAL COMMERCE.
-            </p>
+            <span className="text-[10px] font-mono text-burnt-orange tracking-[0.6em] block mb-12 uppercase"><T k="blog.join-the-inner-circle">{"Join the Inner Circle"}</T></span>
+            <h2 className="text-5xl md:text-8xl font-display mb-12 leading-none uppercase tracking-tighter"><T k="blog.ready-to-evolve" em="italic font-light" label="Heading">{"READY TO *EVOLVE?*"}</T></h2>
+            <p className="text-lg md:text-xl font-light text-white mb-12 max-w-xl mx-auto leading-relaxed"><T k="blog.subscribe-to-our-dispatch">{"SUBSCRIBE TO OUR DISPATCH FOR EXCLUSIVE INSIGHTS INTO AI, DESIGN, AND THE FUTURE OF DIGITAL COMMERCE."}</T></p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               <input
                 type="email"
@@ -311,9 +306,7 @@ export default function BlogPage() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full md:w-auto px-12 py-6 bg-white text-black font-mono text-xs tracking-[0.4em] uppercase hover:bg-burnt-orange hover:text-white transition-all duration-300 font-bold"
-              >
-                Access Dispatch
-              </motion.button>
+              ><T k="blog.access-dispatch">{"Access Dispatch"}</T></motion.button>
             </div>
           </div>
         </section>

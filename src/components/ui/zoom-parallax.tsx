@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { Instagram, Twitter, Mail, MessageCircle, Globe, Circle, Target, Zap, Crosshair } from "lucide-react";
 import { Link } from 'react-router-dom';
 import IconikLogo from "../IconikLogo";
+import { Img, T } from '../../content';
 
 interface Image {
 	src: string;
@@ -45,7 +46,9 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 					style={{ scale: imageScale, y: imageCoverY }}
 					className="absolute inset-0 z-0"
 				>
-					<img
+					<Img
+						k="home.zoom.image"
+						label="Zoom section picture"
 						loading="lazy"
 						decoding="async"
 						src={images[0]?.src || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80'}
@@ -125,9 +128,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						className="font-mono text-xs font-bold text-burnt-orange mb-6 block tracking-[0.4em] uppercase"
-					>
-						we / are
-					</motion.span>
+					><T k="home.zoom.we-are">{"we / are"}</T></motion.span>
 
 					{/* Massive Title */}
 					<motion.h2
@@ -137,8 +138,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						transition={{ duration: 0.8 }}
 						className="text-[12vw] md:text-[10vw] font-display text-tan leading-[0.85] uppercase mb-8 tracking-tighter flex flex-col gap-1"
 					>
-						<span>ICONIK</span>
-						<span className="text-burnt-orange">STUDIOS</span>
+						<span><T k="home.zoom.iconik">{"ICONIK"}</T></span>
+						<span className="text-burnt-orange"><T k="home.zoom.studios">{"STUDIOS"}</T></span>
 					</motion.h2>
 
 					{/* Description */}
@@ -149,11 +150,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						transition={{ delay: 0.2 }}
 						className="max-w-xl mb-10"
 					>
-						<p className="text-base md:text-lg font-medium leading-tight text-tan opacity-100">
-							A premium design and automation agency. We fuse high-end branding
-							aesthetics with intelligent backend workflows to streamline your business
-							and scale your bookings automatically.
-						</p>
+						<p className="text-base md:text-lg font-medium leading-tight text-tan opacity-100"><T k="home.zoom.a-premium-design-and">{"A premium design and automation agency. We fuse high-end branding aesthetics with intelligent backend workflows to streamline your business and scale your bookings automatically."}</T></p>
 					</motion.div>
 
 					{/* CTA Button */}
@@ -171,9 +168,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 							<div className="absolute inset-0 bg-burnt-orange blur-2xl opacity-0 group-hover/btn:opacity-20 transition-opacity" />
 							<div className="relative px-10 py-5 border border-tan/20 rounded-none hover:border-burnt-orange transition-all duration-500 overflow-hidden">
 								<div className="absolute inset-0 bg-burnt-orange translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
-								<span className="relative z-10 text-[10px] uppercase tracking-[0.3em] font-bold text-tan group-hover/btn:text-ink transition-colors">
-									ABOUT ICONIK
-								</span>
+								<span className="relative z-10 text-[10px] uppercase tracking-[0.3em] font-bold text-tan group-hover/btn:text-ink transition-colors"><T k="home.zoom.about-iconik" label="Link or button">{"ABOUT ICONIK"}</T></span>
 							</div>
 						</Link>
 					</motion.div>

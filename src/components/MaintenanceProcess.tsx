@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { T } from '../content';
 
 const pillars = [
   {
@@ -33,13 +34,9 @@ export default function MaintenanceProcess() {
     <section className="py-32 bg-ink text-tan">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         <div className="lg:col-span-4 sticky top-32 h-fit">
-          <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6">Guardianship</span>
-          <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter mb-8">
-            Why Your <br /> Maintenance <br /> Plan Matters.
-          </h2>
-          <p className="text-lg opacity-100 leading-relaxed max-w-sm">
-            Websites and automated systems are never static. To keep your competitive edge, your code, databases, and AI agents require constant vigilance and expert oversight.
-          </p>
+          <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6"><T k="maintenance.process.guardianship">{"Guardianship"}</T></span>
+          <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter mb-8"><T k="maintenance.process.why-your-maintenance-plan" label="Heading">{"Why Your\nMaintenance\nPlan Matters."}</T></h2>
+          <p className="text-lg opacity-100 leading-relaxed max-w-sm"><T k="maintenance.process.websites-and-automated-systems">{"Websites and automated systems are never static. To keep your competitive edge, your code, databases, and AI agents require constant vigilance and expert oversight."}</T></p>
         </div>
 
         <div className="lg:col-span-8 space-y-32">
@@ -58,10 +55,10 @@ export default function MaintenanceProcess() {
                 <div className="absolute left-4 top-10 w-[1px] h-[calc(100%+8rem)] bg-gradient-to-b from-burnt-orange to-transparent opacity-30" />
               )}
               
-              <span className="font-mono text-xs text-burnt-orange mb-4 block uppercase tracking-widest">{item.num} / {item.label}</span>
-              <h3 className="text-4xl md:text-6xl font-display uppercase mb-6">{item.title}</h3>
+              <span className="font-mono text-xs text-burnt-orange mb-4 block uppercase tracking-widest"><T k={`maintenance.process.${i + 1}.num`} label={`Pillar ${i + 1}: number`}>{item.num}</T> / <T k={`maintenance.process.${i + 1}.label`} label={`Pillar ${i + 1}: label`}>{item.label}</T></span>
+              <h3 className="text-4xl md:text-6xl font-display uppercase mb-6"><T k={`maintenance.process.${i + 1}.title`} label={`Pillar ${i + 1}: heading`}>{item.title}</T></h3>
               <p className="text-lg md:text-xl opacity-100 leading-relaxed max-w-2xl">
-                {item.desc}
+                <T k={`maintenance.process.${i + 1}.desc`} label={`Pillar ${i + 1}: text`}>{item.desc}</T>
               </p>
             </motion.div>
           ))}

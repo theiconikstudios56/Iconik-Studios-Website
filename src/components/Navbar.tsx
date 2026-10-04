@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IconikLogo from './IconikLogo';
 import fuzzFuzzyImage from '../assets/images/web/fuzz_fuzzy.webp';
+import { T } from '../content';
+
+/** A menu item's content key, from its starting name: "Web Design" → shared.nav.web-design. */
+const navKey = (name: string) => `shared.nav.${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
 const MENU_ITEMS = [
   { name: 'Home', path: '/' },
@@ -64,7 +68,7 @@ export default function Navbar() {
                 to={item.path} 
                 className={`text-[11px] uppercase tracking-[0.25em] font-bold hover:text-accent transition-colors flex items-center gap-2 ${location.pathname === item.path || (item.subItems && item.subItems.some(sub => location.pathname === sub.path)) ? 'text-accent' : 'text-paper'}`}
               >
-                {item.name}
+                <T k={navKey(item.name)} label="Menu item">{item.name}</T>
                 {item.subItems && <ChevronDown size={12} className="group-hover/item:rotate-180 transition-transform duration-300" />}
               </Link>
 
@@ -78,7 +82,7 @@ export default function Navbar() {
                           to={sub.path}
                           className={`text-[10px] uppercase tracking-[0.2em] font-bold py-2 px-4 rounded-xl hover:bg-accent hover:text-ink transition-all ${location.pathname === sub.path ? 'bg-accent/20 text-accent' : 'text-paper hover:text-ink'}`}
                         >
-                          {sub.name}
+                          <T k={navKey(sub.name)} label="Menu item">{sub.name}</T>
                         </Link>
                       ))}
                     </div>
@@ -92,9 +96,7 @@ export default function Navbar() {
         {/* Action Area - Right */}
         <div className="flex-1 lg:flex-none flex items-center justify-end gap-5 pointer-events-auto">
           <Link to="/contact" className="hidden lg:block">
-            <button className="bg-paper text-ink px-10 py-5 rounded-full font-display text-base tracking-widest hover:bg-accent transition-all hover:-translate-y-1">
-              LET'S TALK
-            </button>
+            <button className="bg-paper text-ink px-10 py-5 rounded-full font-display text-base tracking-widest hover:bg-accent transition-all hover:-translate-y-1"><T k="shared.nav.lets-talk" label="Button">{"LET'S TALK"}</T></button>
           </Link>
           <button 
             onClick={toggleMenu}
@@ -131,7 +133,7 @@ export default function Navbar() {
 
             {/* Right: Links */}
             <div className="w-full lg:w-1/2 flex flex-col justify-start lg:justify-center p-12 lg:p-24 py-20 lg:py-24 space-y-8 overflow-y-auto">
-              <span className="text-accent font-serif italic text-xl">Menu</span>
+              <span className="text-accent font-serif italic text-xl"><T k="shared.nav.menu">{"Menu"}</T></span>
               <div className="space-y-6">
                 {MENU_ITEMS.map((link, i) => (
                   <motion.div
@@ -147,7 +149,7 @@ export default function Navbar() {
                         className="block text-5xl md:text-8xl font-display group relative"
                       >
                         <span className={`relative z-10 group-hover:text-accent transition-colors ${location.pathname === link.path ? 'text-accent' : 'text-paper'}`}>
-                          {link.name}
+                          <T k={navKey(link.name)} label="Menu item">{link.name}</T>
                         </span>
                         <motion.div 
                           className="absolute bottom-0 left-0 h-1 bg-accent w-0 group-hover:w-full transition-all duration-500" 
@@ -162,7 +164,7 @@ export default function Navbar() {
                       >
                         <div className="block text-5xl md:text-8xl font-display relative">
                           <span className={`relative z-10 transition-colors duration-300 ${isServicesHovered ? 'text-accent' : 'text-paper'}`}>
-                            {link.name}
+                            <T k={navKey(link.name)} label="Menu item">{link.name}</T>
                           </span>
                           <motion.div 
                             className="absolute bottom-0 left-0 h-1 bg-accent"
@@ -187,7 +189,7 @@ export default function Navbar() {
                                 onClick={toggleMenu}
                                 className="block text-3xl md:text-5xl font-display text-paper hover:text-accent transition-colors tracking-tighter"
                               >
-                                {sub.name}
+                                <T k={navKey(sub.name)} label="Menu item">{sub.name}</T>
                               </Link>
                             ))}
                           </motion.div>

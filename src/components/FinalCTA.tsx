@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import React from 'react';
 import { Rocket, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { T } from '../content';
 
 const FinalCTA = () => {
   return (
@@ -14,9 +15,7 @@ const FinalCTA = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               className="text-[10px] uppercase tracking-[0.6em] font-bold text-accent block"
-            >
-              ICONIK STUDIOS
-            </motion.span>
+            ><T k="shared.final.iconik-studios">{"ICONIK STUDIOS"}</T></motion.span>
             
             {/* Main Heading */}
             <motion.h2 
@@ -24,9 +23,7 @@ const FinalCTA = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.8 }}
               className="text-5xl md:text-7xl lg:text-[8vw] font-display leading-[0.95] uppercase tracking-tighter"
-            >
-              Let's build<br />something<br />iconik
-            </motion.h2>
+            ><T k="shared.final.lets-build-something-iconik">{"Let's build\nsomething\niconik"}</T></motion.h2>
           </div>
 
           {/* Buttons */}
@@ -39,21 +36,15 @@ const FinalCTA = () => {
             <Link 
               to="/contact" 
               className="px-10 py-5 bg-paper text-ink rounded-full font-display text-lg uppercase hover:bg-accent transition-all duration-300 transform hover:-translate-y-1"
-            >
-              Start your project
-            </Link>
+            ><T k="shared.final.start-your-project" label="Link or button">{"Start your project"}</T></Link>
             <Link 
               to="/portfolio" 
               className="text-xs font-display uppercase tracking-widest border-b border-transparent hover:border-paper transition-all py-2"
-            >
-              View our work
-            </Link>
+            ><T k="shared.final.view-our-work" label="Link or button">{"View our work"}</T></Link>
           </motion.div>
 
           {/* Divider & Copyright */}
-          <div className="pt-8 border-t border-white/5 text-[10px] uppercase tracking-[0.4em] font-semibold opacity-60">
-            © 2026 ICONIK STUDIOS. ALL RIGHTS RESERVED.
-          </div>
+          <div className="pt-8 border-t border-white/5 text-[10px] uppercase tracking-[0.4em] font-semibold opacity-60"><T k="shared.final.2026-iconik-studios-all">{"© 2026 ICONIK STUDIOS. ALL RIGHTS RESERVED."}</T></div>
         </div>
       </footer>
 

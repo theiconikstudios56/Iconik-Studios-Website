@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Activity, Mail, Database, Sparkles, ArrowRight, Zap, CheckCircle2, ShieldAlert } from 'lucide-react';
+import { T } from '../content';
 
 const pipelineSteps = [
   {
@@ -70,18 +71,14 @@ const SuccessSection = () => {
         <div className="space-y-12 lg:col-span-6">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em] font-semibold">Scale System / 05</span>
+              <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em] font-semibold"><T k="shared.success.scale-system-05">{"Scale System / 05"}</T></span>
               <div className="w-12 h-[1px] bg-burnt-orange/30" />
             </div>
-            <h2 className="text-6xl md:text-8xl leading-[0.9] font-display uppercase tracking-tighter">
-              Built for<br/><span className="text-burnt-orange">Success.</span>
-            </h2>
+            <h2 className="text-6xl md:text-8xl leading-[0.9] font-display uppercase tracking-tighter"><T k="shared.success.built-for-success" em="text-burnt-orange" label="Heading">{"Built for\n*Success.*"}</T></h2>
           </div>
 
           <div className="space-y-8">
-            <p className="text-xl font-light leading-relaxed text-ink/90 font-sans normal-case">
-              Most small and medium-sized businesses lose up to 50% of their revenue to simple operational drag: delayed lead follow-ups, manual data entry, and slow onboarding. We build custom, automated pipeline architectures that eliminate administrative friction so your business can run on autopilot.
-            </p>
+            <p className="text-xl font-light leading-relaxed text-ink/90 font-sans normal-case"><T k="shared.success.most-small-and-medium">{"Most small and medium-sized businesses lose up to 50% of their revenue to simple operational drag: delayed lead follow-ups, manual data entry, and slow onboarding. We build custom, automated pipeline architectures that eliminate administrative friction so your business can run on autopilot."}</T></p>
 
             <div className="space-y-6 pt-4 border-t border-ink/10">
               <div className="flex gap-4 items-start">
@@ -89,12 +86,8 @@ const SuccessSection = () => {
                   <Zap size={20} />
                 </div>
                 <div>
-                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink">
-                    Instant Engagement (Speed to Lead)
-                  </h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono">
-                    A lead left waiting for 5 minutes is 10 times less likely to convert. Our automated flows trigger personalized text and email responses within seconds of form submission.
-                  </p>
+                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.instant-engagement-speed-to" label="Subheading">{"Instant Engagement (Speed to Lead)"}</T></h4>
+                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Our automated flows trigger personalized text and email responses within seconds of form submission."}</T></p>
                 </div>
               </div>
 
@@ -103,12 +96,8 @@ const SuccessSection = () => {
                   <Database size={20} />
                 </div>
                 <div>
-                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink">
-                    Seamless Data Flow & Sync
-                  </h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono">
-                    No more manual copy-pasting. Customer records are instantly synchronized across your custom web hooks, CRM databases (GHL, HubSpot), and team channels like Slack.
-                  </p>
+                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.seamless-data-flow-sync" label="Subheading">{"Seamless Data Flow & Sync"}</T></h4>
+                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.no-more-manual-copy">{"No more manual copy-pasting. Customer records are instantly synchronized across your custom web hooks, CRM databases (GHL, HubSpot), and team channels like Slack."}</T></p>
                 </div>
               </div>
 
@@ -117,12 +106,8 @@ const SuccessSection = () => {
                   <Sparkles size={20} />
                 </div>
                 <div>
-                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink">
-                    Hands-Free Client Onboarding
-                  </h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono">
-                    The moment a client signs, pipelines generate standard invoices, spin up secure file storage, create Slack rooms, and dispatch project briefs automatically.
-                  </p>
+                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.hands-free-client-onboarding" label="Subheading">{"Hands-Free Client Onboarding"}</T></h4>
+                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.the-moment-a-client">{"The moment a client signs, pipelines generate standard invoices, spin up secure file storage, create Slack rooms, and dispatch project briefs automatically."}</T></p>
                 </div>
               </div>
             </div>
@@ -131,8 +116,7 @@ const SuccessSection = () => {
               <a 
                 href="/contact" 
                 className="inline-flex items-center gap-3 bg-ink text-white px-8 py-5 rounded-none font-display text-sm tracking-[0.2em] font-bold hover:bg-burnt-orange hover:text-white transition-all duration-500 uppercase shadow-lg hover:translate-x-1"
-              >
-                Scale Your Pipeline <ArrowRight size={16} />
+              ><T k="shared.success.scale-your-pipeline" label="Link or button">{"Scale Your Pipeline"}</T>{" "}<ArrowRight size={16} />
               </a>
             </div>
           </div>
@@ -149,9 +133,7 @@ const SuccessSection = () => {
                 <div className="w-3.5 h-3.5 rounded-full bg-green-500/80" />
               </div>
               <div className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-widest uppercase text-burnt-orange animate-pulse flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-burnt-orange rounded-full animate-ping" />
-                Pipeline Active
-              </div>
+                <span className="w-1.5 h-1.5 bg-burnt-orange rounded-full animate-ping" /><T k="shared.success.pipeline-active">{"Pipeline Active"}</T></div>
             </div>
 
             {/* Pipeline Steps Tracker */}
@@ -189,14 +171,14 @@ const SuccessSection = () => {
                           <h3 className={`font-mono text-xs uppercase tracking-widest font-bold transition-colors ${
                             isActive ? 'text-burnt-orange' : 'text-paper'
                           }`}>
-                            0{idx + 1} // {step.title}
+                            0{idx + 1} // <T k={`shared.success.step${idx + 1}.title`} label={`Step ${idx + 1}: name`}>{step.title}</T>
                           </h3>
                           <span className="text-[9px] font-mono bg-white/5 px-2 py-0.5 rounded text-white/50">
-                            {step.tech}
+                            <T k={`shared.success.step${idx + 1}.tech`} label={`Step ${idx + 1}: tools`}>{step.tech}</T>
                           </span>
                         </div>
                         <p className="text-xs text-white/80 font-mono font-medium tracking-wide">
-                          {step.short}
+                          <T k={`shared.success.step${idx + 1}.short`} label={`Step ${idx + 1}: summary`}>{step.short}</T>
                         </p>
                         
                         {/* Animated description expansion */}
@@ -210,14 +192,14 @@ const SuccessSection = () => {
                               className="overflow-hidden mt-3 pt-3 border-t border-white/5 space-y-3"
                             >
                               <p className="text-[11px] text-white/60 leading-relaxed font-mono">
-                                {step.desc}
+                                <T k={`shared.success.step${idx + 1}.text`} label={`Step ${idx + 1}: text`}>{step.desc}</T>
                               </p>
                               <div className="flex justify-between items-center text-[10px] font-mono pt-1">
                                 <span className="text-burnt-orange font-bold uppercase tracking-wider bg-burnt-orange/10 px-2 py-1 rounded">
-                                  {step.stat}
+                                  <T k={`shared.success.step${idx + 1}.stat`} label={`Step ${idx + 1}: result`}>{step.stat}</T>
                                 </span>
                                 <span className="text-white/40 italic">
-                                  {step.metric}
+                                  <T k={`shared.success.step${idx + 1}.metric`} label={`Step ${idx + 1}: measure`}>{step.metric}</T>
                                 </span>
                               </div>
                             </motion.div>
@@ -233,16 +215,16 @@ const SuccessSection = () => {
             {/* Bottom aggregate metrics for WOW element */}
             <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
               <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40">Time Reclaimed</p>
-                <p className="font-display text-2xl text-burnt-orange">~15h/wk</p>
+                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.time-reclaimed">{"Time Reclaimed"}</T></p>
+                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.15h-wk">{"~15h/wk"}</T></p>
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40">Speed to Lead</p>
-                <p className="font-display text-2xl text-burnt-orange">&lt; 45s</p>
+                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.speed-to-lead">{"Speed to Lead"}</T></p>
+                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.45s">{"< 45s"}</T></p>
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40">Accuracy Rate</p>
-                <p className="font-display text-2xl text-burnt-orange">100%</p>
+                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.accuracy-rate">{"Accuracy Rate"}</T></p>
+                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.100">{"100%"}</T></p>
               </div>
             </div>
 
@@ -256,8 +238,8 @@ const SuccessSection = () => {
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -top-8 -right-8 bg-burnt-orange p-6 rounded-full flex flex-col items-center justify-center text-white w-28 h-28 shadow-2xl border-4 border-white z-20"
           >
-            <span className="font-display text-2xl">99%</span>
-            <span className="text-[9px] font-bold uppercase tracking-tight font-sans">Conversion</span>
+            <span className="font-display text-2xl"><T k="shared.success.99">{"99%"}</T></span>
+            <span className="text-[9px] font-bold uppercase tracking-tight font-sans"><T k="shared.success.conversion">{"Conversion"}</T></span>
           </motion.div>
         </div>
 

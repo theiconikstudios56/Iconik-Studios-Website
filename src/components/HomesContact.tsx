@@ -2,6 +2,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import fuzzySuccessImg from '../assets/images/web/fuzzy-success.webp';
+import { T, useImg } from '../content';
 
 const REVIEWS = [
   {
@@ -94,6 +95,7 @@ const HomesContact = () => {
     startAutoplay();
   };
 
+  const backdrop = useImg('shared.contact.image', fuzzySuccessImg, 'Success Pre-Footer', 'Background picture');
   return (
     <section 
       id="contact" 
@@ -106,8 +108,7 @@ const HomesContact = () => {
           loading="lazy"
           decoding="async"
           style={{ y }}
-          src={fuzzySuccessImg} 
-          alt="Success Pre-Footer" 
+          {...backdrop}
           className="w-full h-[120%] object-cover grayscale brightness-[0.25] absolute top-[-10%]"
           referrerPolicy="no-referrer"
         />
@@ -117,20 +118,14 @@ const HomesContact = () => {
       <div className="max-w-4xl mx-auto w-full relative z-10 text-center space-y-12">
         {/* Pre-Footer Section Heading */}
         <div className="space-y-4">
-          <span className="text-[10px] uppercase tracking-[0.6em] font-bold text-accent block">
-            REVIEWS
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display uppercase tracking-tight text-paper">
-            HEAR FROM THE LOUNGE
-          </h2>
+          <span className="text-[10px] uppercase tracking-[0.6em] font-bold text-accent block"><T k="shared.contact.reviews">{"REVIEWS"}</T></span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display uppercase tracking-tight text-paper"><T k="shared.contact.hear-from-the-lounge" label="Heading">{"HEAR FROM THE LOUNGE"}</T></h2>
         </div>
 
         {/* Carousel Card Container */}
         <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-[40px] p-8 md:p-16 shadow-2xl min-h-[380px] md:min-h-[300px] flex items-center justify-center overflow-hidden">
           {/* Decorative Quote Symbol */}
-          <span className="absolute top-4 left-8 text-[12rem] font-serif text-white/5 select-none pointer-events-none">
-            &ldquo;
-          </span>
+          <span className="absolute top-4 left-8 text-[12rem] font-serif text-white/5 select-none pointer-events-none">&ldquo;</span>
 
           <div className="w-full">
             <AnimatePresence initial={false} custom={direction} mode="wait">
@@ -148,21 +143,19 @@ const HomesContact = () => {
                 className="space-y-8"
               >
                 {/* Quote Text */}
-                <p className="text-lg md:text-2xl font-serif italic text-paper leading-relaxed max-w-2xl mx-auto">
-                  &ldquo;{REVIEWS[currentIndex].quote}&rdquo;
-                </p>
+                <p className="text-lg md:text-2xl font-serif italic text-paper leading-relaxed max-w-2xl mx-auto">&ldquo;<T k={`shared.contact.review${currentIndex + 1}.quote`} label={`Review ${currentIndex + 1}: quote`}>{REVIEWS[currentIndex].quote}</T>&rdquo;</p>
 
                 {/* Author Info */}
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-accent font-bold tracking-wider text-sm select-none">
-                    {REVIEWS[currentIndex].initials}
+                    <T k={`shared.contact.review${currentIndex + 1}.initials`} label={`Review ${currentIndex + 1}: initials`}>{REVIEWS[currentIndex].initials}</T>
                   </div>
                   <div>
                     <h4 className="font-bold text-paper font-display text-base tracking-wider">
-                      {REVIEWS[currentIndex].author}
+                      <T k={`shared.contact.review${currentIndex + 1}.name`} label={`Review ${currentIndex + 1}: name`}>{REVIEWS[currentIndex].author}</T>
                     </h4>
                     <p className="text-xs uppercase tracking-[0.15em] text-accent font-semibold mt-1">
-                      {REVIEWS[currentIndex].role}
+                      <T k={`shared.contact.review${currentIndex + 1}.role`} label={`Review ${currentIndex + 1}: role`}>{REVIEWS[currentIndex].role}</T>
                     </p>
                   </div>
                 </div>

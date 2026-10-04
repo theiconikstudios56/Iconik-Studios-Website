@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import { useText } from '../content';
 
-const MARQUEE_TEXT = "ANIMATION • BRANDING • STRATEGY • DEVELOPMENT • CONTENT • UI/UX • MARKETING • ";
+const START_MARQUEE = "ANIMATION • BRANDING • STRATEGY • DEVELOPMENT • CONTENT • UI/UX • MARKETING • ";
 
 export default function ServicesShowcase() {
+  const MARQUEE_TEXT = useText('home.marquee.text', START_MARQUEE, { label: 'Moving banner text' });
   return (
     <section className="bg-ink text-tan overflow-hidden relative z-10">
       {/* Top Large Marquee */}

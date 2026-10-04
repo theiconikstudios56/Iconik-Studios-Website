@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { PROJECT_DATA } from '../constants/projects';
+import { T } from '../content';
 
 const PORTFOLIO_ITEMS = Object.values(PROJECT_DATA);
 const ITEMS = [...PORTFOLIO_ITEMS, ...PORTFOLIO_ITEMS, ...PORTFOLIO_ITEMS];
@@ -133,7 +134,7 @@ export default function PortfolioCarousel() {
       <div className="mt-6 flex justify-center">
         <div className="flex items-center gap-4 text-white opacity-100 font-mono text-[9px] uppercase tracking-[0.4em]">
           <div className="w-8 md:w-16 h-[1px] bg-white/10" />
-          <span>Slide to Discover</span>
+          <span><T k="web-design.work.slide-to-discover">{"Slide to Discover"}</T></span>
           <div className="w-8 md:w-16 h-[1px] bg-white/10" />
         </div>
       </div>

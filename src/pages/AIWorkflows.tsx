@@ -10,6 +10,7 @@ import FinalCTA from '../components/FinalCTA';
 import aiAutomationsImage from '../assets/images/web/fuzzy-automation.webp';
 import fuzzyWorkImage from '../assets/images/web/fuzzy-work.webp';
 import poolFuzzyImage from '../assets/images/web/pool-fuzzy.webp';
+import { Img, T } from '../content';
 
 const AnimatedWorkflowDiagram = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -61,12 +62,10 @@ const AnimatedWorkflowDiagram = () => {
       
       {/* Header */}
       <div className="flex justify-between items-center pb-4 border-b border-white/10 relative z-10">
-        <div className="text-[10px] tracking-widest text-white/50 uppercase">
-          [Automation 1: Lead Capture System]
-        </div>
+        <div className="text-[10px] tracking-widest text-white/50 uppercase"><T k="ai.automation-1-lead-capture">{"[Automation 1: Lead Capture System]"}</T></div>
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
-          <span className="text-[9px] uppercase tracking-wider text-green-500">Live</span>
+          <span className="text-[9px] uppercase tracking-wider text-green-500"><T k="ai.live">{"Live"}</T></span>
         </div>
       </div>
 
@@ -130,7 +129,7 @@ const AnimatedWorkflowDiagram = () => {
           }`}>
             <User size={18} />
           </div>
-          <span className="text-[8px] uppercase tracking-wider text-white/60">1. Contact Form</span>
+          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.1-contact-form">{"1. Contact Form"}</T></span>
         </div>
 
         {/* Node 2: GHL Contact */}
@@ -145,7 +144,7 @@ const AnimatedWorkflowDiagram = () => {
           }`}>
             <Cpu size={18} />
           </div>
-          <span className="text-[8px] uppercase tracking-wider text-white/60">2. GHL Contact</span>
+          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.2-ghl-contact">{"2. GHL Contact"}</T></span>
         </div>
 
         {/* Node 3a: Email & Pipeline */}
@@ -160,7 +159,7 @@ const AnimatedWorkflowDiagram = () => {
           }`}>
             <MessageSquare size={18} />
           </div>
-          <span className="text-[8px] uppercase tracking-wider text-white/60">3a. Email & Pipeline</span>
+          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.3a-email-pipeline">{"3a. Email & Pipeline"}</T></span>
         </div>
 
         {/* Node 3b: SMS & Sequence */}
@@ -175,7 +174,7 @@ const AnimatedWorkflowDiagram = () => {
           }`}>
             <Database size={18} />
           </div>
-          <span className="text-[8px] uppercase tracking-wider text-white/60">3b. SMS & Sequence</span>
+          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.3b-sms-sequence">{"3b. SMS & Sequence"}</T></span>
         </div>
       </div>
 
@@ -200,6 +199,7 @@ const AIWorkflows = () => {
 
   return (
     <Layout
+      page="ai"
       title="AI Automation Agency | Custom Zapier & Make.com Integrations | Iconik"
       description="As a premier ai automation agency, we build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time."
     >
@@ -207,7 +207,7 @@ const AIWorkflows = () => {
         {/* Hero Section */}
         <section className="relative px-6 lg:px-12 pt-24 pb-12 overflow-hidden min-h-[100svh] flex items-center">
           <div className="absolute inset-0 z-0">
-            <img
+            <Img k="ai.image-iconik-ai-automation" label="Picture"
               src={aiAutomationsImage}
               alt="Iconik AI Automation"
               className="w-full h-full object-cover brightness-[0.4]"
@@ -225,18 +225,12 @@ const AIWorkflows = () => {
             >
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-[1px] bg-burnt-orange" />
-                <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]">Automation / 02</span>
+                <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]"><T k="ai.automation-02">{"Automation / 02"}</T></span>
               </div>
-              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85">
-                Scale <br /> Without <br /> <span className="text-burnt-orange italic">Friction.</span>
-              </h1>
-              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8">
-                Stop drowning in manual tasks. As a premier ai automation agency, we build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time. We bridge the gap between static operations and intelligent systems, allowing your experts to focus on visionary work.
-              </p>
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85"><T k="ai.scale-without-friction" em="text-burnt-orange italic" label="Heading">{"Scale\nWithout\n*Friction.*"}</T></h1>
+              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8"><T k="ai.stop-drowning-in-manual">{"Stop drowning in manual tasks. As a premier ai automation agency, we build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time. We bridge the gap between static operations and intelligent systems, allowing your experts to focus on visionary work."}</T></p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]">
-                  Automate Your Success
-                </button>
+                <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="ai.automate-your-success" label="Button">{"Automate Your Success"}</T></button>
               </div>
             </motion.div>
           </div>
@@ -247,15 +241,11 @@ const AIWorkflows = () => {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 items-end">
               <div className="lg:col-span-8">
-                <span className="font-mono text-xs uppercase tracking-widest text-ink/80 block mb-6">Business Intelligence</span>
-                <h2 className="text-5xl md:text-7xl font-display uppercase tracking-tighter leading-[0.9]">
-                  Efficiency <br /> By Pure Design.
-                </h2>
+                <span className="font-mono text-xs uppercase tracking-widest text-ink/80 block mb-6"><T k="ai.business-intelligence">{"Business Intelligence"}</T></span>
+                <h2 className="text-5xl md:text-7xl font-display uppercase tracking-tighter leading-[0.9]"><T k="ai.efficiency-by-pure-design" label="Heading">{"Efficiency\nBy Pure Design."}</T></h2>
               </div>
               <div className="lg:col-span-4">
-                <p className="text-xl opacity-100 leading-relaxed italic">
-                  "Most agencies automate tasks. We automate decision-making sequences to reduce the mental load on your leadership — and we deploy the Fuzzies to do it."
-                </p>
+                <p className="text-xl opacity-100 leading-relaxed italic"><T k="ai.most-agencies-automate-tasks">{"\"Most agencies automate tasks. We automate decision-making sequences to reduce the mental load on your leadership — and we deploy the Fuzzies to do it.\""}</T></p>
               </div>
             </div>
 
@@ -289,8 +279,8 @@ const AIWorkflows = () => {
                     <benefit.icon size={32} />
                   </div>
                   <div className="space-y-4">
-                    <h3 className="text-2xl font-display uppercase leading-tight">{benefit.title}</h3>
-                    <p className="opacity-100 leading-relaxed text-lg italic">{benefit.desc}</p>
+                    <h3 className="text-2xl font-display uppercase leading-tight"><T k={`ai.benefits.${i + 1}.title`} label={`Benefit ${i + 1}: heading`}>{benefit.title}</T></h3>
+                    <p className="opacity-100 leading-relaxed text-lg italic"><T k={`ai.benefits.${i + 1}.desc`} label={`Benefit ${i + 1}: text`}>{benefit.desc}</T></p>
                   </div>
                 </motion.div>
               ))}
@@ -303,19 +293,11 @@ const AIWorkflows = () => {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row-reverse gap-24 items-center">
               <div className="lg:w-1/2 space-y-12">
-                <h2 className="text-5xl md:text-7xl font-display text-ink uppercase leading-[0.9] tracking-tighter">
-                  The Fuzzies <br /> Are Working <br /> <span className="text-accent italic">While You Aren't.</span>
-                </h2>
+                <h2 className="text-5xl md:text-7xl font-display text-ink uppercase leading-[0.9] tracking-tighter"><T k="ai.the-fuzzies-are-working" em="text-accent italic" label="Heading">{"The Fuzzies\nAre Working\n*While You Aren't.*"}</T></h2>
                 <div className="space-y-6 text-xl text-ink leading-relaxed max-w-xl">
-                  <p>
-                    Most businesses are losing valuable time on tasks that don't need a human touch. Chasing leads. Following up on emails. Onboarding new clients. Scheduling. Data entry. It adds up fast — and every hour your team spends on repetitive work is an hour they're not spending on actually growing the business.
-                  </p>
-                  <p className="font-display text-ink uppercase text-2xl">
-                    That's where the Fuzzies come in.
-                  </p>
-                  <p>
-                    At Iconik Studios, we build and deploy custom AI agents and automated workflow systems designed around how your business actually operates. Our Fuzzies don't just handle simple tasks — they think, decide, and run entire processes on their own so your business moves faster and smarter without adding more to your plate.
-                  </p>
+                  <p><T k="ai.most-businesses-are-losing">{"Most businesses are losing valuable time on tasks that don't need a human touch. Chasing leads. Following up on emails. Onboarding new clients. Scheduling. Data entry. It adds up fast — and every hour your team spends on repetitive work is an hour they're not spending on actually growing the business."}</T></p>
+                  <p className="font-display text-ink uppercase text-2xl"><T k="ai.thats-where-the-fuzzies">{"That's where the Fuzzies come in."}</T></p>
+                  <p><T k="ai.at-iconik-studios-we">{"At Iconik Studios, we build and deploy custom AI agents and automated workflow systems designed around how your business actually operates. Our Fuzzies don't just handle simple tasks — they think, decide, and run entire processes on their own so your business moves faster and smarter without adding more to your plate."}</T></p>
                 </div>
               </div>
 
@@ -331,14 +313,10 @@ const AIWorkflows = () => {
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-32">
               <div className="max-w-3xl">
-                <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange block mb-8">Automation Ecosystem</span>
-                <h2 className="text-6xl md:text-8xl font-display uppercase tracking-tighter leading-[0.9]">
-                  Orchestrate <br /> Your <span className="text-burnt-orange italic">Future.</span>
-                </h2>
+                <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange block mb-8"><T k="ai.automation-ecosystem">{"Automation Ecosystem"}</T></span>
+                <h2 className="text-6xl md:text-8xl font-display uppercase tracking-tighter leading-[0.9]"><T k="ai.orchestrate-your-future" em="text-burnt-orange italic" label="Heading">{"Orchestrate\nYour *Future.*"}</T></h2>
               </div>
-              <p className="max-w-sm text-paper font-mono text-[10px] uppercase tracking-widest leading-loose text-right hidden lg:block">
-                Beyond traditional scripts. We build self-correcting, context-aware systems that evolve with your business complexity.
-              </p>
+              <p className="max-w-sm text-paper font-mono text-[10px] uppercase tracking-widest leading-loose text-right hidden lg:block"><T k="ai.beyond-traditional-scripts-we">{"Beyond traditional scripts. We build self-correcting, context-aware systems that evolve with your business complexity."}</T></p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10 overflow-hidden rounded-[20px]">
@@ -380,20 +358,20 @@ const AIWorkflows = () => {
                     <div className="w-16 h-16 rounded-2xl border border-white/10 flex items-center justify-center text-burnt-orange group-hover:bg-burnt-orange group-hover:text-white group-hover:scale-110 transition-all duration-500">
                       <item.icon size={32} />
                     </div>
-                    <span className="font-mono text-[10px] opacity-20 uppercase tracking-widest">Workflow 0{i + 1}</span>
+                    <span className="font-mono text-[10px] opacity-20 uppercase tracking-widest"><T k="ai.workflow-0">{"Workflow 0"}</T>{i + 1}</span>
                   </div>
 
                   <div className="space-y-8">
                     <h3 className="text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-tight leading-none group-hover:text-burnt-orange transition-colors">
-                      {item.title}
+                      <T k={`ai.systems.${i + 1}.title`} label={`System ${i + 1}: heading`}>{item.title}</T>
                     </h3>
                     <p className="text-paper text-lg md:text-xl leading-relaxed italic max-w-md">
-                      {item.desc}
+                      <T k={`ai.systems.${i + 1}.desc`} label={`System ${i + 1}: text`}>{item.desc}</T>
                     </p>
                     <div className="flex flex-wrap gap-2 pt-8">
                       {item.tags.map((tag, j) => (
                         <span key={j} className="px-4 py-1.5 bg-white/10 rounded-full text-[9px] font-mono uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
-                          {tag}
+                          <T k={`ai.systems.${i + 1}.tag${j + 1}`} label={`System ${i + 1}: tag ${j + 1}`}>{tag}</T>
                         </span>
                       ))}
                     </div>
@@ -405,7 +383,7 @@ const AIWorkflows = () => {
         </section>
 
         {/* Parallax Interstitial */}
-        <ParallaxLogoSection bgImage={fuzzyWorkImage} />
+        <ParallaxLogoSection bgImage={fuzzyWorkImage} imageKey="ai.closing.image" />
 
         {/* Process Section */}
         <AutomationProcess />
@@ -417,17 +395,13 @@ const AIWorkflows = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             className="max-w-4xl mx-auto"
           >
-            <span className="font-mono text-xs uppercase tracking-[0.5em] opacity-100 block mb-12">Iconik Studios</span>
-            <h2 className="text-7xl md:text-[10vw] font-display uppercase tracking-tighter leading-[0.9] mb-16">
-              Future-Proof <br /> Your <span className="italic uppercase">Legacy.</span>
-            </h2>
+            <span className="font-mono text-xs uppercase tracking-[0.5em] opacity-100 block mb-12"><T k="ai.iconik-studios">{"Iconik Studios"}</T></span>
+            <h2 className="text-7xl md:text-[10vw] font-display uppercase tracking-tighter leading-[0.9] mb-16"><T k="ai.future-proof-your-legacy" em="italic uppercase" label="Heading">{"Future-Proof\nYour *Legacy.*"}</T></h2>
             <div className="flex flex-col items-center gap-8">
-              <button className="bg-white text-burnt-orange px-16 py-8 rounded-full font-display text-2xl tracking-[0.2em] font-bold hover:bg-ink hover:text-tan transition-all duration-500 uppercase shadow-2xl">
-                Schedule Your Audit
-              </button>
+              <button className="bg-white text-burnt-orange px-16 py-8 rounded-full font-display text-2xl tracking-[0.2em] font-bold hover:bg-ink hover:text-tan transition-all duration-500 uppercase shadow-2xl"><T k="ai.schedule-your-audit" label="Button">{"Schedule Your Audit"}</T></button>
               <div className="flex items-center justify-center gap-4 text-white opacity-100">
                 <Cpu size={20} />
-                <span className="font-mono text-xs uppercase tracking-widest">Iconik grade reliability.</span>
+                <span className="font-mono text-xs uppercase tracking-widest"><T k="ai.iconik-grade-reliability">{"Iconik grade reliability."}</T></span>
               </div>
             </div>
           </motion.div>

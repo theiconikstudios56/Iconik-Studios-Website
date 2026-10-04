@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import imgWeb from '../assets/images/web/fuzzy-web.webp';
 import imgAi from '../assets/images/web/ai-automations.webp';
 import imgMaintenance from '../assets/images/web/fuzzy-maintenance.webp';
+import { T, useEditor, useImage, useText } from '../content';
 
 const SERVICES = [
   {
@@ -45,8 +46,13 @@ interface CardProps {
   targetScale: number;
 }
 
-const Card: React.FC<CardProps> = ({ i, title, description, categories, image, id, link, progress, range, targetScale }) => {
+const Card: React.FC<CardProps> = ({ i, title: startTitle, description: startDescription, categories: startCategories, image: startImage, id, link, progress, range, targetScale }) => {
   const container = useRef(null);
+  const key = `home.stack.${i + 1}`;
+  const title = useText(`${key}.title`, startTitle, { label: `Service ${i + 1}: name` });
+  const categories = useText(`${key}.tags`, startCategories.join(', '), { label: `Service ${i + 1}: categories (comma separated)` }).split(',').map((c) => c.trim()).filter(Boolean);
+  const image = useImage(`${key}.image`, startImage, { label: `Service ${i + 1}: picture` });
+  const editing = useEditor().on;
   const scale = useTransform(progress, range, [1, targetScale]);
   
   return (
@@ -70,7 +76,7 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
 
         {/* Categories Section (Small Tablets on right in video) */}
         <div className="hidden lg:block absolute top-10 right-10 z-20 text-right">
-            <span className="font-mono text-[8px] uppercase tracking-[0.5em] text-white opacity-100 block mb-4">Categories</span>
+            <span className="font-mono text-[8px] uppercase tracking-[0.5em] text-white opacity-100 block mb-4"><T k="home.stack.categories-label">Categories</T></span>
             <div className="flex flex-wrap gap-2 justify-end max-w-[240px]">
                 {categories.map((cat, idx) => (
                     <span key={idx} className="text-[10px] uppercase font-bold px-3 py-1.5 bg-white/5 border border-white/10 rounded-sm text-white">
@@ -84,16 +90,16 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
         <div className="w-full md:w-3/5 flex flex-col gap-8 md:gap-14 order-2 md:order-1">
             <div className="space-y-6">
               <h3 className="text-5xl md:text-7xl lg:text-9xl font-display text-white uppercase tracking-tighter leading-[0.95]">
-                {title}
+                <T k={`${key}.title`} label={`Service ${i + 1}: name`}>{startTitle}</T>
               </h3>
               <p className="text-lg md:text-2xl text-white opacity-100 max-w-lg font-light leading-relaxed">
-                {description}
+                <T k={`${key}.text`} label={`Service ${i + 1}: text`}>{startDescription}</T>
               </p>
             </div>
             
             {/* Mobile Categories */}
             <div className="flex flex-col gap-4 lg:hidden">
-                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white opacity-100">Categories</span>
+                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white opacity-100"><T k="home.stack.categories-label">Categories</T></span>
                 <div className="flex flex-wrap gap-2">
                     {categories.map((cat, idx) => (
                         <span key={idx} className="text-[10px] uppercase tracking-widest font-bold px-4 py-2 bg-white/5 border border-white/10 rounded-sm text-white">
@@ -105,7 +111,7 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
             
             <div className="hidden md:block">
               <Link to={link} className="group flex items-center gap-4 text-burnt-orange font-display tracking-[0.3em] uppercase text-sm w-fit">
-                Explore {title}
+                <T k="home.stack.link">Explore</T> {title}
                 <div className="w-12 h-[1px] bg-burnt-orange transform group-hover:scale-x-150 transition-transform origin-left duration-500" />
               </Link>
             </div>
@@ -118,6 +124,7 @@ const Card: React.FC<CardProps> = ({ i, title, description, categories, image, i
              decoding="async"
              src={image} 
              alt={title} 
+             {...(editing ? { 'data-img-k': `${key}.image` } : {})}
              className="w-full h-full object-cover"
              referrerPolicy="no-referrer"
            />

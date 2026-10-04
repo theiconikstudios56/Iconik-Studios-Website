@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { T } from '../../content';
 
 const steps = [
   { 
@@ -28,13 +29,9 @@ export default function WebDesignProcess() {
     <section className="py-32 bg-ink text-tan">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         <div className="lg:col-span-4 sticky top-32 h-fit">
-          <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6">Our Process</span>
-          <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter mb-8">
-            How we <br /> Build.
-          </h2>
-          <p className="text-lg opacity-100 leading-relaxed max-w-sm">
-            We don't follow generic templates. We follow a rigorous method of discovery and rapid iterative feedback to engineer a website that's as beautiful as it is built to perform.
-          </p>
+          <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6"><T k="web-design.process.our-process">{"Our Process"}</T></span>
+          <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter mb-8"><T k="web-design.process.how-we-build" label="Heading">{"How we\nBuild."}</T></h2>
+          <p className="text-lg opacity-100 leading-relaxed max-w-sm"><T k="web-design.process.we-dont-follow-generic">{"We don't follow generic templates. We follow a rigorous method of discovery and rapid iterative feedback to engineer a website that's as beautiful as it is built to perform."}</T></p>
         </div>
 
         <div className="lg:col-span-8 space-y-32">
@@ -53,10 +50,10 @@ export default function WebDesignProcess() {
                 <div className="absolute left-4 top-10 w-[1px] h-[calc(100%+8rem)] bg-gradient-to-b from-burnt-orange to-transparent opacity-30" />
               )}
               
-              <span className="font-mono text-xs text-burnt-orange mb-4 block uppercase tracking-widest">{item.step}</span>
-              <h3 className="text-4xl md:text-6xl font-display uppercase mb-6">{item.title}</h3>
+              <span className="font-mono text-xs text-burnt-orange mb-4 block uppercase tracking-widest"><T k={`web-design.process.${i + 1}.step`} label={`Phase ${i + 1}: small heading`}>{item.step}</T></span>
+              <h3 className="text-4xl md:text-6xl font-display uppercase mb-6"><T k={`web-design.process.${i + 1}.title`} label={`Phase ${i + 1}: heading`}>{item.title}</T></h3>
               <p className="text-lg md:text-xl opacity-100 leading-relaxed max-w-2xl font-light">
-                {item.desc}
+                <T k={`web-design.process.${i + 1}.desc`} label={`Phase ${i + 1}: text`}>{item.desc}</T>
               </p>
             </motion.div>
           ))}

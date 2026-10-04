@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Globe, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { T } from '../content';
 
 const PROJECTS = [
   { 
@@ -63,14 +64,10 @@ export default function HomesPortfolio() {
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-[1px] bg-burnt-orange/30" />
-              <span className="text-[10px] font-mono text-burnt-orange tracking-[0.5em] uppercase block">
-                03 // PORTFOLIO
-              </span>
+              <span className="text-[10px] font-mono text-burnt-orange tracking-[0.5em] uppercase block"><T k="home.portfolio.03-portfolio">{"03 // PORTFOLIO"}</T></span>
               <div className="w-12 h-[1px] bg-burnt-orange/30" />
             </div>
-            <h2 className="text-5xl md:text-[6vw] font-display text-white uppercase tracking-tighter leading-[0.8] transition-all duration-500">
-              Portfolio Showcase
-            </h2>
+            <h2 className="text-5xl md:text-[6vw] font-display text-white uppercase tracking-tighter leading-[0.8] transition-all duration-500"><T k="home.portfolio.portfolio-showcase" label="Heading">{"Portfolio Showcase"}</T></h2>
           </motion.div>
         </div>
 

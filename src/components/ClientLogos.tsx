@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Globe, Cpu, Zap, Target, Circle, Radio, Hexagon, Component } from 'lucide-react';
+import { T } from '../content';
 
 const CLIENTS = [
   { name: 'RADIUS', icon: Radio },
@@ -35,7 +36,7 @@ export default function ClientLogos() {
                 >
                   <client.icon size={36} strokeWidth={1.5} className="text-paper shrink-0" />
                   <span className="text-3xl md:text-4xl font-display text-paper tracking-tighter uppercase">
-                    {client.name}
+                    <T k={`shared.logos.${i + 1}`} label={`Client name ${i + 1}`}>{client.name}</T>
                   </span>
                 </div>
               ))}

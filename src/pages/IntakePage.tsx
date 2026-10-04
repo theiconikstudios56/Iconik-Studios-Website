@@ -1,4 +1,5 @@
 import { useState, FormEvent, CSSProperties } from 'react';
+import { T } from '../content';
 
 const ACCENT = '#D98235';
 const ACCENT_BG = 'rgba(217, 130, 53, 0.08)';
@@ -148,16 +149,19 @@ const s = {
   successP: { color: '#888', fontSize: 15, lineHeight: 1.7 } as CSSProperties,
 };
 
+/** A content key from a question's starting wording: "Business Name" → business-name. */
+const keyOf = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50);
+
 function Field({ label, required, hint, children }: {
   label: string; required?: boolean; hint?: string; children: React.ReactNode;
 }) {
   return (
     <div style={s.field}>
       <label style={s.label}>
-        {label}{required && <span style={s.required}>*</span>}
+        <T k={`intake.field.${keyOf(label)}`} label="Question">{label}</T>{required && <span style={s.required}>*</span>}
       </label>
       {children}
-      {hint && <p style={s.hint}>{hint}</p>}
+      {hint && <p style={s.hint}><T k={`intake.field.${keyOf(label)}-hint`} label="Question: help text">{hint}</T></p>}
     </div>
   );
 }
@@ -166,7 +170,7 @@ function SectionHeader({ num, title }: { num: string; title: string }) {
   return (
     <div style={s.sectionLabel}>
       <span style={s.sectionNum}>{num}</span>
-      <span style={s.sectionTitle}>{title}</span>
+      <span style={s.sectionTitle}><T k={`intake.section.${keyOf(title)}`} label="Section heading">{title}</T></span>
     </div>
   );
 }
@@ -268,23 +272,16 @@ export default function IntakePage() {
         {submitted ? (
           <div style={s.successScreen}>
             <div style={s.successIcon}>✦</div>
-            <h2 style={s.successH2}>We've Got It.</h2>
-            <p style={s.successP}>
-              Thanks for taking the time to fill this out.<br />
-              The Iconik Studios team will be in touch within 1–2 business days.
-            </p>
+            <h2 style={s.successH2}><T k="intake.weve-got-it" label="Heading">{"We've Got It."}</T></h2>
+            <p style={s.successP}><T k="intake.thanks-for-taking-the">{"Thanks for taking the time to fill this out.\nThe Iconik Studios team will be in touch within 1–2 business days."}</T></p>
           </div>
         ) : (
           <>
             <div style={s.header}>
-              <span style={s.logoTag}>ICONIK STUDIOS — CLIENT INTAKE</span>
-              <h1 style={s.h1}>
-                Let's Build<br />Something <span style={{ color: ACCENT }}>Great.</span>
+              <span style={s.logoTag}><T k="intake.iconik-studios-client-intake">{"ICONIK STUDIOS — CLIENT INTAKE"}</T></span>
+              <h1 style={s.h1}><T k="intake.lets-build" label="Heading">{"Let's Build"}</T><br /><T k="intake.something" label="Heading">{"Something"}</T>{" "}<span style={{ color: ACCENT }}><T k="intake.great" label="Heading">{"Great."}</T></span>
               </h1>
-              <p style={s.subtitle}>
-                Before we touch a single pixel, we need to understand your business inside and out.
-                Take your time — the more detail you give us, the better your website will be.
-              </p>
+              <p style={s.subtitle}><T k="intake.before-we-touch-a">{"Before we touch a single pixel, we need to understand your business inside and out. Take your time — the more detail you give us, the better your website will be."}</T></p>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -325,12 +322,12 @@ export default function IntakePage() {
                 </Field>
                 <Field label="How long have you been in business?">
                   <select value={form.years_in_business} onChange={set('years_in_business')} {...selectProps('years_in_business')}>
-                    <option value="" disabled>Select one</option>
-                    <option>Less than 1 year</option>
-                    <option>1–3 years</option>
-                    <option>3–5 years</option>
-                    <option>5–10 years</option>
-                    <option>10+ years</option>
+                    <option value="" disabled><T k="intake.select-one" label="Choice">{"Select one"}</T></option>
+                    <option><T k="intake.less-than-1-year" label="Choice">{"Less than 1 year"}</T></option>
+                    <option><T k="intake.1-3-years" label="Choice">{"1–3 years"}</T></option>
+                    <option><T k="intake.3-5-years" label="Choice">{"3–5 years"}</T></option>
+                    <option><T k="intake.5-10-years" label="Choice">{"5–10 years"}</T></option>
+                    <option><T k="intake.10-years" label="Choice">{"10+ years"}</T></option>
                   </select>
                 </Field>
               </div>
@@ -429,23 +426,23 @@ export default function IntakePage() {
                 <SectionHeader num="06" title="Project Details" />
                 <Field label="Target Launch Date">
                   <select value={form.launch_timeline} onChange={set('launch_timeline')} {...selectProps('launch_timeline')}>
-                    <option value="" disabled>Select a timeframe</option>
-                    <option>ASAP — within 2 weeks</option>
-                    <option>Within 1 month</option>
-                    <option>Within 2–3 months</option>
-                    <option>Within 3–6 months</option>
-                    <option>Flexible — no hard deadline</option>
+                    <option value="" disabled><T k="intake.select-a-timeframe" label="Choice">{"Select a timeframe"}</T></option>
+                    <option><T k="intake.asap-within-2-weeks" label="Choice">{"ASAP — within 2 weeks"}</T></option>
+                    <option><T k="intake.within-1-month" label="Choice">{"Within 1 month"}</T></option>
+                    <option><T k="intake.within-2-3-months" label="Choice">{"Within 2–3 months"}</T></option>
+                    <option><T k="intake.within-3-6-months" label="Choice">{"Within 3–6 months"}</T></option>
+                    <option><T k="intake.flexible-no-hard-deadline" label="Choice">{"Flexible — no hard deadline"}</T></option>
                   </select>
                 </Field>
                 <Field label="Budget Range">
                   <select value={form.budget} onChange={set('budget')} {...selectProps('budget')}>
-                    <option value="" disabled>Select a range</option>
-                    <option>Under $1,000</option>
-                    <option>$1,000 – $2,500</option>
-                    <option>$2,500 – $5,000</option>
-                    <option>$5,000 – $10,000</option>
-                    <option>$10,000+</option>
-                    <option>Let's discuss</option>
+                    <option value="" disabled><T k="intake.select-a-range" label="Choice">{"Select a range"}</T></option>
+                    <option><T k="intake.under-1-000" label="Choice">{"Under $1,000"}</T></option>
+                    <option><T k="intake.1-000-2-500" label="Choice">{"$1,000 – $2,500"}</T></option>
+                    <option><T k="intake.2-500-5-000" label="Choice">{"$2,500 – $5,000"}</T></option>
+                    <option><T k="intake.5-000-10-000" label="Choice">{"$5,000 – $10,000"}</T></option>
+                    <option><T k="intake.10-000" label="Choice">{"$10,000+"}</T></option>
+                    <option><T k="intake.lets-discuss" label="Choice">{"Let's discuss"}</T></option>
                   </select>
                 </Field>
                 <Field label="Anything else we should know?">
@@ -455,10 +452,7 @@ export default function IntakePage() {
 
               {/* Submit */}
               <div style={s.submitArea}>
-                <p style={s.submitNote}>
-                  Once you submit, a member of the Iconik Studios team will review your responses
-                  and reach out within 1–2 business days to schedule your kickoff call.
-                </p>
+                <p style={s.submitNote}><T k="intake.once-you-submit-a">{"Once you submit, a member of the Iconik Studios team will review your responses and reach out within 1–2 business days to schedule your kickoff call."}</T></p>
                 <button
                   type="submit"
                   disabled={submitting}
@@ -471,9 +465,7 @@ export default function IntakePage() {
                     </svg>
                   )}
                 </button>
-                <p style={s.footerNote}>
-                  Your information is kept strictly confidential and used only to prepare for your project. — Iconik Studios
-                </p>
+                <p style={s.footerNote}><T k="intake.your-information-is-kept">{"Your information is kept strictly confidential and used only to prepare for your project. — Iconik Studios"}</T></p>
               </div>
             </form>
           </>

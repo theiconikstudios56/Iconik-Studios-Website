@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import fuzzyLineupImg from '../assets/images/web/ping-pong-fuzzy.webp';
+import { Img } from '../content';
 
 const LogoParallax = () => {
   const containerRef = useRef(null);
@@ -21,7 +22,7 @@ const LogoParallax = () => {
         style={{ y: bgY }}
         className="absolute inset-x-0 -top-[20%] -bottom-[20%] z-0"
       >
-        <img
+        <Img k="about.logos.image-parallax-background" label="Picture"
           loading="lazy"
           decoding="async"
           src={fuzzyLineupImg} 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, TrendingUp, Cpu, Workflow } from 'lucide-react';
+import { T } from '../content';
 
 export default function SMBEmpowerment() {
   const points = [
@@ -43,16 +44,10 @@ export default function SMBEmpowerment() {
               className="space-y-6"
             >
               <div className="flex items-center gap-4">
-                <span className="text-burnt-orange font-mono text-xs tracking-[0.4em] uppercase">
-                  OUR MISSION // SYSTEMS OVER CHAOS
-                </span>
+                <span className="text-burnt-orange font-mono text-xs tracking-[0.4em] uppercase"><T k="home.empower.our-mission-systems-over">{"OUR MISSION // SYSTEMS OVER CHAOS"}</T></span>
                 <div className="w-12 h-[1px] bg-burnt-orange/30" />
               </div>
-              <h2 className="text-5xl md:text-7xl font-display leading-[0.95] uppercase tracking-tighter text-paper">
-                ENGINEERING<br />
-                LEVERAGE FOR THE<br />
-                <span className="text-burnt-orange italic">UNDERDOG.</span>
-              </h2>
+              <h2 className="text-5xl md:text-7xl font-display leading-[0.95] uppercase tracking-tighter text-paper"><T k="home.empower.engineering-leverage-for-the" em="text-burnt-orange italic" label="Heading">{"ENGINEERING\nLEVERAGE FOR THE\n*UNDERDOG.*"}</T></h2>
             </motion.div>
           </div>
 
@@ -65,12 +60,8 @@ export default function SMBEmpowerment() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-6"
             >
-              <p className="text-lg md:text-xl font-light text-paper opacity-80 leading-relaxed font-sans normal-case">
-                We believe that small and medium-sized businesses deserve the same elite infrastructure as multi-billion dollar enterprises. Subpar websites and chaotic manual workflows shouldn't limit your potential.
-              </p>
-              <p className="text-base text-paper opacity-60 leading-relaxed font-mono">
-                Iconik Studios designs jaw-dropping frontends backed by rock-solid automation systems. We don't just hand you a website—we build the custom operational processes that capture bookings, sync client databases, and fuel your legacy 24/7.
-              </p>
+              <p className="text-lg md:text-xl font-light text-paper opacity-80 leading-relaxed font-sans normal-case"><T k="home.empower.we-believe-that-small">{"We believe that small and medium-sized businesses deserve the same elite infrastructure as multi-billion dollar enterprises. Subpar websites and chaotic manual workflows shouldn't limit your potential."}</T></p>
+              <p className="text-base text-paper opacity-60 leading-relaxed font-mono"><T k="home.empower.iconik-studios-designs-jaw">{"Iconik Studios designs jaw-dropping frontends backed by rock-solid automation systems. We don't just hand you a website—we build the custom operational processes that capture bookings, sync client databases, and fuel your legacy 24/7."}</T></p>
             </motion.div>
           </div>
 
@@ -97,10 +88,10 @@ export default function SMBEmpowerment() {
                     <Icon className="text-burnt-orange group-hover:scale-110 transition-transform duration-300" size={22} />
                   </div>
                   <h3 className="font-display text-2xl uppercase tracking-tight text-paper mb-4">
-                    {point.title}
+                    <T k={`home.empower.${index + 1}.title`} label={`Point ${index + 1}: heading`}>{point.title}</T>
                   </h3>
                   <p className="text-sm font-light text-paper opacity-60 leading-relaxed font-sans normal-case">
-                    {point.desc}
+                    <T k={`home.empower.${index + 1}.text`} label={`Point ${index + 1}: text`}>{point.desc}</T>
                   </p>
                 </div>
               </motion.div>

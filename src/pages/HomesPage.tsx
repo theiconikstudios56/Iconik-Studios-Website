@@ -8,6 +8,7 @@ import HomesContact from '../components/HomesContact';
 import LatestInsights from '../components/LatestInsights';
 
 import FinalCTA from '../components/FinalCTA';
+import { Img, T, useEditor, useImage } from '../content';
 
 // Missing icons in provided snippet's import line relative to usage (Code, Cpu, Sparkles were mentioned but not strictly used in core loops, but I'll keeping them if they are in the list)
 
@@ -16,7 +17,7 @@ const Hero = () => {
     <section className="relative min-h-[110vh] flex flex-col items-center justify-center px-6 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <img 
+        <Img k="homes.image-modern-architecture" label="Picture" 
           src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000" 
           alt="Modern Architecture" 
           className="w-full h-full object-cover grayscale opacity-20 brightness-50"
@@ -33,19 +34,14 @@ const Hero = () => {
         >
           <div className="flex items-center justify-center gap-4 mb-12">
             <div className="w-12 h-[1px] bg-paper" />
-            <span className="text-[10px] uppercase tracking-[0.6em] font-medium opacity-100 italic">Established MMXXVI</span>
+            <span className="text-[10px] uppercase tracking-[0.6em] font-medium opacity-100 italic"><T k="homes.established-mmxxvi">{"Established MMXXVI"}</T></span>
             <div className="w-12 h-[1px] bg-paper" />
           </div>
 
-          <h1 className="mb-12 text-paper">
-            Iconik<br/>
-            <span className="text-outline">Studios</span>
-          </h1>
+          <h1 className="mb-12 text-paper"><T k="homes.iconik-studios" em="text-outline" label="Heading">{"Iconik\n*Studios*"}</T></h1>
 
           <div className="max-w-xl mx-auto">
-            <h2 className="text-xl md:text-2xl font-sans normal-case opacity-100 leading-relaxed font-light text-paper">
-              We design and build digital experiences through strategy, branding, and intelligent technology.
-            </h2>
+            <h2 className="text-xl md:text-2xl font-sans normal-case opacity-100 leading-relaxed font-light text-paper"><T k="homes.we-design-and-build" label="Heading">{"We design and build digital experiences through strategy, branding, and intelligent technology."}</T></h2>
           </div>
         </motion.div>
       </div>
@@ -53,19 +49,17 @@ const Hero = () => {
       {/* Floating Meta Details */}
       <div className="absolute bottom-12 w-full px-12 flex flex-col md:flex-row justify-between items-end gap-8 opacity-80 text-paper">
         <div className="space-y-1">
-          <p className="text-[10px] uppercase tracking-widest font-semibold">Our Expertise</p>
-          <p className="text-sm">Web / AI / Automation</p>
+          <p className="text-[10px] uppercase tracking-widest font-semibold"><T k="homes.our-expertise">{"Our Expertise"}</T></p>
+          <p className="text-sm"><T k="homes.web-ai-automation">{"Web / AI / Automation"}</T></p>
         </div>
         <div className="flex items-center gap-2 animate-bounce cursor-pointer">
-          <p className="text-[10px] uppercase tracking-widest font-semibold opacity-100">Scroll to explore</p>
+          <p className="text-[10px] uppercase tracking-widest font-semibold opacity-100"><T k="homes.scroll-to-explore">{"Scroll to explore"}</T></p>
           <ChevronDown size={14} />
         </div>
         <div className="text-right space-y-1">
-          <p className="text-[10px] uppercase tracking-widest font-semibold">Status</p>
+          <p className="text-[10px] uppercase tracking-widest font-semibold"><T k="homes.status">{"Status"}</T></p>
           <p className="text-sm flex items-center gap-2 justify-end">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            Active ©26
-          </p>
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /><T k="homes.active-26">{"Active ©26"}</T></p>
         </div>
       </div>
     </section>
@@ -88,6 +82,8 @@ const ProjectCard = ({
 
   const y = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+  const image = useImage(`homes.work.${index + 1}.image`, project.image, { label: `Project ${index + 1}: picture` });
+  const editing = useEditor().on;
 
   return (
     <motion.div 
@@ -97,8 +93,9 @@ const ProjectCard = ({
     >
       <motion.img 
         style={{ y }}
-        src={project.image} 
+        src={image} 
         alt={project.title}
+        {...(editing ? { 'data-img-k': `homes.work.${index + 1}.image` } : {})}
         className="absolute inset-0 w-full h-[120%] object-cover grayscale brightness-75 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -117,8 +114,8 @@ const ProjectCard = ({
               <span className="font-display text-2xl text-accent">0{index + 1}</span>
               <div className="w-12 h-[1px] bg-paper/50" />
             </div>
-            <h2 className="text-6xl md:text-8xl tracking-tighter text-paper">{project.title}</h2>
-            <p className="text-xl font-light tracking-wide text-paper">{project.category}</p>
+            <h2 className="text-6xl md:text-8xl tracking-tighter text-paper"><T k={`homes.work.${index + 1}.title`} label={`Project ${index + 1}: name`}>{project.title}</T></h2>
+            <p className="text-xl font-light tracking-wide text-paper"><T k={`homes.work.${index + 1}.category`} label={`Project ${index + 1}: category`}>{project.category}</T></p>
           </div>
           <motion.button 
             whileHover={{ scale: 1.1, rotate: 45 }}
@@ -159,9 +156,9 @@ const ServiceMarquee = () => {
       <div className="flex whitespace-nowrap animate-marquee">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="flex items-center gap-24 mx-12">
-            {services.map((service) => (
+            {services.map((service, j) => (
               <div key={service} className="flex items-center gap-12">
-                <span className="text-8xl md:text-[10vw] font-display uppercase leading-none tracking-tighter hover:text-accent transition-colors cursor-pointer">{service}</span>
+                <span className="text-8xl md:text-[10vw] font-display uppercase leading-none tracking-tighter hover:text-accent transition-colors cursor-pointer"><T k={`homes.marquee.${j + 1}`} label={`Moving banner word ${j + 1}`}>{service}</T></span>
                 <div className="w-8 h-8 rounded-full bg-accent animate-pulse" />
               </div>
             ))}
@@ -184,7 +181,7 @@ const ServicesGrid = () => {
     <section id="services" className="py-32 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <div className="space-y-12">
-          {items.map((item) => (
+          {items.map((item, i) => (
             <motion.div 
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
@@ -194,13 +191,13 @@ const ServicesGrid = () => {
             >
               <span className="font-display text-xl text-accent">{item.id}</span>
               <div className="md:col-span-2 space-y-4">
-                <h3 className="text-5xl font-display text-paper">{item.title}</h3>
-                <p className="max-w-md text-lg font-light text-paper opacity-100">{item.desc}</p>
+                <h3 className="text-5xl font-display text-paper"><T k={`homes.services.${i + 1}.title`} label={`Service ${i + 1}: name`}>{item.title}</T></h3>
+                <p className="max-w-md text-lg font-light text-paper opacity-100"><T k={`homes.services.${i + 1}.text`} label={`Service ${i + 1}: text`}>{item.desc}</T></p>
               </div>
               <div className="flex flex-wrap gap-3 content-start">
-                {item.tags.map(tag => (
+                {item.tags.map((tag, j) => (
                   <span key={tag} className="px-4 py-2 border border-white/20 rounded-full text-[10px] uppercase tracking-widest font-semibold group-hover:border-accent transition-colors text-paper">
-                    {tag}
+                    <T k={`homes.services.${i + 1}.tag${j + 1}`} label={`Service ${i + 1}: tag ${j + 1}`}>{tag}</T>
                   </span>
                 ))}
               </div>
@@ -222,36 +219,34 @@ const Pricing = () => {
     <section id="pricing" className="py-32 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center space-y-4">
-          <h2 className="text-7xl md:text-9xl text-paper">Pricing</h2>
-          <p className="max-w-xl mx-auto text-xl font-light text-paper opacity-100">Basics to high-performance ecosystems.</p>
+          <h2 className="text-7xl md:text-9xl text-paper"><T k="homes.pricing" label="Heading">{"Pricing"}</T></h2>
+          <p className="max-w-xl mx-auto text-xl font-light text-paper opacity-100"><T k="homes.basics-to-high-performance">{"Basics to high-performance ecosystems."}</T></p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {plans.map((plan) => (
+          {plans.map((plan, i) => (
             <motion.div 
               key={plan.name}
               whileHover={{ y: -10 }}
               className={`p-12 h-fit rounded-[40px] border border-white/10 space-y-12 ${plan.featured ? 'bg-white text-ink' : 'bg-white/5'}`}
             >
               <div className="space-y-4">
-                <h3 className={`text-4xl font-display ${!plan.featured ? 'text-paper' : ''}`}>{plan.name}</h3>
+                <h3 className={`text-4xl font-display ${!plan.featured ? 'text-paper' : ''}`}><T k={`homes.plans.${i + 1}.name`} label={`Plan ${i + 1}: name`}>{plan.name}</T></h3>
                 <div className="flex items-baseline gap-2">
-                  <span className={`text-7xl font-display ${!plan.featured ? 'text-paper' : ''}`}>{plan.price}</span>
-                  <span className={`text-sm opacity-100 ${!plan.featured ? 'text-paper' : ''}`}>/project</span>
+                  <span className={`text-7xl font-display ${!plan.featured ? 'text-paper' : ''}`}><T k={`homes.plans.${i + 1}.price`} label={`Plan ${i + 1}: price`}>{plan.price}</T></span>
+                  <span className={`text-sm opacity-100 ${!plan.featured ? 'text-paper' : ''}`}><T k="homes.project">{"/project"}</T></span>
                 </div>
               </div>
               <div className="w-full h-px bg-current opacity-10" />
               <ul className="space-y-6">
-                {plan.items.map(item => (
+                {plan.items.map((item, j) => (
                   <li key={item} className={`flex items-center gap-4 text-sm font-semibold tracking-wide ${!plan.featured ? 'text-paper' : ''}`}>
                     <Check size={18} className="text-accent" />
-                    {item}
+                    <T k={`homes.plans.${i + 1}.item${j + 1}`} label={`Plan ${i + 1}: item ${j + 1}`}>{item}</T>
                   </li>
                 ))}
               </ul>
-              <button className={`w-full py-6 rounded-full font-display text-xl uppercase transition-all ${plan.featured ? 'bg-ink text-paper hover:bg-accent' : 'bg-paper text-ink hover:bg-accent'}`}>
-                Get Started
-              </button>
+              <button className={`w-full py-6 rounded-full font-display text-xl uppercase transition-all ${plan.featured ? 'bg-ink text-paper hover:bg-accent' : 'bg-paper text-ink hover:bg-accent'}`}><T k="homes.get-started" label="Button">{"Get Started"}</T></button>
             </motion.div>
           ))}
         </div>
@@ -272,8 +267,8 @@ const FAQ = () => {
     <section className="py-32 px-6 lg:px-12 bg-ink">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-8 sticky top-32 h-fit">
-          <h2 className="text-7xl md:text-9xl text-paper">FAQ</h2>
-          <p className="max-w-sm text-xl font-light text-paper opacity-100">Everything you need to know before we launch.</p>
+          <h2 className="text-7xl md:text-9xl text-paper"><T k="homes.faq" label="Heading">{"FAQ"}</T></h2>
+          <p className="max-w-sm text-xl font-light text-paper opacity-100"><T k="homes.everything-you-need-to">{"Everything you need to know before we launch."}</T></p>
         </div>
         <div className="space-y-4">
           {questions.map((item, i) => (
@@ -284,7 +279,7 @@ const FAQ = () => {
               >
                 <div className="flex items-center gap-8 text-paper">
                   <span className="font-display opacity-30">0{i + 1}</span>
-                  <span className="text-base md:text-lg font-mono uppercase">{item.q}</span>
+                  <span className="text-base md:text-lg font-mono uppercase"><T k={`homes.faq.${i + 1}.q`} label={`Question ${i + 1}`}>{item.q}</T></span>
                 </div>
                 <motion.div animate={{ rotate: active === i ? 45 : 0 }} className="text-paper">
                   <X size={24} />
@@ -298,7 +293,7 @@ const FAQ = () => {
                     exit={{ height: 0 }}
                     className="px-8 pb-8"
                   >
-                    <p className="text-lg opacity-100 font-light leading-relaxed text-paper">{item.a}</p>
+                    <p className="text-lg opacity-100 font-light leading-relaxed text-paper"><T k={`homes.faq.${i + 1}.a`} label={`Question ${i + 1}: answer`}>{item.a}</T></p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -317,6 +312,7 @@ export default function HomesPage() {
 
   return (
     <Layout
+      page="homes"
       title="Real Estate Web Design | Iconik Homes | Iconik Studios"
       description="Premium web design and AI property search solutions tailored for luxury real estate professionals."
     >

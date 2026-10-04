@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import studioFuzzyImage from '../assets/images/web/studio-fuzzy.webp';
+import { T, useImg } from '../content';
 
 export default function AboutHero() {
+  const heroImage = useImg('about.hero.image', studioFuzzyImage, 'Studio Fuzzy Workspace', 'Hero picture');
   const heroRef = useRef<HTMLElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -32,9 +34,7 @@ export default function AboutHero() {
           style={{ scale: textScale }}
           className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none"
         >
-          <h1 className="text-[20vw] font-display font-black leading-none tracking-normal mix-blend-difference opacity-85">
-            ABOUT
-          </h1>
+          <h1 className="text-[20vw] font-display font-black leading-none tracking-normal mix-blend-difference opacity-85"><T k="about.hero.about" label="Heading">{"ABOUT"}</T></h1>
         </motion.div>
 
         {/* The Expanding Image Container */}
@@ -47,8 +47,7 @@ export default function AboutHero() {
         >
           <motion.img 
             style={{ scale: imageScale }}
-            src={studioFuzzyImage}
-            alt="Studio Fuzzy Workspace" 
+            {...heroImage}
             className="w-full h-full object-cover brightness-75 contrast-125"
             referrerPolicy="no-referrer"
           />
@@ -58,9 +57,7 @@ export default function AboutHero() {
 
         {/* Corners Content - Bottom Left */}
         <div className="absolute bottom-10 left-10 z-30 max-w-[280px]">
-          <p className="font-mono text-[10px] uppercase tracking-widest leading-relaxed text-white">
-            A boutique creative studio dedicated to architecting digital legacies for pioneering brands.
-          </p>
+          <p className="font-mono text-[10px] uppercase tracking-widest leading-relaxed text-white"><T k="about.hero.a-boutique-creative-studio">{"A boutique creative studio dedicated to architecting digital legacies for pioneering brands."}</T></p>
         </div>
 
         {/* Corners Content - Bottom Right */}
@@ -70,9 +67,7 @@ export default function AboutHero() {
             whileTap={{ scale: 0.95 }}
             className="w-32 h-32 bg-burnt-orange flex flex-col items-center justify-center text-center p-4 rounded-sm"
           >
-            <span className="font-mono text-[10px] font-bold text-black uppercase leading-tight">
-              Colab <br /> With Us
-            </span>
+            <span className="font-mono text-[10px] font-bold text-black uppercase leading-tight"><T k="about.hero.colab-with-us">{"Colab\nWith Us"}</T></span>
           </motion.button>
         </div>
 

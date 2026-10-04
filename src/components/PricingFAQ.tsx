@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Check, X } from 'lucide-react';
 import { useState } from 'react';
+import { T, useText } from '../content';
 
 export const Pricing = () => {
   const plans = [
@@ -27,8 +28,8 @@ export const Pricing = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center space-y-4">
-          <h2 className="text-7xl md:text-9xl text-paper">Pricing</h2>
-          <p className="max-w-xl mx-auto text-xl font-light text-paper opacity-100">Basics to high-performance ecosystems.</p>
+          <h2 className="text-7xl md:text-9xl text-paper"><T k="home.faq.pricing" label="Heading">{"Pricing"}</T></h2>
+          <p className="max-w-xl mx-auto text-xl font-light text-paper opacity-100"><T k="home.faq.basics-to-high-performance">{"Basics to high-performance ecosystems."}</T></p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -42,7 +43,7 @@ export const Pricing = () => {
                 <h3 className={`text-4xl font-display ${!plan.featured ? 'text-paper' : ''}`}>{plan.name}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className={`text-7xl font-display ${!plan.featured ? 'text-paper' : ''}`}>{plan.price}</span>
-                  <span className={`text-sm opacity-100 ${!plan.featured ? 'text-paper' : ''}`}>/project</span>
+                  <span className={`text-sm opacity-100 ${!plan.featured ? 'text-paper' : ''}`}><T k="home.faq.project">{"/project"}</T></span>
                 </div>
               </div>
               <div className="w-full h-px bg-current opacity-10" />
@@ -54,9 +55,7 @@ export const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <button className={`w-full py-6 rounded-full font-display text-xl uppercase transition-all ${plan.featured ? 'bg-ink text-paper hover:bg-accent' : 'bg-paper text-ink hover:bg-accent'}`}>
-                Get Started
-              </button>
+              <button className={`w-full py-6 rounded-full font-display text-xl uppercase transition-all ${plan.featured ? 'bg-ink text-paper hover:bg-accent' : 'bg-paper text-ink hover:bg-accent'}`}><T k="home.faq.get-started" label="Button">{"Get Started"}</T></button>
             </motion.div>
           ))}
         </div>
@@ -67,12 +66,17 @@ export const Pricing = () => {
 
 export const FAQ = () => {
   const [active, setActive] = useState<number | null>(0);
-  const questions = [
+  const startQuestions = [
     { q: "Do you only work with Med Spas and Real Estate?", a: "While we have specialized systems for Med Spas, Real Estate, HVAC, and Consultants, our core methodology—Conversion-Centered Architecture—applies to any service-based business looking to scale." },
     { q: "What makes your websites different from a template?", a: "Templates are built to look pretty. Our websites are custom-engineered to convert. We focus on cognitive load reduction, 1:1 goal alignment, and seamless integration with your CRM." },
     { q: "How long does a website or automation build take?", a: "Standard website builds typically take 4-6 weeks. Complex AI automation systems and custom agent integrations can take 6-8 weeks, depending on the scope of your operations." },
     { q: "Do you offer ongoing support?", a: "Absolutely. We offer tiered 'Guardianship' maintenance packages that include 24/7 monitoring, security patching, and strategic performance tuning." },
   ];
+  // The questions as published (the same keys as on the page), for Google's FAQ listing too.
+  const questions = startQuestions.map((item, i) => ({
+    q: useText(`home.faq.${i + 1}.q`, item.q, { label: `Question ${i + 1}` }),
+    a: useText(`home.faq.${i + 1}.a`, item.a, { label: `Question ${i + 1}: answer` }),
+  }));
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -89,11 +93,11 @@ export const FAQ = () => {
 
   return (
     <section className="py-32 px-6 lg:px-12 bg-ink">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-8 sticky top-32 h-fit">
-          <h2 className="text-7xl md:text-9xl text-paper">FAQ</h2>
-          <p className="max-w-sm text-xl font-light text-paper opacity-100">Everything you need to know before we launch.</p>
+          <h2 className="text-7xl md:text-9xl text-paper"><T k="home.faq.faq" label="Heading">{"FAQ"}</T></h2>
+          <p className="max-w-sm text-xl font-light text-paper opacity-100"><T k="home.faq.everything-you-need-to">{"Everything you need to know before we launch."}</T></p>
         </div>
         <div className="space-y-4">
           {questions.map((item, i) => (
@@ -104,7 +108,7 @@ export const FAQ = () => {
               >
                 <div className="flex items-center gap-8 text-paper">
                   <span className="font-display opacity-80">0{i + 1}</span>
-                  <span className="text-base md:text-lg font-mono uppercase">{item.q}</span>
+                  <span className="text-base md:text-lg font-mono uppercase"><T k={`home.faq.${i + 1}.q`} label={`Question ${i + 1}`}>{startQuestions[i].q}</T></span>
                 </div>
                 <motion.div animate={{ rotate: active === i ? 45 : 0 }} className="text-paper">
                   <X size={24} />
@@ -118,7 +122,7 @@ export const FAQ = () => {
                     exit={{ height: 0 }}
                     className="px-8 pb-8"
                   >
-                    <p className="text-lg opacity-100 font-light leading-relaxed text-paper">{item.a}</p>
+                    <p className="text-lg opacity-100 font-light leading-relaxed text-paper"><T k={`home.faq.${i + 1}.a`} label={`Question ${i + 1}: answer`}>{startQuestions[i].a}</T></p>
                   </motion.div>
                 )}
               </AnimatePresence>

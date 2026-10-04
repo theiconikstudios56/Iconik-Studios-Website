@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom';
 import finalFuzzyHero from '../assets/images/web/chill-office.webp';
 import rooftopFuzzies from '../assets/images/web/rooftop-fuzzy-hd.webp';
 import fuzzyCollab from '../assets/images/web/fuzzy-collab.webp';
-
-const HERO_IMAGES = [
-  finalFuzzyHero,
-  fuzzyCollab,
-  rooftopFuzzies
-];
+import { T, useEditor, useImage, useText } from '../content';
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const HERO_IMAGES = [
+    useImage('home.hero.image1', finalFuzzyHero, { label: 'Hero picture 1' }),
+    useImage('home.hero.image2', fuzzyCollab, { label: 'Hero picture 2' }),
+    useImage('home.hero.image3', rooftopFuzzies, { label: 'Hero picture 3' }),
+  ];
+  const heroAlt = useText('home.hero.image-alt', 'Iconik Lounge', { label: 'Hero pictures: description', max: 200 });
+  const editing = useEditor().on;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -36,7 +38,8 @@ export default function Hero() {
             transition={{ duration: 1.5, ease: "easeInOut" }}
             src={HERO_IMAGES[currentImageIndex]}
             fetchPriority={currentImageIndex === 0 ? 'high' : 'auto'}
-            alt="Iconik Lounge"
+            alt={heroAlt}
+            {...(editing ? { 'data-img-k': `home.hero.image${currentImageIndex + 1}` } : {})}
             className="absolute inset-0 w-full h-full object-cover brightness-[.60]"
             referrerPolicy="no-referrer"
           />
@@ -58,9 +61,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="block text-white"
             >
-              Turn your ad spend into <br className="hidden lg:block" />
-              a fully booked calendar <br className="hidden lg:block" />
-              automatically.
+              <T k="home.hero.title" br="hidden lg:block">{"Turn your ad spend into\na fully booked calendar\nautomatically."}</T>
             </motion.span>
           </h1>
 
@@ -71,7 +72,7 @@ export default function Hero() {
               transition={{ delay: 0.8 }}
               className="text-sm md:text-base font-light max-w-2xl text-tan leading-relaxed font-mono"
             >
-              We help home service businesses capture, engage and retain every patient lead that standard websites miss. Through a powerful combination of conversion optimized design and 24/7 AI automation, we eliminate delayed follow-ups so your marketing dollars actually yield appointments, not missed opportunities.
+              <T k="home.hero.text">{"We help home service businesses capture, engage and retain every patient lead that standard websites miss. Through a powerful combination of conversion optimized design and 24/7 AI automation, we eliminate delayed follow-ups so your marketing dollars actually yield appointments, not missed opportunities."}</T>
             </motion.p>
 
             <motion.div
@@ -90,7 +91,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-burnt-orange blur-2xl opacity-0 group-hover:opacity-20 transition-opacity" />
                 <div className="relative px-10 py-5 border border-ink bg-burnt-orange text-ink hover:border-burnt-orange hover:bg-black/40 backdrop-blur-md hover:text-burnt-orange transition-all duration-500 rounded-none">
                   <span className="relative z-10 text-xs uppercase tracking-[0.25em] font-bold">
-                    Automate My Bookings
+                    <T k="home.hero.button1">{"Automate My Bookings"}</T>
                   </span>
                 </div>
               </Link>
@@ -105,7 +106,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-burnt-orange blur-2xl opacity-0 group-hover:opacity-20 transition-opacity" />
                 <div className="relative px-10 py-5 border border-white/20 bg-black/40 backdrop-blur-md text-white hover:border-burnt-orange hover:bg-transparent hover:text-burnt-orange transition-all duration-500 rounded-none">
                   <span className="relative z-10 text-xs uppercase tracking-[0.25em] font-bold">
-                    Explore Our Portfolio
+                    <T k="home.hero.button2">{"Explore Our Portfolio"}</T>
                   </span>
                 </div>
               </Link>
@@ -117,7 +118,7 @@ export default function Hero() {
       {/* Vertical Rail Text */}
       <div className="absolute right-12 bottom-12 hidden lg:block">
         <div className="writing-vertical-rl text-[10px] uppercase tracking-[0.5em] opacity-80 font-mono">
-          DESIGN // AUTOMATION // STRATEGY
+          <T k="home.hero.rail" label="Side text (large screens)">{"DESIGN // AUTOMATION // STRATEGY"}</T>
         </div>
       </div>
     </section>

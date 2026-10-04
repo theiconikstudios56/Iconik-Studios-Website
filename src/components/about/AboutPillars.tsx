@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Shield, Zap, Target, Palette } from 'lucide-react';
+import { T } from '../../content';
 
 const pillars = [
   {
@@ -37,10 +38,8 @@ export default function AboutPillars() {
     <section className="py-32 bg-[#CFCFCF] text-[#2D2D2D]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
-          <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-70 block mb-6">Core Strength</span>
-          <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter max-w-2xl">
-            The Pillars of <br /> Our Collective.
-          </h2>
+          <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-70 block mb-6"><T k="about.pillars.core-strength">{"Core Strength"}</T></span>
+          <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter max-w-2xl"><T k="about.pillars.the-pillars-of-our" label="Heading">{"The Pillars of\nOur Collective."}</T></h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -56,8 +55,8 @@ export default function AboutPillars() {
             >
               <pillar.icon size={48} className="text-burnt-orange" />
               <div className="mt-auto">
-                <h3 className="text-2xl font-display uppercase mb-4">{pillar.title}</h3>
-                <p className="opacity-80 leading-relaxed font-light italic">{pillar.description}</p>
+                <h3 className="text-2xl font-display uppercase mb-4"><T k={`about.pillars.${i + 1}.title`} label={`Pillar ${i + 1}: heading`}>{pillar.title}</T></h3>
+                <p className="opacity-80 leading-relaxed font-light italic"><T k={`about.pillars.${i + 1}.description`} label={`Pillar ${i + 1}: text`}>{pillar.description}</T></p>
               </div>
             </motion.div>
           ))}

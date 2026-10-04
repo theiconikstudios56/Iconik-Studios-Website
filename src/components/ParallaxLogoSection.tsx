@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import defaultHeroBg from '../assets/images/web/fuzzy-chillin.webp';
+import { Img } from '../content';
 
 interface ParallaxLogoSectionProps {
   bgImage?: string;
+  /** The picture's content key on this page (e.g. "maintenance.closing.image"). */
+  imageKey?: string;
 }
 
-export default function ParallaxLogoSection({ bgImage = defaultHeroBg }: ParallaxLogoSectionProps) {
+export default function ParallaxLogoSection({ bgImage = defaultHeroBg, imageKey = 'shared.closing.image' }: ParallaxLogoSectionProps) {
   const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -35,7 +38,9 @@ export default function ParallaxLogoSection({ bgImage = defaultHeroBg }: Paralla
         <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/30 z-10" />
         <div className="absolute inset-0 bg-ink/10 z-10" />
 
-        <img
+        <Img
+          k={imageKey}
+          label="Closing banner picture"
           loading="lazy"
           decoding="async"
           src={bgImage}

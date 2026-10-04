@@ -2,6 +2,7 @@ import { motion, useScroll, useSpring } from 'motion/react';
 import Navbar from './Navbar';
 import BackgroundTransition from './BackgroundTransition';
 import { ReactNode, useEffect } from 'react';
+import { useText } from '../content';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,9 +10,15 @@ interface LayoutProps {
   description?: string;
   canonicalUrl?: string;
   ogImage?: string;
+  /** The page's content key (e.g. "home"), so its Google title and description can be edited in RMD. */
+  page?: string;
 }
 
-export default function Layout({ children, title, description, canonicalUrl, ogImage }: LayoutProps) {
+export default function Layout({ children, title: startTitle, description: startDescription, canonicalUrl, ogImage, page }: LayoutProps) {
+  const pageTitle = useText(`${page ?? 'page'}.seo.title`, startTitle ?? '', { label: 'Title in Google and browser tabs', max: 70 });
+  const pageDescription = useText(`${page ?? 'page'}.seo.description`, startDescription ?? '', { label: 'Description in Google', max: 170 });
+  const title = page && startTitle ? pageTitle : startTitle;
+  const description = page && startDescription ? pageDescription : startDescription;
   useEffect(() => {
     if (title) {
       document.title = title;

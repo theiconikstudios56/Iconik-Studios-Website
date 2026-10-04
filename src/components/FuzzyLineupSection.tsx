@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import lineupImg from '../assets/images/web/fuzzy-time-2.webp';
+import { Img } from '../content';
 
 export default function FuzzyLineupSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ export default function FuzzyLineupSection() {
         style={{ y }}
         className="absolute inset-x-0 -top-[15%] -bottom-[15%] w-full h-[130%]"
       >
-        <img
+        <Img k="home.lineup.image-iconik-fuzzies-crown" label="Picture"
           loading="lazy"
           decoding="async"
           src={lineupImg}
