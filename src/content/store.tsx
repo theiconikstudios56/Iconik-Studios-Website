@@ -7,7 +7,7 @@ import published from 'virtual:site-content';
 // in when the site is built and replaces the starting value. Inside RMD's
 // editor, the draft replaces both, live.
 
-export type Kind = 'text' | 'image';
+export type Kind = 'text' | 'image' | 'projects';
 export type Piece = { key: string; kind: Kind; label?: string; value: string; multiline?: boolean; max?: number };
 
 const KEY = /^[a-z0-9-]+(\.[a-z0-9-]+)+$/;

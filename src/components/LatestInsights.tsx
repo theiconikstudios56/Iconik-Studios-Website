@@ -3,18 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { T } from '../content';
+import { fetchArticles, type Article } from '../lib/rmdArticles';
 
-interface Article {
-  id: number;
-  title: string;
-  body: string;
-  slug: string;
-  tags: string[];
-  meta_description: string;
-  image_url: string | null;
-  published: boolean;
-  created_at: string;
-}
 
 const DEFAULT_IMAGES = [
   "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200",
@@ -41,18 +31,9 @@ const LatestInsights = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchArticles() {
+    async function load() {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/articles?published=eq.true&order=created_at.desc&limit=4`,
-          {
-            headers: {
-              apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            },
-          }
-        );
-        const data = await res.json();
+        const data = await fetchArticles(4);
         setArticles(data);
       } catch (err) {
         console.error('Failed to fetch articles for LatestInsights:', err);
@@ -60,7 +41,7 @@ const LatestInsights = () => {
         setLoading(false);
       }
     }
-    fetchArticles();
+    load();
   }, []);
 
   return (

@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import Navbar from './Navbar';
 import { useEffect, useState } from 'react';
-import { PROJECT_DATA } from '../constants/projects';
+import { useProjects } from '../content';
 
 export default function ProjectPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const project = id ? PROJECT_DATA[id] : null;
+  const { projects } = useProjects();
+  const project = id ? projects.find((p) => p.id === id) ?? null : null;
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -89,10 +90,18 @@ export default function ProjectPage() {
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <button className="group w-full flex items-center justify-between border border-ink p-4 md:p-6 hover:bg-ink hover:text-tan transition-all duration-500">
-              <span className="text-[10px] font-mono uppercase tracking-[0.4em] font-bold">Visit Website</span>
-              <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-500" />
-            </button>
+            {/* The project's own website, when RMD has one for it. */}
+            {project.url ? (
+              <a href={project.url} target="_blank" rel="noopener noreferrer" className="group w-full flex items-center justify-between border border-ink p-4 md:p-6 hover:bg-ink hover:text-tan transition-all duration-500">
+                <span className="text-[10px] font-mono uppercase tracking-[0.4em] font-bold">Visit Website</span>
+                <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-500" />
+              </a>
+            ) : (
+              <button className="group w-full flex items-center justify-between border border-ink p-4 md:p-6 hover:bg-ink hover:text-tan transition-all duration-500">
+                <span className="text-[10px] font-mono uppercase tracking-[0.4em] font-bold">Visit Website</span>
+                <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-500" />
+              </button>
+            )}
           </motion.div>
         </div>
 

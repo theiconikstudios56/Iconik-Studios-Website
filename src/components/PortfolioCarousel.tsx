@@ -2,13 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { PROJECT_DATA } from '../constants/projects';
-import { T } from '../content';
+import { T, useProjects } from '../content';
 
-const PORTFOLIO_ITEMS = Object.values(PROJECT_DATA);
-const ITEMS = [...PORTFOLIO_ITEMS, ...PORTFOLIO_ITEMS, ...PORTFOLIO_ITEMS];
 
 export default function PortfolioCarousel() {
+  const { projects } = useProjects();
+  const ITEMS = [...projects, ...projects, ...projects];
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 100, damping: 30, mass: 0.5 });

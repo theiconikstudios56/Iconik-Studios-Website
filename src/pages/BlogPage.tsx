@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import { motion, AnimatePresence } from 'motion/react';
 import { SlidersHorizontal, X, Search } from 'lucide-react';
 import { T } from '../content';
+import { fetchArticles, type Article } from '../lib/rmdArticles';
 
 const DEFAULT_IMAGES = [
   "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200",
@@ -24,17 +25,6 @@ const CATEGORIES = [
   { label: 'Inspiration', keywords: ['inspiration', 'creative', 'community', 'culture', 'innovation', 'future', 'trends'] },
 ];
 
-interface Article {
-  id: number;
-  title: string;
-  body: string;
-  slug: string;
-  tags: string[];
-  meta_description: string;
-  image_url: string | null;
-  published: boolean;
-  created_at: string;
-}
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -70,18 +60,9 @@ export default function BlogPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchArticles() {
+    async function load() {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/articles?published=eq.true&order=created_at.desc`,
-          {
-            headers: {
-              apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            },
-          }
-        );
-        const data = await res.json();
+        const data = await fetchArticles();
         setArticles(data);
       } catch (err) {
         console.error('Failed to fetch articles:', err);
@@ -89,7 +70,7 @@ export default function BlogPage() {
         setLoading(false);
       }
     }
-    fetchArticles();
+    load();
   }, []);
 
   useEffect(() => {

@@ -2,26 +2,29 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { PROJECT_DATA, type Project } from '../constants/projects';
+import { useProjects, useText, type ShownProject } from '../content';
 import Navbar from '../components/Navbar';
 
 export default function PortfolioPage() {
-  const projects = Object.values(PROJECT_DATA);
+  const { projects } = useProjects();
   const targetRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(1);
   const [itemWidth, setItemWidth] = useState(0);
 
+  const pageTitle = useText('portfolio.seo.title', 'Our Work | Case Studies & Portfolio | Iconik Studios', { label: 'Title in Google and browser tabs', max: 70 });
+  const pageDescription = useText('portfolio.seo.description', 'Explore our portfolio of high-performing websites, automated workflows, and CRM integrations for elite brands.', { label: 'Description in Google', max: 170 });
+
   useEffect(() => {
-    document.title = "Our Work | Case Studies & Portfolio | Iconik Studios";
+    document.title = pageTitle;
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', "Explore our portfolio of high-performing websites, automated workflows, and CRM integrations for elite brands.");
-  }, []);
+    metaDescription.setAttribute('content', pageDescription);
+  }, [pageTitle, pageDescription]);
 
   // Scroll Progress
   const { scrollYProgress } = useScroll({
@@ -131,7 +134,7 @@ export default function PortfolioPage() {
 }
 
 interface ProjectSlideProps {
-  project: Project;
+  project: ShownProject;
   index: number;
 }
 

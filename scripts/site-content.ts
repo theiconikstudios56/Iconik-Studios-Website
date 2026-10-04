@@ -17,7 +17,7 @@ async function fetchContent(url: string): Promise<Content> {
   const body = (await response.json()) as { version?: unknown; values?: unknown };
   const values: Record<string, string> = {};
   if (body.values && typeof body.values === 'object') {
-    for (const [k, v] of Object.entries(body.values)) if (KEY.test(k) && typeof v === 'string' && v.length <= 5000) values[k] = v;
+    for (const [k, v] of Object.entries(body.values)) if (KEY.test(k) && typeof v === 'string' && v.length <= 100_000) values[k] = v;
   }
   return { version: typeof body.version === 'number' ? body.version : null, values };
 }

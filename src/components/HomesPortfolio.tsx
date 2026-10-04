@@ -2,9 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Globe, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { T } from '../content';
+import { T, useProjects } from '../content';
 
-const PROJECTS = [
+// The homepage's own showcase, until the portfolio is changed in RMD; then its first four projects.
+const SHOWCASE = [
   { 
     id: 'kinetic-solutions-group',
     title: 'KINETIC SOLUTIONS',
@@ -38,7 +39,10 @@ export default function HomesPortfolio() {
     offset: ["start start", "end end"]
   });
 
-  const [activeProject, setActiveProject] = useState(0);
+  const { projects, changed } = useProjects();
+  const PROJECTS = changed && projects.length ? projects.slice(0, 4) : SHOWCASE;
+  const [shown, setActiveProject] = useState(0);
+  const activeProject = Math.min(shown, PROJECTS.length - 1);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change', (v) => {
@@ -48,7 +52,7 @@ export default function HomesPortfolio() {
       }
     });
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, PROJECTS.length]);
 
   return (
     <section ref={sectionRef} className="relative h-[250vh] bg-ink">

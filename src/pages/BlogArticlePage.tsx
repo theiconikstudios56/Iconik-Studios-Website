@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
+import { fetchArticle, type Article } from '../lib/rmdArticles';
+import { safeArticleHtml } from '../lib/safeHtml';
 
 const DEFAULT_IMAGES = [
   "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1600",
@@ -11,17 +13,6 @@ const DEFAULT_IMAGES = [
   "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1600",
 ];
 
-interface Article {
-  id: number;
-  title: string;
-  body: string;
-  slug: string;
-  tags: string[];
-  meta_description: string;
-  image_url: string | null;
-  published: boolean;
-  created_at: string;
-}
 
 function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -39,23 +30,11 @@ export default function BlogArticlePage() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    async function fetchArticle() {
+    async function load() {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/articles?slug=eq.${slug}&published=eq.true&limit=1`,
-          {
-            headers: {
-              apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            },
-          }
-        );
-        const data = await res.json();
-        if (!data || data.length === 0) {
-          setNotFound(true);
-        } else {
-          setArticle(data[0]);
-        }
+        const found = slug ? await fetchArticle(slug) : null;
+        if (!found) setNotFound(true);
+        else setArticle(found);
       } catch (err) {
         console.error('Failed to fetch article:', err);
         setNotFound(true);
@@ -63,7 +42,7 @@ export default function BlogArticlePage() {
         setLoading(false);
       }
     }
-    fetchArticle();
+    load();
   }, [slug]);
 
   if (loading) {
@@ -85,7 +64,8 @@ export default function BlogArticlePage() {
     );
   }
 
-  const heroImage = article.image_url || DEFAULT_IMAGES[article.id % DEFAULT_IMAGES.length];
+  // The placeholder follows the order of publication, as it followed the old article numbers (26, 27…).
+  const heroImage = article.image_url || DEFAULT_IMAGES[(article.number + 1) % DEFAULT_IMAGES.length];
   const siteUrl = 'https://www.theiconikstudios.com';
   const canonicalUrl = `${siteUrl}/blog/${article.slug}`;
 
@@ -158,7 +138,7 @@ export default function BlogArticlePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
             className="article-body text-white/80 text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: article.body }}
+            dangerouslySetInnerHTML={{ __html: safeArticleHtml(article.body) }}
           />
 
           <div className="border-t border-white/10 mt-24 mb-16" />
