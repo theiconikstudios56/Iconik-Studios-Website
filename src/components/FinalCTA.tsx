@@ -44,7 +44,15 @@ const FinalCTA = () => {
           </motion.div>
 
           {/* Divider & Copyright */}
-          <div className="pt-8 border-t border-white/5 text-[10px] uppercase tracking-[0.4em] font-semibold opacity-60"><T k="shared.final.2026-iconik-studios-all">{"© 2026 ICONIK STUDIOS. ALL RIGHTS RESERVED."}</T></div>
+          <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-[10px] uppercase tracking-[0.4em] font-semibold">
+            <span className="opacity-60"><T k="shared.final.2026-iconik-studios-all">{"© 2026 ICONIK STUDIOS. ALL RIGHTS RESERVED."}</T></span>
+            <a
+              href="https://rmd.theiconikstudios.com/privacy"
+              target="_blank"
+              rel="noopener"
+              className="opacity-80 border-b border-transparent hover:border-paper hover:opacity-100 transition-all py-1"
+            ><T k="shared.final.privacy-policy" label="Link or button">{"Privacy Policy"}</T></a>
+          </div>
         </div>
       </footer>
 

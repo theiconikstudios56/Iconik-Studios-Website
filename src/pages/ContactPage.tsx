@@ -320,6 +320,14 @@ export default function ContactPage() {
                 </AnimatePresence>
 
                 <div className="mt-8 text-[10px] font-mono opacity-80 uppercase tracking-widest"><T k="contact.we-usually-respond-within">{"* We usually respond within 24-48 hours."}</T></div>
+                <div className="mt-3 text-[10px] font-mono opacity-80 uppercase tracking-widest">
+                  <a
+                    href="https://rmd.theiconikstudios.com/privacy"
+                    target="_blank"
+                    rel="noopener"
+                    className="border-b border-white/30 hover:border-white hover:opacity-100 transition-all"
+                  ><T k="contact.privacy-policy" label="Link or button">{"Privacy Policy"}</T></a>
+                </div>
               </div>
             </div>
 
