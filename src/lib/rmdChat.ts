@@ -39,7 +39,8 @@ async function call<T>(body: object): Promise<T> {
   return data as T
 }
 
-export type ChatConfig = { enabled: boolean; greeting: string; assistant?: boolean }
+// widget: the look and wording from RMD's Settings → Chat widget, only what's been changed (lib/chatWidget.ts).
+export type ChatConfig = { enabled: boolean; greeting: string; assistant?: boolean; widget?: Record<string, unknown> }
 
 export const getConfig = () => call<ChatConfig>({ t: 'config' })
 
