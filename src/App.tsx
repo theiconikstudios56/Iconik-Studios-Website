@@ -51,6 +51,8 @@ const HomesPage = lazy(() => import('./pages/HomesPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
 const IntakePage = lazy(() => import('./pages/IntakePage'));
+const TemplatesPage = lazy(() => import('./pages/TemplatesPage'));
+const TemplatePage = lazy(() => import('./pages/TemplatePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
 
@@ -238,6 +240,8 @@ export default function App() {
         <Route path="/services/ai-automation" element={<AIWorkflows />} />
         <Route path="/services/maintenance" element={<Maintenance />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/templates" element={<TemplatesPage />} />
+        <Route path="/templates/:slug" element={<TemplatePage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/homes" element={<HomesPage />} />

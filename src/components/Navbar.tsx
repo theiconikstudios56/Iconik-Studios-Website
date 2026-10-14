@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import IconikLogo from './IconikLogo';
 import fuzzFuzzyImage from '../assets/images/web/fuzz_fuzzy.webp';
 import { T } from '../content';
+import { shop } from '../lib/shop';
 
 /** A menu item's content key, from its starting name: "Web Design" → shared.nav.web-design. */
 const navKey = (name: string) => `shared.nav.${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
@@ -22,6 +23,8 @@ const MENU_ITEMS = [
     ]
   },
   { name: 'Portfolio', path: '/portfolio' },
+  // The template shop (11.10), once Sites has templates for sale.
+  ...(shop ? [{ name: 'Templates', path: '/templates' }] : []),
   { name: 'Blog', path: '/blog' },
   { name: 'Contact', path: '/contact' },
 ];
