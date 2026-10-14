@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Loader2 } from 'lucide-react';
 import Layout from '../components/Layout';
+import FinalCTA from '../components/FinalCTA';
 import { BrowserFrame, Checks, Included, Questions } from '../components/shop/ShopParts';
 import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
@@ -79,6 +80,7 @@ export default function TemplatePage() {
           </div>
         </div>
       </section>
+      <FinalCTA />
     </Layout>
   );
 }

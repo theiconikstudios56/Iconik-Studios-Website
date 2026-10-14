@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Layout from '../components/Layout';
+import FinalCTA from '../components/FinalCTA';
 import { Included, PriceLine, Questions } from '../components/shop/ShopParts';
 import { money, pictureOf, shop, type ShopTemplate } from '../lib/shop';
 import { T } from '../content';
@@ -97,6 +98,7 @@ export default function TemplatesPage() {
           </div>
         </div>
       </section>
+      <FinalCTA />
     </Layout>
   );
 }
