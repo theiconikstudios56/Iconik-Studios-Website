@@ -8,6 +8,9 @@ import { BrowserFrame, Checks, Included, Questions } from '../components/shop/Sh
 import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
 
+// Where Sites' own pages (terms, refunds, help) live (RMD-crm 11.12).
+const SITES_APP = 'https://app.iconik.site';
+
 /** One template in the shop: its whole home page, its pages, the plan and Buy (11.10). */
 export default function TemplatePage() {
   const { slug } = useParams();
@@ -167,6 +170,12 @@ function Purchase({ template }: { template: ShopTemplate }) {
         <div className="mt-6">
           <Checks items={['Secure checkout by Stripe', 'Refund within 14 days if it isn’t right for you', 'Set up in minutes: we email your login straight away']} />
         </div>
+        <p className="mt-5 text-xs leading-relaxed text-white/45">
+          By buying you agree to the Sites{' '}
+          <a href={`${SITES_APP}/terms`} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">terms</a>
+          {' '}and{' '}
+          <a href={`${SITES_APP}/refunds`} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">refund policy</a>.
+        </p>
       </div>
     </motion.div>
   );
