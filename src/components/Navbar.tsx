@@ -59,9 +59,9 @@ export default function Navbar() {
             <motion.div 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className={`relative lg:w-28 lg:h-28 flex items-center justify-center group transition-[width,height] duration-300 ${scrolled ? 'w-12 h-12' : 'w-16 h-16'}`}
+              className={`relative lg:w-28 lg:h-28 flex items-center justify-center group transition-[width,height] duration-300 ${scrolled ? 'w-12 h-12' : 'w-28 h-28'}`}
             >
-              <div className={`lg:w-24 lg:h-24 text-accent group-hover:scale-110 transition-[transform,width,height] duration-300 ${scrolled ? 'w-10 h-10' : 'w-14 h-14'}`}>
+              <div className={`lg:w-24 lg:h-24 text-accent group-hover:scale-110 transition-[transform,width,height] duration-300 ${scrolled ? 'w-10 h-10' : 'w-24 h-24'}`}>
                  <IconikLogo color="#F5F2ED" />
               </div>
             </motion.div>
