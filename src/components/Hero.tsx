@@ -48,18 +48,14 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 w-full max-w-[1400px]">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="flex flex-col items-start text-left"
-        >
+        {/* The headline shows as soon as the page draws: it's the first thing a visitor reads. */}
+        <motion.div className="flex flex-col items-start text-left">
           <h1 className="text-5xl md:text-6xl lg:text-[4.5vw] xl:text-[5vw] font-display uppercase tracking-tighter leading-[1.05] mb-2 max-w-[90%] lg:max-w-[60%]">
             <motion.span
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 0.85 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="block text-white"
+              initial={{ y: 16 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="block text-white opacity-[0.85]"
             >
               <T k="home.hero.title" br="hidden lg:block">{"Turn your ad spend into\na fully booked calendar\nautomatically."}</T>
             </motion.span>
@@ -70,7 +66,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="text-sm md:text-base font-light max-w-2xl text-tan leading-relaxed font-mono"
+              className="text-sm md:text-base font-light max-w-2xl text-tan leading-relaxed font-sans"
             >
               <T k="home.hero.text">{"We help home service businesses capture, engage and retain every patient lead that standard websites miss. Through a powerful combination of conversion optimized design and 24/7 AI automation, we eliminate delayed follow-ups so your marketing dollars actually yield appointments, not missed opportunities."}</T>
             </motion.p>

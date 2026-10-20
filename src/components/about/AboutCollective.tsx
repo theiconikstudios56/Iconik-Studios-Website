@@ -32,7 +32,7 @@ export default function AboutCollective() {
               key={i}
               onMouseEnter={() => setActiveImage(member.image)}
               onMouseLeave={() => setActiveImage(null)}
-              className="group py-12 border-b border-ink/10 flex justify-between items-center cursor-none"
+              className="group py-12 border-b border-ink/10 flex justify-between items-center"
             >
               <div className="flex items-baseline gap-8">
                 <span className="font-mono text-xs opacity-60">0{i + 1}</span>

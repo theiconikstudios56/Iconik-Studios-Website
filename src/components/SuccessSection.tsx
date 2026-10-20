@@ -87,7 +87,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.instant-engagement-speed-to" label="Subheading">{"Instant Engagement (Speed to Lead)"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Our automated flows trigger personalized text and email responses within seconds of form submission."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Our automated flows trigger personalized text and email responses within seconds of form submission."}</T></p>
                 </div>
               </div>
 
@@ -97,7 +97,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.seamless-data-flow-sync" label="Subheading">{"Seamless Data Flow & Sync"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.no-more-manual-copy">{"No more manual copy-pasting. Customer records are instantly synchronized across your custom web hooks, CRM databases (GHL, HubSpot), and team channels like Slack."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.no-more-manual-copy">{"No more manual copy-pasting. Customer records are instantly synchronized across your custom web hooks, CRM databases (GHL, HubSpot), and team channels like Slack."}</T></p>
                 </div>
               </div>
 
@@ -107,7 +107,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.hands-free-client-onboarding" label="Subheading">{"Hands-Free Client Onboarding"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.the-moment-a-client">{"The moment a client signs, pipelines generate standard invoices, spin up secure file storage, create Slack rooms, and dispatch project briefs automatically."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.the-moment-a-client">{"The moment a client signs, pipelines generate standard invoices, spin up secure file storage, create Slack rooms, and dispatch project briefs automatically."}</T></p>
                 </div>
               </div>
             </div>
@@ -191,7 +191,7 @@ const SuccessSection = () => {
                               transition={{ duration: 0.3 }}
                               className="overflow-hidden mt-3 pt-3 border-t border-white/5 space-y-3"
                             >
-                              <p className="text-[11px] text-white/60 leading-relaxed font-mono">
+                              <p className="text-[11px] text-white/80 leading-relaxed font-mono">
                                 <T k={`shared.success.step${idx + 1}.text`} label={`Step ${idx + 1}: text`}>{step.desc}</T>
                               </p>
                               <div className="flex justify-between items-center text-[10px] font-mono pt-1">

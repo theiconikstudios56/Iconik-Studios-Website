@@ -22,7 +22,7 @@ export default function AboutStory() {
                 <span className="font-mono text-xs text-burnt-orange uppercase tracking-[0.3em]"><T k="about.story.story">{"Story"}</T></span>
               </div>
               <h3 className="text-5xl md:text-7xl font-display uppercase leading-none tracking-tighter"><T k="about.story.the-philosophy" em="text-burnt-orange italic" label="Subheading">{"The *Philosophy*"}</T></h3>
-              <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-90 font-mono">
+              <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-90 font-sans">
                 <p><T k="about.story.the-internet-is-loud">{"The internet is loud. Everyone looks the same, sounds the same, and builds the same."}</T></p>
                 <p><T k="about.story.iconik-studios-was-founded">{"Iconik Studios was founded in 2019 with one conviction: intentional engineering beats generic output, every time. For over six years, we've been quietly building something different — a studio where creative craftsmanship and technical precision aren't in tension, they're inseparable."}</T></p>
                 <p><T k="about.story.were-a-high-end">{"We're a high-end web design and AI automation agency, but that title barely covers it. We don't just build websites — we engineer growth systems. For small to medium-sized businesses ready to operate at a higher level, we blend striking visual design with intelligent backend automation so that every visitor is captured, every lead is nurtured, and every opportunity converts."}</T></p>

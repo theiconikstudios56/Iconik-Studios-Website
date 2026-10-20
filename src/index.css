@@ -188,32 +188,6 @@
   :root {
     --text-color: #000000;
   }
-  * {
-    cursor: none !important;
-  }
-  a, button, input, select, textarea, [role="button"] {
-    cursor: none !important;
-  }
-  /* Restore the normal pointer on chat widgets and iframes, and on everything
-     inside them (the custom dot hides there): a hand on buttons and links, a
-     text cursor in the fields. Without the inner rule, the chat box's own
-     messages, fields and buttons kept "none" and the pointer vanished. */
-  chat-widget,
-  iframe,
-  [id*="chat-widget"],
-  [class*="chat-widget"],
-  [id*="lc-chat"],
-  [class*="lc-chat"],
-  [id*="leadconnector"],
-  :is(chat-widget, [id*="chat-widget"], [class*="chat-widget"], [id*="lc-chat"], [class*="lc-chat"], [id*="leadconnector"]) * {
-    cursor: auto !important;
-  }
-  :is(chat-widget, [id*="chat-widget"], [class*="chat-widget"]) :is(a, button, [role="button"], summary) {
-    cursor: pointer !important;
-  }
-  :is(chat-widget, [id*="chat-widget"], [class*="chat-widget"]) :is(button, input, textarea):disabled {
-    cursor: not-allowed !important;
-  }
   body {
     color: var(--text-color);
     transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
@@ -224,8 +198,12 @@
     @apply font-display uppercase tracking-tighter;
   }
 
-  p, p * {
-    font-family: var(--font-mono) !important;
+  /* Paragraphs read in Inter; small labels keep the mono face. */
+  p {
+    font-family: var(--font-sans);
+  }
+  p:is(.uppercase, .text-xs, .text-\[8px\], .text-\[9px\], .text-\[10px\], .text-\[11px\]) {
+    font-family: var(--font-mono);
   }
 
   p:not(.text-\[10px\]):not(.text-\[8px\]):not(.text-xs) {

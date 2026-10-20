@@ -24,7 +24,6 @@ import AboutHero from './components/AboutHero';
 import AboutStory from './components/about/AboutStory';
 
 import Layout from './components/Layout';
-import GlobalCursor from './components/GlobalCursor';
 
 import ServicesShowcase from './components/ServicesShowcase';
 import StackedServices from './components/StackedServices';
@@ -228,7 +227,6 @@ export default function App() {
     <Router>
       <RmdTracking />
       <ScrollToTop />
-      <GlobalCursor />
       {/* While a page's code loads: the site's dark background, no flash of white. */}
       <Suspense fallback={<div className="min-h-screen bg-ink" />}>
       <Routes>

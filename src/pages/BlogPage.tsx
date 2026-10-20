@@ -240,7 +240,7 @@ export default function BlogPage() {
                         <h2 className="text-xl md:text-2xl font-display font-black leading-[1.1] uppercase tracking-tight group-hover:text-burnt-orange transition-colors duration-300">
                           {article.title}
                         </h2>
-                        <p className="mt-3 text-white/50 text-sm font-light leading-relaxed line-clamp-3">
+                        <p className="mt-3 text-white/80 text-sm font-light leading-relaxed line-clamp-3">
                           {getExcerpt(article.body)}
                         </p>
                         <motion.div className="h-[1px] bg-burnt-orange mt-4 w-0 group-hover:w-full transition-all duration-500 origin-left" />

@@ -121,12 +121,12 @@ const WebDesign = () => {
                   
                   <div className="pt-6">
                     <h3 className="font-display text-2xl text-ink uppercase mb-3"><T k="web-design.your-digital-storefront-should" label="Subheading">{"Your digital storefront should be a reflection of your brand's excellence. It should also be a lead-generating machine."}</T></h3>
-                    <p className="text-base text-ink opacity-80 leading-relaxed font-mono"><T k="web-design.every-form-submission-every">{"Every form submission, every inquiry, every point of contact is automatically integrated, routed, and synced directly into your CRM the moment it happens — no manual entry, no lost leads, no gaps in your pipeline. Your data flows exactly where it needs to go, in real time, every time."}</T></p>
+                    <p className="text-base text-ink opacity-80 leading-relaxed font-sans"><T k="web-design.every-form-submission-every">{"Every form submission, every inquiry, every point of contact is automatically integrated, routed, and synced directly into your CRM the moment it happens — no manual entry, no lost leads, no gaps in your pipeline. Your data flows exactly where it needs to go, in real time, every time."}</T></p>
                   </div>
 
                   <div className="pt-6">
                     <h3 className="font-display text-2xl text-ink uppercase mb-3"><T k="web-design.and-because-your-business" label="Subheading">{"And because your business doesn't clock out at 5pm, neither do we."}</T></h3>
-                    <p className="text-base text-ink opacity-80 leading-relaxed font-mono"><T k="web-design.each-site-is-equipped">{"Each site is equipped with an intelligent AI chatbot — powered by the same automation-first philosophy we apply to everything we build. Light enough to feel natural, smart enough to engage, qualify, and capture prospects around the clock. Whether it's 2pm or 2am, your business is always on, always present, and always converting."}</T></p>
+                    <p className="text-base text-ink opacity-80 leading-relaxed font-sans"><T k="web-design.each-site-is-equipped">{"Each site is equipped with an intelligent AI chatbot — powered by the same automation-first philosophy we apply to everything we build. Light enough to feel natural, smart enough to engage, qualify, and capture prospects around the clock. Whether it's 2pm or 2am, your business is always on, always present, and always converting."}</T></p>
                   </div>
                 </div>
 

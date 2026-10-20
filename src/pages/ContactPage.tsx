@@ -202,7 +202,7 @@ export default function ContactPage() {
                     >
                       <CheckCircle2 className="text-burnt-orange w-16 h-16" />
                       <h3 className="text-3xl font-display uppercase tracking-tight"><T k="contact.weve-got-it" label="Subheading">{"We've Got It."}</T></h3>
-                      <p className="text-white/60 text-sm leading-relaxed max-w-sm"><T k="contact.thanks-for-taking-the">{"Thanks for taking the time to fill this out. The Iconik Studios team will be in touch within 1–2 business days."}</T></p>
+                      <p className="text-white/80 text-sm leading-relaxed max-w-sm"><T k="contact.thanks-for-taking-the">{"Thanks for taking the time to fill this out. The Iconik Studios team will be in touch within 1–2 business days."}</T></p>
                       <button 
                         onClick={() => setStatus('idle')}
                         className="mt-4 px-6 py-3 border border-white/20 hover:border-white font-mono text-[10px] uppercase tracking-widest transition-colors"
