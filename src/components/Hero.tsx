@@ -24,7 +24,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section data-bg="dark" className="relative h-screen w-full flex flex-col items-center justify-center px-6 overflow-hidden text-tan">
+    <section data-bg="dark" className="relative h-screen w-full flex flex-col items-center justify-center px-6 overflow-hidden text-tan max-lg:h-auto max-lg:min-h-svh max-lg:pt-28 max-lg:pb-20">
       {/* Background Atmosphere Carousel */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-ink">
         {/* The first photo is there from the start (no fade-in) and loads first: it's the
