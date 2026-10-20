@@ -11,8 +11,6 @@ const pipelineSteps = [
     desc: "A client fills in a form or books online. Remedy, our own CRM, saves them as a new lead the moment they press send.",
     icon: Activity,
     tech: "Remedy forms",
-    stat: "+391% Reach",
-    metric: "Latency: < 0.2s"
   },
   {
     id: 1,
@@ -21,8 +19,6 @@ const pipelineSteps = [
     desc: "An automatic reply reaches them right away, and a real person from your spa follows up within one business day, while their interest is still warm.",
     icon: Mail,
     tech: "Remedy",
-    stat: "9x Booking Rate",
-    metric: "Auto-reply: instant"
   },
   {
     id: 2,
@@ -31,8 +27,6 @@ const pipelineSteps = [
     desc: "Their details land in Remedy with the right tags, a new deal opens in your pipeline, and your team gets a notification. Nobody copies anything by hand.",
     icon: Database,
     tech: "Remedy CRM",
-    stat: "100% Accurate",
-    metric: "Manual Input: 0%"
   },
   {
     id: 3,
@@ -41,8 +35,6 @@ const pipelineSteps = [
     desc: "Once they book, the deposit is taken, reminders and the before-your-visit forms go out, and the appointment appears on your front-desk calendar.",
     icon: Sparkles,
     tech: "Remedy + Stripe",
-    stat: "-15 Hrs Admin/Wk",
-    metric: "Admin Friction: None"
   }
 ];
 
@@ -194,14 +186,6 @@ const SuccessSection = () => {
                               <p className="text-[11px] text-white/80 leading-relaxed font-mono">
                                 <T k={`shared.success.step${idx + 1}.text`} label={`Step ${idx + 1}: text`}>{step.desc}</T>
                               </p>
-                              <div className="flex justify-between items-center text-[10px] font-mono pt-1">
-                                <span className="text-burnt-orange font-bold uppercase tracking-wider bg-burnt-orange/10 px-2 py-1 rounded">
-                                  <T k={`shared.success.step${idx + 1}.stat`} label={`Step ${idx + 1}: result`}>{step.stat}</T>
-                                </span>
-                                <span className="text-white/40 italic">
-                                  <T k={`shared.success.step${idx + 1}.metric`} label={`Step ${idx + 1}: measure`}>{step.metric}</T>
-                                </span>
-                              </div>
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -212,35 +196,10 @@ const SuccessSection = () => {
               })}
             </div>
 
-            {/* Bottom aggregate metrics for WOW element */}
-            <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
-              <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.time-reclaimed">{"Time Reclaimed"}</T></p>
-                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.15h-wk">{"~15h/wk"}</T></p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.speed-to-lead">{"Speed to Lead"}</T></p>
-                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.45s">{"Instant"}</T></p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.accuracy-rate">{"Accuracy Rate"}</T></p>
-                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.100">{"100%"}</T></p>
-              </div>
-            </div>
-
             {/* Glowing gradient background sphere */}
             <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-burnt-orange/10 rounded-full blur-[100px] pointer-events-none" />
           </div>
 
-          {/* Floater Success Badge */}
-          <motion.div 
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-8 -right-8 bg-burnt-orange p-6 rounded-full flex flex-col items-center justify-center text-white w-28 h-28 shadow-2xl border-4 border-white z-20"
-          >
-            <span className="font-display text-2xl"><T k="shared.success.99">{"99%"}</T></span>
-            <span className="text-[9px] font-bold uppercase tracking-tight font-sans"><T k="shared.success.conversion">{"Conversion"}</T></span>
-          </motion.div>
         </div>
 
       </div>
