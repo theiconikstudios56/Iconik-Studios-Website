@@ -59,7 +59,7 @@ const WebDesign = () => {
         </section>
 
         {/* The Methodology - Bento Style */}
-        <section className="px-6 lg:px-12 py-32 bg-tan text-ink rounded-t-[32px]">
+        <section className="px-6 lg:px-12 py-20 md:py-32 bg-tan text-ink rounded-t-[32px]">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 items-end">
               <div className="lg:col-span-8">
@@ -111,7 +111,7 @@ const WebDesign = () => {
         </section>
 
         {/* Web Design Service Section */}
-        <section className="px-6 lg:px-12 py-40 border-t border-ink/5 bg-gray-100">
+        <section className="px-6 lg:px-12 py-20 md:py-40 border-t border-ink/5 bg-gray-100">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-24 items-start">
               <div className="lg:w-1/2 space-y-12">

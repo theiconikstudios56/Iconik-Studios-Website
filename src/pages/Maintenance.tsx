@@ -71,7 +71,7 @@ const Maintenance = () => {
         </section>
 
         {/* Core Pillars */}
-        <section className="px-6 lg:px-12 py-32 bg-tan text-ink rounded-t-[32px]">
+        <section className="px-6 lg:px-12 py-20 md:py-32 bg-tan text-ink rounded-t-[32px]">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-5xl md:text-7xl font-display uppercase mb-24 max-w-4xl tracking-tighter leading-none text-center mx-auto"><T k="maintenance.proactive-protection-for-high" label="Heading">{"Proactive Protection\nFor High-Value Assets."}</T></h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -107,7 +107,7 @@ const Maintenance = () => {
         </section>
 
         {/* Pricing Tiers */}
-        <section className="px-6 lg:px-12 py-32 bg-paper text-ink">
+        <section className="px-6 lg:px-12 py-20 md:py-32 bg-paper text-ink">
           <div className="max-w-7xl mx-auto">
              <div className="text-center mb-24">
                 <span className="font-mono text-xs uppercase tracking-[0.5em] opacity-100 block mb-6"><T k="maintenance.service-tiers">{"Service Tiers"}</T></span>

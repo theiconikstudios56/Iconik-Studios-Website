@@ -107,7 +107,7 @@ const HomesContact = () => {
     <section 
       id="contact" 
       ref={sectionRef}
-      className="py-32 px-6 lg:px-12 relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-ink"
+      className="py-20 md:py-32 px-6 lg:px-12 relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-ink"
     >
       {/* Background Parallax Image */}
       <div className="absolute inset-0 z-0">

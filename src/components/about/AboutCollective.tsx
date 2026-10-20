@@ -12,7 +12,7 @@ export default function AboutCollective() {
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
   return (
-    <section className="py-32 bg-tan text-ink border-b border-ink/5 relative overflow-visible">
+    <section className="py-20 md:py-32 bg-tan text-ink border-b border-ink/5 relative overflow-visible">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24 flex justify-between items-end">
           <div className="max-w-2xl">

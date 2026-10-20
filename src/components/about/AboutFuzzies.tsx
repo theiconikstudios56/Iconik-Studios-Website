@@ -6,7 +6,7 @@ import { Img, T } from '../../content';
 
 export default function AboutFuzzies() {
   return (
-    <section className="py-32 bg-tan text-ink border-b border-ink/5 relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-tan text-ink border-b border-ink/5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           {/* Content Block */}

@@ -182,11 +182,11 @@ export default function BlogPage() {
 
             {/* Grid */}
             {loading ? (
-              <div className="flex items-center justify-center py-40">
+              <div className="flex items-center justify-center py-20 md:py-40">
                 <p className="font-mono text-xs tracking-widest text-white/40 uppercase"><T k="blog.loading-articles">{"Loading Articles..."}</T></p>
               </div>
             ) : filteredArticles.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-40 gap-4">
+              <div className="flex flex-col items-center justify-center py-20 md:py-40 gap-4">
                 <p className="font-mono text-xs tracking-widest text-white/40 uppercase"><T k="blog.no-articles-found">{"No Articles Found"}</T></p>
                 <button onClick={clearFilter} className="font-mono text-[10px] tracking-widest text-burnt-orange uppercase hover:underline"><T k="blog.clear-filter" label="Button">{"Clear Filter"}</T></button>
               </div>
@@ -256,7 +256,7 @@ export default function BlogPage() {
           </div>
         </section>
 
-        <section className="py-40 px-6 md:px-12 text-center">
+        <section className="py-20 md:py-40 px-6 md:px-12 text-center">
           <div className="max-w-4xl mx-auto">
             <span className="text-[10px] font-mono text-burnt-orange tracking-[0.6em] block mb-12 uppercase"><T k="blog.join-the-inner-circle">{"Join the Inner Circle"}</T></span>
             <h2 className="text-5xl md:text-8xl font-display mb-12 leading-none uppercase tracking-tighter"><T k="blog.ready-to-evolve" em="italic font-light" label="Heading">{"READY TO *EVOLVE?*"}</T></h2>

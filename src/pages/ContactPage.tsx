@@ -112,7 +112,7 @@ export default function ContactPage() {
       title="Contact Us | Start Your Project | Iconik Studios"
       description="Ready to elevate your digital presence? Contact Iconik Studios today to discuss custom web development and automation solutions."
     >
-      <div className="bg-black text-white selection:bg-burnt-orange selection:text-white min-h-screen flex items-center justify-center py-32 lg:pt-48 lg:pb-32">
+      <div className="bg-black text-white selection:bg-burnt-orange selection:text-white min-h-screen flex items-center justify-center py-20 md:py-32 lg:pt-48 lg:pb-32">
         <section className="w-full px-6 md:px-12 max-w-[1800px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-white/10 overflow-hidden bg-black shadow-2xl">
             

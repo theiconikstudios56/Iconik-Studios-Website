@@ -35,7 +35,7 @@ const pillars = [
 
 export default function AboutPillars() {
   return (
-    <section className="py-32 bg-[#CFCFCF] text-[#2D2D2D]">
+    <section className="py-20 md:py-32 bg-[#CFCFCF] text-[#2D2D2D]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
           <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-70 block mb-6"><T k="about.pillars.core-strength">{"Core Strength"}</T></span>

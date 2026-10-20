@@ -24,7 +24,7 @@ export const Pricing = () => {
   };
 
   return (
-    <section id="pricing" className="py-32 px-6 lg:px-12 bg-ink">
+    <section id="pricing" className="py-20 md:py-32 px-6 lg:px-12 bg-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center space-y-4">
@@ -92,7 +92,7 @@ export const FAQ = () => {
   };
 
   return (
-    <section className="py-32 px-6 lg:px-12 bg-ink">
+    <section className="py-20 md:py-32 px-6 lg:px-12 bg-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-8 sticky top-32 h-fit">

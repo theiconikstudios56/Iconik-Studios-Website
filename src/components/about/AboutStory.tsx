@@ -7,7 +7,7 @@ export default function AboutStory() {
   const container = useRef(null);
   
   return (
-    <section ref={container} className="py-40 bg-ink text-paper overflow-hidden border-b border-white/5">
+    <section ref={container} className="py-20 md:py-40 bg-ink text-paper overflow-hidden border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">

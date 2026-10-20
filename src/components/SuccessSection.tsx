@@ -61,7 +61,7 @@ const SuccessSection = () => {
   }, [isHovered]);
 
   return (
-    <section className="py-32 px-6 lg:px-12 bg-white text-ink rounded-3xl mx-4 my-12 border border-ink/5 relative overflow-hidden">
+    <section className="py-20 md:py-32 px-6 lg:px-12 bg-white text-ink rounded-3xl mx-4 my-12 border border-ink/5 relative overflow-hidden">
       {/* Subtle decorative background gradient grid lines */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#cd7f32_1px,transparent_1px)] [background-size:24px_24px]" />
 

@@ -25,7 +25,7 @@ export default function SMBEmpowerment() {
   return (
     <section 
       data-bg="dark" 
-      className="relative bg-ink text-tan py-32 px-6 lg:px-12 overflow-hidden border-t border-white/5"
+      className="relative bg-ink text-tan py-20 md:py-32 px-6 lg:px-12 overflow-hidden border-t border-white/5"
     >
       {/* Subtle Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-burnt-orange/5 rounded-full blur-[120px] pointer-events-none" />

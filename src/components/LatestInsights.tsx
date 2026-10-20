@@ -28,8 +28,8 @@ const LatestInsights = () => {
   }, []);
 
   return (
-    <section className="py-32 px-6 lg:px-12 bg-black text-white">
-      <div className="max-w-[1800px] mx-auto space-y-24">
+    <section className="py-20 md:py-32 px-6 lg:px-12 bg-black text-white">
+      <div className="max-w-[1800px] mx-auto space-y-12 md:space-y-24">
         {/* Header Section */}
         <div className="text-center space-y-6">
           <motion.h2 
@@ -45,11 +45,11 @@ const LatestInsights = () => {
           ><T k="shared.insights.deep-dives-into-the">{"\"Deep dives into the intersection of design and technology.\""}</T></motion.p>
         </div>
 
-        {/* Grid Section - Matching Blog Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+        {/* Grid Section - Matching Blog Style. On phones a sideways swipe row, not a tall stack. */}
+        <div className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-16 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
           {loading ? (
             Array.from({ length: 4 }).map((_, index) => (
-              <div key={index} className="animate-pulse space-y-8">
+              <div key={index} className="animate-pulse space-y-8 w-[78%] shrink-0 snap-start md:w-auto">
                 <div className="aspect-[3/4] bg-white/5" />
                 <div className="space-y-4 px-1">
                   <div className="h-7 bg-white/10 w-11/12" />
@@ -64,7 +64,7 @@ const LatestInsights = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-                className="group"
+                className="group w-[78%] shrink-0 snap-start md:w-auto"
               >
                 <Link to={`/blog/${item.slug}`} className="block">
                 {/* Image Container with Badge */}

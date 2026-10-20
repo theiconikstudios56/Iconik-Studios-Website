@@ -237,7 +237,7 @@ const AIWorkflows = () => {
         </section>
 
         {/* Benefits - Value Prop */}
-        <section className="px-6 lg:px-12 py-32 bg-paper text-ink rounded-t-[32px] relative z-10">
+        <section className="px-6 lg:px-12 py-20 md:py-32 bg-paper text-ink rounded-t-[32px] relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 items-end">
               <div className="lg:col-span-8">
@@ -289,7 +289,7 @@ const AIWorkflows = () => {
         </section>
 
         {/* The Fuzzies Working Section */}
-        <section className="px-6 lg:px-12 py-40 border-t border-ink/5 bg-paper">
+        <section className="px-6 lg:px-12 py-20 md:py-40 border-t border-ink/5 bg-paper">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row-reverse gap-24 items-center">
               <div className="lg:w-1/2 space-y-12">
@@ -309,7 +309,7 @@ const AIWorkflows = () => {
         </section>
 
         {/* Workflow Ecosystem Section */}
-        <section className="px-6 lg:px-12 py-40 bg-ink text-paper relative overflow-hidden z-20">
+        <section className="px-6 lg:px-12 py-20 md:py-40 bg-ink text-paper relative overflow-hidden z-20">
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-32">
               <div className="max-w-3xl">

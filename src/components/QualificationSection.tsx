@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 export default function QualificationSection() {
   return (
-    <section className="py-32 md:py-48 px-6 md:px-12 border-b border-ink/10 bg-tan text-ink">
+    <section className="py-20 md:py-48 px-6 md:px-12 border-b border-ink/10 bg-tan text-ink">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
         <div className="md:col-span-6">
           <div className="max-w-xl">

@@ -31,7 +31,7 @@ const steps = [
 
 export default function AutomationProcess() {
   return (
-    <section className="py-32 bg-ink text-tan">
+    <section className="py-20 md:py-32 bg-ink text-tan">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         <div className="lg:col-span-4 sticky top-32 h-fit">
           <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6"><T k="ai.process.our-process">{"Our Process"}</T></span>

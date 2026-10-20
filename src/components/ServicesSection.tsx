@@ -1,6 +1,6 @@
 export default function ServicesSection() {
   return (
-    <section id="services" className="py-32 md:py-48 px-6 md:px-12 border-b border-ink/10">
+    <section id="services" className="py-20 md:py-48 px-6 md:px-12 border-b border-ink/10">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-3">
            <span className="font-mono text-[10px] tracking-[0.4em] uppercase opacity-100 sticky top-32">Services</span>

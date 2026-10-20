@@ -111,7 +111,7 @@ function Home() {
       <div className="relative z-10 bg-ink">
         <Hero />
         <PropertyShowcase />
-        <section className="px-6 lg:px-12 py-32 overflow-hidden">
+        <section className="px-6 lg:px-12 py-20 md:py-32 overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
               <motion.div
