@@ -270,3 +270,11 @@
 .mask-fade-up {
   mask-image: linear-gradient(to top, black 0%, transparent 100%);
 }
+
+/* iPhones zoom the page in when a form field's text is under 16px: keep every
+   field (contact form, chat, intake, blog search) at 16px on phones. */
+@media (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}

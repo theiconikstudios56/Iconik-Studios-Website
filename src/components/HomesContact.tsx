@@ -2,26 +2,28 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import fuzzySuccessImg from '../assets/images/web/fuzzy-success.webp';
-import { T, useImg } from '../content';
+import { T, useEditor, useImg, useText } from '../content';
 
+// Placeholders until real client reviews come in (the earlier ones were
+// made up). Each is editable from RMD's Sites → Website.
 const REVIEWS = [
   {
-    quote: "Their ability to bridge the gap between stunning, luxury web design and complex backend AI automation transformed our operations. We saw a 40% increase in booked appointments within the first month.",
-    author: "Marco Domani",
-    role: "Founder, Domani Home Services",
-    initials: "MD"
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    author: "Client Name",
+    role: "Title, Company",
+    initials: "CN"
   },
   {
-    quote: "Iconik Studios built more than just a website; they built an automated client acquisition engine. The 24/7 AI receptionist captures every single lead instantly.",
-    author: "Sarah Jenkins",
-    role: "Director of Growth, Summit Medical",
-    initials: "SJ"
+    quote: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    author: "Client Name",
+    role: "Title, Company",
+    initials: "CN"
   },
   {
-    quote: "An absolute game-changer. The design aesthetic is premium and immersive, and the Deno Edge workflows they implemented save our team 15+ hours of manual follow-up every single week.",
-    author: "Alex Rivera",
-    role: "COO, Vanguard Group",
-    initials: "AR"
+    quote: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    author: "Client Name",
+    role: "Title, Company",
+    initials: "CN"
   }
 ];
 
@@ -96,6 +98,11 @@ const HomesContact = () => {
   };
 
   const backdrop = useImg('shared.contact.image', fuzzySuccessImg, 'Success Pre-Footer', 'Background picture');
+  // Hidden on the live site while the reviews are still placeholders; shown in
+  // RMD's website editor, and everywhere once a real one replaces the first.
+  const firstQuote = useText('shared.contact.review1.quote', REVIEWS[0].quote, { label: 'Review 1: quote' });
+  const editing = useEditor().on;
+  if (!editing && firstQuote.startsWith('Lorem ipsum')) return null;
   return (
     <section 
       id="contact" 

@@ -71,7 +71,7 @@ const SuccessSection = () => {
         <div className="space-y-12 lg:col-span-6">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em] font-semibold"><T k="shared.success.scale-system-05">{"Scale System / 05"}</T></span>
+              <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em] font-semibold"><T k="shared.success.scale-system-05">{"Scale System"}</T></span>
               <div className="w-12 h-[1px] bg-burnt-orange/30" />
             </div>
             <h2 className="text-6xl md:text-8xl leading-[0.9] font-display uppercase tracking-tighter"><T k="shared.success.built-for-success" em="text-burnt-orange" label="Heading">{"Built for\n*Success.*"}</T></h2>

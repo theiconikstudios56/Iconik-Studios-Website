@@ -19,9 +19,10 @@ export default function ServicesShowcase() {
             ease: "linear" 
           }}
         >
-          <span>{MARQUEE_TEXT}</span>
-          <span>{MARQUEE_TEXT}</span>
-          <span>{MARQUEE_TEXT}</span>
+          {/* whitespace-pre keeps the space at the end of each copy ("MARKETING • ANIMATION") */}
+          <span className="whitespace-pre">{MARQUEE_TEXT}</span>
+          <span className="whitespace-pre">{MARQUEE_TEXT}</span>
+          <span className="whitespace-pre">{MARQUEE_TEXT}</span>
         </motion.div>
       </div>
     </section>

@@ -13,7 +13,7 @@ interface SlideData {
 
 const slide1 = {
   title: 'ELITE CRAFTSMEN.',
-  subtitle: '04 / THE COLLECTIVE',
+  subtitle: 'THE COLLECTIVE',
   description:
     'Our mascot fuzzies work for you. They are elite craftsmen and AI architects who design high-converting, immersive websites with pixel-perfect UI layouts and lightning-fast load speeds, crafting digital storefronts built exclusively for results.',
   accent: '#cd7f32',
@@ -23,7 +23,7 @@ const slide1 = {
 
 const slide2 = {
   title: 'DETAILED PLANNERS',
-  subtitle: '05 / THE COLLECTIVE',
+  subtitle: 'THE COLLECTIVE',
   description:
     'Our fuzzies are detailed planners for your AI automation workflows, constructing bulletproof system backends so that you never miss a lead, convert more phone calls, and grow booked appointments on autopilot.',
   accent: '#cd7f32',
@@ -44,7 +44,7 @@ export default function ElegantCarousel({ reversed = false }: { reversed?: boole
             {/* Collection number */}
             <div className="carousel-collection-num visible">
               <span className="carousel-num-line" />
-              <span className="carousel-num-text"><T k="home.carousel.04-04">{"04 / 04"}</T></span>
+              <span className="carousel-num-text"><T k={`home.carousel.${n}.count`} label={`Team slide ${n}: number`}>{`0${n} / 02`}</T></span>
             </div>
 
             {/* Title */}

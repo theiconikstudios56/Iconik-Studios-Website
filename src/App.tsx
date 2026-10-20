@@ -121,7 +121,7 @@ function Home() {
                 transition={{ duration: 0.8 }}
               >
                 <div className="flex items-center gap-4 mb-8">
-                  <span className="text-accent font-mono text-sm tracking-[0.3em]"><T k="home.services.eyebrow">{"SERVICES / 01"}</T></span>
+                  <span className="text-accent font-mono text-sm tracking-[0.3em]"><T k="home.services.eyebrow">{"SERVICES"}</T></span>
                   <div className="w-12 h-[1px] bg-accent/30" />
                 </div>
                 <h2 className="text-6xl md:text-[6.5vw] font-display text-tan uppercase tracking-tighter leading-[1.05] mb-12">

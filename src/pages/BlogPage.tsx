@@ -1,21 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { motion, AnimatePresence } from 'motion/react';
 import { SlidersHorizontal, X, Search } from 'lucide-react';
 import { T } from '../content';
 import { fetchArticles, type Article } from '../lib/rmdArticles';
+import { blogDate, blogPlaceholder } from '../lib/blogCards';
 
-const DEFAULT_IMAGES = [
-  "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&q=80&w=1200",
-];
 
 const CATEGORIES = [
   { label: 'AI', keywords: ['ai', 'artificial intelligence', 'machine learning', 'claude', 'chatgpt', 'llm'] },
@@ -26,13 +17,6 @@ const CATEGORIES = [
 ];
 
 
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = String(date.getFullYear()).slice(2);
-  return `${day}.${month}.${year}`;
-}
 
 function getExcerpt(body: string): string {
   const stripped = body.replace(/<[^>]+>/g, '');
@@ -57,7 +41,6 @@ export default function BlogPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function load() {
@@ -223,22 +206,22 @@ export default function BlogPage() {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.05, duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
-                      className="group cursor-pointer"
-                      onClick={() => navigate(`/blog/${article.slug}`)}
+                      className="group"
                     >
+                      <Link to={`/blog/${article.slug}`} className="block">
                       <div className="relative aspect-[3/4] overflow-hidden bg-[#111] mb-6">
                         <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-                          <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] sm:text-[11px] font-bold tracking-widest whitespace-nowrap border border-black/5"><T k="blog.releases">{"RELEASES —"}</T>{" "}{formatDate(article.created_at)}
+                          <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] sm:text-[11px] font-bold tracking-widest whitespace-nowrap border border-black/5"><T k="blog.releases">{"RELEASES —"}</T>{" "}{blogDate(article.created_at)}
                           </div>
                         </div>
 
                         <motion.img
-                          src={article.image_url || DEFAULT_IMAGES[idx % DEFAULT_IMAGES.length]}
+                          src={article.image_url || blogPlaceholder(idx)}
                           alt={article.title}
                           className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:brightness-110"
                           referrerPolicy="no-referrer"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = DEFAULT_IMAGES[idx % DEFAULT_IMAGES.length];
+                            (e.target as HTMLImageElement).src = blogPlaceholder(idx);
                           }}
                         />
 
@@ -262,6 +245,7 @@ export default function BlogPage() {
                         </p>
                         <motion.div className="h-[1px] bg-burnt-orange mt-4 w-0 group-hover:w-full transition-all duration-500 origin-left" />
                       </div>
+                    </Link>
                     </motion.article>
                   ))}
                 </motion.div>

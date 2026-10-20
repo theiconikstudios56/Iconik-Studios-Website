@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Globe, Instagram, Linkedin, Twitter, ChevronDown } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown } from 'lucide-react';
+import { SOCIAL_LINKS } from '../constants/social';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IconikLogo from './IconikLogo';
@@ -69,7 +70,7 @@ export default function Navbar() {
         </div>
 
         {/* Nav Links - Center (Hidden on small) */}
-        <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-10 bg-ink/30 backdrop-blur-md px-10 py-5 border border-white/10 rounded-full pointer-events-auto">
+        <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-10 bg-ink/75 backdrop-blur-md px-10 py-5 border border-white/10 rounded-full pointer-events-auto">
           {MENU_ITEMS.map((item) => (
             <div 
               key={item.name} 
@@ -114,9 +115,9 @@ export default function Navbar() {
           <button 
             onClick={toggleMenu}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            className={`lg:w-16 lg:h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 text-paper shrink-0 ${scrolled ? 'w-10 h-10' : 'w-12 h-12'}`}
+            className={`lg:hidden bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 text-paper shrink-0 ${scrolled ? 'w-10 h-10' : 'w-12 h-12'}`}
           >
-            {isOpen ? <X size={24} className="lg:size-7" /> : <Menu size={24} className="lg:size-7" />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
@@ -214,11 +215,15 @@ export default function Navbar() {
                 ))}
               </div>
 
-              <div className="pt-12 flex gap-8 text-paper">
-                <Instagram className="hover:text-accent cursor-pointer transition-colors" />
-                <Linkedin className="hover:text-accent cursor-pointer transition-colors" />
-                <Twitter className="hover:text-accent cursor-pointer transition-colors" />
-              </div>
+              {SOCIAL_LINKS.length > 0 && (
+                <div className="pt-12 flex gap-8 text-paper font-mono text-xs uppercase tracking-[0.3em]">
+                  {SOCIAL_LINKS.map((social) => (
+                    <a key={social.short} href={social.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                      {social.name}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         )}

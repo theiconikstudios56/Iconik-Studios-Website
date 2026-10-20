@@ -6,10 +6,11 @@ import { trackLead } from '../lib/rmdTracking';
 import { loadTurnstile, TURNSTILE_SITE_KEY } from '../lib/rmdChat';
 import { ContactError, sendContact } from '../lib/rmdContact';
 import { T } from '../content';
+import { SOCIAL_LINKS } from '../constants/social';
 
 export default function ContactPage() {
   const [index, setIndex] = useState(0);
-  const words = ['create', 'work', 'live', 'love'];
+  const words = ['create', 'build', 'grow', 'launch'];
 
   // Form states
   const [name, setName] = useState('');
@@ -166,7 +167,7 @@ export default function ContactPage() {
                       <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-3 block"><T k="contact.meet-us">{"/ meet us"}</T></span>
                       <div className="space-y-2">
                         <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 block"><T k="contact.address">{"Address"}</T></span>
-                        <p className="text-lg font-display uppercase tracking-tight leading-tight"><T k="contact.iconik-studios-metaverse">{"Iconik Studios\nMetaverse"}</T></p>
+                        <p className="text-lg font-display uppercase tracking-tight leading-tight"><T k="contact.iconik-studios-metaverse">{"Iconik Studios\nPhoenix, Arizona"}</T></p>
                       </div>
                     </div>
                   </div>
@@ -174,13 +175,15 @@ export default function ContactPage() {
               </div>
 
               {/* Socials */}
-              <div className="flex gap-6 border-t border-white/10 pt-8">
-                {['IN', 'IG', 'VI', 'X', 'FB'].map(social => (
-                  <a key={social} href="#" className="font-mono text-[10px] uppercase tracking-[0.4em] hover:text-burnt-orange transition-colors">
-                    {social}
-                  </a>
-                ))}
-              </div>
+              {SOCIAL_LINKS.length > 0 && (
+                <div className="flex gap-6 border-t border-white/10 pt-8">
+                  {SOCIAL_LINKS.map(social => (
+                    <a key={social.short} href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name} className="font-mono text-[10px] uppercase tracking-[0.4em] hover:text-burnt-orange transition-colors">
+                      {social.short}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Right Half: Form */}
