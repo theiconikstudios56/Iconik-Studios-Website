@@ -8,9 +8,9 @@ const pipelineSteps = [
     id: 0,
     title: "Webhook Ingest",
     short: "Instant Capture",
-    desc: "A prospect submits a form. Our system immediately captures the data payload, cleans it, and initiates the pipeline in less than 200ms.",
+    desc: "A client fills in a form or books online. Remedy, our own CRM, saves them as a new lead the moment they press send.",
     icon: Activity,
-    tech: "Vite / Deno Edge",
+    tech: "Remedy forms",
     stat: "+391% Reach",
     metric: "Latency: < 0.2s"
   },
@@ -18,19 +18,19 @@ const pipelineSteps = [
     id: 1,
     title: "Instant Response",
     short: "Speed-to-Lead SMS & Mail",
-    desc: "Within 45 seconds, the prospect receives a highly personalized SMS and email greeting. This instant touch-point captures lead attention while they are hot.",
+    desc: "An automatic reply reaches them right away, and a real person from your spa follows up within one business day, while their interest is still warm.",
     icon: Mail,
-    tech: "Twilio / SendGrid / LLM",
+    tech: "Remedy",
     stat: "9x Booking Rate",
-    metric: "Response Time: 45s"
+    metric: "Auto-reply: instant"
   },
   {
     id: 2,
     title: "CRM Synchronization",
     short: "Zero-Touch Data Flow",
-    desc: "Client details are instantly synced into GoHighLevel or HubSpot. Custom tags are applied, a deal is created in the pipeline, and the sales team is alerted via Slack.",
+    desc: "Their details land in Remedy with the right tags, a new deal opens in your pipeline, and your team gets a notification. Nobody copies anything by hand.",
     icon: Database,
-    tech: "Make / Zapier / REST",
+    tech: "Remedy CRM",
     stat: "100% Accurate",
     metric: "Manual Input: 0%"
   },
@@ -38,9 +38,9 @@ const pipelineSteps = [
     id: 3,
     title: "Autopilot Onboarding",
     short: "Instant Brief & Portal",
-    desc: "Once booked, a Stripe invoice is sent, a Google Drive folder structure is generated, and a custom client portal link is emailed automatically.",
+    desc: "Once they book, the deposit is taken, reminders and the before-your-visit forms go out, and the appointment appears on your front-desk calendar.",
     icon: Sparkles,
-    tech: "Node.js / Drive API",
+    tech: "Remedy + Stripe",
     stat: "-15 Hrs Admin/Wk",
     metric: "Admin Friction: None"
   }
@@ -87,7 +87,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.instant-engagement-speed-to" label="Subheading">{"Instant Engagement (Speed to Lead)"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Our automated flows trigger personalized text and email responses within seconds of form submission."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Every new inquiry gets an automatic reply within seconds, and your team is told straight away."}</T></p>
                 </div>
               </div>
 
@@ -97,7 +97,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.seamless-data-flow-sync" label="Subheading">{"Seamless Data Flow & Sync"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.no-more-manual-copy">{"No more manual copy-pasting. Customer records are instantly synchronized across your custom web hooks, CRM databases (GHL, HubSpot), and team channels like Slack."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.no-more-manual-copy">{"No more copy-pasting. Every new client, booking and payment lands in Remedy, Iconik's own CRM, with the right tags and a deal in your pipeline."}</T></p>
                 </div>
               </div>
 
@@ -107,7 +107,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.hands-free-client-onboarding" label="Subheading">{"Hands-Free Client Onboarding"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.the-moment-a-client">{"The moment a client signs, pipelines generate standard invoices, spin up secure file storage, create Slack rooms, and dispatch project briefs automatically."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.the-moment-a-client">{"The moment a client books, Remedy takes the deposit, sends reminders and the forms to fill in before the visit, and puts the appointment on your calendar."}</T></p>
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@ const SuccessSection = () => {
               </div>
               <div className="space-y-1">
                 <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.speed-to-lead">{"Speed to Lead"}</T></p>
-                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.45s">{"< 45s"}</T></p>
+                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.45s">{"Instant"}</T></p>
               </div>
               <div className="space-y-1">
                 <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.accuracy-rate">{"Accuracy Rate"}</T></p>

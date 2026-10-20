@@ -19,7 +19,7 @@ const SERVICES = [
     id: "002",
     title: "AI Automations",
     description: "We build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time. Scale your operations without scaling your headcount.",
-    categories: ["AI", "Automation", "Make.com", "Lead Capture", "CRM"],
+    categories: ["AI", "Automation", "Remedy CRM", "Lead Capture", "Booking"],
     image: imgAi,
     link: "/services/ai-automation"
   },

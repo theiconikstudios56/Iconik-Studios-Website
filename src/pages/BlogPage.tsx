@@ -10,7 +10,7 @@ import { blogDate, blogPlaceholder } from '../lib/blogCards';
 
 const CATEGORIES = [
   { label: 'AI', keywords: ['ai', 'artificial intelligence', 'machine learning', 'claude', 'chatgpt', 'llm'] },
-  { label: 'Automation', keywords: ['automation', 'automated', 'automate', 'workflow', 'make.com', 'zapier', 'gohighlevel', 'no-code'] },
+  { label: 'Automation', keywords: ['automation', 'automated', 'automate', 'workflow', 'remedy', 'crm', 'no-code'] },
   { label: 'Web Design', keywords: ['web design', 'website', 'design', 'ux', 'ui', 'landing page', 'frontend'] },
   { label: 'Business', keywords: ['business', 'small business', 'entrepreneur', 'growth', 'strategy', 'roi', 'revenue', 'sales', 'leads', 'crm', 'productivity'] },
   { label: 'Inspiration', keywords: ['inspiration', 'creative', 'community', 'culture', 'innovation', 'future', 'trends'] },
@@ -90,8 +90,8 @@ export default function BlogPage() {
   return (
     <Layout
       page="blog"
-      title="Insights & Strategies | AI Automation Blog | Iconik Studios"
-      description="Read the latest insights on AI automation, web development, and digital strategy to scale your business effortlessly."
+      title="Med Spa Marketing & Automation Blog | Iconik Studios"
+      description="Ideas for med spa owners on websites, online booking, lead follow-up and AI automation that keep the calendar full."
     >
       <div className="bg-[#000000] min-h-screen text-white font-sans selection:bg-burnt-orange selection:text-white" data-bg="black">
         <div className="h-24 md:h-32" />

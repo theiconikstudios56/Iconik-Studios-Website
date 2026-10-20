@@ -68,7 +68,7 @@ export default function Hero() {
               transition={{ delay: 0.8 }}
               className="text-sm md:text-base font-light max-w-2xl text-tan leading-relaxed font-sans"
             >
-              <T k="home.hero.text">{"We help home service businesses capture, engage and retain every patient lead that standard websites miss. Through a powerful combination of conversion optimized design and 24/7 AI automation, we eliminate delayed follow-ups so your marketing dollars actually yield appointments, not missed opportunities."}</T>
+              <T k="home.hero.text">{"We help med spas capture, engage and keep every patient lead that standard websites miss. With conversion-focused design and AI automation that never sleeps, we end slow follow-ups, so your marketing dollars turn into booked appointments, not missed opportunities."}</T>
             </motion.p>
 
             <motion.div

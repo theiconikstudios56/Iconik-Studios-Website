@@ -21,8 +21,8 @@ const WebDesign = () => {
   return (
     <Layout
       page="web-design"
-      title="Website Development for Workflow Automation | Iconik Studios"
-      description="Turn your website into an automated lead generation machine with Iconik Studios. We specialize in custom web design with zapier automation."
+      title="Med Spa Website Design That Books Appointments | Iconik Studios"
+      description="Custom med spa website design built to convert: fast, mobile-first pages, online booking with deposits and automatic follow-up through Remedy, our own CRM."
     >
       <div className="bg-ink min-h-screen">
         {/* Hero Section - The Hook */}
@@ -80,7 +80,7 @@ const WebDesign = () => {
                 },
                 {
                   title: "Automated Lead Capture",
-                  desc: "Our designs feature deep integration with Zapier and Make.com. Get custom web design with zapier automation that instantly routes prospects to your CRM the moment they click submit.",
+                  desc: "Every form and booking on your site feeds straight into Remedy, our own CRM, so a new patient lead is saved, tagged and followed up the moment they press send.",
                   icon: Target
                 },
                 {

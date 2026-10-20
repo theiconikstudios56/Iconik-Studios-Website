@@ -109,8 +109,8 @@ export default function ContactPage() {
   return (
     <Layout
       page="contact"
-      title="Contact Us | Start Your Project | Iconik Studios"
-      description="Ready to elevate your digital presence? Contact Iconik Studios today to discuss custom web development and automation solutions."
+      title="Contact Iconik Studios | Med Spa Website & Automation Quote"
+      description="Tell us about your med spa and get a quote for a website, online booking and automated follow-up. You'll hear from a real person within one business day."
     >
       <div className="bg-black text-white selection:bg-burnt-orange selection:text-white min-h-screen flex items-center justify-center py-20 md:py-32 lg:pt-48 lg:pb-32">
         <section className="w-full px-6 md:px-12 max-w-[1800px] mx-auto">
@@ -322,7 +322,7 @@ export default function ContactPage() {
                   )}
                 </AnimatePresence>
 
-                <div className="mt-8 text-[10px] font-mono opacity-80 uppercase tracking-widest"><T k="contact.we-usually-respond-within">{"* We usually respond within 24-48 hours."}</T></div>
+                <div className="mt-8 text-[10px] font-mono opacity-80 uppercase tracking-widest"><T k="contact.we-usually-respond-within">{"* You'll get an automatic reply right away, and a real person within one business day."}</T></div>
                 <div className="mt-3 text-[10px] font-mono opacity-80 uppercase tracking-widest">
                   <a
                     href="https://rmd.theiconikstudios.com/privacy"

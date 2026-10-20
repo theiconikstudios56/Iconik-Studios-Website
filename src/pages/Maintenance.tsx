@@ -33,7 +33,7 @@ const Maintenance = () => {
   return (
     <Layout
       page="maintenance"
-      title="Website Management Services & Guardianship | Iconik Studios"
+      title="Med Spa Website Maintenance & Support | Iconik Studios"
       description="Secure your digital assets with Iconik Studios. We offer comprehensive website management services, 24/7 monitoring, and performance tuning."
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />

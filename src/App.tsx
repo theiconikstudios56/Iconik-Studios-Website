@@ -49,7 +49,6 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const HomesPage = lazy(() => import('./pages/HomesPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
-const IntakePage = lazy(() => import('./pages/IntakePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
 
@@ -104,8 +103,8 @@ function Home() {
   return (
     <Layout
       page="home"
-      title="AI Powered User Experience Design Agency | Iconik Studios"
-      description="Iconik Studios is a boutique design and automation agency. We engineer digital legacies with high-end aesthetic strategy and robust backend automation."
+      title="Med Spa Website Design & AI Automation | Iconik Studios"
+      description="Med spa websites, online booking and AI follow-up that turn ad clicks into booked appointments. Built in Phoenix, Arizona, and run on Remedy, our own CRM."
     >
       <div className="relative z-10 bg-ink">
         <Hero />
@@ -246,7 +245,8 @@ export default function App() {
         <Route path="/proposals/*" element={<Navigate to="/contact" replace />} />
         <Route path="/contract" element={<Navigate to="/contact" replace />} />
         <Route path="/admin/*" element={<Navigate to="/contact" replace />} />
-        <Route path="/intake" element={<IntakePage />} />
+        {/* Onboarding questions now come from RMD's questionnaire link; old links land on Contact. */}
+        <Route path="/intake" element={<Navigate to="/contact" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </Suspense>

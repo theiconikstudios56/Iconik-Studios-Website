@@ -6,7 +6,7 @@ import { T, useText } from '../content';
 export const Pricing = () => {
   const plans = [
     { name: 'Starter', price: '$2,500', items: ['Custom Web Design', 'Core SEO Setup', 'Mobile Responsive', 'Basic Lead Capture'] },
-    { name: 'Growth', price: '$5,000', items: ['Advanced Web Design', 'Complete SEO Strategy', 'Make.com Integrations', 'CRM Setup', 'Copywriting'], featured: true },
+    { name: 'Growth', price: '$5,000', items: ['Advanced Web Design', 'Complete SEO Strategy', 'Automated Follow-Ups', 'CRM Setup', 'Copywriting'], featured: true },
   ];
 
   const productSchema = {
@@ -67,8 +67,8 @@ export const Pricing = () => {
 export const FAQ = () => {
   const [active, setActive] = useState<number | null>(0);
   const startQuestions = [
-    { q: "Do you only work with Med Spas and Real Estate?", a: "While we have specialized systems for Med Spas, Real Estate, HVAC, and Consultants, our core methodology—Conversion-Centered Architecture—applies to any service-based business looking to scale." },
-    { q: "What makes your websites different from a template?", a: "Templates are built to look pretty. Our websites are custom-engineered to convert. We focus on cognitive load reduction, 1:1 goal alignment, and seamless integration with your CRM." },
+    { q: "Do you only work with med spas?", a: "Right now, yes: our websites, booking and follow-up systems are built around how a med spa runs, from consults and deposits to rebooking and reviews. If you run a different kind of business, get in touch and we'll tell you honestly whether we're a fit." },
+    { q: "What makes your websites different from a template?", a: "Templates are built to look pretty. Our websites are custom-engineered to convert. We focus on cognitive load reduction, 1:1 goal alignment, and built-in follow-up through Remedy, our own CRM." },
     { q: "How long does a website or automation build take?", a: "Standard website builds typically take 4-6 weeks. Complex AI automation systems and custom agent integrations can take 6-8 weeks, depending on the scope of your operations." },
     { q: "Do you offer ongoing support?", a: "Absolutely. We offer tiered 'Guardianship' maintenance packages that include 24/7 monitoring, security patching, and strategic performance tuning." },
   ];

@@ -32,19 +32,19 @@ const AnimatedWorkflowDiagram = () => {
         } else if (next === 1) {
           setLogs((prevLogs) => [
             ...prevLogs,
-            "» CRM integration: Creating contact in GoHighLevel...",
-            "» GoHighLevel contact record successfully created"
+            "» Remedy CRM: Creating the patient lead...",
+            "» Remedy contact saved and tagged"
           ]);
         } else if (next === 2) {
           setLogs((prevLogs) => [
             ...prevLogs,
             "» Email Dispatch: Sending instant auto-reply response...",
-            "» Pipeline Action: Adding lead to GHL opportunity board"
+            "» Pipeline: New consult deal opened in Remedy"
           ]);
         } else if (next === 3) {
           setLogs((prevLogs) => [
             ...prevLogs,
-            "» Admin SMS: Sending instant alert notification to you...",
+            "» Team alert: Notifying your front desk...",
             "» Sequence start: Launching automated lead follow-up emails"
           ]);
         }
@@ -132,7 +132,7 @@ const AnimatedWorkflowDiagram = () => {
           <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.1-contact-form">{"1. Contact Form"}</T></span>
         </div>
 
-        {/* Node 2: GHL Contact */}
+        {/* Node 2: Remedy Contact */}
         <div 
           className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5" 
           style={{ top: '50%', left: '50%' }}
@@ -144,7 +144,7 @@ const AnimatedWorkflowDiagram = () => {
           }`}>
             <Cpu size={18} />
           </div>
-          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.2-ghl-contact">{"2. GHL Contact"}</T></span>
+          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.2-ghl-contact">{"2. Remedy Contact"}</T></span>
         </div>
 
         {/* Node 3a: Email & Pipeline */}
@@ -174,7 +174,7 @@ const AnimatedWorkflowDiagram = () => {
           }`}>
             <Database size={18} />
           </div>
-          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.3b-sms-sequence">{"3b. SMS & Sequence"}</T></span>
+          <span className="text-[8px] uppercase tracking-wider text-white/60"><T k="ai.3b-sms-sequence">{"3b. Alert & Sequence"}</T></span>
         </div>
       </div>
 
@@ -200,8 +200,8 @@ const AIWorkflows = () => {
   return (
     <Layout
       page="ai"
-      title="AI Automation Agency | Custom Zapier & Make.com Integrations | Iconik"
-      description="As a premier ai automation agency, we build autonomous agents and intelligent workflows that handle lead qualification, booking, and CRM updates in real time."
+      title="AI Automation for Med Spas | Lead Follow-Up & Booking | Iconik Studios"
+      description="AI automation for med spas: instant replies to new leads, follow-ups, reminders and CRM updates in Remedy, so every inquiry becomes a booked consultation."
     >
       <div className="bg-ink min-h-screen">
         {/* Hero Section */}
