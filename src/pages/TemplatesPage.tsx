@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
 import { Included, PriceLine, Questions } from '../components/shop/ShopParts';
-import { money, pictureOf, shop, type ShopTemplate } from '../lib/shop';
+import { industries, money, pictureOf, shop, type ShopTemplate } from '../lib/shop';
 import { T } from '../content';
 
 /** The template shop (RMD-crm BUILD_PLAN 11.10): every template, its price and its live demo. */
@@ -14,11 +14,17 @@ export default function TemplatesPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  // The industry filter lives in the address (/templates?industry=roofing), so a
+  // post can link to one industry and Back steps through the filters.
+  const [params] = useSearchParams();
+  const current = industries.find((i) => i.slug === params.get('industry'));
+  const shown = shop?.templates.filter((t) => !current || t.industry === current.label) ?? [];
+
   return (
     <Layout
       page="templates"
       title="Website Templates for Local Businesses | Iconik Studios"
-      description="Complete, ready-to-edit websites for med spas, realtors, HVAC companies and bakeries. Every page written for your industry, hosting and your own domain included."
+      description={`Complete, ready-to-edit websites for ${industryList} businesses. Every page written for your industry, hosting and your own domain included.`}
     >
       <div className="bg-ink text-paper">
         <section className="px-6 pb-24 pt-40 lg:px-12 lg:pt-48">
@@ -41,8 +47,9 @@ export default function TemplatesPage() {
 
         {shop ? (
           <section className="px-6 pb-32 lg:px-12">
+            {industries.length > 1 && <IndustryFilter current={current?.slug} total={shop.templates.length} />}
             <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-10 gap-y-20 md:grid-cols-2">
-              {shop.templates.map((template, i) => (
+              {shown.map((template, i) => (
                 <TemplateCard key={template.key} template={template} index={i} />
               ))}
             </div>
@@ -100,6 +107,39 @@ export default function TemplatesPage() {
       </section>
       <FinalCTA />
     </Layout>
+  );
+}
+
+// "med spa, real estate, HVAC & plumbing and bakery" (… businesses) for the page's search description.
+const industryList = (() => {
+  const names = industries.map((i) => i.label.replace(/^[A-Z][a-z]/, (c) => c.toLowerCase()));
+  return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : names[0] ?? 'local businesses';
+})();
+
+/** "All" and a button per industry, with counts; one row that scrolls sideways on phones. */
+function IndustryFilter({ current, total }: { current: string | undefined; total: number }) {
+  const pill = (active: boolean) =>
+    `inline-flex shrink-0 items-center gap-2.5 rounded-full border px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.25em] transition-colors ${
+      active ? 'border-paper bg-paper text-ink' : 'border-white/15 text-white/70 hover:border-burnt-orange hover:text-paper'
+    }`;
+  const count = (n: number, active: boolean) => <span className={active ? 'text-ink/50' : 'text-burnt-orange'}>{n}</span>;
+  return (
+    <nav aria-label="Templates by industry" className="mx-auto mb-16 max-w-7xl">
+      <ul className="-mx-6 flex gap-3 overflow-x-auto px-6 pb-1 [scrollbar-width:none] lg:mx-0 lg:flex-wrap lg:px-0 [&::-webkit-scrollbar]:hidden">
+        <li className="shrink-0">
+          <Link to="/templates" aria-current={!current ? 'page' : undefined} className={pill(!current)}>
+            All {count(total, !current)}
+          </Link>
+        </li>
+        {industries.map((i) => (
+          <li key={i.slug} className="shrink-0">
+            <Link to={`/templates?industry=${i.slug}`} aria-current={current === i.slug ? 'page' : undefined} className={pill(current === i.slug)}>
+              {i.label} {count(i.count, current === i.slug)}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

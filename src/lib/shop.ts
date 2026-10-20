@@ -20,6 +20,14 @@ export const pictureOf = (slug: string, kind: 'hero' | 'full') => pictures[`../a
 
 export const money = (cents: number) => `$${(cents / 100).toLocaleString('en-US', { minimumFractionDigits: cents % 100 ? 2 : 0 })}`;
 
+/** Each industry the shop sells for, in catalogue order, with its address slug ("HVAC & plumbing" → hvac-plumbing). */
+export const industries = (shop?.templates ?? []).reduce<{ label: string; slug: string; count: number }[]>((list, t) => {
+  const found = list.find((i) => i.label === t.industry);
+  if (found) found.count++;
+  else list.push({ label: t.industry, slug: t.industry.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), count: 1 });
+  return list;
+}, []);
+
 export const templateBySlug = (slug: string | undefined) => shop?.templates.find((t) => t.slug === slug);
 
 /** Opens Stripe Checkout for the template and plan, or throws with a message to show. */
