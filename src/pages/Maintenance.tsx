@@ -63,7 +63,7 @@ const Maintenance = () => {
                 <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]"><T k="maintenance.vigilance-03">{"Vigilance / 03"}</T></span>
               </div>
               <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85"><T k="maintenance.peace-of-mind-guaranteed" em="text-burnt-orange italic" label="Heading">{"Peace\nOf Mind\n*Guaranteed.*"}</T></h1>
-              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8"><T k="maintenance.your-website-and-automation">{"Your website works for your business every day. Our care plans keep it online, backed up and secure, and a real person makes your changes (text, photos, hours, prices, new pages) so it stays current while you run your business. Month to month, from $69."}</T></p>
+              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8"><T k="maintenance.your-website-and-automation">{"Your website and automation systems are living assets that power your business every single day. We provide comprehensive maintenance for both your website and AI workflows — including 24/7 monitoring, security patching, performance tuning, and ongoing optimization of your Fuzzy agents — so everything stays protected, sharp, and running at full capacity while you focus on growing your business. Month to month, from $69."}</T></p>
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link to="/contact" className="inline-block text-center bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="maintenance.secure-my-website" label="Button">{"Secure My Website"}</T></Link>
               </div>
@@ -78,18 +78,18 @@ const Maintenance = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
-                  title: "Watched Around The Clock",
-                  desc: "Your site is hosted on our servers with SSL, and checked around the clock. If it ever goes down, we know right away and we're on it, usually before you or your clients notice.",
+                  title: "Iron-Clad Security",
+                  desc: "We run weekly security audits and deploy critical patches the moment a vulnerability is identified. Your website and Fuzzy agents are continuously monitored to keep your customer data, automation workflows, and business operations locked down behind a solid layer of protection — 24/7, no exceptions.",
                   icon: Shield
                 },
                 {
-                  title: "Changes Made For You",
-                  desc: "New hours, a price change, fresh photos, a new treatment page. Send the request and a real person makes the change for you. No logins and no page builder to learn.",
+                  title: "Performance Tuning",
+                  desc: "Web standards evolve and so do your automation systems. We continuously tune your server environment, database queries, and AI workflow sequences to make sure everything is running at maximum velocity. We keep the engine clean and the performance sharp.",
                   icon: Zap
                 },
                 {
-                  title: "Daily Backups",
-                  desc: "Your site is backed up every day and kept off-site, so if anything ever goes wrong, we put it back the way it was.",
+                  title: "Daily Snapshots",
+                  desc: "Redundancy is everything. We perform daily off-site cloud backups of your website and automation configurations so that if anything ever goes wrong, your entire digital ecosystem — site, workflows, and Fuzzy agents — can be fully restored immediately.",
                   icon: HardDrive
                 }
               ].map((benefit, i) => (
