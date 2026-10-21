@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { Shield, Clock, HardDrive, RefreshCw, CheckCircle2, Lock, Monitor, Zap, HeartPulse, ChevronRight } from 'lucide-react';
 import MaintenanceProcess from '../components/MaintenanceProcess';
@@ -19,13 +20,13 @@ const Maintenance = () => {
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Iconik Studios Website Guardianship",
-    "description": "Comprehensive website management, 24/7 monitoring, security patching, and performance tuning.",
+    "name": "Iconik Studios Website Care Plans",
+    "description": "Monthly website care: hosting, monitoring, daily backups and content edits made by a person, with reports and Google Business Profile upkeep on the higher plans.",
     "offers": {
       "@type": "AggregateOffer",
       "offerCount": "3",
-      "lowPrice": "500",
-      "highPrice": "2000",
+      "lowPrice": "69",
+      "highPrice": "349",
       "priceCurrency": "USD"
     }
   };
@@ -33,8 +34,8 @@ const Maintenance = () => {
   return (
     <Layout
       page="maintenance"
-      title="Med Spa Website Maintenance & Support | Iconik Studios"
-      description="Secure your digital assets with Iconik Studios. We offer comprehensive website management services, 24/7 monitoring, and performance tuning."
+      title="Med Spa Website Care Plans | Iconik Studios"
+      description="Monthly website care from $69: hosting, monitoring, daily backups and edits made for you, plus reports and Google Business Profile upkeep. Month to month."
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="bg-ink min-h-screen">
@@ -62,9 +63,9 @@ const Maintenance = () => {
                 <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]"><T k="maintenance.vigilance-03">{"Vigilance / 03"}</T></span>
               </div>
               <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85"><T k="maintenance.peace-of-mind-guaranteed" em="text-burnt-orange italic" label="Heading">{"Peace\nOf Mind\n*Guaranteed.*"}</T></h1>
-              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8"><T k="maintenance.your-website-and-automation">{"Your website and automation systems are living assets that power your business every single day. We provide comprehensive maintenance for both your website and AI workflows — including 24/7 monitoring, security patching, performance tuning, and ongoing optimization of your Fuzzy agents — so everything stays protected, sharp, and running at full capacity while you focus on growing your business."}</T></p>
+              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8"><T k="maintenance.your-website-and-automation">{"Your website works for your business every day. Our care plans keep it online, backed up and secure, and a real person makes your changes (text, photos, hours, prices, new pages) so it stays current while you run your business. Month to month, from $69."}</T></p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="maintenance.secure-my-website" label="Button">{"Secure My Website"}</T></button>
+                <Link to="/contact" className="inline-block text-center bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="maintenance.secure-my-website" label="Button">{"Secure My Website"}</T></Link>
               </div>
             </motion.div>
           </div>
@@ -77,18 +78,18 @@ const Maintenance = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
-                  title: "Iron-Clad Security",
-                  desc: "We run weekly security audits and deploy critical patches the moment a vulnerability is identified. Your website and Fuzzy agents are continuously monitored to keep your customer data, automation workflows, and business operations locked down behind a solid layer of protection — 24/7, no exceptions.",
+                  title: "Watched Around The Clock",
+                  desc: "Your site is hosted on our servers with SSL, and checked around the clock. If it ever goes down, we know right away and we're on it, usually before you or your clients notice.",
                   icon: Shield
                 },
                 {
-                  title: "Performance Tuning",
-                  desc: "Web standards evolve and so do your automation systems. We continuously tune your server environment, database queries, and AI workflow sequences to make sure everything is running at maximum velocity. We keep the engine clean and the performance sharp.",
+                  title: "Changes Made For You",
+                  desc: "New hours, a price change, fresh photos, a new treatment page. Send the request and a real person makes the change for you. No logins and no page builder to learn.",
                   icon: Zap
                 },
                 {
-                  title: "Daily Snapshots",
-                  desc: "Redundancy is everything. We perform daily off-site cloud backups of your website and automation configurations so that if anything ever goes wrong, your entire digital ecosystem — site, workflows, and Fuzzy agents — can be fully restored in seconds, not hours.",
+                  title: "Daily Backups",
+                  desc: "Your site is backed up every day and kept off-site, so if anything ever goes wrong, we put it back the way it was.",
                   icon: HardDrive
                 }
               ].map((benefit, i) => (
@@ -111,52 +112,44 @@ const Maintenance = () => {
           <div className="max-w-7xl mx-auto">
              <div className="text-center mb-24">
                 <span className="font-mono text-xs uppercase tracking-[0.5em] opacity-100 block mb-6"><T k="maintenance.service-tiers">{"Service Tiers"}</T></span>
-                <h2 className="text-6xl md:text-8xl font-display uppercase tracking-tighter"><T k="maintenance.the-guardianship" label="Heading">{"The Guardianship."}</T></h2>
+                <h2 className="text-6xl md:text-8xl font-display uppercase tracking-tighter"><T k="maintenance.the-guardianship" label="Heading">{"Care Plans."}</T></h2>
              </div>
-             
+
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                {[
                  {
                    tier: "Foundation",
-                   price: "$500",
+                   price: "$69",
                    features: [
-                     "Up to 2 website update requests per month (text changes, image swaps, minor layout adjustments)",
-                     "Monthly chatbot performance check and minor configuration tweaks",
-                     "24/7 uptime monitoring with instant alerts",
-                     "Monthly security audit and critical patch deployment",
-                     "Daily off-site cloud backups with rapid restore capability",
-                     "1 monthly check-in call (30 minutes) to review performance and address any concerns",
-                     "48-hour response time on all support requests"
+                     "Hosting on our servers, with SSL",
+                     "Uptime monitoring around the clock, with alerts",
+                     "Daily off-site backups",
+                     "Security monitoring",
+                     "Your forms and lead delivery checked every month",
+                     "Up to 30 minutes of content edits a month (text, photos, hours, prices)",
+                     "Replies within 2 business days"
                    ]
                  },
                  {
                    tier: "Performance",
-                   price: "$1000",
+                   price: "$189",
                    features: [
-                     "Everything in the Maintenance Plan",
-                     "Up to 3 website update requests per month (text, images, new sections, or page edits)",
-                     "Chatbot monitoring and optimization — responses refined monthly based on real conversation data",
-                     "2 email marketing campaigns per month (written, designed, and deployed)",
-                     "12 social media posts per month (graphics and captions created and scheduled)",
-                     "Monthly lead performance report showing traffic, leads captured, and conversion data",
-                     "Automation workflow monitoring — all active Fuzzy agents reviewed and fine-tuned monthly",
-                     "24-hour response time on all support requests"
+                     "Everything in Foundation",
+                     "Up to 1 hour of content edits a month",
+                     "A monthly report: visits, leads and your top pages",
+                     "Google Business Profile kept up to date: hours, photos and 2 posts a month",
+                     "Your review-request link set up and kept working",
+                     "Replies by the next business day"
                    ],
                    highlighted: true
                  },
                  {
-                   tier: "Enterprise",
-                   price: "$2000",
+                   tier: "Iconik",
+                   price: "$349",
                    features: [
-                     "Everything in the Growth Plan",
-                     "Up to 3 website update requests per month plus 1 larger structural update (new landing page, new service section, or funnel adjustment)",
-                     "Advanced automation management — all Fuzzy agents monitored, tested, and optimized continuously",
-                     "Full sales pipeline automation review and refinement each month",
-                     "A/B testing on key website pages and email campaigns to continuously improve conversion rates",
-                     "Monthly strategy session (60 minutes) with your Iconik Studios team to review results and plan next steps",
-                     "Comprehensive monthly performance dashboard covering website traffic, lead flow, automation performance, and email campaign results",
-                     "Priority response time — all support requests handled within 12 hours",
-                     "Quarterly automation audit to identify new opportunities to save time and scale faster"
+                     "Everything in Performance",
+                     "Up to 3 hours of changes a month, new pages and landing pages included",
+                     "Replies the same business day"
                    ]
                  }
                ].map((plan, i) => (
@@ -177,10 +170,11 @@ const Maintenance = () => {
                        ))}
                      </ul>
                    </div>
-                   <button className={`w-full py-8 rounded-full font-display uppercase tracking-[0.2em] text-lg mt-16 transition-all shadow-lg ${plan.highlighted ? 'bg-burnt-orange text-white hover:bg-tan hover:text-ink' : 'bg-ink text-tan hover:bg-burnt-orange hover:text-white'}`}><T k="maintenance.select-tier" label="Button">{"Select Tier"}</T></button>
+                   <Link to="/contact" className={`block text-center w-full py-8 rounded-full font-display uppercase tracking-[0.2em] text-lg mt-16 transition-all shadow-lg ${plan.highlighted ? 'bg-burnt-orange text-white hover:bg-tan hover:text-ink' : 'bg-ink text-tan hover:bg-burnt-orange hover:text-white'}`}><T k="maintenance.select-tier" label="Button">{"Select Tier"}</T></Link>
                  </div>
                ))}
              </div>
+             <p className="max-w-3xl mx-auto text-center text-sm leading-relaxed mt-16"><T k="maintenance.plan-terms" label="Plan terms">{"Month to month, cancel with 30 days' notice. Unused time doesn't roll over. Work beyond your plan is $85 an hour, quoted before we start. Built on Iconik Sites? Your Sites plan is included."}</T></p>
           </div>
         </section>
 
@@ -199,7 +193,7 @@ const Maintenance = () => {
           >
             <h2 className="text-7xl md:text-[10vw] font-display uppercase tracking-tighter leading-[0.95] mb-16"><T k="maintenance.we-got-your-back" em="italic" label="Heading">{"We Got\n*Your Back.*"}</T></h2>
             <div className="flex flex-col items-center gap-8">
-              <button className="bg-white text-burnt-orange px-16 py-8 rounded-full font-display text-2xl tracking-[0.2em] font-bold hover:bg-ink hover:text-tan transition-all duration-500 uppercase shadow-2xl"><T k="maintenance.start-your-protection" label="Button">{"Start Your Protection"}</T></button>
+              <Link to="/contact" className="inline-block bg-white text-burnt-orange px-16 py-8 rounded-full font-display text-2xl tracking-[0.2em] font-bold hover:bg-ink hover:text-tan transition-all duration-500 uppercase shadow-2xl"><T k="maintenance.start-your-protection" label="Button">{"Start Your Protection"}</T></Link>
               <div className="flex items-center justify-center gap-4 text-white opacity-80">
                 <Lock size={20} />
                 <span className="font-mono text-xs uppercase tracking-widest"><T k="maintenance.secured-by-iconik-studios">{"Secured by Iconik Studios."}</T></span>
