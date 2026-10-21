@@ -126,6 +126,7 @@ const Maintenance = () => {
                      "Daily off-site backups",
                      "Security monitoring",
                      "Your forms and lead delivery checked every month",
+                     "Your Fuzzy chatbot checked and tuned",
                      "Up to 30 minutes of content edits a month (text, photos, hours, prices)",
                      "Replies within 2 business days"
                    ]
