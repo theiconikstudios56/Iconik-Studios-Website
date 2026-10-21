@@ -89,7 +89,7 @@ const Maintenance = () => {
                 },
                 {
                   title: "Daily Snapshots",
-                  desc: "Redundancy is everything. We perform daily off-site cloud backups of your website and automation configurations so that if anything ever goes wrong, your entire digital ecosystem — site, workflows, and Fuzzy agents — can be fully restored immediately.",
+                  desc: "Redundancy is everything. We perform daily off-site cloud backups of your website and automation configurations so that if anything ever goes wrong, your entire digital ecosystem — site, workflows, and Fuzzy agents — can be rolled back to its last good version within minutes, and fully restored from a daily backup the same day.",
                   icon: HardDrive
                 }
               ].map((benefit, i) => (
