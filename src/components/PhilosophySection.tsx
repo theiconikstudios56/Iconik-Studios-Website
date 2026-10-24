@@ -1,6 +1,6 @@
 export default function PhilosophySection() {
   return (
-    <section className="py-32 md:py-48 px-6 md:px-12 border-b border-ink/10 bg-ink text-tan">
+    <section className="py-20 md:py-48 px-6 md:px-12 border-b border-ink/10 bg-ink text-tan">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-3">
            <span className="font-mono text-[10px] tracking-[0.4em] uppercase opacity-100 sticky top-32">Our Approach</span>

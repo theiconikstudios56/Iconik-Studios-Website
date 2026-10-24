@@ -5,22 +5,10 @@ import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { fetchArticle, type Article } from '../lib/rmdArticles';
 import { safeArticleHtml } from '../lib/safeHtml';
-
-const DEFAULT_IMAGES = [
-  "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1600",
-  "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1600",
-  "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1600",
-  "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1600",
-];
+import { blogDate, blogPlaceholder } from '../lib/blogCards';
 
 
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
+
 
 export default function BlogArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -65,7 +53,7 @@ export default function BlogArticlePage() {
   }
 
   // The placeholder follows the order of publication, as it followed the old article numbers (26, 27…).
-  const heroImage = article.image_url || DEFAULT_IMAGES[(article.number + 1) % DEFAULT_IMAGES.length];
+  const heroImage = article.image_url || blogPlaceholder(article.number + 1);
   const siteUrl = 'https://www.theiconikstudios.com';
   const canonicalUrl = `${siteUrl}/blog/${article.slug}`;
 
@@ -86,7 +74,7 @@ export default function BlogArticlePage() {
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = DEFAULT_IMAGES[0];
+              (e.target as HTMLImageElement).src = blogPlaceholder(0);
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black" />
@@ -127,7 +115,7 @@ export default function BlogArticlePage() {
 
           {/* Date */}
           <p className="font-mono text-[10px] text-white/30 tracking-widest uppercase mb-16">
-            {formatDate(article.created_at)}
+            {blogDate(article.created_at, 'long')}
           </p>
 
           <div className="border-t border-white/10 mb-16" />

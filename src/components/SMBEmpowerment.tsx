@@ -25,7 +25,7 @@ export default function SMBEmpowerment() {
   return (
     <section 
       data-bg="dark" 
-      className="relative bg-ink text-tan py-32 px-6 lg:px-12 overflow-hidden border-t border-white/5"
+      className="relative bg-ink text-tan py-20 md:py-32 px-6 lg:px-12 overflow-hidden border-t border-white/5"
     >
       {/* Subtle Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-burnt-orange/5 rounded-full blur-[120px] pointer-events-none" />
@@ -61,7 +61,7 @@ export default function SMBEmpowerment() {
               className="space-y-6"
             >
               <p className="text-lg md:text-xl font-light text-paper opacity-80 leading-relaxed font-sans normal-case"><T k="home.empower.we-believe-that-small">{"We believe that small and medium-sized businesses deserve the same elite infrastructure as multi-billion dollar enterprises. Subpar websites and chaotic manual workflows shouldn't limit your potential."}</T></p>
-              <p className="text-base text-paper opacity-60 leading-relaxed font-mono"><T k="home.empower.iconik-studios-designs-jaw">{"Iconik Studios designs jaw-dropping frontends backed by rock-solid automation systems. We don't just hand you a website—we build the custom operational processes that capture bookings, sync client databases, and fuel your legacy 24/7."}</T></p>
+              <p className="text-base text-paper opacity-80 leading-relaxed font-sans"><T k="home.empower.iconik-studios-designs-jaw">{"Iconik Studios designs jaw-dropping frontends backed by rock-solid automation systems. We don't just hand you a website—we build the custom operational processes that capture bookings, sync client databases, and fuel your legacy 24/7."}</T></p>
             </motion.div>
           </div>
 
@@ -90,7 +90,7 @@ export default function SMBEmpowerment() {
                   <h3 className="font-display text-2xl uppercase tracking-tight text-paper mb-4">
                     <T k={`home.empower.${index + 1}.title`} label={`Point ${index + 1}: heading`}>{point.title}</T>
                   </h3>
-                  <p className="text-sm font-light text-paper opacity-60 leading-relaxed font-sans normal-case">
+                  <p className="text-sm font-light text-paper opacity-80 leading-relaxed font-sans normal-case">
                     <T k={`home.empower.${index + 1}.text`} label={`Point ${index + 1}: text`}>{point.desc}</T>
                   </p>
                 </div>

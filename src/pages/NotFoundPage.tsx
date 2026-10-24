@@ -10,7 +10,7 @@ export default function NotFoundPage() {
         <div className="max-w-3xl mx-auto text-center space-y-8">
           <span className="text-[10px] uppercase tracking-[0.6em] font-bold text-accent block"><T k="not-found.error-404">{"Error 404"}</T></span>
           <h1 className="text-5xl md:text-7xl font-display uppercase tracking-tighter leading-[0.95]"><T k="not-found.this-page-wandered-off" label="Heading">{"This page wandered off"}</T></h1>
-          <p className="text-sm md:text-base font-mono text-tan leading-relaxed"><T k="not-found.the-link-may-be">{"The link may be old or mistyped. Everything else is right where you left it."}</T></p>
+          <p className="text-sm md:text-base font-sans text-tan leading-relaxed"><T k="not-found.the-link-may-be">{"The link may be old or mistyped. Everything else is right where you left it."}</T></p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
             <Link
               to="/"

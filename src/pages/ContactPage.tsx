@@ -6,10 +6,11 @@ import { trackLead } from '../lib/rmdTracking';
 import { loadTurnstile, TURNSTILE_SITE_KEY } from '../lib/rmdChat';
 import { ContactError, sendContact } from '../lib/rmdContact';
 import { T } from '../content';
+import { SOCIAL_LINKS } from '../constants/social';
 
 export default function ContactPage() {
   const [index, setIndex] = useState(0);
-  const words = ['create', 'work', 'live', 'love'];
+  const words = ['create', 'build', 'grow', 'launch'];
 
   // Form states
   const [name, setName] = useState('');
@@ -108,10 +109,10 @@ export default function ContactPage() {
   return (
     <Layout
       page="contact"
-      title="Contact Us | Start Your Project | Iconik Studios"
-      description="Ready to elevate your digital presence? Contact Iconik Studios today to discuss custom web development and automation solutions."
+      title="Contact Iconik Studios | Med Spa Website & Automation Quote"
+      description="Tell us about your med spa and get a quote for a website, online booking and automated follow-up. You'll hear from a real person within one business day."
     >
-      <div className="bg-black text-white selection:bg-burnt-orange selection:text-white min-h-screen flex items-center justify-center py-32 lg:pt-48 lg:pb-32">
+      <div className="bg-black text-white selection:bg-burnt-orange selection:text-white min-h-screen flex items-center justify-center py-20 md:py-32 lg:pt-48 lg:pb-32">
         <section className="w-full px-6 md:px-12 max-w-[1800px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-white/10 overflow-hidden bg-black shadow-2xl">
             
@@ -166,7 +167,7 @@ export default function ContactPage() {
                       <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-3 block"><T k="contact.meet-us">{"/ meet us"}</T></span>
                       <div className="space-y-2">
                         <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 block"><T k="contact.address">{"Address"}</T></span>
-                        <p className="text-lg font-display uppercase tracking-tight leading-tight"><T k="contact.iconik-studios-metaverse">{"Iconik Studios\nMetaverse"}</T></p>
+                        <p className="text-lg font-display uppercase tracking-tight leading-tight"><T k="contact.iconik-studios-metaverse">{"Iconik Studios\nPhoenix, Arizona"}</T></p>
                       </div>
                     </div>
                   </div>
@@ -174,13 +175,15 @@ export default function ContactPage() {
               </div>
 
               {/* Socials */}
-              <div className="flex gap-6 border-t border-white/10 pt-8">
-                {['IN', 'IG', 'VI', 'X', 'FB'].map(social => (
-                  <a key={social} href="#" className="font-mono text-[10px] uppercase tracking-[0.4em] hover:text-burnt-orange transition-colors">
-                    {social}
-                  </a>
-                ))}
-              </div>
+              {SOCIAL_LINKS.length > 0 && (
+                <div className="flex gap-6 border-t border-white/10 pt-8">
+                  {SOCIAL_LINKS.map(social => (
+                    <a key={social.short} href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name} className="font-mono text-[10px] uppercase tracking-[0.4em] hover:text-burnt-orange transition-colors">
+                      {social.short}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Right Half: Form */}
@@ -199,7 +202,7 @@ export default function ContactPage() {
                     >
                       <CheckCircle2 className="text-burnt-orange w-16 h-16" />
                       <h3 className="text-3xl font-display uppercase tracking-tight"><T k="contact.weve-got-it" label="Subheading">{"We've Got It."}</T></h3>
-                      <p className="text-white/60 text-sm leading-relaxed max-w-sm"><T k="contact.thanks-for-taking-the">{"Thanks for taking the time to fill this out. The Iconik Studios team will be in touch within 1–2 business days."}</T></p>
+                      <p className="text-white/80 text-sm leading-relaxed max-w-sm"><T k="contact.thanks-for-taking-the">{"Thanks for taking the time to fill this out. The Iconik Studios team will be in touch within 1–2 business days."}</T></p>
                       <button 
                         onClick={() => setStatus('idle')}
                         className="mt-4 px-6 py-3 border border-white/20 hover:border-white font-mono text-[10px] uppercase tracking-widest transition-colors"
@@ -319,7 +322,7 @@ export default function ContactPage() {
                   )}
                 </AnimatePresence>
 
-                <div className="mt-8 text-[10px] font-mono opacity-80 uppercase tracking-widest"><T k="contact.we-usually-respond-within">{"* We usually respond within 24-48 hours."}</T></div>
+                <div className="mt-8 text-[10px] font-mono opacity-80 uppercase tracking-widest"><T k="contact.we-usually-respond-within">{"* You'll get an automatic reply right away, and a real person within one business day."}</T></div>
                 <div className="mt-3 text-[10px] font-mono opacity-80 uppercase tracking-widest">
                   <a
                     href="https://rmd.theiconikstudios.com/privacy"

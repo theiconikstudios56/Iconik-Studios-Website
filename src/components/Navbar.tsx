@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Globe, Instagram, Linkedin, Twitter, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, Globe, ChevronDown } from 'lucide-react';
+import { SOCIAL_LINKS } from '../constants/social';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IconikLogo from './IconikLogo';
 import fuzzFuzzyImage from '../assets/images/web/fuzz_fuzzy.webp';
@@ -34,6 +35,15 @@ export default function Navbar() {
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [isServicesHovered, setIsServicesHovered] = useState(false);
   const location = useLocation();
+  // On phones the header gets a black bar and shrinks once the page moves, so
+  // the logo and menu button never sit on top of headlines or white sections.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -42,16 +52,20 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 p-6 flex justify-between items-center pointer-events-none">
+      <nav className={`fixed top-0 left-0 w-full z-50 px-4 lg:p-6 flex justify-between items-center pointer-events-none transition-[padding] duration-300 ${scrolled ? 'py-1.5' : 'py-3'}`}>
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 lg:hidden bg-ink/95 backdrop-blur-md border-b border-white/10 transition-opacity duration-300 ${scrolled && !isOpen ? 'opacity-100' : 'opacity-0'}`}
+        />
         {/* Logo Square */}
         <div className="flex-1 lg:flex-none">
           <Link to="/" className="pointer-events-auto inline-block">
             <motion.div 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="w-28 h-28 flex items-center justify-center group"
+              className={`relative lg:w-28 lg:h-28 flex items-center justify-center group transition-[width,height] duration-300 ${scrolled ? 'w-24 h-12' : 'w-28 h-28'}`}
             >
-              <div className="w-24 h-24 text-accent group-hover:scale-110 transition-transform duration-500">
+              <div className={`lg:w-24 lg:h-24 text-accent group-hover:scale-110 transition-[transform,width,height] duration-300 ${scrolled ? 'w-20 h-10' : 'w-24 h-24'}`}>
                  <IconikLogo color="#F5F2ED" />
               </div>
             </motion.div>
@@ -59,7 +73,7 @@ export default function Navbar() {
         </div>
 
         {/* Nav Links - Center (Hidden on small) */}
-        <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-10 bg-ink/30 backdrop-blur-md px-10 py-5 border border-white/10 rounded-full pointer-events-auto">
+        <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-10 bg-ink/75 backdrop-blur-md px-10 py-5 border border-white/10 rounded-full pointer-events-auto">
           {MENU_ITEMS.map((item) => (
             <div 
               key={item.name} 
@@ -97,15 +111,16 @@ export default function Navbar() {
         </div>
 
         {/* Action Area - Right */}
-        <div className="flex-1 lg:flex-none flex items-center justify-end gap-5 pointer-events-auto">
+        <div className="relative flex-1 lg:flex-none flex items-center justify-end gap-5 pointer-events-auto">
           <Link to="/contact" className="hidden lg:block">
             <button className="bg-paper text-ink px-10 py-5 rounded-full font-display text-base tracking-widest hover:bg-accent transition-all hover:-translate-y-1"><T k="shared.nav.lets-talk" label="Button">{"LET'S TALK"}</T></button>
           </Link>
           <button 
             onClick={toggleMenu}
-            className="w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-colors text-paper shrink-0"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            className={`lg:hidden bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 text-paper shrink-0 ${scrolled ? 'w-10 h-10' : 'w-12 h-12'}`}
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
@@ -203,11 +218,15 @@ export default function Navbar() {
                 ))}
               </div>
 
-              <div className="pt-12 flex gap-8 text-paper">
-                <Instagram className="hover:text-accent cursor-pointer transition-colors" />
-                <Linkedin className="hover:text-accent cursor-pointer transition-colors" />
-                <Twitter className="hover:text-accent cursor-pointer transition-colors" />
-              </div>
+              {SOCIAL_LINKS.length > 0 && (
+                <div className="pt-12 flex gap-8 text-paper font-mono text-xs uppercase tracking-[0.3em]">
+                  {SOCIAL_LINKS.map((social) => (
+                    <a key={social.short} href={social.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                      {social.name}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         )}

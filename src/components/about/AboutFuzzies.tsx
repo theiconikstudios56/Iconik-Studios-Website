@@ -6,7 +6,7 @@ import { Img, T } from '../../content';
 
 export default function AboutFuzzies() {
   return (
-    <section className="py-32 bg-tan text-ink border-b border-ink/5 relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-tan text-ink border-b border-ink/5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           {/* Content Block */}
@@ -18,7 +18,7 @@ export default function AboutFuzzies() {
             
             <h2 className="text-5xl md:text-7xl font-display uppercase leading-none tracking-tighter"><T k="about.fuzzies.meet-the-fuzzies" em="text-burnt-orange italic" label="Heading">{"Meet the *Fuzzies*"}</T></h2>
             
-            <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-90 font-mono">
+            <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-90 font-sans">
               <p><T k="about.fuzzies.at-the-heart-of">{"At the heart of Iconik Studios are the Fuzzies — our brand mascots and the living face of every AI agent and automated workflow system we build and deploy for our clients. When you partner with us, the Fuzzies go to work for you — running in the background, capturing leads, automating processes, and scaling your business while you focus on what matters most."}</T></p>
               <p><T k="about.fuzzies.they-also-carry-something">{"They also carry something deeper. Named with love in memory of someone who meant everything to our founder, the Fuzzies represent more than technology — they represent heart, purpose, and the belief that what we build should leave a lasting difference in the world."}</T></p>
               <p className="border-t border-ink/10 pt-6 mt-6"><T k="about.fuzzies.we-operate-as-an">{"We operate as an elite collective, not a factory. Quality over quantity isn't a tagline — it's the filter for everything we take on. We build with purpose. We design with intention. And we show up for every partner with one simple goal: to leave a lasting mark, one business at a time."}</T></p>

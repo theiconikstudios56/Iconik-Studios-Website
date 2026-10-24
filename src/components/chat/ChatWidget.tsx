@@ -25,6 +25,8 @@ const FAST_MS = 4000;
 const SLOW_MS = 15000;
 const QUIET_AFTER_MS = 120000;
 const RECENT_MS = 3600000;
+// Below Tailwind's sm: the chat opens full screen.
+const PHONE = '(max-width: 639px)';
 
 /**
  * The website chat (RMD Step 5.4d), replacing GoHighLevel's widget. Visitors
@@ -49,6 +51,15 @@ export default function ChatWidget() {
   const lastNew = useRef(Date.now());
   const panel = useRef<HTMLDivElement>(null);
   const bubble = useRef<HTMLButtonElement>(null);
+  const [phone, setPhone] = useState(() => window.matchMedia(PHONE).matches);
+
+  // Turning a phone sideways can cross the breakpoint while the chat is open.
+  useEffect(() => {
+    const query = window.matchMedia(PHONE);
+    const change = () => setPhone(query.matches);
+    query.addEventListener('change', change);
+    return () => query.removeEventListener('change', change);
+  }, []);
 
   useEffect(() => {
     getConfig().then(setConfig).catch(() => setConfig(null));
@@ -112,7 +123,8 @@ export default function ChatWidget() {
     if (open) setUnread(0);
   }, [open, messages.length]);
 
-  // Escape closes; focus goes back to the bubble.
+  // Escape closes; focus goes back to the bubble. The first field takes focus
+  // only with a mouse: on a phone that would open the keyboard at once.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -122,9 +134,38 @@ export default function ChatWidget() {
       }
     };
     document.addEventListener('keydown', onKey);
-    panel.current?.querySelector<HTMLElement>('input, textarea')?.focus();
+    if (window.matchMedia('(pointer: fine)').matches) panel.current?.querySelector<HTMLElement>('input, textarea')?.focus();
     return () => document.removeEventListener('keydown', onKey);
   }, [open, chat]);
+
+  // On a phone the open chat fills the screen: the page behind it is held
+  // still (iOS ignores overflow alone, so the body is pinned where it was), and
+  // the panel follows the visible area so the keyboard never covers the reply box.
+  useEffect(() => {
+    if (!open || !phone) return;
+    const y = window.scrollY;
+    const body = document.body.style;
+    const before = { position: body.position, top: body.top, left: body.left, right: body.right, overflow: body.overflow };
+    Object.assign(body, { position: 'fixed', top: `-${y}px`, left: '0', right: '0', overflow: 'hidden' });
+    const view = window.visualViewport;
+    const fit = () => {
+      const el = panel.current;
+      if (!el || !view) return;
+      el.style.height = `${view.height}px`;
+      el.style.transform = `translateY(${view.offsetTop}px)`;
+    };
+    fit();
+    view?.addEventListener('resize', fit);
+    view?.addEventListener('scroll', fit);
+    return () => {
+      view?.removeEventListener('resize', fit);
+      view?.removeEventListener('scroll', fit);
+      panel.current?.style.removeProperty('height');
+      panel.current?.style.removeProperty('transform');
+      Object.assign(body, before);
+      window.scrollTo(0, y);
+    };
+  }, [open, phone]);
 
   if (!config?.enabled && !chat) return null;
   const look = resolveChatWidget(config?.widget);
@@ -160,9 +201,9 @@ export default function ChatWidget() {
           ref={panel}
           role="dialog"
           aria-label={look.title}
-          className="flex h-[min(36rem,calc(100svh-6.5rem))] w-[calc(100vw-2rem)] max-w-[24rem] flex-col overflow-hidden rounded-[var(--cw-r-panel)] border border-[var(--cw-line)] bg-[var(--cw-bg)] text-[var(--cw-text)] shadow-2xl shadow-black/60"
+          className="flex h-[min(36rem,calc(100svh-6.5rem))] w-[calc(100vw-2rem)] max-w-[24rem] flex-col overflow-hidden overscroll-contain rounded-[var(--cw-r-panel)] border border-[var(--cw-line)] bg-[var(--cw-bg)] text-[var(--cw-text)] shadow-2xl shadow-black/60 max-sm:fixed max-sm:inset-x-0 max-sm:top-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:rounded-none max-sm:border-0 max-sm:shadow-none"
         >
-          <header className="flex items-start justify-between gap-3 bg-[var(--cw-accent)] px-5 py-4 text-[var(--cw-on-accent)]">
+          <header className="flex shrink-0 items-start justify-between gap-3 bg-[var(--cw-accent)] px-5 py-4 text-[var(--cw-on-accent)]">
             <div className="flex min-w-0 items-center gap-3">
               {look.logo_url && <img src={look.logo_url} alt="" className="size-10 shrink-0 rounded-[min(var(--cw-r-control),8px)] object-contain" />}
               <div className="min-w-0">
@@ -213,7 +254,7 @@ export default function ChatWidget() {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close the chat' : unread ? `Open the chat, ${unread} new ${unread === 1 ? 'reply' : 'replies'}` : look.launcher_text || 'Chat with us'}
         aria-expanded={open}
-        className={`relative flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--cw-accent)] text-[var(--cw-on-accent)] shadow-lg shadow-black/40 transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cw-accent)] ${look.launcher_text && !open ? 'px-5' : 'w-14'}`}
+        className={`relative flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--cw-accent)] text-[var(--cw-on-accent)] shadow-lg shadow-black/40 transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cw-accent)] ${look.launcher_text && !open ? 'px-5' : 'w-14'} ${open ? 'max-sm:hidden' : ''}`}
       >
         {open ? (
           <X size={24} />
@@ -234,7 +275,7 @@ export default function ChatWidget() {
 }
 
 const field =
-  'w-full rounded-[var(--cw-r-control)] border border-[var(--cw-line)] bg-[var(--cw-field)] px-3 py-2.5 font-mono text-sm text-[var(--cw-text)] placeholder:text-[var(--cw-text-40)] focus:border-[var(--cw-accent)] focus:outline-none';
+  'w-full rounded-[var(--cw-r-control)] border border-[var(--cw-line)] bg-[var(--cw-field)] px-3 py-2.5 font-mono text-base text-[var(--cw-text)] sm:text-sm placeholder:text-[var(--cw-text-40)] focus:border-[var(--cw-accent)] focus:outline-none';
 const button =
   'rounded-[var(--cw-r-control)] bg-[var(--cw-accent)] text-[var(--cw-on-accent)] transition hover:brightness-110 disabled:opacity-60';
 
@@ -298,7 +339,7 @@ function StartForm({
   };
 
   return (
-    <form onSubmit={submit} className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-5">
+    <form onSubmit={submit} className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain p-5">
       <p className="font-mono text-sm leading-relaxed">{greeting}</p>
       {assistant && <p className="font-mono text-[11px] leading-relaxed text-[var(--cw-text-60)]">{look.ai_notice}</p>}
       <label className="sr-only" htmlFor="chat-name">{look.name_placeholder}</label>
@@ -354,10 +395,10 @@ function Conversation({
   const [body, setBody] = useState('');
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const end = useRef<HTMLDivElement>(null);
+  const list = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    end.current?.scrollIntoView({ block: 'end' });
+    if (list.current) list.current.scrollTop = list.current.scrollHeight;
   }, [messages.length, typing]);
 
   const send = async (e?: FormEvent) => {
@@ -382,7 +423,7 @@ function Conversation({
 
   return (
     <>
-      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4" aria-live="polite">
+      <div ref={list} className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain p-4" aria-live="polite">
         {messages.map((m) => {
           const mine = m.kind === 'visitor';
           return (
@@ -415,9 +456,8 @@ function Conversation({
         ) : (
           waiting && <p className="font-mono text-[11px] text-[var(--cw-text-50)]">{look.waiting_text.replaceAll('{first_name}', chat.firstName)}</p>
         )}
-        <div ref={end} />
       </div>
-      <form onSubmit={send} className="border-t border-[var(--cw-line-soft)] p-3">
+      <form onSubmit={send} className="shrink-0 border-t border-[var(--cw-line-soft)] p-3">
         {(error || problem) && <p role="alert" className="mb-2 font-mono text-xs text-[var(--cw-mark)]">{error ?? problem}</p>}
         <div className="flex items-end gap-2">
           <label className="sr-only" htmlFor="chat-reply">{look.reply_placeholder}</label>

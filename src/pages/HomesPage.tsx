@@ -152,7 +152,7 @@ const ServiceMarquee = () => {
   const services = ["Web Design", "AI Automation", "Social Media", "Marketing", "Branding", "UI/UX Strategy"];
   
   return (
-    <section className="py-32 bg-paper text-ink overflow-hidden border-y border-ink/10">
+    <section className="py-20 md:py-32 bg-paper text-ink overflow-hidden border-y border-ink/10">
       <div className="flex whitespace-nowrap animate-marquee">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="flex items-center gap-24 mx-12">
@@ -178,7 +178,7 @@ const ServicesGrid = () => {
   ];
 
   return (
-    <section id="services" className="py-32 px-6 lg:px-12">
+    <section id="services" className="py-20 md:py-32 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <div className="space-y-12">
           {items.map((item, i) => (
@@ -216,7 +216,7 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="py-32 px-6 lg:px-12">
+    <section id="pricing" className="py-20 md:py-32 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center space-y-4">
           <h2 className="text-7xl md:text-9xl text-paper"><T k="homes.pricing" label="Heading">{"Pricing"}</T></h2>
@@ -264,7 +264,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-32 px-6 lg:px-12 bg-ink">
+    <section className="py-20 md:py-32 px-6 lg:px-12 bg-ink">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-8 sticky top-32 h-fit">
           <h2 className="text-7xl md:text-9xl text-paper"><T k="homes.faq" label="Heading">{"FAQ"}</T></h2>

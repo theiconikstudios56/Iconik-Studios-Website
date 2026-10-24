@@ -8,41 +8,33 @@ const pipelineSteps = [
     id: 0,
     title: "Webhook Ingest",
     short: "Instant Capture",
-    desc: "A prospect submits a form. Our system immediately captures the data payload, cleans it, and initiates the pipeline in less than 200ms.",
+    desc: "A client fills in a form or books online. Remedy, our own CRM, saves them as a new lead the moment they press send.",
     icon: Activity,
-    tech: "Vite / Deno Edge",
-    stat: "+391% Reach",
-    metric: "Latency: < 0.2s"
+    tech: "Remedy forms",
   },
   {
     id: 1,
     title: "Instant Response",
     short: "Speed-to-Lead SMS & Mail",
-    desc: "Within 45 seconds, the prospect receives a highly personalized SMS and email greeting. This instant touch-point captures lead attention while they are hot.",
+    desc: "An automatic reply reaches them right away, and a real person from your spa follows up within one business day, while their interest is still warm.",
     icon: Mail,
-    tech: "Twilio / SendGrid / LLM",
-    stat: "9x Booking Rate",
-    metric: "Response Time: 45s"
+    tech: "Remedy",
   },
   {
     id: 2,
     title: "CRM Synchronization",
     short: "Zero-Touch Data Flow",
-    desc: "Client details are instantly synced into GoHighLevel or HubSpot. Custom tags are applied, a deal is created in the pipeline, and the sales team is alerted via Slack.",
+    desc: "Their details land in Remedy with the right tags, a new deal opens in your pipeline, and your team gets a notification. Nobody copies anything by hand.",
     icon: Database,
-    tech: "Make / Zapier / REST",
-    stat: "100% Accurate",
-    metric: "Manual Input: 0%"
+    tech: "Remedy CRM",
   },
   {
     id: 3,
     title: "Autopilot Onboarding",
     short: "Instant Brief & Portal",
-    desc: "Once booked, a Stripe invoice is sent, a Google Drive folder structure is generated, and a custom client portal link is emailed automatically.",
+    desc: "Once they book, the deposit is taken, reminders and the before-your-visit forms go out, and the appointment appears on your front-desk calendar.",
     icon: Sparkles,
-    tech: "Node.js / Drive API",
-    stat: "-15 Hrs Admin/Wk",
-    metric: "Admin Friction: None"
+    tech: "Remedy + Stripe",
   }
 ];
 
@@ -61,7 +53,7 @@ const SuccessSection = () => {
   }, [isHovered]);
 
   return (
-    <section className="py-32 px-6 lg:px-12 bg-white text-ink rounded-3xl mx-4 my-12 border border-ink/5 relative overflow-hidden">
+    <section className="py-20 md:py-32 px-6 lg:px-12 bg-white text-ink rounded-3xl mx-4 my-12 border border-ink/5 relative overflow-hidden">
       {/* Subtle decorative background gradient grid lines */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#cd7f32_1px,transparent_1px)] [background-size:24px_24px]" />
 
@@ -71,7 +63,7 @@ const SuccessSection = () => {
         <div className="space-y-12 lg:col-span-6">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em] font-semibold"><T k="shared.success.scale-system-05">{"Scale System / 05"}</T></span>
+              <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em] font-semibold"><T k="shared.success.scale-system-05">{"Scale System"}</T></span>
               <div className="w-12 h-[1px] bg-burnt-orange/30" />
             </div>
             <h2 className="text-6xl md:text-8xl leading-[0.9] font-display uppercase tracking-tighter"><T k="shared.success.built-for-success" em="text-burnt-orange" label="Heading">{"Built for\n*Success.*"}</T></h2>
@@ -87,7 +79,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.instant-engagement-speed-to" label="Subheading">{"Instant Engagement (Speed to Lead)"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Our automated flows trigger personalized text and email responses within seconds of form submission."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Every new inquiry gets an automatic reply within seconds, and your team is told straight away."}</T></p>
                 </div>
               </div>
 
@@ -97,7 +89,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.seamless-data-flow-sync" label="Subheading">{"Seamless Data Flow & Sync"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.no-more-manual-copy">{"No more manual copy-pasting. Customer records are instantly synchronized across your custom web hooks, CRM databases (GHL, HubSpot), and team channels like Slack."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.no-more-manual-copy">{"No more copy-pasting. Every new client, booking and payment lands in Remedy, Iconik's own CRM, with the right tags and a deal in your pipeline."}</T></p>
                 </div>
               </div>
 
@@ -107,7 +99,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.hands-free-client-onboarding" label="Subheading">{"Hands-Free Client Onboarding"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-mono"><T k="shared.success.the-moment-a-client">{"The moment a client signs, pipelines generate standard invoices, spin up secure file storage, create Slack rooms, and dispatch project briefs automatically."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.the-moment-a-client">{"The moment a client books, Remedy takes the deposit, sends reminders and the forms to fill in before the visit, and puts the appointment on your calendar."}</T></p>
                 </div>
               </div>
             </div>
@@ -191,17 +183,9 @@ const SuccessSection = () => {
                               transition={{ duration: 0.3 }}
                               className="overflow-hidden mt-3 pt-3 border-t border-white/5 space-y-3"
                             >
-                              <p className="text-[11px] text-white/60 leading-relaxed font-mono">
+                              <p className="text-[11px] text-white/80 leading-relaxed font-mono">
                                 <T k={`shared.success.step${idx + 1}.text`} label={`Step ${idx + 1}: text`}>{step.desc}</T>
                               </p>
-                              <div className="flex justify-between items-center text-[10px] font-mono pt-1">
-                                <span className="text-burnt-orange font-bold uppercase tracking-wider bg-burnt-orange/10 px-2 py-1 rounded">
-                                  <T k={`shared.success.step${idx + 1}.stat`} label={`Step ${idx + 1}: result`}>{step.stat}</T>
-                                </span>
-                                <span className="text-white/40 italic">
-                                  <T k={`shared.success.step${idx + 1}.metric`} label={`Step ${idx + 1}: measure`}>{step.metric}</T>
-                                </span>
-                              </div>
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -212,35 +196,10 @@ const SuccessSection = () => {
               })}
             </div>
 
-            {/* Bottom aggregate metrics for WOW element */}
-            <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
-              <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.time-reclaimed">{"Time Reclaimed"}</T></p>
-                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.15h-wk">{"~15h/wk"}</T></p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.speed-to-lead">{"Speed to Lead"}</T></p>
-                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.45s">{"< 45s"}</T></p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-white/40"><T k="shared.success.accuracy-rate">{"Accuracy Rate"}</T></p>
-                <p className="font-display text-2xl text-burnt-orange"><T k="shared.success.100">{"100%"}</T></p>
-              </div>
-            </div>
-
             {/* Glowing gradient background sphere */}
             <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-burnt-orange/10 rounded-full blur-[100px] pointer-events-none" />
           </div>
 
-          {/* Floater Success Badge */}
-          <motion.div 
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-8 -right-8 bg-burnt-orange p-6 rounded-full flex flex-col items-center justify-center text-white w-28 h-28 shadow-2xl border-4 border-white z-20"
-          >
-            <span className="font-display text-2xl"><T k="shared.success.99">{"99%"}</T></span>
-            <span className="text-[9px] font-bold uppercase tracking-tight font-sans"><T k="shared.success.conversion">{"Conversion"}</T></span>
-          </motion.div>
         </div>
 
       </div>

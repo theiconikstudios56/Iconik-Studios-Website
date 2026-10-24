@@ -71,7 +71,7 @@ export default function About({ reversed = false, dark = false, staticBg = false
             {reversed ? (
               <>
                 <p>
-                  WE ARE A SMALL, HIGHLY SPECIALIZED TEAM OF DESIGNERS, DEVELOPERS, AND AI ARCHITECTS. WE DON'T DO RETAINERS; WE DO RESULTS.
+                  WE ARE A SMALL, HIGHLY SPECIALIZED TEAM OF DESIGNERS, DEVELOPERS, AND AI ARCHITECTS. NO LOCK-IN CONTRACTS; JUST RESULTS.
                 </p>
                 <p>
                   EVERY PROJECT IS A MISSION. EVERY LINE OF CODE IS A STRATEGIC MOVE. WE OPERATE IN THE SHADOWS TO ENSURE YOUR BRAND SHINES IN THE LIGHT.

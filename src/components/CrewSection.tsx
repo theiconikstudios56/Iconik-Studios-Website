@@ -15,7 +15,7 @@ export default function CrewSection() {
     <section 
       id="crew" 
       ref={crewRef}
-      className="py-32 md:py-64 px-6 md:px-12 border-b border-ink/10 relative overflow-hidden bg-ink text-tan"
+      className="py-20 md:py-64 px-6 md:px-12 border-b border-ink/10 relative overflow-hidden bg-ink text-tan"
     >
       {/* Parallax Background Images for Crew */}
       <div className="absolute inset-0 z-0 overflow-hidden opacity-40">

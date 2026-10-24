@@ -79,7 +79,7 @@ export default function ProjectPage() {
               ))}
             </div>
             {project.description && (
-              <p className="mt-6 text-sm text-ink opacity-80 leading-relaxed font-mono">
+              <p className="mt-6 text-sm text-ink opacity-80 leading-relaxed font-sans">
                 {project.description}
               </p>
             )}

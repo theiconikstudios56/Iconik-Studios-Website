@@ -12,8 +12,8 @@ export default function AboutPage() {
   return (
     <Layout
       page="about"
-      title="About Iconik Studios | Elite Web Design & Automation"
-      description="Learn about Iconik Studios, our philosophy, and how we engineer digital legacies for discerning brands."
+      title="About Iconik Studios | Med Spa Web Design & Automation Agency"
+      description="Iconik Studios is a Phoenix design and automation studio for med spas: websites, online booking and follow-up systems, built on Remedy, our own CRM."
     >
       <div className="bg-tan text-ink selection:bg-burnt-orange selection:text-tan">
         <AboutHero />

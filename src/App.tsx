@@ -24,7 +24,6 @@ import AboutHero from './components/AboutHero';
 import AboutStory from './components/about/AboutStory';
 
 import Layout from './components/Layout';
-import GlobalCursor from './components/GlobalCursor';
 
 import ServicesShowcase from './components/ServicesShowcase';
 import StackedServices from './components/StackedServices';
@@ -50,7 +49,6 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const HomesPage = lazy(() => import('./pages/HomesPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
-const IntakePage = lazy(() => import('./pages/IntakePage'));
 const TemplatesPage = lazy(() => import('./pages/TemplatesPage'));
 const TemplatePage = lazy(() => import('./pages/TemplatePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
@@ -107,13 +105,13 @@ function Home() {
   return (
     <Layout
       page="home"
-      title="AI Powered User Experience Design Agency | Iconik Studios"
-      description="Iconik Studios is a boutique design and automation agency. We engineer digital legacies with high-end aesthetic strategy and robust backend automation."
+      title="Med Spa Website Design & AI Automation | Iconik Studios"
+      description="Med spa websites, online booking and AI follow-up that turn ad clicks into booked appointments. Built in Phoenix, Arizona, and run on Remedy, our own CRM."
     >
       <div className="relative z-10 bg-ink">
         <Hero />
         <PropertyShowcase />
-        <section className="px-6 lg:px-12 py-32 overflow-hidden">
+        <section className="px-6 lg:px-12 py-20 md:py-32 overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
               <motion.div
@@ -123,7 +121,7 @@ function Home() {
                 transition={{ duration: 0.8 }}
               >
                 <div className="flex items-center gap-4 mb-8">
-                  <span className="text-accent font-mono text-sm tracking-[0.3em]"><T k="home.services.eyebrow">{"SERVICES / 01"}</T></span>
+                  <span className="text-accent font-mono text-sm tracking-[0.3em]"><T k="home.services.eyebrow">{"SERVICES"}</T></span>
                   <div className="w-12 h-[1px] bg-accent/30" />
                 </div>
                 <h2 className="text-6xl md:text-[6.5vw] font-display text-tan uppercase tracking-tighter leading-[1.05] mb-12">
@@ -230,7 +228,6 @@ export default function App() {
     <Router>
       <RmdTracking />
       <ScrollToTop />
-      <GlobalCursor />
       {/* While a page's code loads: the site's dark background, no flash of white. */}
       <Suspense fallback={<div className="min-h-screen bg-ink" />}>
       <Routes>
@@ -252,7 +249,8 @@ export default function App() {
         <Route path="/proposals/*" element={<Navigate to="/contact" replace />} />
         <Route path="/contract" element={<Navigate to="/contact" replace />} />
         <Route path="/admin/*" element={<Navigate to="/contact" replace />} />
-        <Route path="/intake" element={<IntakePage />} />
+        {/* Onboarding questions now come from RMD's questionnaire link; old links land on Contact. */}
+        <Route path="/intake" element={<Navigate to="/contact" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </Suspense>

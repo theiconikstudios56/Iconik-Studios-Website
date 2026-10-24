@@ -7,7 +7,7 @@ import { Img, T } from '../content';
 
 export default function PropertyShowcase() {
   return (
-    <section className="bg-ink text-tan py-32 min-h-[90vh] flex flex-col justify-center items-center relative overflow-hidden">
+    <section className="bg-ink text-tan py-20 md:py-32 min-h-[90vh] flex flex-col justify-center items-center relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full flex flex-col items-center gap-16 relative z-10 text-center">
         
         {/* Narrative (Top Centered) */}

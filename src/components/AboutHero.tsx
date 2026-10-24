@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import studioFuzzyImage from '../assets/images/web/studio-fuzzy.webp';
 import { T, useImg } from '../content';
 
@@ -60,15 +61,16 @@ export default function AboutHero() {
           <p className="font-mono text-[10px] uppercase tracking-widest leading-relaxed text-white"><T k="about.hero.a-boutique-creative-studio">{"A boutique creative studio dedicated to architecting digital legacies for pioneering brands."}</T></p>
         </div>
 
-        {/* Corners Content - Bottom Right */}
-        <div className="absolute bottom-10 right-10 z-30">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-32 h-32 bg-burnt-orange flex flex-col items-center justify-center text-center p-4 rounded-sm"
-          >
-            <span className="font-mono text-[10px] font-bold text-black uppercase leading-tight"><T k="about.hero.colab-with-us">{"Colab\nWith Us"}</T></span>
-          </motion.button>
+        {/* Corners Content - Bottom Right (wide screens: on a phone it covered the intro) */}
+        <div className="absolute bottom-10 right-10 z-30 hidden md:block">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              to="/contact"
+              className="w-32 h-32 bg-burnt-orange flex flex-col items-center justify-center text-center p-4 rounded-sm"
+            >
+              <span className="font-mono text-[10px] font-bold text-black uppercase leading-tight"><T k="about.hero.colab-with-us">{"Collab\nWith Us"}</T></span>
+            </Link>
+          </motion.div>
         </div>
 
         {/* Subtle Vignette */}

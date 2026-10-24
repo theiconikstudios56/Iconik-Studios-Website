@@ -12,7 +12,7 @@ export default function AboutCollective() {
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
   return (
-    <section className="py-32 bg-tan text-ink border-b border-ink/5 relative overflow-visible">
+    <section className="py-20 md:py-32 bg-tan text-ink border-b border-ink/5 relative overflow-visible">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24 flex justify-between items-end">
           <div className="max-w-2xl">
@@ -32,7 +32,7 @@ export default function AboutCollective() {
               key={i}
               onMouseEnter={() => setActiveImage(member.image)}
               onMouseLeave={() => setActiveImage(null)}
-              className="group py-12 border-b border-ink/10 flex justify-between items-center cursor-none"
+              className="group py-12 border-b border-ink/10 flex justify-between items-center"
             >
               <div className="flex items-baseline gap-8">
                 <span className="font-mono text-xs opacity-60">0{i + 1}</span>

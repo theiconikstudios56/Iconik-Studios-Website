@@ -38,7 +38,7 @@ export default function Showcase() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section data-bg="tan" className="py-32 text-ink overflow-hidden relative">
+    <section data-bg="tan" className="py-20 md:py-32 text-ink overflow-hidden relative">
       <div className="w-full">
         <div className="px-6 md:px-12 mb-20 text-center">
           <span className="text-lg font-serif italic text-burnt-orange mb-2 block">Selected Work</span>

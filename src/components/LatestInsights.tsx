@@ -1,34 +1,17 @@
 import { motion } from 'motion/react';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { T } from '../content';
 import { fetchArticles, type Article } from '../lib/rmdArticles';
+import { blogDate, blogPlaceholder } from '../lib/blogCards';
 
 
-const DEFAULT_IMAGES = [
-  "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&q=80&w=1200",
-];
 
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = String(date.getFullYear()).slice(2);
-  return `${day}.${month}.${year}`;
-}
 
 const LatestInsights = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function load() {
@@ -45,8 +28,8 @@ const LatestInsights = () => {
   }, []);
 
   return (
-    <section className="py-32 px-6 lg:px-12 bg-black text-white">
-      <div className="max-w-[1800px] mx-auto space-y-24">
+    <section className="py-20 md:py-32 px-6 lg:px-12 bg-black text-white">
+      <div className="max-w-[1800px] mx-auto space-y-12 md:space-y-24">
         {/* Header Section */}
         <div className="text-center space-y-6">
           <motion.h2 
@@ -62,11 +45,11 @@ const LatestInsights = () => {
           ><T k="shared.insights.deep-dives-into-the">{"\"Deep dives into the intersection of design and technology.\""}</T></motion.p>
         </div>
 
-        {/* Grid Section - Matching Blog Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+        {/* Grid Section - Matching Blog Style. On phones a sideways swipe row, not a tall stack. */}
+        <div className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-16 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
           {loading ? (
             Array.from({ length: 4 }).map((_, index) => (
-              <div key={index} className="animate-pulse space-y-8">
+              <div key={index} className="animate-pulse space-y-8 w-[78%] shrink-0 snap-start md:w-auto">
                 <div className="aspect-[3/4] bg-white/5" />
                 <div className="space-y-4 px-1">
                   <div className="h-7 bg-white/10 w-11/12" />
@@ -81,26 +64,26 @@ const LatestInsights = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-                className="group cursor-pointer"
-                onClick={() => navigate(`/blog/${item.slug}`)}
+                className="group w-[78%] shrink-0 snap-start md:w-auto"
               >
+                <Link to={`/blog/${item.slug}`} className="block">
                 {/* Image Container with Badge */}
                 <div className="relative aspect-[3/4] overflow-hidden bg-white/5 mb-8">
                   {/* Release Badge */}
                   <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-                    <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] font-bold tracking-widest whitespace-nowrap"><T k="shared.insights.releases">{"RELEASES —"}</T>{" "}{formatDate(item.created_at)}
+                    <div className="bg-white text-black px-6 py-2 rounded-full font-mono text-[10px] font-bold tracking-widest whitespace-nowrap"><T k="shared.insights.releases">{"RELEASES —"}</T>{" "}{blogDate(item.created_at)}
                     </div>
                   </div>
 
                   <motion.img
                     loading="lazy"
                     decoding="async"
-                    src={item.image_url || DEFAULT_IMAGES[index % DEFAULT_IMAGES.length]} 
+                    src={item.image_url || blogPlaceholder(index)} 
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:brightness-110"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = DEFAULT_IMAGES[index % DEFAULT_IMAGES.length];
+                      (e.target as HTMLImageElement).src = blogPlaceholder(index);
                     }}
                   />
                   
@@ -119,6 +102,7 @@ const LatestInsights = () => {
                     className="h-[1.5px] bg-burnt-orange mt-6 w-0 group-hover:w-full transition-all duration-500 origin-left"
                   />
                 </div>
+              </Link>
               </motion.article>
             ))
           )}

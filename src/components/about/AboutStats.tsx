@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 export default function AboutStats() {
   return (
-    <section className="py-40 bg-burnt-orange text-white">
+    <section className="py-20 md:py-40 bg-burnt-orange text-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-24">
           <motion.div

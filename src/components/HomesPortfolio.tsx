@@ -55,7 +55,7 @@ export default function HomesPortfolio() {
   }, [scrollYProgress, PROJECTS.length]);
 
   return (
-    <section ref={sectionRef} className="relative h-[250vh] bg-ink">
+    <section ref={sectionRef} className="relative h-[180vh] md:h-[250vh] bg-ink">
       <div className="sticky top-0 h-screen w-full flex flex-col pt-32 pb-12 overflow-hidden">
         
         {/* Title */}
