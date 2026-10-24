@@ -50,8 +50,16 @@ const HomesContact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
 
+  const backdrop = useImg('shared.contact.image', fuzzySuccessImg, 'Success Pre-Footer', 'Background picture');
+  // Hidden on the live site while the reviews are still placeholders; shown in
+  // RMD's website editor, and everywhere once a real one replaces the first.
+  const firstQuote = useText('shared.contact.review1.quote', REVIEWS[0].quote, { label: 'Review 1: quote' });
+  const editing = useEditor().on;
+  const hidden = !editing && firstQuote.startsWith('Lorem ipsum');
+
+  // A hidden section has nothing to track (Motion stops on a ref that's never attached).
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: hidden ? undefined : sectionRef,
     offset: ["start end", "end start"]
   });
 
@@ -97,12 +105,7 @@ const HomesContact = () => {
     startAutoplay();
   };
 
-  const backdrop = useImg('shared.contact.image', fuzzySuccessImg, 'Success Pre-Footer', 'Background picture');
-  // Hidden on the live site while the reviews are still placeholders; shown in
-  // RMD's website editor, and everywhere once a real one replaces the first.
-  const firstQuote = useText('shared.contact.review1.quote', REVIEWS[0].quote, { label: 'Review 1: quote' });
-  const editing = useEditor().on;
-  if (!editing && firstQuote.startsWith('Lorem ipsum')) return null;
+  if (hidden) return null;
   return (
     <section 
       id="contact" 

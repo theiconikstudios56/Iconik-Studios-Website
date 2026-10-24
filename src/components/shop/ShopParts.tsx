@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Check, Globe2, History, Mail, MousePointerClick, PenLine, ShieldCheck } from 'lucide-react';
-import { money, shop } from '../../lib/shop';
 
 /** A screenshot in a plain browser window, the way a buyer will see their site. */
 export function BrowserFrame({ src, alt, address, scroll = false, className = '' }: { src?: string; alt: string; address: string; scroll?: boolean; className?: string }) {
@@ -81,17 +80,6 @@ export function Questions() {
         </div>
       ))}
     </div>
-  );
-}
-
-/** "$129 once, then $15/month" in the shop's own numbers. */
-export function PriceLine({ className = '' }: { className?: string }) {
-  if (!shop) return null;
-  const lowest = Math.min(...shop.templates.map((t) => t.price));
-  return (
-    <p className={`font-mono text-xs uppercase tracking-[0.3em] ${className}`}>
-      {money(lowest)} once <span className="text-burnt-orange">/</span> then {money(shop.plans.monthly)} a month for hosting
-    </p>
   );
 }
 
