@@ -1,10 +1,12 @@
 // /sitemap.xml (and /api/sitemap): every page of theiconikstudios.com for
 // Google, including each published blog article and portfolio project. The
 // articles and projects come from RMD (BUILD_PLAN A16 there), so a new one
-// is listed as soon as it's published.
+// is listed as soon as it's published. The template shop's pages come from
+// Sites' catalogue (RMD-crm BUILD_PLAN 11.10), once it has templates for sale.
 
 const SITE = 'https://www.theiconikstudios.com';
 const RMD = 'https://winicrmzmcgfwrrynoxd.supabase.co/functions/v1';
+const SHOP_CATALOG = 'https://app.iconik.site/shop/catalog.json';
 
 const PAGES = [
   { url: '/', priority: '1.0', changefreq: 'weekly' },
@@ -30,7 +32,12 @@ async function json(url) {
 }
 
 export default async function handler(req, res) {
-  const [articles, content] = await Promise.all([json(`${RMD}/website-articles`).catch(() => []), json(`${RMD}/website-content`).catch(() => null)]);
+  const [articles, content, catalog] = await Promise.all([
+    json(`${RMD}/website-articles`).catch(() => []),
+    json(`${RMD}/website-content`).catch(() => null),
+    json(SHOP_CATALOG).catch(() => null),
+  ]);
+  const templates = (Array.isArray(catalog?.templates) ? catalog.templates : []).filter((t) => t && /^[a-z0-9-]+$/.test(t.slug));
 
   let projects = START_PROJECTS;
   try {
@@ -42,6 +49,9 @@ export default async function handler(req, res) {
 
   const entries = [
     ...PAGES,
+    ...(templates.length
+      ? [{ url: '/templates', priority: '0.8', changefreq: 'weekly' }, ...templates.map((t) => ({ url: `/templates/${t.slug}`, priority: '0.7', changefreq: 'monthly' }))]
+      : []),
     ...projects.map((id) => ({ url: `/project/${id}`, priority: '0.6', changefreq: 'monthly' })),
     ...(Array.isArray(articles) ? articles : [])
       .filter((a) => a && /^[a-z0-9-]+$/.test(a.slug))

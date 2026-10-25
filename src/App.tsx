@@ -30,6 +30,7 @@ import StackedServices from './components/StackedServices';
 import { FAQ } from './components/PricingFAQ';
 import { ServicesGrid } from './components/HomesServices';
 import HomesPortfolio from './components/HomesPortfolio';
+import TemplateShowcase from './components/shop/TemplateShowcase';
 import ClientLogos from './components/ClientLogos';
 import SuccessSection from './components/SuccessSection';
 import SMBEmpowerment from './components/SMBEmpowerment';
@@ -49,6 +50,8 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const HomesPage = lazy(() => import('./pages/HomesPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
+const TemplatesPage = lazy(() => import('./pages/TemplatesPage'));
+const TemplatePage = lazy(() => import('./pages/TemplatePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
 
@@ -197,6 +200,7 @@ function Home() {
           </StaticSection>
         </div>
         <HomesPortfolio />
+        <TemplateShowcase />
         <ClientLogos />
         <FAQ />
         <FuzzyLineupSection />
@@ -235,6 +239,8 @@ export default function App() {
         <Route path="/services/ai-automation" element={<AIWorkflows />} />
         <Route path="/services/maintenance" element={<Maintenance />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/templates" element={<TemplatesPage />} />
+        <Route path="/templates/:slug" element={<TemplatePage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/homes" element={<HomesPage />} />
