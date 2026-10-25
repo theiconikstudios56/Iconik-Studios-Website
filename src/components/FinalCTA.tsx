@@ -17,13 +17,11 @@ const FinalCTA = () => {
               className="text-[10px] uppercase tracking-[0.6em] font-bold text-accent block"
             ><T k="shared.final.iconik-studios">{"ICONIK STUDIOS"}</T></motion.span>
             
-            {/* Main Heading */}
-            <motion.h2 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8 }}
+            {/* Main Heading. No fade: the footer sits fixed behind the page, so a fade would run unseen at load
+                and hold back the page's measured loading time (LCP). */}
+            <h2
               className="text-5xl md:text-7xl lg:text-[8vw] font-display leading-[0.95] uppercase tracking-tighter"
-            ><T k="shared.final.lets-build-something-iconik">{"Let's build\nsomething\niconik"}</T></motion.h2>
+            ><T k="shared.final.lets-build-something-iconik">{"Let's build\nsomething\niconik"}</T></h2>
           </div>
 
           {/* Buttons */}

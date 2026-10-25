@@ -32,6 +32,9 @@ import { ServicesGrid } from './components/HomesServices';
 import HomesPortfolio from './components/HomesPortfolio';
 import TemplateShowcase from './components/shop/TemplateShowcase';
 import ClientLogos from './components/ClientLogos';
+// The shop's pages are where campaign posts land, so they come with the first download (no second round trip).
+import TemplatesPage from './pages/TemplatesPage';
+import TemplatePage from './pages/TemplatePage';
 import SuccessSection from './components/SuccessSection';
 import SMBEmpowerment from './components/SMBEmpowerment';
 import FuzzyLineupSection from './components/FuzzyLineupSection';
@@ -50,8 +53,6 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const HomesPage = lazy(() => import('./pages/HomesPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
-const TemplatesPage = lazy(() => import('./pages/TemplatesPage'));
-const TemplatePage = lazy(() => import('./pages/TemplatePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
 
@@ -64,13 +65,21 @@ function ChatLauncher() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     if (!chatAvailable) return;
+    // After the page has loaded, then when the browser is idle: the chat never slows the first screen.
+    let idle: number | undefined;
+    let timer: number | undefined;
     const start = () => setReady(true);
-    if (typeof window.requestIdleCallback === 'function') {
-      const id = window.requestIdleCallback(start, { timeout: 4000 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const id = window.setTimeout(start, 2500);
-    return () => window.clearTimeout(id);
+    const whenIdle = () => {
+      if (typeof window.requestIdleCallback === 'function') idle = window.requestIdleCallback(start, { timeout: 4000 });
+      else timer = window.setTimeout(start, 2500);
+    };
+    if (document.readyState === 'complete') whenIdle();
+    else window.addEventListener('load', whenIdle, { once: true });
+    return () => {
+      window.removeEventListener('load', whenIdle);
+      if (idle !== undefined) window.cancelIdleCallback(idle);
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
   }, []);
   if (!ready || inEditor || NO_CHAT.test(pathname)) return null;
   return (

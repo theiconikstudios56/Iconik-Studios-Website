@@ -30,7 +30,8 @@ export default function TemplatesPage() {
       <div className="bg-ink text-paper">
         <section className="relative overflow-hidden px-6 pb-16 pt-36 lg:px-12 lg:pb-20 lg:pt-44">
           <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-16 lg:grid-cols-12">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-6">
+            {/* Slides in but is never invisible, so the page counts as loaded as soon as it shows. */}
+            <motion.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-6">
               <div className="mb-8 flex items-center gap-4">
                 <div className="h-[1px] w-12 bg-burnt-orange" />
                 <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange"><T k="templates.eyebrow">{"Website Templates"}</T></span>
@@ -179,6 +180,8 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
                 src={full}
                 alt={`The ${template.name} template’s home page`}
                 loading="lazy"
+                // Tall full-page screenshots: never ahead of the page's own text, fonts and code.
+                fetchPriority="low"
                 decoding="async"
                 className="absolute inset-x-0 top-0 w-full transition-transform duration-[7000ms] ease-in-out group-hover:-translate-y-[calc(100%-20rem)] md:group-hover:-translate-y-[calc(100%-24rem)] motion-reduce:transition-none"
               />

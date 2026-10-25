@@ -38,7 +38,7 @@ export default function TemplatePage() {
                   <Purchase template={template} />
                 </div>
               </div>
-              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="lg:col-span-7">
+              <motion.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="lg:col-span-7">
                 <BrowserFrame src={pictureOf(template.slug, 'full')} alt={`The ${template.name} template’s home page, top to bottom`} address={template.demo.replace('https://', '')} scroll />
                 <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">Scroll the preview, or open the live demo to click around</p>
               </motion.div>
@@ -108,7 +108,8 @@ function Purchase({ template }: { template: ShopTemplate }) {
   }
 
   return (
-    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+    // Slides in but is never invisible: the template's name is the first thing a visitor from a post should see.
+    <motion.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8 }}>
       <p className="mb-4 font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange">{template.industry} website</p>
       <h1 className="mb-6 font-display text-7xl uppercase leading-none tracking-tighter md:text-8xl">{template.name}</h1>
       <p className="mb-8 text-lg leading-relaxed text-white/75">{template.summary}</p>
