@@ -50,7 +50,7 @@ export default async function middleware(request: Request) {
   if (cookie && (await sha256(cookie)) === PREVIEW_HASH) return next();
 
   const page = await fetch(new URL('/coming-soon/index.html', url)).catch(() => null);
-  const html = page?.ok ? await page.text() : '<!doctype html><title>Iconik Studios</title><p>Something iconik is on the way.</p>';
+  const html = page?.ok ? await page.text() : '<!doctype html><title>Iconik Studios</title><p>Iconik Studios is coming soon.</p>';
   return new Response(html, {
     status: 503,
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '86400', 'Cache-Control': 'no-store' },

@@ -96,15 +96,9 @@
     }
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-    h1 {
-      margin: 0; max-width: 22ch;
-      font: italic 400 clamp(26px, 4.4vw, 40px)/1.15 var(--serif);
-      text-wrap: balance;
-      opacity: 0; animation: rise 1s 1.5s cubic-bezier(.2,.7,.2,1) forwards;
-    }
     .sub {
-      margin: -8px 0 0; max-width: 46ch; color: var(--muted); text-wrap: balance;
-      opacity: 0; animation: rise 1s 1.8s cubic-bezier(.2,.7,.2,1) forwards;
+      margin: 0; max-width: 46ch; color: var(--muted); text-wrap: balance;
+      opacity: 0; animation: rise 1s 1.6s cubic-bezier(.2,.7,.2,1) forwards;
     }
     .cta {
       display: inline-flex; align-items: center; gap: 10px;
@@ -128,7 +122,7 @@
     @media (max-height: 560px) { footer { position: static; margin-top: 8px; } body { overflow: auto; } }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .eyebrow, .logo, h1, .sub, .cta, footer { opacity: 1; filter: none; transform: none; }
+      .eyebrow, .logo, .sub, .cta, footer { opacity: 1; filter: none; transform: none; }
       canvas#dust { display: none; }
     }
   </style>
@@ -144,7 +138,6 @@
       <img src="/coming-soon/logo.webp" alt="Iconik Studios" width="1483" height="720">
       <div class="sheen" aria-hidden="true"></div>
     </div>
-    <h1>Something iconik is on the way.</h1>
     <p class="sub">We're putting the crown on a brand-new site. Back very soon.</p>
     <a class="cta" href="https://rmd.theiconikstudios.com/f/contact">Need us now? Get in touch <span aria-hidden="true">→</span></a>
   </main>
