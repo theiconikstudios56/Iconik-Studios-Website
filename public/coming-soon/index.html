@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Iconik Studios: coming soon</title>
+  <meta name="description" content="Iconik Studios is getting a new crown. Back very soon.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/coming-soon/logo.webp">
+  <style>
+    /* Black stage, the logo as the one bright object, bronze light (the brand accent) moving across it. */
+    :root {
+      --ink: #000000;
+      --paper: #ffffff;
+      --bronze: #cd7f32;
+      --bronze-hi: #f3c48a;
+      --muted: rgba(255, 255, 255, 0.62);
+      --display: "Anton", "Arial Narrow", sans-serif;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Inter", system-ui, sans-serif;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font: 15px/1.6 var(--sans);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient bronze glow that breathes behind the logo. */
+    .glow {
+      position: fixed; inset: -20%;
+      background:
+        radial-gradient(40% 35% at 50% 45%, rgba(205, 127, 50, 0.22), transparent 70%),
+        radial-gradient(30% 30% at 30% 70%, rgba(205, 127, 50, 0.10), transparent 70%),
+        radial-gradient(30% 30% at 72% 28%, rgba(243, 196, 138, 0.08), transparent 70%);
+      animation: breathe 9s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes breathe {
+      from { transform: scale(1) translate3d(0, 0, 0); opacity: 0.75; }
+      to   { transform: scale(1.12) translate3d(1.5%, -1.5%, 0); opacity: 1; }
+    }
+    canvas#dust { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    main {
+      position: relative; z-index: 1;
+      min-height: 100%;
+      display: grid; place-items: center; align-content: center; gap: clamp(20px, 4vh, 36px);
+      padding-block: max(32px, env(safe-area-inset-top, 0px)) max(32px, env(safe-area-inset-bottom, 0px));
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(20px, env(safe-area-inset-right, 0px));
+      text-align: center;
+    }
+
+    .eyebrow {
+      font: 14px/1 var(--display); letter-spacing: 0.42em; text-transform: uppercase;
+      color: var(--bronze); padding-left: 0.42em;
+      opacity: 0; animation: rise 1s 0.2s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+
+    /* The logo, with a bronze sweep masked to its exact shape. */
+    .logo {
+      position: relative;
+      width: min(560px, 78vw);
+      aspect-ratio: 1483 / 720;
+      opacity: 0; filter: blur(14px); transform: translateY(18px) scale(0.97);
+      animation: arrive 1.6s 0.35s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .logo img { width: 100%; height: 100%; display: block; }
+    .logo .sheen {
+      position: absolute; inset: 0;
+      -webkit-mask: url("/coming-soon/logo.webp") center / contain no-repeat;
+              mask: url("/coming-soon/logo.webp") center / contain no-repeat;
+      background: linear-gradient(105deg, transparent 35%, var(--bronze) 45%, var(--bronze-hi) 50%, var(--bronze) 55%, transparent 65%);
+      background-size: 300% 100%;
+      background-position: 120% 0;
+      animation: sweep 5.5s 2s ease-in-out infinite;
+    }
+    @keyframes arrive { to { opacity: 1; filter: blur(0); transform: none; } }
+    @keyframes sweep {
+      0%   { background-position: 120% 0; }
+      45%  { background-position: -20% 0; }
+      100% { background-position: -20% 0; }
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    h1 {
+      margin: 0; max-width: 22ch;
+      font: italic 400 clamp(26px, 4.4vw, 40px)/1.15 var(--serif);
+      text-wrap: balance;
+      opacity: 0; animation: rise 1s 1.5s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .sub {
+      margin: -8px 0 0; max-width: 46ch; color: var(--muted); text-wrap: balance;
+      opacity: 0; animation: rise 1s 1.8s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 22px; border-radius: 999px;
+      border: 1px solid rgba(205, 127, 50, 0.55);
+      color: var(--paper); text-decoration: none; font-weight: 500;
+      transition: background-color .25s, border-color .25s, transform .25s;
+      opacity: 0; animation: rise 1s 2.1s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .cta:hover { background: rgba(205, 127, 50, 0.14); border-color: var(--bronze); transform: translateY(-1px); }
+    .cta:focus-visible { outline: 2px solid var(--bronze-hi); outline-offset: 3px; }
+    .cta span { color: var(--bronze); transition: transform .25s; }
+    .cta:hover span { transform: translateX(3px); }
+
+    footer {
+      position: fixed; left: 0; right: 0; bottom: max(18px, env(safe-area-inset-bottom, 0px));
+      text-align: center; font-size: 12px; letter-spacing: 0.08em; color: rgba(255, 255, 255, 0.38); z-index: 1;
+      opacity: 0; animation: rise 1s 2.4s ease forwards;
+    }
+
+    @media (max-height: 560px) { footer { position: static; margin-top: 8px; } body { overflow: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .eyebrow, .logo, h1, .sub, .cta, footer { opacity: 1; filter: none; transform: none; }
+      canvas#dust { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main>
+    <div class="eyebrow">Coming soon</div>
+    <div class="logo">
+      <img src="/coming-soon/logo.webp" alt="Iconik Studios" width="1483" height="720">
+      <div class="sheen" aria-hidden="true"></div>
+    </div>
+    <h1>Something iconik is on the way.</h1>
+    <p class="sub">We're putting the crown on a brand-new site. Back very soon.</p>
+    <a class="cta" href="https://rmd.theiconikstudios.com/f/contact">Need us now? Get in touch <span aria-hidden="true">→</span></a>
+  </main>
+
+  <footer>© Iconik Studios · Phoenix, Arizona</footer>
+
+  <script>
+    // Slow-rising bronze dust. Skipped when the visitor prefers reduced motion.
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var canvas = document.getElementById('dust');
+      var ctx = canvas.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w, h, motes = [];
+      function size() {
+        w = canvas.width = innerWidth * dpr;
+        h = canvas.height = innerHeight * dpr;
+      }
+      function mote(fresh) {
+        return {
+          x: Math.random() * w,
+          y: fresh ? h + Math.random() * h * 0.2 : Math.random() * h,
+          r: (Math.random() * 1.6 + 0.4) * dpr,
+          vy: (Math.random() * 0.25 + 0.08) * dpr,
+          drift: Math.random() * Math.PI * 2,
+          a: Math.random() * 0.5 + 0.15
+        };
+      }
+      size();
+      addEventListener('resize', size);
+      var count = innerWidth < 600 ? 34 : 70;
+      for (var i = 0; i < count; i++) motes.push(mote(false));
+      function frame(t) {
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < motes.length; i++) {
+          var m = motes[i];
+          m.y -= m.vy;
+          m.x += Math.sin(t / 2400 + m.drift) * 0.25 * dpr;
+          if (m.y < -10) motes[i] = m = mote(true);
+          var fade = Math.min(1, m.y / (h * 0.25));
+          ctx.beginPath();
+          ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(232, 168, 98,' + (m.a * fade).toFixed(3) + ')';
+          ctx.shadowColor = 'rgba(205, 127, 50, 0.8)';
+          ctx.shadowBlur = 8 * dpr;
+          ctx.fill();
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>
