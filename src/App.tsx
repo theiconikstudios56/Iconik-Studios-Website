@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { trackPage } from './lib/rmdTracking';
 import { Img, inEditor, reportRoute, T } from './content';
 import { chatAvailable } from './lib/rmdChat';
-import './lib/rmdContact'; // notes where the visit came from, for the contact form
+import './lib/arrival'; // notes where the visit came from, for the contact form and the shop
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/Hero';

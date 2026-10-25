@@ -1,9 +1,10 @@
 // The template shop (RMD-crm BUILD_PLAN 11.10): what's for sale comes from
 // Sites when the site is built; Buy asks Sites' shop-checkout for a Stripe
 // Checkout page and goes there. Prices are Stripe's own: the browser only
-// says which template and which plan.
+// says which template and which plan, and where the visit came from (11.14).
 
 import catalog, { type ShopTemplate } from 'virtual:shop-catalog';
+import { arrival } from './arrival';
 
 export type { ShopTemplate };
 export type ShopPlan = 'monthly' | 'yearly';
@@ -38,7 +39,7 @@ export async function buy(template: ShopTemplate, plan: ShopPlan): Promise<void>
     response = await fetch(CHECKOUT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ template_key: template.key, plan }),
+      body: JSON.stringify({ template_key: template.key, plan, attribution: arrival }),
     });
   } catch {
     throw new Error('We couldn’t reach checkout. Check your connection and try again.');

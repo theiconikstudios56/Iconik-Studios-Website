@@ -3,41 +3,14 @@
 // creates or updates the contact, records where the visit came from, and
 // starts Workflow 1 (deal, tag, notification, confirmation email).
 //
-// Where the visit came from is read once, when the site first loads (this
-// module is imported by App), because by the time someone reaches /contact
-// the page address no longer has the ad's utm_* parameters. Kept in memory
-// only: no cookies, no storage.
+// Where the visit came from is read in arrival.ts.
+
+import { arrival } from './arrival'
 
 const ENDPOINT: string | undefined =
   import.meta.env.VITE_RMD_FORM_URL || (import.meta.env.PROD ? 'https://winicrmzmcgfwrrynoxd.supabase.co/functions/v1/form' : undefined)
 
 const FORM = 'contact'
-
-type Attribution = { source?: string; medium?: string; campaign?: string; source_detail?: string; referrer?: string; landing_page?: string }
-
-function arrivalOf(): Attribution {
-  if (typeof window === 'undefined') return {}
-  const page = new URL(window.location.href)
-  const p = page.searchParams
-  let referrer: string | undefined
-  try {
-    const ref = new URL(document.referrer)
-    if ((ref.protocol === 'https:' || ref.protocol === 'http:') && ref.hostname.replace(/^www\./, '') !== page.hostname.replace(/^www\./, '')) referrer = ref.toString()
-  } catch {
-    // No referrer, or not a web address.
-  }
-  page.hash = ''
-  return {
-    source: p.get('utm_source') ?? undefined,
-    medium: p.get('utm_medium') ?? undefined,
-    campaign: p.get('utm_campaign') ?? undefined,
-    source_detail: p.get('utm_content') ?? undefined,
-    referrer,
-    landing_page: page.toString(),
-  }
-}
-
-const arrival = arrivalOf()
 
 export type ContactAnswers = { name: string; email: string; phone: string; company: string; message: string }
 
