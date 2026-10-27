@@ -18,6 +18,7 @@ export default function ContactPage() {
   const [phone, setPhone] = useState('');
   const [company, setCompany] = useState('');
   const [message, setMessage] = useState('');
+  const [textConsent, setTextConsent] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [website, setWebsite] = useState(''); // honeypot: people never see it
@@ -83,7 +84,7 @@ export default function ContactPage() {
 
     try {
       await sendContact(
-        { name: name.trim(), email: email.trim(), phone: phone.trim(), company: company.trim(), message: message.trim() },
+        { name: name.trim(), email: email.trim(), phone: phone.trim(), company: company.trim(), message: message.trim(), text_consent: textConsent },
         token,
         website
       );
@@ -94,6 +95,7 @@ export default function ContactPage() {
       setPhone('');
       setCompany('');
       setMessage('');
+      setTextConsent(false);
     } catch (err) {
       setStatus('error');
       const fields = err instanceof ContactError ? Object.values(err.fields).filter(Boolean) : [];
@@ -281,6 +283,23 @@ export default function ContactPage() {
                           className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-burnt-orange transition-colors resize-none font-sans text-sm placeholder:text-white/20 disabled:opacity-50"
                         />
                       </div>
+
+                      {/* Texting consent for the phone carriers (10DLC): never ticked for them, never required.
+                          Plain text, not <T>: it must match the "Text consent" box on RMD's Contact form word for word,
+                          because RMD stores this wording as what the person agreed to. */}
+                      <label className="flex items-start gap-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={textConsent}
+                          onChange={(e) => setTextConsent(e.target.checked)}
+                          disabled={status === 'submitting'}
+                          className="mt-0.5 h-4 w-4 flex-shrink-0 accent-burnt-orange disabled:opacity-50"
+                        />
+                        <span className="font-sans text-xs leading-relaxed opacity-80">
+                          I agree to receive text messages from Iconik Studios about my enquiry, appointments and services. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help.{' '}
+                          <a href="https://rmd.theiconikstudios.com/privacy" target="_blank" rel="noopener" className="border-b border-white/30 hover:border-white">Privacy Policy</a>
+                        </span>
+                      </label>
 
                       <input
                         type="text"

@@ -12,7 +12,9 @@ const ENDPOINT: string | undefined =
 
 const FORM = 'contact'
 
-export type ContactAnswers = { name: string; email: string; phone: string; company: string; message: string }
+// text_consent is the form's "Text consent" box in RMD (field id `text_consent`):
+// ticked, RMD records consent to texts for the phone number, with the wording.
+export type ContactAnswers = { name: string; email: string; phone: string; company: string; message: string; text_consent: boolean }
 
 export class ContactError extends Error {
   constructor(
