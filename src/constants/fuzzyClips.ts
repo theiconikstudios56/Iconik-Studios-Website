@@ -5,8 +5,8 @@
 //
 export type FuzzyClip = { src: string; poster: string };
 
-// Ricky's clips of the fuzzies, added as they're made (2026-10-29: the first).
-const CLIPS = ['fuzzy-1'];
+// Ricky's clips of the fuzzies, added as they're made (2026-10-29: the first; 2026-10-30: two more).
+const CLIPS = ['fuzzy-1', 'fuzzy-2', 'fuzzy-3'];
 
 export const FUZZY_CLIPS: FuzzyClip[] = CLIPS.map((name) => ({
   src: `/videos/fuzzies/${name}.mp4`,
