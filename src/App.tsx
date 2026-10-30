@@ -31,7 +31,6 @@ import { FAQ } from './components/PricingFAQ';
 import { ServicesGrid } from './components/HomesServices';
 import HomesPortfolio from './components/HomesPortfolio';
 import TemplateShowcase from './components/shop/TemplateShowcase';
-import ClientLogos from './components/ClientLogos';
 // The shop's pages are where campaign posts land, so they come with the first download (no second round trip).
 import TemplatesPage from './pages/TemplatesPage';
 import TemplatePage from './pages/TemplatePage';
@@ -210,7 +209,6 @@ function Home() {
         </div>
         <HomesPortfolio />
         <TemplateShowcase />
-        <ClientLogos />
         <FAQ />
         <FuzzyLineupSection />
         <LatestInsights />

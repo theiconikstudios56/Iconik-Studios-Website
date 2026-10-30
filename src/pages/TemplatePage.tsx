@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Loader2 } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
-import { BrowserFrame, Checks, Included, Questions } from '../components/shop/ShopParts';
+import { BrowserFrame, Checks, HowItWorks, Included, MoneyBack, Questions } from '../components/shop/ShopParts';
 import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
 
@@ -49,8 +49,16 @@ export default function TemplatePage() {
 
       <section className="rounded-t-[32px] bg-paper px-6 py-32 text-ink lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <span className="mb-6 block font-mono text-xs uppercase tracking-widest">With {template.name} you get</span>
-          <h2 className="mb-20 max-w-4xl font-display text-5xl uppercase leading-[0.9] tracking-tighter md:text-7xl">A whole website, not a starting point.</h2>
+          <div className="mb-20 grid grid-cols-1 items-end gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <span className="mb-6 block font-mono text-xs uppercase tracking-widest">With {template.name} you get</span>
+              <h2 className="max-w-4xl font-display text-5xl uppercase leading-[0.9] tracking-tighter md:text-7xl">A whole website, not a starting point.</h2>
+            </div>
+            <div className="lg:col-span-5">
+              <span className="mb-6 block font-mono text-xs uppercase tracking-widest">How it works</span>
+              <HowItWorks />
+            </div>
+          </div>
           <Included />
         </div>
       </section>
@@ -89,7 +97,7 @@ export default function TemplatePage() {
 }
 
 function Purchase({ template }: { template: ShopTemplate }) {
-  const [plan, setPlan] = useState<ShopPlan>('monthly');
+  const [plan, setPlan] = useState<ShopPlan>('yearly');
   const [busy, setBusy] = useState(false);
   const [problem, setProblem] = useState<string | null>(null);
   const plans = shop!.plans;
@@ -126,7 +134,7 @@ function Purchase({ template }: { template: ShopTemplate }) {
 
       <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <div role="radiogroup" aria-label="Sites plan" className="mb-6 grid grid-cols-2 gap-2 rounded-full bg-white/5 p-1">
-          {(['monthly', 'yearly'] as const).map((p) => (
+          {(['yearly', 'monthly'] as const).map((p) => (
             <button
               key={p}
               type="button"
@@ -164,12 +172,15 @@ function Purchase({ template }: { template: ShopTemplate }) {
           {busy ? <Loader2 size={18} className="animate-spin" /> : null}
           {!canBuy ? 'Opening soon' : busy ? 'Opening checkout…' : <>Buy {template.name} <ArrowRight size={18} /></>}
         </button>
+        <div className="mt-3">
+          <MoneyBack />
+        </div>
         {problem && <p role="alert" className="mt-3 text-sm text-burnt-orange">{problem}</p>}
         <a href={template.demo} target="_blank" rel="noreferrer" className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 font-display text-sm uppercase tracking-widest transition-colors hover:border-paper">
           Open the live demo <ArrowUpRight size={16} />
         </a>
         <div className="mt-6">
-          <Checks items={['Secure checkout by Stripe', 'Refund within 14 days if it isn’t right for you', 'Set up in minutes: we email your login straight away']} />
+          <Checks items={['Secure checkout by Stripe', 'Set up in minutes: we email your login straight away', 'Email help from a real person, replies within 1–2 business days']} />
         </div>
         <p className="mt-5 text-xs leading-relaxed text-white/45">
           By buying you agree to the Sites{' '}

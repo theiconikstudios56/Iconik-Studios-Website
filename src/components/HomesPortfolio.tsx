@@ -4,34 +4,7 @@ import { Globe, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { T, useProjects } from '../content';
 
-// The homepage's own showcase, until the portfolio is changed in RMD; then its first four projects.
-const SHOWCASE = [
-  { 
-    id: 'kinetic-solutions-group',
-    title: 'KINETIC SOLUTIONS',
-    category: 'REBRAND / WEB SUITE',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000',
-  },
-  { 
-    id: 'luxe-estate',
-    title: 'LUXE ESTATE',
-    category: 'REAL ESTATE / AI SEARCH',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000',
-  },
-  { 
-    id: 'nova-audio',
-    title: 'NOVA AUDIO',
-    category: 'MUSIC / GENERATIVE AI',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=2000',
-  },
-  { 
-    id: 'zenith-flow',
-    title: 'ZENITH FLOW',
-    category: 'SAAS / AUTOMATION',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000',
-  }
-];
-
+// The homepage's showcase: the portfolio's first four projects.
 export default function HomesPortfolio() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -39,8 +12,8 @@ export default function HomesPortfolio() {
     offset: ["start start", "end end"]
   });
 
-  const { projects, changed } = useProjects();
-  const PROJECTS = changed && projects.length ? projects.slice(0, 4) : SHOWCASE;
+  const { projects } = useProjects();
+  const PROJECTS = projects.slice(0, 4);
   const [shown, setActiveProject] = useState(0);
   const activeProject = Math.min(shown, PROJECTS.length - 1);
 
@@ -53,6 +26,8 @@ export default function HomesPortfolio() {
     });
     return () => unsubscribe();
   }, [scrollYProgress, PROJECTS.length]);
+
+  if (!PROJECTS.length) return null;
 
   return (
     <section ref={sectionRef} className="relative h-[180vh] md:h-[250vh] bg-ink">

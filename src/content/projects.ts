@@ -44,7 +44,7 @@ export const serializeProjects = (list: SiteProject[]) =>
   );
 
 export const START_PROJECTS = serializeProjects(
-  Object.values(PROJECT_DATA).map((p) => ({ ...p, description: p.description ?? '', url: '', hidden: false })),
+  Object.values(PROJECT_DATA).map((p) => ({ ...p, description: p.description ?? '', url: p.url ?? '', hidden: false })),
 );
 
 const str = (v: unknown, max: number) => (typeof v === 'string' ? v.slice(0, max) : '');

@@ -2,7 +2,6 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, Check, Globe, Instagram, Linkedin, Twitter, Menu, X, ChevronDown } from 'lucide-react';
 import React, { useState, useRef, useEffect } from 'react';
 import SuccessSection from '../components/SuccessSection';
-import ClientLogos from '../components/ClientLogos';
 import Layout from '../components/Layout';
 import HomesContact from '../components/HomesContact';
 import LatestInsights from '../components/LatestInsights';
@@ -322,7 +321,6 @@ export default function HomesPage() {
         <ServiceMarquee />
         <ServicesGrid />
         <SuccessSection />
-        <ClientLogos />
         <LatestInsights />
         <Pricing />
         <FAQ />

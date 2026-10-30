@@ -1,3 +1,5 @@
+import { pictureOf, shop } from '../lib/shop';
+
 export interface Project {
   id: string;
   shortName: string;
@@ -11,74 +13,36 @@ export interface Project {
   nextId: string;
   prevId: string;
   description?: string;
+  /** The live site (here, the template's demo). */
+  url?: string;
 }
 
-export const PROJECT_DATA: Record<string, Project> = {
-  'kinetic-solutions-group': {
-    id: 'kinetic-solutions-group',
-    shortName: 'KSG',
-    title: 'KINETIC SOLUTIONS',
-    category: 'REBRAND / WEB SUITE',
-    client: 'KINETIC SOLUTIONS',
-    services: ['BRANDING', 'WEB', 'AUTOMATION'],
-    year: '2024',
-    description: 'A custom Med Spa automation workflow that increased bookings by 30%. We implemented seamless CRM syncing and automated follow-ups to eliminate manual lead handling.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000',
-    gallery: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
-      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1600'
-    ],
-    nextId: 'luxe-estate',
-    prevId: 'zenith-flow'
-  },
-  'luxe-estate': {
-    id: 'luxe-estate',
-    shortName: 'LXE',
-    title: 'LUXE ESTATE',
-    category: 'REAL ESTATE / AI SEARCH',
-    client: 'LUXE GLOBAL',
-    services: ['WEB DESIGN', 'AI', 'UX/UI'],
-    year: '2024',
-    description: 'An AI-powered search tool and custom web platform for high-end properties. The new architecture significantly reduced bounce rates and improved qualified lead capture.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000',
-    gallery: [
-      'https://images.unsplash.com/photo-1600607687940-4e2a09695d51?auto=format&fit=crop&q=80&w=1600',
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1600'
-    ],
-    nextId: 'nova-audio',
-    prevId: 'kinetic-solutions-group'
-  },
-  'nova-audio': {
-    id: 'nova-audio',
-    shortName: 'NVA',
-    title: 'NOVA AUDIO',
-    category: 'MUSIC / GENERATIVE AI',
-    client: 'NOVA SOUND',
-    services: ['PRODUCT', 'AI', 'MOTION'],
-    year: '2023',
-    image: 'https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&q=80&w=2000',
-    gallery: [
-      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1600',
-      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1600'
-    ],
-    nextId: 'zenith-flow',
-    prevId: 'luxe-estate'
-  },
-  'zenith-flow': {
-    id: 'zenith-flow',
-    shortName: 'ZNF',
-    title: 'ZENITH FLOW',
-    category: 'SAAS / AUTOMATION',
-    client: 'ZENITH CORP',
-    services: ['UI/UX', 'AUTOMATION', 'DASHBOARD'],
-    year: '2023',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000',
-    gallery: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600',
-      'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1600'
-    ],
-    nextId: 'kinetic-solutions-group',
-    prevId: 'nova-audio'
-  }
-};
+// The portfolio's starting list: the shop's template demos, each a whole
+// website the studio designed and wrote, linked to its live demo. No invented
+// clients (website audit item 1). Real client work is added in RMD's editor.
+const templates = shop?.templates ?? [];
+
+export const PROJECT_DATA: Record<string, Project> = Object.fromEntries(
+  templates.map((t, i) => {
+    const id = `${t.slug}-template`;
+    const at = (n: number) => `${templates[(n + templates.length) % templates.length].slug}-template`;
+    return [
+      id,
+      {
+        id,
+        shortName: t.name.toUpperCase().slice(0, 12),
+        title: t.name.toUpperCase(),
+        category: `${t.industry.toUpperCase()} / TEMPLATE`,
+        client: 'ICONIK STUDIOS TEMPLATE',
+        services: ['WEB DESIGN', 'COPYWRITING', 'HOSTING'],
+        year: '2026',
+        description: `${t.summary} Designed and written by our studio, with ${t.pages.length} pages ready to edit. Open the live demo to click around, or find it in our template shop.`,
+        image: pictureOf(t.slug, 'hero') ?? '',
+        gallery: [],
+        url: t.demo,
+        nextId: at(i + 1),
+        prevId: at(i - 1),
+      },
+    ];
+  }),
+);
