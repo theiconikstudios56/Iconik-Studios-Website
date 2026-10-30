@@ -16,10 +16,12 @@ const FADE_MS = 700;
  * The fattest point of the drawn words (the centre of the widest letter stroke)
  * in the heading's own pixels, and how far it is to the nearest edge of the ink.
  * The zoom flies into that point, so the screen ends up inside a letter, on
- * the clip, rather than in a black gap. Drawn on a small canvas with the
- * heading's own font; null when it can't be worked out (the centre is used).
+ * the clip, rather than in a black gap. With `focus` (a line and a character
+ * in it) only that letter is searched: Ricky wants the T of "MEET". Drawn on a
+ * small canvas with the heading's own font; null when it can't be worked out
+ * (the centre is used).
  */
-function fattestInk(h2: HTMLElement): { x: number; y: number; r: number } | null {
+function fattestInk(h2: HTMLElement, focus?: { line: number; index: number }): { x: number; y: number; r: number } | null {
   const rect = h2.getBoundingClientRect();
   if (!rect.width || !rect.height) return null;
   const cs = getComputedStyle(h2);
@@ -50,9 +52,20 @@ function fattestInk(h2: HTMLElement): { x: number; y: number; r: number } | null
   for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) dist[y * W + x] = px[(y * W + x) * 4] > 128 && x > 0 && y > 0 && x < W - 1 && y < H - 1 ? far : 0;
   for (let y = 1; y < H; y++) for (let x = 1; x < W - 1; x++) { const i = y * W + x; if (dist[i]) dist[i] = Math.min(dist[i], dist[i - 1] + 3, dist[i - W] + 3, dist[i - W - 1] + 4, dist[i - W + 1] + 4); }
   for (let y = H - 2; y >= 0; y--) for (let x = W - 2; x >= 1; x--) { const i = y * W + x; if (dist[i]) dist[i] = Math.min(dist[i], dist[i + 1] + 3, dist[i + W] + 3, dist[i + W + 1] + 4, dist[i + W - 1] + 4); }
+  // The box of the letter to zoom into, or the whole drawing.
+  let box = { xa: 0, xb: W, ya: 0, yb: H };
+  if (focus && lines[focus.line]) {
+    const line = upper ? lines[focus.line].toUpperCase() : lines[focus.line];
+    const x0 = W / 2 - ctx.measureText(line).width / 2;
+    box = { xa: x0 + ctx.measureText(line.slice(0, focus.index)).width, xb: x0 + ctx.measureText(line.slice(0, focus.index + 1)).width, ya: focus.line * lineHeight, yb: (focus.line + 1) * lineHeight };
+  }
   let best = 0;
   let at = -1;
-  for (let i = 0; i < dist.length; i++) if (dist[i] > best && dist[i] < far) { best = dist[i]; at = i; }
+  for (let y = Math.max(0, Math.floor(box.ya)); y < Math.min(H, Math.ceil(box.yb)); y++)
+    for (let x = Math.max(0, Math.floor(box.xa)); x < Math.min(W, Math.ceil(box.xb)); x++) {
+      const i = y * W + x;
+      if (dist[i] > best && dist[i] < far) { best = dist[i]; at = i; }
+    }
   if (at < 0) return null;
   return { x: (at % W) / k, y: Math.floor(at / W) / k, r: best / 3 / k };
 }
@@ -85,7 +98,10 @@ export default function MeetTheFuzzies({ tall = false, zoom }: { tall?: boolean;
       const mask = maskRef.current;
       const h2 = headingRef.current;
       if (stop || !mask || !h2) return;
-      const ink = fattestInk(h2);
+      // The T that ends "MEET", when the words still say that; otherwise the fattest stroke anywhere.
+      const lines = h2.innerText.split('\n').map((l) => l.trim()).filter(Boolean);
+      const line = lines.findIndex((l) => l.toUpperCase().includes('MEET'));
+      const ink = fattestInk(h2, line >= 0 ? { line, index: lines[line].toUpperCase().indexOf('MEET') + 3 } : undefined);
       const m = mask.getBoundingClientRect();
       const h = h2.getBoundingClientRect();
       if (!ink) return setTarget({ x: m.width / 2, y: m.height / 2, scale: 35 });
