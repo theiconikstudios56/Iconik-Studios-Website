@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import MeetTheFuzzies from './MeetTheFuzzies';
-import lineupImg from '../assets/images/web/fuzzy-time-2.webp';
+import lineupImg from '../assets/images/web/fuzzy-lineup-2026.webp';
 import { Img } from '../content';
 
 // "Meet the Fuzzies" (Ricky, 2026-10-30): the words fill the screen and pin;
@@ -28,9 +28,9 @@ export default function FuzziesReveal() {
 
   return (
     <div className="relative">
-      {/* The picture: pinned to the top of the screen while the panel moves over it. */}
-      <section data-bg="white" className="sticky top-0 z-0 h-[100svh] w-full overflow-hidden bg-[#E9E8E6]">
-        <motion.div style={{ scale }} className="absolute inset-0 will-change-transform">
+      {/* The picture: pinned to the top of the screen while the panel moves over it; it starts below the menu bar so the Iconik mark above the fuzzies stays clear, the strip above in the picture's own background colour. */}
+      <section data-bg="white" className="sticky top-0 z-0 h-[100svh] w-full overflow-hidden bg-[#F0EBEC]">
+        <motion.div style={{ scale }} className="absolute inset-x-0 bottom-0 top-[72px] md:top-[120px] will-change-transform">
           <Img k="home.lineup.image-iconik-fuzzies-crown" label="Picture"
             loading="lazy"
             decoding="async"
