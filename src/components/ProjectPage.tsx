@@ -12,7 +12,6 @@ export default function ProjectPage() {
   const { projects } = useProjects();
   const project = id ? projects.find((p) => p.id === id) ?? null : null;
   const full = project ? FULL_PICTURES[project.id] : undefined;
-  const address = project?.url ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -131,17 +130,11 @@ export default function ProjectPage() {
         </div>
       </aside>
 
-      {/* Right Content - Visual Area: the whole home page in a browser frame, scrolled in
-          place as on the template pages; "Visit Website" on the left opens the real thing. */}
+      {/* Right Content - Visual Area: the whole home page, scrolled in place (no browser
+          bar, Ricky 2026-10-30); "Visit Website" on the left opens the real thing. */}
       {full ? (
         <div className="flex-1 min-h-0 h-[85svh] md:h-full bg-ink p-4 md:p-8 md:pt-28 lg:p-10 lg:pt-32 flex">
           <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#111] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]">
-            <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-              <span className="size-2.5 rounded-full bg-white/20" />
-              <span className="size-2.5 rounded-full bg-white/20" />
-              <span className="size-2.5 rounded-full bg-white/20" />
-              <span className="ml-3 truncate rounded-full bg-white/5 px-3 py-1 font-mono text-[10px] tracking-wider text-white/50">{address}</span>
-            </div>
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
               <motion.img
                 key={project.id + 'full'}
