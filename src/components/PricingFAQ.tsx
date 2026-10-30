@@ -67,11 +67,11 @@ export const Pricing = () => {
 export const FAQ = () => {
   const [active, setActive] = useState<number | null>(0);
   const startQuestions = [
-    { q: "Do you only work with med spas?", a: "Right now, yes: our websites, booking and follow-up systems are built around how a med spa runs, from consults and deposits to rebooking and reviews. If you run a different kind of business, get in touch and we'll tell you honestly whether we're a fit." },
+    { q: "Do you only work with med spas?", a: "Right now, yes: our websites, booking and follow-up systems are built around how a med spa runs, from consults and deposits to rebooking and reviews. Iconik Studios built 30+ websites for PatientNow's med spa clients, so we know how a spa books, follows up and rebooks. If you run a different kind of business, get in touch and we'll tell you honestly whether we're a fit." },
     { q: "What makes your websites different from a template?", a: "Templates are built to look pretty. Our websites are custom-engineered to convert. We focus on cognitive load reduction, 1:1 goal alignment, and built-in follow-up through Remedy, our own CRM." },
     { q: "How long does a website or automation build take?", a: "Standard website builds typically take 4-6 weeks. Complex AI automation systems and custom agent integrations can take 6-8 weeks, depending on the scope of your operations." },
     { q: "Do you offer ongoing support?", a: "Yes. Our monthly care plans start at $69 and cover hosting, monitoring, daily backups and edits made for you; the higher plans add a monthly report and Google Business Profile upkeep. All month to month." },
-    { q: "What happens on the discovery call?", a: "A 30-minute video call with Ricky. We look at your current website and how leads reach you today, then tell you plainly what we'd change, what it costs and how long it takes. No slide deck and no pressure; if one of our templates is the better fit, we'll say so." },
+    { q: "What happens on the discovery call?", a: "A 30-minute video call. We look at your current website and how leads reach you today, then tell you plainly what we'd change, what it costs and how long it takes. No slide deck and no pressure; if one of our templates is the better fit, we'll say so." },
   ];
   // The questions as published (the same keys as on the page), for Google's FAQ listing too.
   const questions = startQuestions.map((item, i) => ({

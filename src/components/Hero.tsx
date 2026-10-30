@@ -213,7 +213,7 @@ export default function Hero() {
               className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.25em] text-tan/70"
             >
               <li><T k="home.hero.trust1" label="Line under the buttons, 1">{"Phoenix, Arizona"}</T></li>
-              <li><T k="home.hero.trust2" label="Line under the buttons, 2">{"Built on Remedy, our own CRM"}</T></li>
+              <li><T k="home.hero.trust2" label="Line under the buttons, 2">{"30+ websites built for PatientNow’s med spa clients"}</T></li>
               <li><T k="home.hero.trust3" label="Line under the buttons, 3">{"A reply within one business day"}</T></li>
             </motion.ul>
           </div>

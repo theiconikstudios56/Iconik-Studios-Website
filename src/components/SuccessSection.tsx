@@ -71,7 +71,7 @@ const SuccessSection = () => {
           </div>
 
           <div className="space-y-8">
-            <p className="text-xl font-light leading-relaxed text-ink/90 font-sans normal-case"><T k="shared.success.most-small-and-medium">{"Most small and medium-sized businesses lose up to 50% of their revenue to simple operational drag: delayed lead follow-ups, manual data entry, and slow onboarding. We build custom, automated pipeline architectures that eliminate administrative friction so your business can run on autopilot."}</T></p>
+            <p className="text-xl font-light leading-relaxed text-ink/90 font-sans normal-case"><T k="shared.success.most-small-and-medium">{"Iconik Studios built 30+ websites for PatientNow’s med spa clients, so we’ve seen exactly where a spa loses bookings: slow follow-up, leads typed in by hand, no-shows nobody chased. We build the automated pipeline that closes those gaps, so your spa runs on autopilot."}</T></p>
 
             <div className="space-y-6 pt-4 border-t border-ink/10">
               <div className="flex gap-4 items-start">

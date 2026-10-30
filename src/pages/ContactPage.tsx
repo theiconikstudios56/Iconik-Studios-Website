@@ -153,7 +153,8 @@ export default function ContactPage() {
                 {/* The quickest way in: a time on Ricky's calendar. */}
                 <div className="mb-12 border border-white/15 p-6 md:p-8">
                   <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-3 block"><T k="contact.book-a-call">{"/ book a call"}</T></span>
-                  <p className="text-lg leading-snug mb-6 max-w-md"><T k="contact.book-a-call.text">{"Thirty minutes with Ricky on video. Pick a time that suits you; we'll look at your website and how leads reach you today, and tell you plainly what we'd change."}</T></p>
+                  <p className="text-lg leading-snug mb-4 max-w-md"><T k="contact.book-a-call.text">{"Thirty minutes on video. Pick a time that suits you; we'll look at your website and how leads reach you today, and tell you plainly what we'd change."}</T></p>
+                  <p className="text-sm leading-snug mb-6 max-w-md text-white/60"><T k="contact.book-a-call.proof">{"Iconik Studios built 30+ websites for PatientNow’s med spa clients. We’ll recognise your setup."}</T></p>
                   <a
                     href={DISCOVERY_CALL_URL}
                     className="inline-flex items-center gap-3 bg-burnt-orange text-ink px-8 py-4 font-display text-xs uppercase tracking-[0.25em] font-bold transition-all duration-500 hover:bg-white"
