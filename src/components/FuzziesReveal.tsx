@@ -34,9 +34,13 @@ export default function FuzziesReveal() {
         <motion.div style={{ opacity: shade }} aria-hidden="true" className="absolute inset-0 bg-ink pointer-events-none" />
       </section>
 
-      {/* The panel starts exactly over the picture and scrolls away to uncover it. */}
+      {/* The panel starts exactly over the picture, holds there for a moment (the
+          spacer's height of scrolling, Ricky: "stop for a brief second"), then scrolls away to uncover it. */}
       <div ref={panelRef} className="relative z-10 -mt-[100svh]">
-        <MeetTheFuzzies tall />
+        <div className="sticky top-0">
+          <MeetTheFuzzies tall />
+        </div>
+        <div aria-hidden="true" className="h-[70svh]" />
       </div>
 
       {/* Holds the uncovered picture for one screen before the next section slides over it. */}
