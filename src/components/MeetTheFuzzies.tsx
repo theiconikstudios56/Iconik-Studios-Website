@@ -17,7 +17,7 @@ const FADE_MS = 700;
  * in the heading's own pixels, and how far it is to the nearest edge of the ink.
  * The zoom flies into that point, so the screen ends up inside a letter, on
  * the clip, rather than in a black gap. With `focus` (a line and a character
- * in it) only that letter is searched: Ricky wants the T of "MEET". Drawn on a
+ * in it) only that letter is searched: Ricky wants an E of "MEET". Drawn on a
  * small canvas with the heading's own font; null when it can't be worked out
  * (the centre is used).
  */
@@ -98,10 +98,10 @@ export default function MeetTheFuzzies({ tall = false, zoom }: { tall?: boolean;
       const mask = maskRef.current;
       const h2 = headingRef.current;
       if (stop || !mask || !h2) return;
-      // The T that ends "MEET", when the words still say that; otherwise the fattest stroke anywhere.
+      // The second E of "MEET" (its middle, where the stem meets the bar), when the words still say that; otherwise the fattest stroke anywhere.
       const lines = h2.innerText.split('\n').map((l) => l.trim()).filter(Boolean);
       const line = lines.findIndex((l) => l.toUpperCase().includes('MEET'));
-      const ink = fattestInk(h2, line >= 0 ? { line, index: lines[line].toUpperCase().indexOf('MEET') + 3 } : undefined);
+      const ink = fattestInk(h2, line >= 0 ? { line, index: lines[line].toUpperCase().indexOf('MEET') + 2 } : undefined);
       const m = mask.getBoundingClientRect();
       const h = h2.getBoundingClientRect();
       if (!ink) return setTarget({ x: m.width / 2, y: m.height / 2, scale: 35 });
