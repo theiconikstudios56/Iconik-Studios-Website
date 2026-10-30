@@ -36,6 +36,7 @@ import TemplatesPage from './pages/TemplatesPage';
 import TemplatePage from './pages/TemplatePage';
 import SuccessSection from './components/SuccessSection';
 import SMBEmpowerment from './components/SMBEmpowerment';
+import MeetTheFuzzies from './components/MeetTheFuzzies';
 import FuzzyLineupSection from './components/FuzzyLineupSection';
 import HomesContact from './components/HomesContact';
 import LatestInsights from './components/LatestInsights';
@@ -210,6 +211,7 @@ function Home() {
         <HomesPortfolio />
         <TemplateShowcase />
         <FAQ />
+        <MeetTheFuzzies />
         <FuzzyLineupSection />
         <LatestInsights />
         <HomesContact />
