@@ -1,14 +1,14 @@
 // The clips that play inside the "Meet the Fuzzies" words on the home page,
 // in a random order. Each is a short, silent MP4 in public/videos/fuzzies
-// (H.264, 1280×720, about 5–10 seconds and under 1 MB) with a still picture
+// (H.264, 1280×720, about 5–10 seconds and 1–1.5 MB) with a still picture
 // from it for people who turn motion off.
 //
-// The stand-ins are slow pans across fuzzy pictures; swap them for the real
-// clips of the fuzzies at work as they're made.
-
 export type FuzzyClip = { src: string; poster: string };
 
-export const FUZZY_CLIPS: FuzzyClip[] = [1, 2, 3, 4, 5].map((n) => ({
-  src: `/videos/fuzzies/standin-${n}.mp4`,
-  poster: `/videos/fuzzies/standin-${n}.jpg`,
+// Ricky's clips of the fuzzies, added as they're made (2026-10-29: the first).
+const CLIPS = ['fuzzy-1'];
+
+export const FUZZY_CLIPS: FuzzyClip[] = CLIPS.map((name) => ({
+  src: `/videos/fuzzies/${name}.mp4`,
+  poster: `/videos/fuzzies/${name}.jpg`,
 }));
