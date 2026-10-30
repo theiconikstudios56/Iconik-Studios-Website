@@ -8,7 +8,6 @@ import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/Hero';
 import PropertyShowcase from './components/PropertyShowcase';
-import ZoomParallaxSection from './components/ZoomParallaxSection';
 import focusedFuzzyImage from './assets/images/web/focused-fuzzy.webp';
 import { lazy, Suspense, useState, useEffect } from 'react';
 
@@ -165,9 +164,8 @@ function Home() {
         </section>
         <SuccessSection />
         <StackedServices />
-        <ZoomParallaxSection />
-        <FuzziesReveal />
         <TemplateShowcase />
+        <FuzziesReveal />
         <FAQ />
         <HomesContact />
       </div>
