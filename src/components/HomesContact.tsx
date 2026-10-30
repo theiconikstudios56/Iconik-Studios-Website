@@ -51,11 +51,14 @@ const HomesContact = () => {
   const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
 
   const backdrop = useImg('shared.contact.image', fuzzySuccessImg, 'Success Pre-Footer', 'Background picture');
-  // Hidden on the live site while the reviews are still placeholders; shown in
-  // RMD's website editor, and everywhere once a real one replaces the first.
-  const firstQuote = useText('shared.contact.review1.quote', REVIEWS[0].quote, { label: 'Review 1: quote' });
+  // Only slots with a real review show (a slot still reading "Lorem ipsum" is
+  // skipped); the section is hidden while there are none. RMD's website editor
+  // shows all three so they can be filled in.
+  const quotes = REVIEWS.map((review, i) => useText(`shared.contact.review${i + 1}.quote`, review.quote, { label: `Review ${i + 1}: quote` }));
   const editing = useEditor().on;
-  const hidden = !editing && firstQuote.startsWith('Lorem ipsum');
+  const slots = quotes.map((q, i) => (editing || !q.startsWith('Lorem ipsum') ? i : -1)).filter((i) => i >= 0);
+  const hidden = slots.length === 0;
+  const slot = slots[Math.min(currentIndex, slots.length - 1)] ?? 0;
 
   // A hidden section has nothing to track (Motion stops on a ref that's never attached).
   const { scrollYProgress } = useScroll({
@@ -69,7 +72,7 @@ const HomesContact = () => {
     stopAutoplay();
     autoplayTimer.current = setInterval(() => {
       setDirection(1);
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % REVIEWS.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slots.length);
     }, 6000);
   };
 
@@ -87,14 +90,14 @@ const HomesContact = () => {
   const handleNext = () => {
     stopAutoplay();
     setDirection(1);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % REVIEWS.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slots.length);
     startAutoplay();
   };
 
   const handlePrev = () => {
     stopAutoplay();
     setDirection(-1);
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + REVIEWS.length) % REVIEWS.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + slots.length) % slots.length);
     startAutoplay();
   };
 
@@ -153,19 +156,19 @@ const HomesContact = () => {
                 className="space-y-8"
               >
                 {/* Quote Text */}
-                <p className="text-lg md:text-2xl font-serif italic text-paper leading-relaxed max-w-2xl mx-auto">&ldquo;<T k={`shared.contact.review${currentIndex + 1}.quote`} label={`Review ${currentIndex + 1}: quote`}>{REVIEWS[currentIndex].quote}</T>&rdquo;</p>
+                <p className="text-lg md:text-2xl font-serif italic text-paper leading-relaxed max-w-2xl mx-auto">&ldquo;<T k={`shared.contact.review${slot + 1}.quote`} label={`Review ${slot + 1}: quote`}>{REVIEWS[slot].quote}</T>&rdquo;</p>
 
                 {/* Author Info */}
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-accent font-bold tracking-wider text-sm select-none">
-                    <T k={`shared.contact.review${currentIndex + 1}.initials`} label={`Review ${currentIndex + 1}: initials`}>{REVIEWS[currentIndex].initials}</T>
+                    <T k={`shared.contact.review${slot + 1}.initials`} label={`Review ${slot + 1}: initials`}>{REVIEWS[slot].initials}</T>
                   </div>
                   <div>
                     <h4 className="font-bold text-paper font-display text-base tracking-wider">
-                      <T k={`shared.contact.review${currentIndex + 1}.name`} label={`Review ${currentIndex + 1}: name`}>{REVIEWS[currentIndex].author}</T>
+                      <T k={`shared.contact.review${slot + 1}.name`} label={`Review ${slot + 1}: name`}>{REVIEWS[slot].author}</T>
                     </h4>
                     <p className="text-xs uppercase tracking-[0.15em] text-accent font-semibold mt-1">
-                      <T k={`shared.contact.review${currentIndex + 1}.role`} label={`Review ${currentIndex + 1}: role`}>{REVIEWS[currentIndex].role}</T>
+                      <T k={`shared.contact.review${slot + 1}.role`} label={`Review ${slot + 1}: role`}>{REVIEWS[slot].role}</T>
                     </p>
                   </div>
                 </div>
@@ -174,8 +177,8 @@ const HomesContact = () => {
           </div>
         </div>
 
-        {/* Navigation & Controls */}
-        <div className="flex items-center justify-center gap-8 pt-4">
+        {/* Navigation & Controls (nothing to turn with one review) */}
+        {slots.length > 1 && <div className="flex items-center justify-center gap-8 pt-4">
           {/* Prev Button */}
           <button 
             onClick={handlePrev}
@@ -187,7 +190,7 @@ const HomesContact = () => {
 
           {/* Dots Indicator */}
           <div className="flex items-center gap-3">
-            {REVIEWS.map((_, index) => (
+            {slots.map((_, index) => (
               <button
                 key={index}
                 onClick={() => handleDotClick(index)}
@@ -207,7 +210,7 @@ const HomesContact = () => {
           >
             <ChevronRight size={20} />
           </button>
-        </div>
+        </div>}
       </div>
     </section>
   );
