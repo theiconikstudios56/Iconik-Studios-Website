@@ -21,7 +21,8 @@ function shuffled<T>(items: T[]): T[] {
   return out;
 }
 
-export default function MeetTheFuzzies() {
+/** `tall`: a full-screen black panel (the curtain in FuzziesReveal) rather than one sized to the words. */
+export default function MeetTheFuzzies({ tall = false }: { tall?: boolean } = {}) {
   const sectionRef = useRef<HTMLElement>(null);
   const firstRef = useRef<HTMLVideoElement>(null);
   const secondRef = useRef<HTMLVideoElement>(null);
@@ -126,7 +127,7 @@ export default function MeetTheFuzzies() {
       </div>
 
       {/* Black everywhere but the letters */}
-      <div className="relative flex items-center justify-center bg-ink px-4 py-16 md:py-40 mix-blend-multiply">
+      <div className={`relative flex items-center justify-center bg-ink px-4 mix-blend-multiply ${tall ? 'min-h-[100svh] py-16' : 'py-16 md:py-40'}`}>
         <h2 className="text-center font-display uppercase text-white leading-[0.9] tracking-[0.01em] text-[24vw] md:text-[17vw] xl:text-[15vw]">
           <T k="home.fuzzies.title" label="Heading">{"Meet the\nFuzzies"}</T>
         </h2>

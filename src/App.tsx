@@ -26,8 +26,7 @@ import TemplateShowcase from './components/shop/TemplateShowcase';
 import TemplatesPage from './pages/TemplatesPage';
 import TemplatePage from './pages/TemplatePage';
 import SuccessSection from './components/SuccessSection';
-import MeetTheFuzzies from './components/MeetTheFuzzies';
-import FuzzyLineupSection from './components/FuzzyLineupSection';
+import FuzziesReveal from './components/FuzziesReveal';
 import HomesContact from './components/HomesContact';
 
 // Every page but the homepage loads its own code when it's opened, so the
@@ -167,8 +166,7 @@ function Home() {
         <SuccessSection />
         <StackedServices />
         <ZoomParallaxSection />
-        <MeetTheFuzzies />
-        <FuzzyLineupSection />
+        <FuzziesReveal />
         <TemplateShowcase />
         <FAQ />
         <HomesContact />
