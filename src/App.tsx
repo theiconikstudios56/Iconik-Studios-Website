@@ -31,7 +31,6 @@ import { FAQ } from './components/PricingFAQ';
 import { ServicesGrid } from './components/HomesServices';
 import HomesPortfolio from './components/HomesPortfolio';
 import TemplateShowcase from './components/shop/TemplateShowcase';
-import ClientLogos from './components/ClientLogos';
 import SuccessSection from './components/SuccessSection';
 import SMBEmpowerment from './components/SMBEmpowerment';
 import FuzzyLineupSection from './components/FuzzyLineupSection';
@@ -201,7 +200,6 @@ function Home() {
         </div>
         <HomesPortfolio />
         <TemplateShowcase />
-        <ClientLogos />
         <FAQ />
         <FuzzyLineupSection />
         <LatestInsights />
