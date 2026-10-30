@@ -4,12 +4,15 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import Navbar from './Navbar';
 import { useEffect, useState } from 'react';
 import { useProjects } from '../content';
+import { FULL_PICTURES } from '../constants/projects';
 
 export default function ProjectPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { projects } = useProjects();
   const project = id ? projects.find((p) => p.id === id) ?? null : null;
+  const full = project ? FULL_PICTURES[project.id] : undefined;
+  const address = project?.url ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -28,13 +31,13 @@ export default function ProjectPage() {
   }
 
   return (
-    <main className="h-screen w-full overflow-hidden bg-ink flex flex-col md:flex-row relative">
+    <main className="min-h-screen md:h-screen w-full md:overflow-hidden bg-ink flex flex-col md:flex-row relative">
       <Navbar />
       
       {/* Left Sidebar - Fixed Width */}
-      <aside className="w-full md:w-[35%] lg:w-[30%] h-full flex flex-col z-20 border-r border-tan/10">
+      <aside className="w-full md:w-[35%] lg:w-[30%] md:h-full flex flex-col z-20 border-r border-tan/10">
         {/* Top Block: Acronym */}
-        <div className="h-[35%] bg-ink flex items-center justify-center p-8 pt-32 border-b border-tan/10 relative overflow-hidden">
+        <div className="py-10 md:py-0 md:h-[35%] bg-ink flex items-center justify-center p-8 pt-28 md:pt-32 border-b border-tan/10 relative overflow-hidden">
           {/* Subtle Grain for this block */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay">
             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +109,7 @@ export default function ProjectPage() {
         </div>
 
         {/* Bottom Block: Navigation */}
-        <div className="h-[15%] bg-ink flex items-center justify-between px-8 relative">
+        <div className="py-6 md:py-0 md:h-[15%] bg-ink flex items-center justify-between px-8 relative">
           <button 
             onClick={() => navigate(`/project/${project.prevId}`)}
             className="w-12 h-12 rounded-full border border-tan/20 flex items-center justify-center text-tan hover:bg-burnt-orange hover:border-burnt-orange hover:text-ink transition-all duration-500"
@@ -116,7 +119,7 @@ export default function ProjectPage() {
 
           <div className="text-center">
             <p className="text-[8px] font-mono uppercase tracking-[0.3em] text-tan mb-1">Explore Project</p>
-            <p className="text-[8px] font-mono uppercase tracking-[0.3em] text-tan">Scroll to view gallery</p>
+            <p className="text-[8px] font-mono uppercase tracking-[0.3em] text-tan">{full ? 'Scroll the home page' : 'Scroll to view gallery'}</p>
           </div>
 
           <button 
@@ -128,7 +131,32 @@ export default function ProjectPage() {
         </div>
       </aside>
 
-      {/* Right Content - Visual Area */}
+      {/* Right Content - Visual Area: the whole home page in a browser frame, scrolled in
+          place as on the template pages; "Visit Website" on the left opens the real thing. */}
+      {full ? (
+        <div className="flex-1 min-h-0 h-[85svh] md:h-full bg-ink p-4 md:p-8 md:pt-28 lg:p-10 lg:pt-32 flex">
+          <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#111] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]">
+            <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+              <span className="size-2.5 rounded-full bg-white/20" />
+              <span className="size-2.5 rounded-full bg-white/20" />
+              <span className="size-2.5 rounded-full bg-white/20" />
+              <span className="ml-3 truncate rounded-full bg-white/5 px-3 py-1 font-mono text-[10px] tracking-wider text-white/50">{address}</span>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
+              <motion.img
+                key={project.id + 'full'}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                src={full}
+                alt={`${project.title}: the home page, top to bottom`}
+                className="block w-full"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
       <div className="flex-1 h-full overflow-y-auto snap-y snap-mandatory hide-scrollbar bg-ink">
         <section className="h-full w-full snap-start relative overflow-hidden">
           <motion.img 
@@ -156,6 +184,7 @@ export default function ProjectPage() {
           </section>
         ))}
       </div>
+      )}
 
       {/* Grain Overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay">

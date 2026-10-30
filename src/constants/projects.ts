@@ -1,5 +1,6 @@
 import { pictureOf, shop } from '../lib/shop';
 import digitalWaveHero from '../assets/images/web/portfolio/digital-wave-hero.webp';
+import digitalWaveFull from '../assets/images/web/portfolio/digital-wave-full.webp';
 
 export interface Project {
   id: string;
@@ -57,6 +58,16 @@ const all = [
     url: t.demo,
   })),
 ];
+
+/**
+ * Each project's whole home page, top to bottom, for the project page's
+ * scrolling frame (as on the template pages). Kept apart from the list RMD
+ * edits, so an edited list never loses them.
+ */
+export const FULL_PICTURES: Record<string, string> = {
+  'digital-wave-media-solutions': digitalWaveFull,
+  ...Object.fromEntries(templates.map((t) => [`${t.slug}-template`, pictureOf(t.slug, 'full')]).filter(([, src]) => src)),
+};
 
 export const PROJECT_DATA: Record<string, Project> = Object.fromEntries(
   all.map((p, i) => {
