@@ -167,10 +167,6 @@ export default function ContactPage() {
                     <div>
                       <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-3 block"><T k="contact.write-to-us">{"/ write to us"}</T></span>
                       <div className="space-y-4">
-                        <a href="tel:6232618824" className="group block">
-                          <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-1 block"><T k="contact.phone" label="Link or button">{"Phone"}</T></span>
-                          <span className="text-lg font-display group-hover:text-burnt-orange transition-colors"><T k="contact.623-261-8824" label="Link or button">{"623.261.8824"}</T></span>
-                        </a>
                         <a href="mailto:support@theiconikstudios.com" className="group block">
                           <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-1 block"><T k="contact.general-inquiry" label="Link or button">{"General Inquiry"}</T></span>
                           <span className="text-lg font-display group-hover:text-burnt-orange transition-colors"><T k="contact.remedy-theiconikstudios-com" label="Link or button">{"support@theiconikstudios.com"}</T></span>

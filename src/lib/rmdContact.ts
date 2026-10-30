@@ -25,7 +25,7 @@ export class ContactError extends Error {
   }
 }
 
-const FALLBACK = 'We couldn’t send your message just now. Please try again, or email remedy@theiconikstudios.com or call 623.261.8824.'
+const FALLBACK = 'We couldn’t send your message just now. Please try again, or email support@theiconikstudios.com.'
 
 /** Sends the message to RMD. */
 export async function sendContact(answers: ContactAnswers, turnstile: string, website: string): Promise<void> {
