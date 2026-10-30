@@ -4,23 +4,25 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import fuzzySuccessImg from '../assets/images/web/fuzzy-success.webp';
 import { T, useEditor, useImg, useText } from '../content';
 
-// Placeholders until real client reviews come in (the earlier ones were
-// made up). Each is editable from RMD's Sites → Website.
+// Real reviews only (the earlier ones were made up); a slot still reading
+// "Lorem ipsum" stays hidden. Each is editable from RMD's Sites → Website.
+// Review 1: Derick Washington's Google review of Iconik Studios (5 stars,
+// 2023-04-24), shortened with "…" but otherwise in his words.
 const REVIEWS = [
   {
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    quote: "Working with Ricky of Iconik Studios was such a great experience. He was always on time, has great recommendations, and was never hard to get a hold of when I had a question. … He took a quick look at my old website and showed me how he could make it better, and that he did! … Having someone on the back-end to focus on things like SEO has been such a load off. Now I can really focus on my business.",
+    author: "Derick Washington",
+    role: "Google review · 5 stars",
+    initials: "DW"
+  },
+  {
+    quote: "Lorem ipsum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     author: "Client Name",
     role: "Title, Company",
     initials: "CN"
   },
   {
-    quote: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    author: "Client Name",
-    role: "Title, Company",
-    initials: "CN"
-  },
-  {
-    quote: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    quote: "Lorem ipsum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     author: "Client Name",
     role: "Title, Company",
     initials: "CN"
