@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, MousePointer2 } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
-import { Included, Questions } from '../components/shop/ShopParts';
+import { HowItWorks, Included, Questions } from '../components/shop/ShopParts';
 import { industries, money, pictureOf, shop, templateBySlug, type ShopTemplate } from '../lib/shop';
 import { Img, T } from '../content';
 import deskFuzzy from '../assets/images/web/fuzzy-automation.webp';
@@ -90,18 +90,8 @@ export default function TemplatesPage() {
               <h2 className="font-display text-5xl uppercase leading-[0.9] tracking-tighter md:text-7xl"><T k="templates.included.title" label="Heading">{"A whole website,\nnot a starting point."}</T></h2>
             </div>
             <div className="lg:col-span-5">
-              <ol className="space-y-5">
-                {[
-                  ['01', 'Pick a template and pay once, with the plan monthly or yearly.'],
-                  ['02', 'Give it your business’s name, address and phone. Every page fills in.'],
-                  ['03', 'Change anything you like, then publish. Connect your domain when you’re ready.'],
-                ].map(([n, text]) => (
-                  <li key={n} className="flex gap-5">
-                    <span className="font-mono text-sm text-burnt-orange">{n}</span>
-                    <span className="text-lg leading-snug">{text}</span>
-                  </li>
-                ))}
-              </ol>
+              <span className="mb-6 block font-mono text-xs uppercase tracking-widest">How it works</span>
+              <HowItWorks />
             </div>
           </div>
           <Included />
@@ -307,7 +297,7 @@ function Facts() {
     [String(shop!.templates.length), 'Templates'],
     [String(industries.length), 'Industries'],
     [money(lowest), 'Once, per template'],
-    [money(shop!.plans.monthly), 'A month, hosting included'],
+    [money(shop!.plans.yearly), 'A year, hosting included'],
   ];
   return (
     <motion.dl

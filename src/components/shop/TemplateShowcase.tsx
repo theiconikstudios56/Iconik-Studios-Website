@@ -59,7 +59,7 @@ export default function TemplateShowcase() {
               <T k="home.templates.text">{"Not ready for a custom build? Start with a website our studio has already designed for your industry. Every page comes written, you change anything with a click, and it goes live on your own domain with hosting included."}</T>
             </p>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/60 md:tracking-[0.3em]">
-              From {money(lowest)} once <span className="text-accent">/</span> then {money(shop.plans.monthly)} a month
+              From {money(lowest)} once <span className="text-accent">/</span> then {money(shop.plans.yearly)} a year
             </p>
           </motion.div>
         </div>
