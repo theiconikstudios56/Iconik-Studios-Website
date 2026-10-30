@@ -1,6 +1,6 @@
 // The clips that play inside the "Meet the Fuzzies" words on the home page,
 // in a random order. Each is a short, silent MP4 in public/videos/fuzzies
-// (H.264, 1280×720, about 5–10 seconds and 1–1.5 MB) with a still picture
+// (H.264, 1920×1080 with a light sharpen, about 5–10 seconds and 4–8 MB; they load only as the section nears) with a still picture
 // from it for people who turn motion off.
 //
 export type FuzzyClip = { src: string; poster: string };
