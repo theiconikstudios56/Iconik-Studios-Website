@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useReducedMotion } from 'motion/react';
+import { motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from 'motion/react';
 import { T } from '../content';
 import { FUZZY_CLIPS, type FuzzyClip } from '../constants/fuzzyClips';
 
@@ -12,6 +12,51 @@ import { FUZZY_CLIPS, type FuzzyClip } from '../constants/fuzzyClips';
 
 const FADE_MS = 700;
 
+/**
+ * The fattest point of the drawn words (the centre of the widest letter stroke)
+ * in the heading's own pixels, and how far it is to the nearest edge of the ink.
+ * The zoom flies into that point, so the screen ends up inside a letter, on
+ * the clip, rather than in a black gap. Drawn on a small canvas with the
+ * heading's own font; null when it can't be worked out (the centre is used).
+ */
+function fattestInk(h2: HTMLElement): { x: number; y: number; r: number } | null {
+  const rect = h2.getBoundingClientRect();
+  if (!rect.width || !rect.height) return null;
+  const cs = getComputedStyle(h2);
+  const lines = h2.innerText.split('\n').map((l) => l.trim()).filter(Boolean);
+  if (!lines.length) return null;
+  const W = 360;
+  const k = W / rect.width;
+  const H = Math.max(1, Math.round(rect.height * k));
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  if (!ctx) return null;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#fff';
+  ctx.font = `${cs.fontWeight} ${parseFloat(cs.fontSize) * k}px ${cs.fontFamily}`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  if ('letterSpacing' in ctx) (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = `${(parseFloat(cs.letterSpacing) || 0) * k}px`;
+  const lineHeight = (parseFloat(cs.lineHeight) || parseFloat(cs.fontSize)) * k;
+  const upper = cs.textTransform === 'uppercase';
+  lines.forEach((line, i) => ctx.fillText(upper ? line.toUpperCase() : line, W / 2, (i + 0.5) * lineHeight));
+  const px = ctx.getImageData(0, 0, W, H).data;
+  // Distance from each ink pixel to the nearest non-ink one (chamfer 3-4, two passes); the edge counts as non-ink.
+  const far = 1e9;
+  const dist = new Float32Array(W * H);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) dist[y * W + x] = px[(y * W + x) * 4] > 128 && x > 0 && y > 0 && x < W - 1 && y < H - 1 ? far : 0;
+  for (let y = 1; y < H; y++) for (let x = 1; x < W - 1; x++) { const i = y * W + x; if (dist[i]) dist[i] = Math.min(dist[i], dist[i - 1] + 3, dist[i - W] + 3, dist[i - W - 1] + 4, dist[i - W + 1] + 4); }
+  for (let y = H - 2; y >= 0; y--) for (let x = W - 2; x >= 1; x--) { const i = y * W + x; if (dist[i]) dist[i] = Math.min(dist[i], dist[i + 1] + 3, dist[i + W] + 3, dist[i + W + 1] + 4, dist[i + W - 1] + 4); }
+  let best = 0;
+  let at = -1;
+  for (let i = 0; i < dist.length; i++) if (dist[i] > best && dist[i] < far) { best = dist[i]; at = i; }
+  if (at < 0) return null;
+  return { x: (at % W) / k, y: Math.floor(at / W) / k, r: best / 3 / k };
+}
+
 function shuffled<T>(items: T[]): T[] {
   const out = [...items];
   for (let i = out.length - 1; i > 0; i--) {
@@ -21,8 +66,45 @@ function shuffled<T>(items: T[]): T[] {
   return out;
 }
 
-/** `tall`: a full-screen black panel (the curtain in FuzziesReveal) rather than one sized to the words. */
-export default function MeetTheFuzzies({ tall = false }: { tall?: boolean } = {}) {
+/**
+ * `tall`: a full-screen black panel (the curtain in FuzziesReveal) rather than
+ * one sized to the words. `zoom` (0 to 1): how far the view has flown into the
+ * words; at 1 the black is gone and the clip fills the screen.
+ */
+export default function MeetTheFuzzies({ tall = false, zoom }: { tall?: boolean; zoom?: MotionValue<number> } = {}) {
+  const maskRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const none = useMotionValue(0);
+  const progress = zoom ?? none;
+  // Where to zoom into, in the black panel's own pixels, and how big the zoom must get for that stroke to fill the screen.
+  const [target, setTarget] = useState<{ x: number; y: number; scale: number } | null>(null);
+  useEffect(() => {
+    if (!zoom) return;
+    let stop = false;
+    const measure = () => {
+      const mask = maskRef.current;
+      const h2 = headingRef.current;
+      if (stop || !mask || !h2) return;
+      const ink = fattestInk(h2);
+      const m = mask.getBoundingClientRect();
+      const h = h2.getBoundingClientRect();
+      if (!ink) return setTarget({ x: m.width / 2, y: m.height / 2, scale: 35 });
+      const needed = (Math.hypot(window.innerWidth, window.innerHeight) / 2 / ink.r) * 1.25;
+      setTarget({ x: h.left - m.left + ink.x, y: h.top - m.top + ink.y, scale: Math.min(80, Math.max(8, needed)) });
+    };
+    document.fonts.ready.then(measure);
+    window.addEventListener('resize', measure);
+    return () => {
+      stop = true;
+      window.removeEventListener('resize', measure);
+    };
+  }, [zoom]);
+  // A steady zoom: the same factor per scroll step all the way in (so it neither crawls at the start nor jumps at the end).
+  const maxScale = target?.scale ?? 35;
+  const scale = useTransform(progress, (p) => Math.pow(maxScale, Math.min(1, Math.max(0, p))));
+  // The black melts away over the last stretch, leaving the clip alone on screen.
+  const maskOpacity = useTransform(progress, [0.78, 0.94], [1, 0]);
+
   const sectionRef = useRef<HTMLElement>(null);
   const firstRef = useRef<HTMLVideoElement>(null);
   const secondRef = useRef<HTMLVideoElement>(null);
@@ -127,11 +209,15 @@ export default function MeetTheFuzzies({ tall = false }: { tall?: boolean } = {}
       </div>
 
       {/* Black everywhere but the letters */}
-      <div className={`relative flex items-center justify-center bg-ink px-4 mix-blend-multiply ${tall ? 'min-h-[100svh] py-16' : 'py-16 md:py-40'}`}>
-        <h2 className="text-center font-display uppercase text-white leading-[0.9] tracking-[0.01em] text-[24vw] md:text-[17vw] xl:text-[15vw]">
+      <motion.div
+        ref={maskRef}
+        style={zoom ? { scale, opacity: maskOpacity, transformOrigin: target ? `${target.x}px ${target.y}px` : '50% 50%' } : undefined}
+        className={`relative flex items-center justify-center bg-ink px-4 mix-blend-multiply ${tall ? 'min-h-[100svh] py-16' : 'py-16 md:py-40'}`}
+      >
+        <h2 ref={headingRef} className="text-center font-display uppercase text-white leading-[0.9] tracking-[0.01em] text-[24vw] md:text-[17vw] xl:text-[15vw]">
           <T k="home.fuzzies.title" label="Heading">{"Meet the\nFuzzies"}</T>
         </h2>
-      </div>
+      </motion.div>
     </section>
   );
 }
