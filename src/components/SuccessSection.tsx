@@ -1,3 +1,4 @@
+import { DISCOVERY_CALL_URL } from '../constants/booking';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Activity, Mail, Database, Sparkles, ArrowRight, Zap, CheckCircle2, ShieldAlert } from 'lucide-react';
@@ -106,9 +107,9 @@ const SuccessSection = () => {
 
             <div className="pt-6">
               <a 
-                href="/contact" 
+                href={DISCOVERY_CALL_URL} 
                 className="inline-flex items-center gap-3 bg-ink text-white px-8 py-5 rounded-none font-display text-sm tracking-[0.2em] font-bold hover:bg-burnt-orange hover:text-white transition-all duration-500 uppercase shadow-lg hover:translate-x-1"
-              ><T k="shared.success.scale-your-pipeline" label="Link or button">{"Scale Your Pipeline"}</T>{" "}<ArrowRight size={16} />
+              ><T k="shared.success.scale-your-pipeline" label="Link or button">{"Book a discovery call"}</T>{" "}<ArrowRight size={16} />
               </a>
             </div>
           </div>

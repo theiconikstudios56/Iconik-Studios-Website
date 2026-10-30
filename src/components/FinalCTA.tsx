@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import React from 'react';
 import { Rocket, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { DISCOVERY_CALL_URL } from '../constants/booking';
 import { T } from '../content';
 
 const FinalCTA = () => {
@@ -31,10 +32,10 @@ const FinalCTA = () => {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4"
           >
-            <Link 
-              to="/contact" 
+            <a 
+              href={DISCOVERY_CALL_URL} 
               className="px-10 py-5 bg-paper text-ink rounded-full font-display text-lg uppercase hover:bg-accent transition-all duration-300 transform hover:-translate-y-1"
-            ><T k="shared.final.start-your-project" label="Link or button">{"Start your project"}</T></Link>
+            ><T k="shared.final.start-your-project" label="Link or button">{"Book a discovery call"}</T></a>
             <Link 
               to="/portfolio" 
               className="text-xs font-display uppercase tracking-widest border-b border-transparent hover:border-paper transition-all py-2"

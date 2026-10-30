@@ -1,12 +1,13 @@
 import Layout from '../components/Layout';
 import { motion, AnimatePresence } from 'motion/react';
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowUpRight, Mail, Phone, MapPin, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Mail, Phone, MapPin, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { trackLead } from '../lib/rmdTracking';
 import { loadTurnstile, TURNSTILE_SITE_KEY } from '../lib/rmdChat';
 import { ContactError, sendContact } from '../lib/rmdContact';
 import { T } from '../content';
 import { SOCIAL_LINKS } from '../constants/social';
+import { DISCOVERY_CALL_URL } from '../constants/booking';
 
 export default function ContactPage() {
   const [index, setIndex] = useState(0);
@@ -56,7 +57,7 @@ export default function ContactPage() {
       })
       .catch(() => {
         setStatus('error');
-        setErrorMessage('The spam check couldn’t load. Please refresh the page, or email remedy@theiconikstudios.com.');
+        setErrorMessage('The spam check couldn’t load. Please refresh the page, or email support@theiconikstudios.com.');
       });
     return () => {
       cancelled = true;
@@ -149,6 +150,16 @@ export default function ContactPage() {
                   </h2>
                 </div>
 
+                {/* The quickest way in: a time on Ricky's calendar. */}
+                <div className="mb-12 border border-white/15 p-6 md:p-8">
+                  <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-3 block"><T k="contact.book-a-call">{"/ book a call"}</T></span>
+                  <p className="text-lg leading-snug mb-6 max-w-md"><T k="contact.book-a-call.text">{"Thirty minutes with Ricky on video. Pick a time that suits you; we'll look at your website and how leads reach you today, and tell you plainly what we'd change."}</T></p>
+                  <a
+                    href={DISCOVERY_CALL_URL}
+                    className="inline-flex items-center gap-3 bg-burnt-orange text-ink px-8 py-4 font-display text-xs uppercase tracking-[0.25em] font-bold transition-all duration-500 hover:bg-white"
+                  ><T k="contact.book-a-call.button" label="Link or button">{"Book a discovery call"}</T> <ArrowRight size={16} /></a>
+                </div>
+
                 {/* Contact Details */}
                 <div className="space-y-8 mb-12">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -159,9 +170,9 @@ export default function ContactPage() {
                           <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-1 block"><T k="contact.phone" label="Link or button">{"Phone"}</T></span>
                           <span className="text-lg font-display group-hover:text-burnt-orange transition-colors"><T k="contact.623-261-8824" label="Link or button">{"623.261.8824"}</T></span>
                         </a>
-                        <a href="mailto:remedy@theiconikstudios.com" className="group block">
+                        <a href="mailto:support@theiconikstudios.com" className="group block">
                           <span className="text-[10px] font-mono uppercase tracking-widest opacity-80 mb-1 block"><T k="contact.general-inquiry" label="Link or button">{"General Inquiry"}</T></span>
-                          <span className="text-lg font-display group-hover:text-burnt-orange transition-colors"><T k="contact.remedy-theiconikstudios-com" label="Link or button">{"remedy@theiconikstudios.com"}</T></span>
+                          <span className="text-lg font-display group-hover:text-burnt-orange transition-colors"><T k="contact.remedy-theiconikstudios-com" label="Link or button">{"support@theiconikstudios.com"}</T></span>
                         </a>
                       </div>
                     </div>

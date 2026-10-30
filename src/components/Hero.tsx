@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DISCOVERY_CALL_URL } from '../constants/booking';
 import finalFuzzyHero from '../assets/images/web/chill-office.webp';
 import rooftopFuzzies from '../assets/images/web/rooftop-fuzzy-hd.webp';
 import fuzzyCollab from '../assets/images/web/fuzzy-collab.webp';
@@ -173,20 +174,20 @@ export default function Hero() {
               transition={{ delay: 1, duration: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <Link
-                to="/contact"
+              <a
+                href={DISCOVERY_CALL_URL}
                 id="hero-cta-primary"
-                aria-label="Automate My Bookings - Get started with Iconik Studios"
-                title="Automate My Bookings"
+                aria-label="Book a discovery call with Iconik Studios"
+                title="Book a discovery call"
                 className="relative group inline-block"
               >
                 <div className="absolute inset-0 bg-burnt-orange blur-2xl opacity-0 group-hover:opacity-20 transition-opacity" />
                 <div className="relative px-10 py-5 border border-ink bg-burnt-orange text-ink hover:border-burnt-orange hover:bg-black/40 backdrop-blur-md hover:text-burnt-orange transition-all duration-500 rounded-none">
                   <span className="relative z-10 text-xs uppercase tracking-[0.25em] font-bold">
-                    <T k="home.hero.button1">{"Automate My Bookings"}</T>
+                    <T k="home.hero.button1">{"Book a discovery call"}</T>
                   </span>
                 </div>
-              </Link>
+              </a>
 
               <Link
                 to="/portfolio"
@@ -198,11 +199,23 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-burnt-orange blur-2xl opacity-0 group-hover:opacity-20 transition-opacity" />
                 <div className="relative px-10 py-5 border border-white/20 bg-black/40 backdrop-blur-md text-white hover:border-burnt-orange hover:bg-transparent hover:text-burnt-orange transition-all duration-500 rounded-none">
                   <span className="relative z-10 text-xs uppercase tracking-[0.25em] font-bold">
-                    <T k="home.hero.button2">{"Explore Our Portfolio"}</T>
+                    <T k="home.hero.button2">{"See our work"}</T>
                   </span>
                 </div>
               </Link>
             </motion.div>
+
+            {/* The quiet reasons to trust the button above. */}
+            <motion.ul
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.3, duration: 0.6 }}
+              className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.25em] text-tan/70"
+            >
+              <li><T k="home.hero.trust1" label="Line under the buttons, 1">{"Phoenix, Arizona"}</T></li>
+              <li><T k="home.hero.trust2" label="Line under the buttons, 2">{"Built on Remedy, our own CRM"}</T></li>
+              <li><T k="home.hero.trust3" label="Line under the buttons, 3">{"A reply within one business day"}</T></li>
+            </motion.ul>
           </div>
         </motion.div>
       </div>
