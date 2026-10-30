@@ -1,6 +1,8 @@
 import { pictureOf, shop } from '../lib/shop';
 import digitalWaveHero from '../assets/images/web/portfolio/digital-wave-hero.webp';
 import digitalWaveFull from '../assets/images/web/portfolio/digital-wave-full.webp';
+import mintHero from '../assets/images/web/portfolio/mint-cannabis-hero.webp';
+import mintFull from '../assets/images/web/portfolio/mint-cannabis-full.webp';
 
 export interface Project {
   id: string;
@@ -40,6 +42,19 @@ const CLIENTS: Omit<Project, 'nextId' | 'prevId'>[] = [
     gallery: [],
     url: 'https://digitalwavemediasolutions.com/',
   },
+  {
+    id: 'mint-cannabis',
+    shortName: 'MINT',
+    title: 'MINT CANNABIS',
+    category: 'DISPENSARY BRAND / WEBSITE',
+    client: 'THE MINT CANNABIS',
+    services: ['WEB DESIGN'],
+    year: '2025',
+    description: 'The website for a dispensary brand with locations across Arizona, Nevada, Florida, Michigan and more: deals by state, a store finder, the rewards app and a learning centre, all pointing visitors to the nearest Mint.',
+    image: mintHero,
+    gallery: [],
+    url: 'https://mintdeals.com/',
+  },
 ];
 
 const all = [
@@ -66,6 +81,7 @@ const all = [
  */
 export const FULL_PICTURES: Record<string, string> = {
   'digital-wave-media-solutions': digitalWaveFull,
+  'mint-cannabis': mintFull,
   ...Object.fromEntries(templates.map((t) => [`${t.slug}-template`, pictureOf(t.slug, 'full')]).filter(([, src]) => src)),
 };
 
