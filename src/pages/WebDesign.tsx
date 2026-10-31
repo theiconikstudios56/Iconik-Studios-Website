@@ -49,7 +49,7 @@ const WebDesign = () => {
                 <span className="text-burnt-orange font-mono text-xs uppercase tracking-[0.4em]"><T k="web-design.web-architecture-01">{"Web Architecture / 01"}</T></span>
               </div>
               <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display text-tan uppercase leading-none mb-8 tracking-tighter opacity-85"><T k="web-design.stop-losing-leads-to" em="text-burnt-orange italic" label="Heading">{"Stop Losing\nLeads To\n*Bad Design.*"}</T></h1>
-              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8"><T k="web-design.most-websites-are-built">{"Most websites are built to look good in a portfolio. Ours are built to convert. We specialize in website development for workflow automation, bridging the gap between stunning web design and backend AI efficiency. Every layout decision is engineered to systematically move your visitors toward a single, business-driven objective."}</T></p>
+              <p className="max-w-xl text-paper text-xl leading-relaxed mb-8"><T k="web-design.most-websites-are-built">{"Most websites are built to look good in a portfolio. Ours are built to convert. We specialize in website development for workflow automation, bridging the gap between stunning web design and backend AI efficiency. Every layout decision is made to move your visitors toward a single, business-driven objective."}</T></p>
               <div className="flex flex-col sm:flex-row gap-6">
                 <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="web-design.schedule-your-audit" label="Button">{"Schedule Your Audit"}</T></button>
 
@@ -117,7 +117,7 @@ const WebDesign = () => {
               <div className="lg:w-1/2 space-y-12">
                 <h2 className="text-6xl md:text-8xl font-display text-ink uppercase leading-[0.95] tracking-tighter"><T k="web-design.beautiful-built-to-work" em="text-burnt-orange italic" label="Heading">{"Beautiful.\nBuilt To\n*Work.*"}</T></h2>
                 <div className="space-y-8 text-xl text-ink leading-relaxed max-w-xl">
-                  <p className="text-xl text-ink leading-relaxed"><T k="web-design.every-site-we-design">{"Every site we design and develop is custom-crafted to do two things at once — look exceptional and convert relentlessly. Rooted in our proven template systems and engineered from the ground up, each interface balances stunning aesthetics with zero friction, holding attention while guiding every visitor toward your primary business objective with clarity and intention."}</T></p>
+                  <p className="text-xl text-ink leading-relaxed"><T k="web-design.every-site-we-design">{"Every site we design and develop is custom-crafted to do two things at once — look exceptional and convert relentlessly. Rooted in our proven template systems and built from the ground up, each interface balances stunning aesthetics with zero friction, holding attention while guiding every visitor toward your primary business objective with clarity and intention."}</T></p>
                   
                   <div className="pt-6">
                     <h3 className="font-display text-2xl text-ink uppercase mb-3"><T k="web-design.your-digital-storefront-should" label="Subheading">{"Your digital storefront should be a reflection of your brand's excellence. It should also be a lead-generating machine."}</T></h3>

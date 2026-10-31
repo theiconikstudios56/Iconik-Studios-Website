@@ -10,7 +10,7 @@ const SERVICES = [
   {
     id: "001",
     title: "Website Design",
-    description: "We design modern, responsive websites engineered to engage your audience and turn visitors into customers. Every layout decision is intentional—built to convert, not just impress.",
+    description: "We design modern, responsive websites built to engage your audience and turn visitors into customers. Every layout decision is intentional—built to convert, not just impress.",
     categories: ["Wireframe", "Website", "Web Design", "Dashboard", "Product"],
     image: imgWeb,
     link: "/services/web-design"

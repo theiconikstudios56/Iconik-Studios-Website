@@ -13,7 +13,7 @@ export default function PortfolioPage() {
   const [itemWidth, setItemWidth] = useState(0);
 
   const pageTitle = useText('portfolio.seo.title', 'Our Work | Case Studies & Portfolio | Iconik Studios', { label: 'Title in Google and browser tabs', max: 70 });
-  const pageDescription = useText('portfolio.seo.description', 'Explore our portfolio of high-performing websites, automated workflows, and CRM integrations for elite brands.', { label: 'Description in Google', max: 170 });
+  const pageDescription = useText('portfolio.seo.description', 'Explore our portfolio of high-performing websites, automated workflows, and CRM integrations for local businesses.', { label: 'Description in Google', max: 170 });
 
   useEffect(() => {
     document.title = pageTitle;

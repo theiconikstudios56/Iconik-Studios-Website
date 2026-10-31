@@ -31,7 +31,7 @@ export default function WebDesignProcess() {
         <div className="lg:col-span-4 sticky top-32 h-fit">
           <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6"><T k="web-design.process.our-process">{"Our Process"}</T></span>
           <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter mb-8"><T k="web-design.process.how-we-build" label="Heading">{"How we\nBuild."}</T></h2>
-          <p className="text-lg opacity-100 leading-relaxed max-w-sm"><T k="web-design.process.we-dont-follow-generic">{"We don't follow generic templates. We follow a rigorous method of discovery and rapid iterative feedback to engineer a website that's as beautiful as it is built to perform."}</T></p>
+          <p className="text-lg opacity-100 leading-relaxed max-w-sm"><T k="web-design.process.we-dont-follow-generic">{"We don't follow generic templates. We follow a rigorous method of discovery and quick rounds of feedback to build a website that's as beautiful as it is built to perform."}</T></p>
         </div>
 
         <div className="lg:col-span-8 space-y-32">

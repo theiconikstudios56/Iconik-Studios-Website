@@ -58,7 +58,7 @@ export default function AboutHero() {
 
         {/* Corners Content - Bottom Left */}
         <div className="absolute bottom-10 left-10 z-30 max-w-[280px]">
-          <p className="font-mono text-[10px] uppercase tracking-widest leading-relaxed text-white"><T k="about.hero.a-boutique-creative-studio">{"A boutique creative studio dedicated to architecting digital legacies for pioneering brands."}</T></p>
+          <p className="font-mono text-[10px] uppercase tracking-widest leading-relaxed text-white"><T k="about.hero.a-boutique-creative-studio">{"A small design studio building websites and automations for local businesses."}</T></p>
         </div>
 
         {/* Corners Content - Bottom Right (wide screens: on a phone it covered the intro) */}

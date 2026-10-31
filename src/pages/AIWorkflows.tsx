@@ -313,7 +313,7 @@ const AIWorkflows = () => {
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-32">
               <div className="max-w-3xl">
-                <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange block mb-8"><T k="ai.automation-ecosystem">{"Automation Ecosystem"}</T></span>
+                <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange block mb-8"><T k="ai.automation-ecosystem">{"How It Connects"}</T></span>
                 <h2 className="text-6xl md:text-8xl font-display uppercase tracking-tighter leading-[0.9]"><T k="ai.orchestrate-your-future" em="text-burnt-orange italic" label="Heading">{"Orchestrate\nYour *Future.*"}</T></h2>
               </div>
               <p className="max-w-sm text-paper font-mono text-[10px] uppercase tracking-widest leading-loose text-right hidden lg:block"><T k="ai.beyond-traditional-scripts-we">{"Beyond traditional scripts. We build self-correcting, context-aware systems that evolve with your business complexity."}</T></p>

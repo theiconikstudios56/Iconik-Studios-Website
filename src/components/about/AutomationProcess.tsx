@@ -36,7 +36,7 @@ export default function AutomationProcess() {
         <div className="lg:col-span-4 sticky top-32 h-fit">
           <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6"><T k="ai.process.our-process">{"Our Process"}</T></span>
           <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter mb-8"><T k="ai.process.how-we-build-your" em="text-burnt-orange italic" label="Heading">{"How we build\nyour automation\n*system.*"}</T></h2>
-          <p className="text-lg opacity-100 leading-relaxed max-w-sm"><T k="ai.process.we-dont-follow-generic">{"We don't follow generic templates. We follow a rigorous method of discovery and rapid iterative feedback to engineer an automation engine that scales with your growth."}</T></p>
+          <p className="text-lg opacity-100 leading-relaxed max-w-sm"><T k="ai.process.we-dont-follow-generic">{"We don't follow generic templates. We follow a rigorous method of discovery and quick rounds of feedback to build automations that grow with your business."}</T></p>
         </div>
 
         <div className="lg:col-span-8 space-y-32">

@@ -4,7 +4,7 @@ import { T } from '../../content';
 
 const pillars = [
   {
-    title: "Intentional Engineering",
+    title: "Built With Intent",
     description: "No generic code and no shortcuts. Every custom build and every template we sell is made to the same standard, built to turn visitors into enquiries.",
     icon: Shield,
     color: "bg-white/50",
@@ -12,7 +12,7 @@ const pillars = [
   },
   {
     title: "High-End Web Design",
-    description: "Bespoke digital experiences crafted to command attention. We blend striking aesthetics with conversion science so your brand stands alone.",
+    description: "Websites designed around your business and made to stand out. We blend striking aesthetics with conversion science so your brand stands alone.",
     icon: Palette,
     color: "bg-white/50",
     textColor: "text-[#2D2D2D]"
@@ -25,8 +25,8 @@ const pillars = [
     textColor: "text-[#2D2D2D]"
   },
   {
-    title: "Elite Partnership",
-    description: "No bloated corporate layers or account managers. You collaborate directly with the engineers and designers building your legacy.",
+    title: "Direct Partnership",
+    description: "No bloated corporate layers or account managers. You work directly with the people designing and building your site.",
     icon: Target,
     color: "bg-white/50",
     textColor: "text-[#2D2D2D]"
