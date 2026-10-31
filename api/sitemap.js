@@ -16,7 +16,6 @@ const PAGES = [
   { url: '/portfolio', priority: '0.8', changefreq: 'monthly' },
   { url: '/blog', priority: '0.8', changefreq: 'weekly' },
   { url: '/about', priority: '0.7', changefreq: 'monthly' },
-  { url: '/homes', priority: '0.6', changefreq: 'monthly' },
   { url: '/contact', priority: '0.7', changefreq: 'monthly' },
 ];
 

@@ -154,7 +154,7 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
               className="block text-white opacity-[0.85]"
             >
-              <T k="home.hero.title" br="hidden lg:block">{"Turn your ad spend into\na fully booked calendar\nautomatically."}</T>
+              <T k="home.hero.title" br="hidden lg:block">{"Your craft is luxury.\nYour website\nshould match."}</T>
             </motion.span>
           </h1>
 
@@ -165,7 +165,7 @@ export default function Hero() {
               transition={{ delay: 0.8 }}
               className="text-sm md:text-base font-light max-w-2xl text-tan leading-relaxed font-sans"
             >
-              <T k="home.hero.text">{"We help med spas capture, engage and keep every patient lead that standard websites miss. With conversion-focused design and AI automation that never sleeps, we end slow follow-ups, so your marketing dollars turn into booked appointments, not missed opportunities."}</T>
+              <T k="home.hero.text">{"Agency-built websites and done-for-you follow-up for med spas and local service businesses around Phoenix. Design made to convert, and automation that answers every enquiry in seconds, so fewer leads slip away while you're with a client."}</T>
             </motion.p>
 
             <motion.div

@@ -5,7 +5,7 @@ import { T } from '../../content';
 const pillars = [
   {
     title: "Intentional Engineering",
-    description: "We reject generic code and template shortcuts. Every web framework and automation pipeline is custom-engineered to convert traffic into real growth.",
+    description: "No generic code and no shortcuts. Every custom build and every template we sell is made to the same standard, built to turn visitors into enquiries.",
     icon: Shield,
     color: "bg-white/50",
     textColor: "text-[#2D2D2D]"

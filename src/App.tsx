@@ -38,7 +38,6 @@ const Maintenance = lazy(() => import('./pages/Maintenance'));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
-const HomesPage = lazy(() => import('./pages/HomesPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
@@ -106,7 +105,7 @@ function Home() {
                   <T k="home.services.title" em="text-accent italic">{"Turn Visions\nInto *Visuals.*"}</T>
                 </h2>
                 <p className="max-w-2xl text-paper text-base leading-relaxed mb-12">
-                  <T k="home.services.text">{"We design jaw-dropping, high-converting digital storefronts, but we don't stop at aesthetics. Iconik Studios engineers the underlying automation workflows that capture every incoming inquiry, follow up instantly, and sync lead data directly to your CRM—saving you hours of manual labor, reducing marketing costs, and guaranteeing that zero opportunities slip through the cracks."}</T>
+                  <T k="home.services.text">{"We design jaw-dropping, high-converting digital storefronts, but we don't stop at aesthetics. Iconik Studios engineers the underlying automation workflows that capture every incoming inquiry, follow up instantly, and sync lead data directly to your CRM—saving you hours of manual work and making sure every enquiry gets an answer."}</T>
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl mt-8">
                   <div className="bg-accent text-ink py-5 px-6 rounded-none border border-accent/20 flex flex-col justify-between hover:scale-[1.02] hover:bg-tan transition-all duration-300">
@@ -207,7 +206,7 @@ export default function App() {
         <Route path="/templates/:slug" element={<TemplatePage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/homes" element={<HomesPage />} />
+        <Route path="/homes" element={<Navigate to="/templates/ridge" replace />} />
         <Route path="/project/:id" element={<ProjectPage />} />
         <Route path="/blog/:slug" element={<BlogArticlePage />} />
         {/* The old proposal, contract and admin pages were retired: proposals and

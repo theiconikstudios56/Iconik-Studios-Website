@@ -80,7 +80,7 @@ const SuccessSection = () => {
                 </div>
                 <div>
                   <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.instant-engagement-speed-to" label="Subheading">{"Instant Engagement (Speed to Lead)"}</T></h4>
-                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.a-lead-left-waiting">{"A lead left waiting for 5 minutes is 10 times less likely to convert. Every new inquiry gets an automatic reply within seconds, and your team is told straight away."}</T></p>
+                  <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.a-lead-left-waiting">{"Every new inquiry gets an automatic reply within seconds, and your team is told straight away. The faster the reply, the warmer the lead."}</T></p>
                 </div>
               </div>
 
