@@ -7,9 +7,10 @@ const DISCOVERY_CALL = 'https://rmd.theiconikstudios.com/book/discovery-call';
 
 /**
  * The homepage's ladder (brand guide, "a path up"; strategy brief §3, upsell
- * ladder): template → care plan → custom build, so a visitor sees the $129
- * template leads somewhere. Automations join once texting is live and the
- * brief says "promote".
+ * ladder): template → care plan → automations → custom build, so a visitor
+ * sees the $129 template leads somewhere. Automations name only what works
+ * without texting (Ricky, 2026-10-31); missed-call text-back joins once
+ * carriers approve texting.
  */
 const rungs = [
   {
@@ -31,8 +32,17 @@ const rungs = [
     to: '/services/maintenance',
   },
   {
-    key: 'custom',
+    key: 'automations',
     step: '03',
+    name: 'Automations',
+    price: 'From $97 a month',
+    text: 'New leads get a reply within a minute, bookings come with reminders, and every customer is asked for a review. We set it up and run it. No setup fee on a 12-month plan.',
+    cta: 'See how it works',
+    to: '/services/ai-automation',
+  },
+  {
+    key: 'custom',
+    step: '04',
     name: 'Custom build',
     price: '$2,000 to $5,000',
     text: 'A website designed from scratch around your business, by the studio that designs the templates.',
@@ -62,11 +72,11 @@ export default function GrowthLadder() {
             </h2>
           </div>
           <p className="text-base leading-relaxed text-paper md:text-lg lg:col-span-5">
-            <T k="home.ladder.text">{"Start with a template this week. Add a care plan when you'd rather we look after it. Move to a custom build when you outgrow it. Same studio, same standards, no starting over."}</T>
+            <T k="home.ladder.text">{"Start with a template this week. Add a care plan when you'd rather we look after it, and automations when you'd rather not chase leads. Move to a custom build when you outgrow it. Same studio, same standards, no starting over."}</T>
           </p>
         </motion.div>
 
-        <ol className="grid grid-cols-1 border-t border-white/10 md:grid-cols-3">
+        <ol className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-4">
           {rungs.map((r, i) => {
             const cta = (
               <>
@@ -82,7 +92,7 @@ export default function GrowthLadder() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 * i }}
-                className="flex flex-col border-b border-white/10 py-10 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 lg:px-10"
+                className="flex flex-col border-t border-white/10 pb-10 pt-8"
               >
                 <span className="mb-6 font-mono text-xs tracking-[0.3em] text-white/50">{r.step}</span>
                 <h3 className="mb-2 font-display text-3xl uppercase tracking-tight text-tan md:text-4xl">

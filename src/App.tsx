@@ -106,26 +106,26 @@ function Home() {
                   <T k="home.services.title" em="text-accent italic">{"Turn Visions\nInto *Visuals.*"}</T>
                 </h2>
                 <p className="max-w-2xl text-paper text-base leading-relaxed mb-12">
-                  <T k="home.services.text">{"We design jaw-dropping, high-converting digital storefronts, but we don't stop at aesthetics. Iconik Studios engineers the underlying automation workflows that capture every incoming inquiry, follow up instantly, and sync lead data directly to your CRM—saving you hours of manual work and making sure every enquiry gets an answer."}</T>
+                  <T k="home.services.text">{"We design websites that look the part and turn visitors into inquiries. Then we set up the automations behind them: every new lead gets a reply straight away, follow-ups go out on their own, and every lead lands in one place. Less admin for you, and no inquiry left waiting."}</T>
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl mt-8">
                   <div className="bg-accent text-ink py-5 px-6 rounded-none border border-accent/20 flex flex-col justify-between hover:scale-[1.02] hover:bg-tan transition-all duration-300">
                     <div>
                       <h3 className="font-display text-lg tracking-[0.1em] font-bold uppercase mb-2">
-                        <T k="home.services.card1-title">{"Elite Web Design"}</T>
+                        <T k="home.services.card1-title">{"Custom Web Design"}</T>
                       </h3>
                       <p className="text-ink text-xs leading-relaxed font-mono">
-                        <T k="home.services.card1-text">{"We design visually stunning user experiences tailored to convert visitors into clients."}</T>
+                        <T k="home.services.card1-text">{"Websites designed around your business and built to turn visitors into customers."}</T>
                       </p>
                     </div>
                   </div>
                   <div className="bg-accent text-ink py-5 px-6 rounded-none border border-accent/20 flex flex-col justify-between hover:scale-[1.02] hover:bg-tan transition-all duration-300">
                     <div>
                       <h3 className="font-display text-lg tracking-[0.1em] font-bold uppercase mb-2">
-                        <T k="home.services.card2-title">{"Intelligent Automation"}</T>
+                        <T k="home.services.card2-title">{"Lead Automations"}</T>
                       </h3>
                       <p className="text-ink text-xs leading-relaxed font-mono">
-                        <T k="home.services.card2-text">{"We build custom backend workflows to follow up 24/7 and automate your operations."}</T>
+                        <T k="home.services.card2-text">{"Instant lead replies, booking reminders and review requests, set up and run for you."}</T>
                       </p>
                     </div>
                   </div>
