@@ -7,6 +7,7 @@ import FinalCTA from '../components/FinalCTA';
 import { BrowserFrame, Checks, HowItWorks, Included, MoneyBack, Questions } from '../components/shop/ShopParts';
 import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
+import { metaViewContent } from '../lib/metaPixel';
 
 // Where Sites' own pages (terms, refunds, help) live (RMD-crm 11.12).
 const SITES_APP = 'https://app.iconik.site';
@@ -18,6 +19,9 @@ export default function TemplatePage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+  useEffect(() => {
+    if (template && shop) metaViewContent(template, shop.currency);
+  }, [template, shop]);
   if (!template || !shop) return <NotFoundPage />;
   const others = shop.templates.filter((t) => t.key !== template.key);
 

@@ -1,10 +1,12 @@
 // The template shop (RMD-crm BUILD_PLAN 11.10): what's for sale comes from
 // Sites when the site is built; Buy asks Sites' shop-checkout for a Stripe
 // Checkout page and goes there. Prices are Stripe's own: the browser only
-// says which template and which plan, and where the visit came from (11.14).
+// says which template and which plan, where the visit came from (11.14), and
+// the Meta Pixel's IDs so the paid sale can be matched to its ad (lib/metaPixel).
 
 import catalog, { type ShopTemplate } from 'virtual:shop-catalog';
 import { arrival } from './arrival';
+import { metaIds, metaInitiateCheckout } from './metaPixel';
 
 export type { ShopTemplate };
 export type ShopPlan = 'monthly' | 'yearly';
@@ -34,12 +36,13 @@ export const templateBySlug = (slug: string | undefined) => shop?.templates.find
 /** Opens Stripe Checkout for the template and plan, or throws with a message to show. */
 export async function buy(template: ShopTemplate, plan: ShopPlan): Promise<void> {
   if (!CHECKOUT) throw new Error('The shop opens soon. Please check back shortly.');
+  metaInitiateCheckout(template, plan, shop?.currency ?? 'usd');
   let response: Response;
   try {
     response = await fetch(CHECKOUT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ template_key: template.key, plan, attribution: arrival }),
+      body: JSON.stringify({ template_key: template.key, plan, attribution: arrival, meta: metaIds() }),
     });
   } catch {
     throw new Error('We couldn’t reach checkout. Check your connection and try again.');

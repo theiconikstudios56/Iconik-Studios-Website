@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { trackPage } from './lib/rmdTracking';
+import { metaPageView } from './lib/metaPixel';
 import { Img, inEditor, reportRoute, T } from './content';
 import { motion } from 'motion/react';
 import { chatAvailable } from './lib/rmdChat';
@@ -174,13 +175,14 @@ function Home() {
   );
 }
 
-/** Sends each page view to RMD's visitor statistics (see lib/rmdTracking). */
+/** Sends each page view to RMD's visitor statistics (see lib/rmdTracking) and the Meta Pixel (lib/metaPixel). */
 function RmdTracking() {
   const { pathname, search } = useLocation();
   useEffect(() => {
     // Inside RMD's website editor, nothing is counted as a visit.
     if (inEditor) return reportRoute(pathname);
     trackPage(pathname, search);
+    metaPageView(pathname);
     // A new page is a new view; a changed query string on the same page isn't.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
