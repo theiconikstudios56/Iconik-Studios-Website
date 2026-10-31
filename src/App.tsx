@@ -22,6 +22,7 @@ import Layout from './components/Layout';
 import StackedServices from './components/StackedServices';
 import { FAQ } from './components/PricingFAQ';
 import TemplateShowcase from './components/shop/TemplateShowcase';
+import GrowthLadder from './components/GrowthLadder';
 // The shop's pages are where campaign posts land, so they come with the first download (no second round trip).
 import TemplatesPage from './pages/TemplatesPage';
 import TemplatePage from './pages/TemplatePage';
@@ -165,6 +166,7 @@ function Home() {
         <SuccessSection />
         <StackedServices />
         <TemplateShowcase />
+        <GrowthLadder />
         <FuzziesReveal />
         <FAQ />
         <HomesContact />
