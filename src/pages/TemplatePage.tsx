@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Loader2 } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
-import { BrowserFrame, Checks, HowItWorks, Included, MoneyBack, Questions } from '../components/shop/ShopParts';
+import { BrowserFrame, Checks, HowItWorks, Included, FoundingOffer, MoneyBack, Questions } from '../components/shop/ShopParts';
 import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
 import { metaViewContent } from '../lib/metaPixel';
@@ -176,8 +176,9 @@ function Purchase({ template }: { template: ShopTemplate }) {
           {busy ? <Loader2 size={18} className="animate-spin" /> : null}
           {!canBuy ? 'Opening soon' : busy ? 'Opening checkout…' : <>Buy {template.name} <ArrowRight size={18} /></>}
         </button>
-        <div className="mt-3">
+        <div className="mt-3 space-y-2">
           <MoneyBack />
+          <FoundingOffer />
         </div>
         {problem && <p role="alert" className="mt-3 text-sm text-burnt-orange">{problem}</p>}
         <a href={template.demo} target="_blank" rel="noreferrer" className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 font-display text-sm uppercase tracking-widest transition-colors hover:border-paper">

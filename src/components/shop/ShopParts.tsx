@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Check, Globe2, History, Mail, MousePointerClick, PenLine, ShieldCheck } from 'lucide-react';
+import { Check, Crown, Globe2, History, Mail, MousePointerClick, PenLine, ShieldCheck } from 'lucide-react';
 
 /** A screenshot in a plain browser window, the way a buyer will see their site. */
 export function BrowserFrame({ src, alt, address, scroll = false, className = '' }: { src?: string; alt: string; address: string; scroll?: boolean; className?: string }) {
@@ -111,6 +111,22 @@ export function MoneyBack() {
   return (
     <p className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white/60">
       <ShieldCheck size={14} className="text-burnt-orange" /> 14-day money-back guarantee
+    </p>
+  );
+}
+
+/**
+ * The founding-buyer offer (Sales playbook §2, SD-D12): the first 10 template
+ * buyers get a free 20-minute setup call. Grizzy counts contacts tagged
+ * founding-buyer; set FOUNDING_OPEN to false when the tenth is taken.
+ */
+export const FOUNDING_OPEN = true;
+
+export function FoundingOffer() {
+  if (!FOUNDING_OPEN) return null;
+  return (
+    <p className="flex items-center justify-center gap-2 text-center text-xs leading-relaxed text-white/75">
+      <Crown size={14} className="shrink-0 text-burnt-orange" /> Founding offer: our first 10 buyers get a free 20-minute setup call with us.
     </p>
   );
 }
