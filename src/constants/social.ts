@@ -8,7 +8,7 @@ export const SOCIAL: SocialProfile[] = [
   { short: 'IG', name: 'Instagram', url: 'https://www.instagram.com/iconik_studios/' },
   { short: 'YT', name: 'YouTube', url: null },
   { short: 'X', name: 'X', url: null },
-  { short: 'FB', name: 'Facebook', url: null },
+  { short: 'FB', name: 'Facebook', url: 'https://www.facebook.com/iconikstudios/' },
   { short: 'G', name: 'Google reviews', url: 'https://www.google.com/search?q=iconik+studios+llc#lrd=0x872b3fc434e1a90f:0xecef97fcfe10ae9,1' },
 ];
 
