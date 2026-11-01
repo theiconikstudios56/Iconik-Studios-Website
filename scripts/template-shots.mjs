@@ -15,8 +15,10 @@ import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const OUT = new URL('../src/assets/images/web/templates/', import.meta.url).pathname;
+// A file path, not the URL's pathname: this folder's name has spaces, which a pathname keeps as %20.
+const OUT = fileURLToPath(new URL('../src/assets/images/web/templates/', import.meta.url));
 const source = process.env.SITES_CATALOG_URL || 'https://app.iconik.site/shop/catalog.json';
 const catalog = /^https?:\/\//.test(source) ? await fetch(source).then((r) => r.json()) : JSON.parse(readFileSync(source, 'utf8'));
 
@@ -85,9 +87,11 @@ try {
     await open(t.demo, 1200, 750);
     await save(`${t.slug}-hero`, 1200, 750, false);
     await open(t.demo, 960, 900);
+    // The window stays 900 tall and the capture reaches past it: a window as tall as the page would
+    // stretch every band sized to the screen's height (Cinder's case study is 88% of it).
+    // A bar fixed to the bottom of the window (the phone bar) would sit 900px down the picture, so it's hidden.
+    await run(`[...document.querySelectorAll('body *')].filter((el) => getComputedStyle(el).position === 'fixed' && el.getBoundingClientRect().top > innerHeight / 2).forEach((el) => (el.style.display = 'none'))`);
     const height = await run('document.documentElement.scrollHeight');
-    await send('Emulation.setDeviceMetricsOverride', { width: 960, height, deviceScaleFactor: 1, mobile: false });
-    await sleep(800);
     await save(`${t.slug}-full`, 960, height, true);
     console.log(`  ${t.slug}: hero and full page (${height}px tall)`);
   }
