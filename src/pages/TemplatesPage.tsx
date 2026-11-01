@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, MousePointer2 } from 'lucide-react';
@@ -149,8 +149,23 @@ function IndustryFilter({ current, total }: { current: string | undefined; total
   );
 }
 
+// The hover scroll moves at one speed for every template, so a long page takes longer instead of racing
+// past (7 s for the short ones, as before; Corbel's 15 screens about 25 s). Leaving goes back up in 1 s.
+const SCROLL_PX_PER_SECOND = 340;
+const SCROLL_MIN_MS = 7000;
+
 function TemplateCard({ template, index }: { template: ShopTemplate; index: number }) {
   const full = pictureOf(template.slug, 'full');
+  const shot = useRef<HTMLImageElement>(null);
+  // Measured on hover: the picture's travel at the card's size right now
+  const timeTheScroll = () => {
+    const img = shot.current;
+    const frame = img?.parentElement;
+    if (!img || !frame) return;
+    const travel = Math.max(0, img.offsetHeight - frame.offsetHeight);
+    const ms = Math.max(SCROLL_MIN_MS, Math.round((travel / SCROLL_PX_PER_SECOND) * 1000));
+    img.style.setProperty('--scroll-ms', `${ms}ms`);
+  };
   const number = String(shop!.templates.indexOf(template) + 1).padStart(2, '0');
   const palette = [template.colors.background, template.colors.brand, template.colors.text];
   return (
@@ -160,6 +175,7 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.7, delay: (index % 2) * 0.1 }}
       className="group flex flex-col rounded-[28px] border border-white/10 bg-white/[0.03] p-3 transition-colors duration-500 hover:border-burnt-orange/40 md:p-4"
+      onPointerEnter={timeTheScroll}
     >
       <Link to={`/templates/${template.slug}`} className="block" aria-label={`${template.name}: see the template`}>
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#111]">
@@ -167,13 +183,14 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
           <div className="relative h-[20rem] overflow-hidden md:h-[24rem]">
             {full && (
               <img
+                ref={shot}
                 src={full}
                 alt={`The ${template.name} template’s home page`}
                 loading="lazy"
                 // Tall full-page screenshots: never ahead of the page's own text, fonts and code.
                 fetchPriority="low"
                 decoding="async"
-                className="absolute inset-x-0 top-0 w-full transition-transform duration-[7000ms] ease-in-out group-hover:-translate-y-[calc(100%-20rem)] md:group-hover:-translate-y-[calc(100%-24rem)] motion-reduce:transition-none"
+                className="absolute inset-x-0 top-0 w-full transition-transform duration-1000 ease-[cubic-bezier(0.3,0.05,0.7,0.95)] group-hover:duration-(--scroll-ms) group-hover:-translate-y-[calc(100%-20rem)] md:group-hover:-translate-y-[calc(100%-24rem)] motion-reduce:transition-none"
               />
             )}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-0" />
