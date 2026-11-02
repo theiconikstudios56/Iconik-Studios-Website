@@ -95,8 +95,9 @@ export const FAQ = () => {
   return (
     <section className="py-20 md:py-32 px-6 lg:px-12 bg-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
-        <div className="space-y-8 sticky top-32 h-fit">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+        {/* Beside the questions on large screens it stays in view; on phones it sits above them. */}
+        <div className="space-y-8 lg:sticky lg:top-32 lg:h-fit">
           <h2 className="text-7xl md:text-9xl text-paper"><T k="home.faq.faq" label="Heading">{"FAQ"}</T></h2>
           <p className="max-w-sm text-xl font-light text-paper opacity-100"><T k="home.faq.everything-you-need-to">{"Everything you need to know before we launch."}</T></p>
         </div>

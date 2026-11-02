@@ -45,7 +45,7 @@ export default function MaintenanceProcess() {
   return (
     <section className="py-20 md:py-32 bg-ink text-tan">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-        <div className="lg:col-span-4 sticky top-32 h-fit">
+        <div className="lg:col-span-4 lg:sticky lg:top-32 lg:h-fit">
           <span className="font-mono text-[10px] tracking-[0.5em] uppercase opacity-100 block mb-6"><T k="maintenance.process.guardianship">{"Care Plans"}</T></span>
           <h2 className="text-5xl md:text-7xl font-display uppercase leading-[0.9] tracking-tighter mb-8"><T k="maintenance.process.why-your-maintenance-plan" label="Heading">{"Why Your\nMaintenance\nPlan Matters."}</T></h2>
           <p className="text-lg opacity-100 leading-relaxed max-w-sm"><T k="maintenance.process.websites-and-automated-systems">{"Websites and automated systems are never static. To keep your competitive edge, your code, databases, and AI agents require constant vigilance and expert oversight."}</T></p>
