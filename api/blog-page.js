@@ -15,10 +15,17 @@ const RMD_ARTICLES = 'https://winicrmzmcgfwrrynoxd.supabase.co/functions/v1/webs
 
 let cached = '';
 
-/** This deployment's own shell, bundled with the function (vercel.json includeFiles), so it names this build's files. */
-async function readShell() {
+/**
+ * This deployment's own shell, bundled with the function (vercel.json
+ * includeFiles) so it names this build's files; if it's missing, the one the
+ * site serves at /app.html.
+ */
+async function readShell(origin) {
   if (cached) return cached;
-  const shell = await readFile(join(process.cwd(), 'dist', 'app.html'), 'utf8');
+  const shell = await readFile(join(process.cwd(), 'dist', 'app.html'), 'utf8').catch(async () => {
+    const response = await fetch(`${origin}/app.html`, { signal: AbortSignal.timeout(5000) });
+    return response.ok ? response.text() : '';
+  });
   if (!shell.includes('<div id="root">')) throw new Error('app.html isn’t the site’s shell');
   cached = shell;
   return shell;
@@ -30,7 +37,7 @@ export default async function handler(req, res) {
 
   let shell;
   try {
-    shell = await readShell();
+    shell = await readShell(`https://${req.headers['x-forwarded-host'] || req.headers.host}`);
   } catch {
     // Without the shell there's no page to send; the browser tries again.
     res.setHeader('Cache-Control', 'no-store');
