@@ -45,11 +45,20 @@ const LatestInsights = () => {
           ><T k="shared.insights.deep-dives-into-the">{"\"Deep dives into the intersection of design and technology.\""}</T></m.p>
         </div>
 
-        {/* Grid Section - Matching Blog Style. On phones a sideways swipe row, not a tall stack. */}
-        <div className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-16 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
+        {/* Grid Section - Matching Blog Style. On phones a sideways swipe row, not a tall stack: it moves
+            only sideways (nothing to scroll up and down inside it) and stops on each article in turn,
+            lined up with the page's margin. */}
+        <m.div
+          // The row comes in as one, once: on phones the cards still off to the right rise and fade in
+          // with the rest, rather than each one as it's swiped in.
+          initial="hidden"
+          whileInView="shown"
+          viewport={{ once: true }}
+          className="-mx-6 flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto overflow-y-hidden overscroll-x-contain px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-16 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4"
+        >
           {loading ? (
             Array.from({ length: 4 }).map((_, index) => (
-              <div key={index} className="animate-pulse space-y-8 w-[78%] shrink-0 snap-start md:w-auto">
+              <div key={index} className="animate-pulse space-y-8 w-[78%] shrink-0 snap-start snap-always md:w-auto">
                 <div className="aspect-[3/4] bg-white/5" />
                 <div className="space-y-4 px-1">
                   <div className="h-7 bg-white/10 w-11/12" />
@@ -61,10 +70,9 @@ const LatestInsights = () => {
             articles.map((item, index) => (
               <m.article 
                 key={item.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={{ hidden: { opacity: 0, y: 30 }, shown: { opacity: 1, y: 0 } }}
                 transition={{ delay: index * 0.1, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-                className="group w-[78%] shrink-0 snap-start md:w-auto"
+                className="group w-[78%] shrink-0 snap-start snap-always md:w-auto"
               >
                 <Link to={`/blog/${item.slug}`} className="block">
                 {/* Image Container with Badge */}
@@ -106,7 +114,7 @@ const LatestInsights = () => {
               </m.article>
             ))
           )}
-        </div>
+        </m.div>
         
         {/* Footer Link */}
         <div className="pt-12 text-center">

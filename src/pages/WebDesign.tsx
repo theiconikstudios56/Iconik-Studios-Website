@@ -173,7 +173,7 @@ const WebDesign = () => {
             className="max-w-4xl mx-auto"
           >
             <span className="font-mono text-xs uppercase tracking-[0.5em] opacity-100 block mb-6"><T k="web-design.the-momentum-loop">{"The Momentum Loop"}</T></span>
-            <h2 className="text-5xl md:text-[7vw] font-display uppercase tracking-tighter leading-[0.95] mb-2"><T k="web-design.start-your-ascent" em="italic" label="Heading">{"Start Your\n*Ascent.*"}</T></h2>
+            <h2 className="text-[20vw] md:text-[7vw] font-display uppercase tracking-tighter leading-[0.95] mb-2"><T k="web-design.start-your-ascent" em="italic" label="Heading">{"Start Your\n*Ascent.*"}</T></h2>
           </m.div>
 
           <div className="w-full">
