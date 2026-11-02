@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useProjects, useText, type ShownProject } from '../content';
 import Navbar from '../components/Navbar';
+import { PAGE_SEO } from '../seo';
 
 export default function PortfolioPage() {
   const { projects } = useProjects();
@@ -12,8 +13,8 @@ export default function PortfolioPage() {
   const [activeIndex, setActiveIndex] = useState(1);
   const [itemWidth, setItemWidth] = useState(0);
 
-  const pageTitle = useText('portfolio.seo.title', 'Our Work | Case Studies & Portfolio | Iconik Studios', { label: 'Title in Google and browser tabs', max: 70 });
-  const pageDescription = useText('portfolio.seo.description', 'Explore our portfolio of high-performing websites, automated workflows, and CRM integrations for local businesses.', { label: 'Description in Google', max: 170 });
+  const pageTitle = useText('portfolio.seo.title', PAGE_SEO.portfolio.title, { label: 'Title in Google and browser tabs', max: 70 });
+  const pageDescription = useText('portfolio.seo.description', PAGE_SEO.portfolio.description, { label: 'Description in Google', max: 170 });
 
   useEffect(() => {
     document.title = pageTitle;

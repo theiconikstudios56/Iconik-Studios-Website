@@ -9,8 +9,12 @@
             "destination": "/api/$1"
         },
         {
+            "source": "/blog/:slug",
+            "destination": "/api/blog-page?slug=:slug"
+        },
+        {
             "source": "/(.*)",
-            "destination": "/index.html"
+            "destination": "/app.html"
         }
     ],
     "headers": [
@@ -36,5 +40,10 @@
                 }
             ]
         }
-    ]
+    ],
+    "functions": {
+        "api/blog-page.js": {
+            "includeFiles": "dist/app.html"
+        }
+    }
 }

@@ -7,13 +7,14 @@ import LogoParallax from '../components/LogoParallax';
 import LatestInsights from '../components/LatestInsights';
 import HomesContact from '../components/HomesContact';
 import FinalCTA from '../components/FinalCTA';
+import { PAGE_SEO } from '../seo';
 
 export default function AboutPage() {
   return (
     <Layout
       page="about"
-      title="About Iconik Studios | Med Spa Web Design & Automation Agency"
-      description="Iconik Studios is a Phoenix design and automation studio for med spas: websites, online booking and follow-up systems, built on Remedy, our own CRM."
+      title={PAGE_SEO.about.title}
+      description={PAGE_SEO.about.description}
     >
       <div className="bg-tan text-ink selection:bg-burnt-orange selection:text-tan">
         <AboutHero />

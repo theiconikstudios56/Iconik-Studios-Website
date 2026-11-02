@@ -29,6 +29,7 @@ import TemplatePage from './pages/TemplatePage';
 import SuccessSection from './components/SuccessSection';
 import FuzziesReveal from './components/FuzziesReveal';
 import HomesContact from './components/HomesContact';
+import { PAGE_SEO } from './seo';
 
 // Every page but the homepage loads its own code when it's opened, so the
 // first visit downloads only what the homepage needs.
@@ -83,8 +84,8 @@ function Home() {
   return (
     <Layout
       page="home"
-      title="Med Spa Website Design & AI Automation | Iconik Studios"
-      description="Med spa websites, online booking and AI follow-up that turn ad clicks into booked appointments. Built in Phoenix, Arizona, and run on Remedy, our own CRM."
+      title={PAGE_SEO.home.title}
+      description={PAGE_SEO.home.description}
     >
       <div className="relative z-10 bg-ink">
         <Hero />

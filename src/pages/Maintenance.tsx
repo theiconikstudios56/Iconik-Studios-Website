@@ -11,6 +11,7 @@ import FinalCTA from '../components/FinalCTA';
 import fuzzyMaintenanceImage from '../assets/images/web/funny-maintain.webp';
 import fuzzyClosingImage from '../assets/images/web/fuzzy-closing.webp';
 import { Img, T } from '../content';
+import { PAGE_SEO } from '../seo';
 
 const Maintenance = () => {
   useEffect(() => {
@@ -34,8 +35,8 @@ const Maintenance = () => {
   return (
     <Layout
       page="maintenance"
-      title="Med Spa Website Care Plans | Iconik Studios"
-      description="Monthly website care from $69: hosting, monitoring, daily backups and edits made for you, plus reports and Google Business Profile upkeep. Month to month."
+      title={PAGE_SEO.maintenance.title}
+      description={PAGE_SEO.maintenance.description}
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="bg-ink min-h-screen">
