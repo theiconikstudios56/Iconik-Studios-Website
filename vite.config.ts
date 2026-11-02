@@ -4,11 +4,12 @@ import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 import {siteContent} from './scripts/site-content';
 import {shopCatalog} from './scripts/shop-catalog';
+import {pageHeads} from './scripts/page-heads';
 
 export default defineConfig(({command, mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    plugins: [react(), tailwindcss(), siteContent(command, env), shopCatalog(command, env)],
+    plugins: [react(), tailwindcss(), siteContent(command, env), shopCatalog(command, env), pageHeads(command)],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },

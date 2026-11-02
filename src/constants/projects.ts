@@ -3,6 +3,7 @@ import digitalWaveHero from '../assets/images/web/portfolio/digital-wave-hero.we
 import digitalWaveFull from '../assets/images/web/portfolio/digital-wave-full.webp';
 import mintHero from '../assets/images/web/portfolio/mint-cannabis-hero.webp';
 import mintFull from '../assets/images/web/portfolio/mint-cannabis-full.webp';
+import { CLIENT_PROJECTS, templateProject } from './projectText';
 
 export interface Project {
   id: string;
@@ -27,51 +28,13 @@ export interface Project {
 // in RMD's editor.
 const templates = shop?.templates ?? [];
 
-/** Real client builds (Ricky, 2026-10-30). */
-const CLIENTS: Omit<Project, 'nextId' | 'prevId'>[] = [
-  {
-    id: 'digital-wave-media-solutions',
-    shortName: 'DWMS',
-    title: 'DIGITAL WAVE MEDIA',
-    category: 'MARKETING AGENCY / WEBSITE',
-    client: 'DIGITAL WAVE MEDIA SOLUTIONS',
-    services: ['WEB DESIGN'],
-    year: '2025',
-    description: 'A website for a digital marketing agency: social media, SEO and AI-powered automation for local businesses. Built to read clearly, load fast and send every enquiry somewhere it gets answered.',
-    image: digitalWaveHero,
-    gallery: [],
-    url: 'https://digitalwavemediasolutions.com/',
-  },
-  {
-    id: 'mint-cannabis',
-    shortName: 'MINT',
-    title: 'MINT CANNABIS',
-    category: 'DISPENSARY BRAND / WEBSITE',
-    client: 'THE MINT CANNABIS',
-    services: ['WEB DESIGN'],
-    year: '2025',
-    description: 'The website for a dispensary brand with locations across Arizona, Nevada, Florida, Michigan and more: deals by state, a store finder, the rewards app and a learning centre, all pointing visitors to the nearest Mint.',
-    image: mintHero,
-    gallery: [],
-    url: 'https://mintdeals.com/',
-  },
-];
+/** Real client builds (Ricky, 2026-10-30), with their pictures. */
+const CLIENT_PICTURES: Record<string, string> = { 'digital-wave-media-solutions': digitalWaveHero, 'mint-cannabis': mintHero };
+const CLIENTS: Omit<Project, 'nextId' | 'prevId'>[] = CLIENT_PROJECTS.map((p) => ({ ...p, image: CLIENT_PICTURES[p.id] ?? '', gallery: [] }));
 
 const all = [
   ...CLIENTS,
-  ...templates.map((t) => ({
-    id: `${t.slug}-template`,
-    shortName: t.name.toUpperCase().slice(0, 12),
-    title: t.name.toUpperCase(),
-    category: `${t.industry.toUpperCase()} / TEMPLATE`,
-    client: 'ICONIK STUDIOS TEMPLATE',
-    services: ['WEB DESIGN', 'COPYWRITING', 'HOSTING'],
-    year: '2026',
-    description: `${t.summary} Designed and written by our studio, with ${t.pages.length} pages ready to edit. Open the live demo to click around, or find it in our template shop.`,
-    image: pictureOf(t.slug, 'hero') ?? '',
-    gallery: [] as string[],
-    url: t.demo,
-  })),
+  ...templates.map((t) => ({ ...templateProject(t), image: pictureOf(t.slug, 'hero') ?? '', gallery: [] as string[] })),
 ];
 
 /**

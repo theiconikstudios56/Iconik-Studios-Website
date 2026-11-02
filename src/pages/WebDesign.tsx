@@ -12,6 +12,7 @@ import FinalCTA from '../components/FinalCTA';
 import fuzzyWebDesignImage from '../assets/images/web/fuzzy-web-design.webp';
 import homeOfficeFuzzyImage from '../assets/images/web/home-office-fuzzy.webp';
 import { Img, T } from '../content';
+import { PAGE_SEO } from '../seo';
 
 const WebDesign = () => {
   useEffect(() => {
@@ -21,8 +22,8 @@ const WebDesign = () => {
   return (
     <Layout
       page="web-design"
-      title="Med Spa Website Design That Books Appointments | Iconik Studios"
-      description="Custom med spa website design built to convert: fast, mobile-first pages, online booking with deposits and automatic follow-up through Remedy, our own CRM."
+      title={PAGE_SEO['web-design'].title}
+      description={PAGE_SEO['web-design'].description}
     >
       <div className="bg-ink min-h-screen">
         {/* Hero Section - The Hook */}

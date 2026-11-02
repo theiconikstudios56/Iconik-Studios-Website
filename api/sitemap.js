@@ -19,8 +19,9 @@ const PAGES = [
   { url: '/contact', priority: '0.7', changefreq: 'monthly' },
 ];
 
-// The site's own projects, until the portfolio is changed in RMD (src/constants/projects.ts).
-const START_PROJECTS = ['kinetic-solutions-group', 'luxe-estate', 'nova-audio', 'zenith-flow'];
+// The site's own projects, until the portfolio is changed in RMD: the client
+// builds, then each template's demo (src/constants/projectText.ts).
+const CLIENT_PROJECTS = ['digital-wave-media-solutions', 'mint-cannabis'];
 
 const escape = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -38,7 +39,7 @@ export default async function handler(req, res) {
   ]);
   const templates = (Array.isArray(catalog?.templates) ? catalog.templates : []).filter((t) => t && /^[a-z0-9-]+$/.test(t.slug));
 
-  let projects = START_PROJECTS;
+  let projects = [...CLIENT_PROJECTS, ...templates.map((t) => `${t.slug}-template`)];
   try {
     const list = content?.values?.['portfolio.projects'];
     if (list) projects = JSON.parse(list).filter((p) => p && !p.hidden && p.image && /^[a-z0-9-]+$/.test(p.id)).map((p) => p.id);

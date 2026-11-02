@@ -11,6 +11,7 @@ import aiAutomationsImage from '../assets/images/web/fuzzy-automation.webp';
 import fuzzyWorkImage from '../assets/images/web/fuzzy-work.webp';
 import poolFuzzyImage from '../assets/images/web/pool-fuzzy.webp';
 import { Img, T } from '../content';
+import { PAGE_SEO } from '../seo';
 
 const AnimatedWorkflowDiagram = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -200,8 +201,8 @@ const AIWorkflows = () => {
   return (
     <Layout
       page="ai"
-      title="AI Automation for Med Spas | Lead Follow-Up & Booking | Iconik Studios"
-      description="AI automation for med spas: instant replies to new leads, follow-ups, reminders and CRM updates in Remedy, so every inquiry becomes a booked consultation."
+      title={PAGE_SEO.ai.title}
+      description={PAGE_SEO.ai.description}
     >
       <div className="bg-ink min-h-screen">
         {/* Hero Section */}

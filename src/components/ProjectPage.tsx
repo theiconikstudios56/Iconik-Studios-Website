@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import { useEffect, useState } from 'react';
 import { useProjects } from '../content';
 import { FULL_PICTURES } from '../constants/projects';
+import { projectSeo } from '../seo';
 
 export default function ProjectPage() {
   const { id } = useParams();
@@ -13,6 +14,14 @@ export default function ProjectPage() {
   const project = id ? projects.find((p) => p.id === id) ?? null : null;
   const full = project ? FULL_PICTURES[project.id] : undefined;
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // The same title and description the build wrote into this page's HTML (SEO-D1).
+  useEffect(() => {
+    if (!project) return;
+    const { title, description } = projectSeo(project);
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+  }, [project]);
 
   useEffect(() => {
     setIsLoaded(false);

@@ -8,6 +8,7 @@ import { ContactError, sendContact } from '../lib/rmdContact';
 import { T } from '../content';
 import { SOCIAL_LINKS } from '../constants/social';
 import { DISCOVERY_CALL_URL } from '../constants/booking';
+import { PAGE_SEO } from '../seo';
 
 export default function ContactPage() {
   const [index, setIndex] = useState(0);
@@ -112,8 +113,8 @@ export default function ContactPage() {
   return (
     <Layout
       page="contact"
-      title="Contact Iconik Studios | Med Spa Website & Automation Quote"
-      description="Tell us about your med spa and get a quote for a website, online booking and automated follow-up. You'll hear from a real person within one business day."
+      title={PAGE_SEO.contact.title}
+      description={PAGE_SEO.contact.description}
     >
       <div className="bg-black text-white selection:bg-burnt-orange selection:text-white min-h-screen flex items-center justify-center py-20 md:py-32 lg:pt-48 lg:pb-32">
         <section className="w-full px-6 md:px-12 max-w-[1800px] mx-auto">

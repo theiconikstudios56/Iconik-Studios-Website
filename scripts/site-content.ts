@@ -26,6 +26,8 @@ export function siteContent(command: 'build' | 'serve', env: Record<string, stri
   let content: Content = { version: null, values: {} };
   return {
     name: 'site-content',
+    // For scripts/page-heads.ts: the content this build baked in.
+    api: { content: () => content },
     async buildStart() {
       const url = env.RMD_CONTENT_URL || (command === 'build' ? LIVE : '');
       if (!url) return;

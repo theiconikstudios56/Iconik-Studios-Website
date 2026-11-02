@@ -6,6 +6,7 @@ import { SlidersHorizontal, X, Search } from 'lucide-react';
 import { T } from '../content';
 import { fetchArticles, type Article } from '../lib/rmdArticles';
 import { blogDate, blogPlaceholder } from '../lib/blogCards';
+import { PAGE_SEO } from '../seo';
 
 
 const CATEGORIES = [
@@ -90,8 +91,8 @@ export default function BlogPage() {
   return (
     <Layout
       page="blog"
-      title="Med Spa Marketing & Automation Blog | Iconik Studios"
-      description="Ideas for med spa owners on websites, online booking, lead follow-up and AI automation that keep the calendar full."
+      title={PAGE_SEO.blog.title}
+      description={PAGE_SEO.blog.description}
     >
       <div className="bg-[#000000] min-h-screen text-white font-sans selection:bg-burnt-orange selection:text-white" data-bg="black">
         <div className="h-24 md:h-32" />
