@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { trackPage } from './lib/rmdTracking';
 import { metaPageView } from './lib/metaPixel';
 import { Img, inEditor, reportRoute, T } from './content';
-import { motion } from 'motion/react';
+import { LazyMotion, m } from 'motion/react';
 import { chatAvailable } from './lib/rmdChat';
 import './lib/arrival'; // notes where the visit came from, for the contact form and the shop
 import Navbar from './components/Navbar';
@@ -23,9 +23,6 @@ import StackedServices from './components/StackedServices';
 import { FAQ } from './components/PricingFAQ';
 import TemplateShowcase from './components/shop/TemplateShowcase';
 import GrowthLadder from './components/GrowthLadder';
-// The shop's pages are where campaign posts land, so they come with the first download (no second round trip).
-import TemplatesPage from './pages/TemplatesPage';
-import TemplatePage from './pages/TemplatePage';
 import SuccessSection from './components/SuccessSection';
 import FuzziesReveal from './components/FuzziesReveal';
 import HomesContact from './components/HomesContact';
@@ -43,7 +40,13 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ProjectPage = lazy(() => import('./components/ProjectPage'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+// The shop's pages (where campaign posts land) arrive already drawn, so their code can come separately too.
+const TemplatesPage = lazy(() => import('./pages/TemplatesPage'));
+const TemplatePage = lazy(() => import('./pages/TemplatePage'));
 const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
+
+/** The animation engine, in its own file: pages draw without it and start moving when it arrives. */
+const motionFeatures = () => import('./lib/motionFeatures').then((r) => r.default);
 
 // Pages where the chat bubble doesn't belong.
 const NO_CHAT = /^\/intake(\/|$)/;
@@ -93,7 +96,7 @@ function Home() {
         <section className="px-6 lg:px-12 py-20 md:py-32 overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -131,10 +134,10 @@ function Home() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
 
               <div className="relative aspect-[4/5] md:aspect-square lg:aspect-auto lg:h-[600px] rounded-[40px] overflow-hidden group">
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, scale: 1.05 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -152,7 +155,7 @@ function Home() {
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
-                </motion.div>
+                </m.div>
 
                 {/* Decorative Elements */}
                 <div className="absolute inset-0 border-[20px] border-ink/40 pointer-events-none" />
@@ -194,7 +197,7 @@ function RmdTracking() {
 /** Every page. The browser runs it in its router (App); the build draws each page at its address (entry-server.tsx). */
 export function AppRoutes() {
   return (
-    <>
+    <LazyMotion features={motionFeatures} strict>
       <RmdTracking />
       <ScrollToTop />
       {/* While a page's code loads: the site's dark background, no flash of white. */}
@@ -224,7 +227,7 @@ export function AppRoutes() {
       </Routes>
       </Suspense>
       <ChatLauncher />
-    </>
+    </LazyMotion>
   );
 }
 

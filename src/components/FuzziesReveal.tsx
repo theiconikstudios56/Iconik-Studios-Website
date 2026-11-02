@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { m, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import MeetTheFuzzies from './MeetTheFuzzies';
 import lineupImg from '../assets/images/web/fuzzy-lineup-2026.webp';
 import { Img } from '../content';
@@ -30,7 +30,7 @@ export default function FuzziesReveal() {
     <div className="relative">
       {/* The picture: pinned to the top of the screen while the panel moves over it; it starts below the menu bar so the Iconik mark above the fuzzies stays clear, the strip above in the picture's own background colour. */}
       <section data-bg="white" className="sticky top-0 z-0 h-[100svh] w-full overflow-hidden bg-[#F0EBEC]">
-        <motion.div style={{ scale }} className="absolute inset-x-0 bottom-0 top-[72px] md:top-[120px] will-change-transform">
+        <m.div style={{ scale }} className="absolute inset-x-0 bottom-0 top-[72px] md:top-[120px] will-change-transform">
           <Img k="home.lineup.image-iconik-fuzzies-crown" label="Picture"
             loading="lazy"
             decoding="async"
@@ -39,8 +39,8 @@ export default function FuzziesReveal() {
             className="h-full w-full object-cover object-center block selection:bg-transparent"
             draggable={false}
           />
-        </motion.div>
-        <motion.div style={{ opacity: shade }} aria-hidden="true" className="absolute inset-0 bg-ink pointer-events-none" />
+        </m.div>
+        <m.div style={{ opacity: shade }} aria-hidden="true" className="absolute inset-0 bg-ink pointer-events-none" />
       </section>
 
       {/* The panel starts exactly over the picture and pins while the spacer scrolls by

@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import React from 'react';
 import { Rocket, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,11 +12,11 @@ const FinalCTA = () => {
       <footer className="fixed bottom-0 left-0 w-full h-screen bg-ink text-paper text-center flex flex-col justify-center -z-10 pt-40 pb-12">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full space-y-8 md:space-y-12">
           <div className="space-y-4">
-            <motion.span 
+            <m.span 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               className="text-[10px] uppercase tracking-[0.6em] font-bold text-accent block"
-            ><T k="shared.final.iconik-studios">{"ICONIK STUDIOS"}</T></motion.span>
+            ><T k="shared.final.iconik-studios">{"ICONIK STUDIOS"}</T></m.span>
             
             {/* Main Heading. No fade: the footer sits fixed behind the page, so a fade would run unseen at load
                 and hold back the page's measured loading time (LCP). */}
@@ -26,7 +26,7 @@ const FinalCTA = () => {
           </div>
 
           {/* Buttons */}
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -40,7 +40,7 @@ const FinalCTA = () => {
               to="/portfolio" 
               className="text-xs font-display uppercase tracking-widest border-b border-transparent hover:border-paper transition-all py-2"
             ><T k="shared.final.view-our-work" label="Link or button">{"View our work"}</T></Link>
-          </motion.div>
+          </m.div>
 
           {/* Divider & Copyright */}
           <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-[10px] uppercase tracking-[0.4em] font-semibold">

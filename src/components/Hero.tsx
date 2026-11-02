@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DISCOVERY_CALL_URL } from '../constants/booking';
@@ -153,29 +153,29 @@ export default function Hero() {
 
       <div className="relative z-10 w-full max-w-[1400px]">
         {/* The headline shows as soon as the page draws: it's the first thing a visitor reads. */}
-        <motion.div className="flex flex-col items-start text-left">
+        <m.div className="flex flex-col items-start text-left">
           <h1 className="text-5xl md:text-6xl lg:text-[4.5vw] xl:text-[5vw] font-display uppercase tracking-tighter leading-[1.05] mb-2 max-w-[90%] lg:max-w-[60%]">
-            <motion.span
+            <m.span
               initial={{ y: 16 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.5 }}
               className="block text-white opacity-[0.85]"
             >
               <T k="home.hero.title" br="hidden lg:block">{"Your craft is luxury.\nYour website\nshould match."}</T>
-            </motion.span>
+            </m.span>
           </h1>
 
           <div className="flex flex-col items-start w-full mt-4 gap-8">
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
               className="text-sm md:text-base font-light max-w-2xl text-tan leading-relaxed font-sans"
             >
               <T k="home.hero.text">{"Agency-built websites and done-for-you follow-up for med spas and local service businesses around Phoenix. Design made to convert, and automation that answers every enquiry in seconds, so fewer leads slip away while you're with a client."}</T>
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1, duration: 0.5 }}
@@ -210,10 +210,10 @@ export default function Hero() {
                   </span>
                 </div>
               </Link>
-            </motion.div>
+            </m.div>
 
             {/* The quiet reasons to trust the button above. */}
-            <motion.ul
+            <m.ul
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.3, duration: 0.6 }}
@@ -222,9 +222,9 @@ export default function Hero() {
               <li><T k="home.hero.trust1" label="Line under the buttons, 1">{"Phoenix, Arizona"}</T></li>
               <li><T k="home.hero.trust2" label="Line under the buttons, 2">{"30+ websites built for PatientNow’s med spa clients"}</T></li>
               <li><T k="home.hero.trust3" label="Line under the buttons, 3">{"A reply within one business day"}</T></li>
-            </motion.ul>
+            </m.ul>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Vertical Rail Text */}

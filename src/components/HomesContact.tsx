@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { m, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import fuzzySuccessImg from '../assets/images/web/fuzzy-success.webp';
@@ -119,7 +119,7 @@ const HomesContact = () => {
     >
       {/* Background Parallax Image */}
       <div className="absolute inset-0 z-0">
-        <motion.img
+        <m.img
           loading="lazy"
           decoding="async"
           style={{ y }}
@@ -144,7 +144,7 @@ const HomesContact = () => {
 
           <div className="w-full">
             <AnimatePresence initial={false} custom={direction} mode="wait">
-              <motion.div
+              <m.div
                 key={currentIndex}
                 custom={direction}
                 variants={slideVariants}
@@ -166,15 +166,15 @@ const HomesContact = () => {
                     <T k={`shared.contact.review${slot + 1}.initials`} label={`Review ${slot + 1}: initials`}>{REVIEWS[slot].initials}</T>
                   </div>
                   <div>
-                    <h4 className="font-bold text-paper font-display text-base tracking-wider">
+                    <div className="font-bold text-paper font-display text-base tracking-wider">
                       <T k={`shared.contact.review${slot + 1}.name`} label={`Review ${slot + 1}: name`}>{REVIEWS[slot].author}</T>
-                    </h4>
+                    </div>
                     <p className="text-xs uppercase tracking-[0.15em] text-accent font-semibold mt-1">
                       <T k={`shared.contact.review${slot + 1}.role`} label={`Review ${slot + 1}: role`}>{REVIEWS[slot].role}</T>
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Cpu, Layout as LayoutIcon, Zap, BarChart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -56,7 +56,7 @@ export default function Services() {
         <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t ${borderColor} ${transitionClass}`}>
           {SERVICES.map((service, idx) => (
             <Link key={service.id} to={`/services/${service.id}`}>
-              <motion.div 
+              <m.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -68,7 +68,7 @@ export default function Services() {
                 <p className={`text-[10px] font-mono leading-relaxed opacity-100 group-hover:opacity-100 ${textColor} ${transitionClass}`}>
                   {service.description}
                 </p>
-              </motion.div>
+              </m.div>
             </Link>
           ))}
         </div>

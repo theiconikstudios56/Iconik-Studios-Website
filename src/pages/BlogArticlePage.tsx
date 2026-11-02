@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { fetchArticle, type Article } from '../lib/rmdArticles';
 import { safeArticleHtml } from '../lib/safeHtml';
@@ -104,14 +104,14 @@ export default function BlogArticlePage() {
           )}
 
           {/* Title */}
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
             className="text-4xl md:text-6xl font-display font-black uppercase leading-[1.05] tracking-tight mb-6"
           >
             {article.title}
-          </motion.h1>
+          </m.h1>
 
           {/* Date */}
           <p className="font-mono text-[10px] text-white/30 tracking-widest uppercase mb-16">
@@ -121,7 +121,7 @@ export default function BlogArticlePage() {
           <div className="border-t border-white/10 mb-16" />
 
           {/* Body */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}

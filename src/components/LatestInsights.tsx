@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
@@ -32,17 +32,17 @@ const LatestInsights = () => {
       <div className="max-w-[1800px] mx-auto space-y-12 md:space-y-24">
         {/* Header Section */}
         <div className="text-center space-y-6">
-          <motion.h2 
+          <m.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-7xl md:text-9xl font-display uppercase tracking-tighter"
-          ><T k="shared.insights.latest-insights">{"Latest Insights"}</T></motion.h2>
-          <motion.p 
+          ><T k="shared.insights.latest-insights">{"Latest Insights"}</T></m.h2>
+          <m.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="max-w-md mx-auto text-lg opacity-100 font-light uppercase tracking-widest text-white italic"
-          ><T k="shared.insights.deep-dives-into-the">{"\"Deep dives into the intersection of design and technology.\""}</T></motion.p>
+          ><T k="shared.insights.deep-dives-into-the">{"\"Deep dives into the intersection of design and technology.\""}</T></m.p>
         </div>
 
         {/* Grid Section - Matching Blog Style. On phones a sideways swipe row, not a tall stack. */}
@@ -59,7 +59,7 @@ const LatestInsights = () => {
             ))
           ) : (
             articles.map((item, index) => (
-              <motion.article 
+              <m.article 
                 key={item.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ const LatestInsights = () => {
                     </div>
                   </div>
 
-                  <motion.img
+                  <m.img
                     loading="lazy"
                     decoding="async"
                     src={item.image_url || blogPlaceholder(index)} 
@@ -98,12 +98,12 @@ const LatestInsights = () => {
                   </h3>
                   
                   {/* Decorative underline appearing on hover */}
-                  <motion.div 
+                  <m.div 
                     className="h-[1.5px] bg-burnt-orange mt-6 w-0 group-hover:w-full transition-all duration-500 origin-left"
                   />
                 </div>
               </Link>
-              </motion.article>
+              </m.article>
             ))
           )}
         </div>

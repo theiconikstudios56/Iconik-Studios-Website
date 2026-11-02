@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { m, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { T, useProjects } from '../content';
@@ -72,7 +72,7 @@ export default function PortfolioCarousel() {
               numOctaves="1" 
               result="noise" 
             />
-            <motion.feDisplacementMap 
+            <m.feDisplacementMap 
               in="SourceGraphic" 
               in2="noise" 
               scale={distortionScale}
@@ -81,7 +81,7 @@ export default function PortfolioCarousel() {
         </defs>
       </svg>
 
-      <motion.div
+      <m.div
         ref={containerRef}
         className="flex gap-4 md:gap-8 px-4 md:px-8"
         style={{ x: springX, filter: 'url(#water-filter)' }}
@@ -127,7 +127,7 @@ export default function PortfolioCarousel() {
             </Link>
           </div>
         ))}
-      </motion.div>
+      </m.div>
       
       {/* Scroll indicator or instructions */}
       <div className="mt-6 flex justify-center">

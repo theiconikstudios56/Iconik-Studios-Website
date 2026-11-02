@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { m, useScroll, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 import imgWeb from '../assets/images/web/fuzzy-web.webp';
 import imgAi from '../assets/images/web/ai-automations.webp';
@@ -60,7 +60,7 @@ const Card: React.FC<CardProps> = ({ i, title: startTitle, description: startDes
       ref={container} 
       className="h-screen flex items-center justify-center sticky top-0 px-4 md:px-6"
     >
-      <motion.div 
+      <m.div 
         style={{ 
           scale, 
           top: `${i * 30}px` 
@@ -138,7 +138,7 @@ const Card: React.FC<CardProps> = ({ i, title: startTitle, description: startDes
         
         {/* Ambient Glow */}
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-white/5 blur-[120px] rounded-full opacity-30" />
-      </motion.div>
+      </m.div>
     </div>
   )
 }

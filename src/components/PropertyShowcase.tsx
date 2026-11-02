@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import convoFuzzyImage from '../assets/images/web/convo-fuzzy.webp';
 import fuzzySetupImage from '../assets/images/web/fuzzy-setup.webp';
@@ -11,7 +11,7 @@ export default function PropertyShowcase() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full flex flex-col items-center gap-16 relative z-10 text-center">
         
         {/* Narrative (Top Centered) */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -19,10 +19,10 @@ export default function PropertyShowcase() {
           className="max-w-[280px] text-sm font-medium leading-relaxed opacity-100"
         >
           <T k="home.intro.lead">{"A premium agency fusing high-end brand aesthetics with intelligent backend automation."}</T>
-        </motion.p>
+        </m.p>
 
         {/* Heading */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -31,18 +31,18 @@ export default function PropertyShowcase() {
           <h2 className="text-5xl md:text-7xl lg:text-[4.2vw] font-display font-medium leading-[1.1] uppercase tracking-tight">
             <T k="home.intro.title" em="italic font-serif normal-case text-burnt-orange" br="hidden md:block">{"SYSTEMS BUILT\nTO CAPTURE LEADS AND *convert*,\nNOT JUST LOOK GOOD."}</T>
           </h2>
-        </motion.div>
+        </m.div>
 
         {/* Bottom Area: CTA and Listings Info */}
         <div className="flex flex-col items-center gap-10">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="w-24 h-24 rounded-full border border-tan/20 flex items-center justify-center hover:bg-burnt-orange hover:text-ink hover:border-burnt-orange transition-all duration-500 cursor-pointer"
           >
             <ArrowUpRight size={36} />
-          </motion.div>
+          </m.div>
           
           <p className="max-w-[300px] text-sm font-medium opacity-100 uppercase tracking-[0.2em] leading-relaxed">
             <T k="home.intro.note">{"we streamline your intake pipeline to grow your bookings automatically."}</T>
@@ -53,7 +53,7 @@ export default function PropertyShowcase() {
       {/* Floating Visual Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Image 2: Middle Left Vertical */}
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -69,10 +69,10 @@ export default function PropertyShowcase() {
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/20" />
-        </motion.div>
+        </m.div>
 
         {/* Image 3: Mid Right Large Landscape */}
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
@@ -88,7 +88,7 @@ export default function PropertyShowcase() {
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/20" />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

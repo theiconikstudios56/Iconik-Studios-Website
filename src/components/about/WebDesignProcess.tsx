@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { T } from '../../content';
 
 const steps = [
@@ -36,7 +36,7 @@ export default function WebDesignProcess() {
 
         <div className="lg:col-span-8 space-y-32">
           {steps.map((item, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -55,7 +55,7 @@ export default function WebDesignProcess() {
               <p className="text-lg md:text-xl opacity-100 leading-relaxed max-w-2xl font-light">
                 <T k={`web-design.process.${i + 1}.desc`} label={`Phase ${i + 1}: text`}>{item.desc}</T>
               </p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

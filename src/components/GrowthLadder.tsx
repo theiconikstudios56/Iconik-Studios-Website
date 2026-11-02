@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { T } from '../content';
 
@@ -55,7 +55,7 @@ export default function GrowthLadder() {
   return (
     <section aria-labelledby="home-ladder-title" className="relative bg-ink px-6 py-20 text-paper md:py-32 lg:px-12">
       <div className="mx-auto max-w-7xl">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -74,7 +74,7 @@ export default function GrowthLadder() {
           <p className="text-base leading-relaxed text-paper md:text-lg lg:col-span-5">
             <T k="home.ladder.text">{"Start with a template this week. Add a care plan when you'd rather we look after it, and automations when you'd rather not chase leads. Move to a custom build when you outgrow it. Same studio, same standards, no starting over."}</T>
           </p>
-        </motion.div>
+        </m.div>
 
         <ol className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-4">
           {rungs.map((r, i) => {
@@ -86,7 +86,7 @@ export default function GrowthLadder() {
             );
             const ctaClass = 'mt-auto inline-flex items-center gap-2 pt-8 font-mono text-xs uppercase tracking-[0.2em] text-accent transition-colors hover:text-tan';
             return (
-              <motion.li
+              <m.li
                 key={r.key}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export default function GrowthLadder() {
                 ) : (
                   <Link to={r.to} className={ctaClass}>{cta}</Link>
                 )}
-              </motion.li>
+              </m.li>
             );
           })}
         </ol>

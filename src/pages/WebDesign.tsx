@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { m, useScroll, useTransform } from 'motion/react';
 import Layout from '../components/Layout';
 import { Link } from 'react-router-dom';
 import { Target, MousePointer2, Layout as LayoutIcon, Shield, ArrowRight } from 'lucide-react';
@@ -39,7 +39,7 @@ const WebDesign = () => {
           </div>
 
           <div className="max-w-7xl mx-auto relative z-10 w-full">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -55,7 +55,7 @@ const WebDesign = () => {
                 <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="web-design.schedule-your-audit" label="Button">{"Schedule Your Audit"}</T></button>
 
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
 
@@ -90,7 +90,7 @@ const WebDesign = () => {
                   icon: LayoutIcon
                 }
               ].map((benefit, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ const WebDesign = () => {
                     <h3 className="text-2xl font-display uppercase leading-tight"><T k={`web-design.benefits.${i + 1}.title`} label={`Benefit ${i + 1}: heading`}>{benefit.title}</T></h3>
                     <p className="opacity-100 leading-relaxed text-lg"><T k={`web-design.benefits.${i + 1}.desc`} label={`Benefit ${i + 1}: text`}>{benefit.desc}</T></p>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
@@ -133,11 +133,11 @@ const WebDesign = () => {
 
                 <div className="pt-8 grid grid-cols-2 gap-12">
                   <div className="">
-                    <h4 className="text-4xl font-display text-burnt-orange"><T k="web-design.24-7" label="Subheading">{"24/7"}</T></h4>
+                    <div className="text-4xl font-display text-burnt-orange"><T k="web-design.24-7" label="Subheading">{"24/7"}</T></div>
                     <p className="text-xs uppercase tracking-widest font-mono text-ink"><T k="web-design.ai-lead-nurturing">{"AI Lead Nurturing"}</T></p>
                   </div>
                   <div className="">
-                    <h4 className="text-4xl font-display text-burnt-orange">0</h4>
+                    <div className="text-4xl font-display text-burnt-orange">0</div>
                     <p className="text-xs uppercase tracking-widest font-mono text-ink"><T k="web-design.missed-opportunities">{"Missed Opportunities"}</T></p>
                   </div>
                 </div>
@@ -167,20 +167,20 @@ const WebDesign = () => {
 
         {/* Final CTA - The Conversion Point */}
         <section className="py-24 md:py-32 flex flex-col items-center text-center px-6 relative overflow-hidden bg-burnt-orange text-white gap-16">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="max-w-4xl mx-auto"
           >
             <span className="font-mono text-xs uppercase tracking-[0.5em] opacity-100 block mb-6"><T k="web-design.the-momentum-loop">{"The Momentum Loop"}</T></span>
             <h2 className="text-5xl md:text-[7vw] font-display uppercase tracking-tighter leading-[0.95] mb-2"><T k="web-design.start-your-ascent" em="italic" label="Heading">{"Start Your\n*Ascent.*"}</T></h2>
-          </motion.div>
+          </m.div>
 
           <div className="w-full">
             <PortfolioCarousel />
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="max-w-4xl mx-auto w-full"
@@ -191,7 +191,7 @@ const WebDesign = () => {
                 className="bg-white text-burnt-orange px-12 py-5 rounded-full font-display text-xl tracking-[0.2em] font-bold hover:bg-ink hover:text-tan transition-all duration-500 uppercase shadow-2xl inline-block"
               ><T k="web-design.view-full-portfolio" label="Link or button">{"View Full Portfolio"}</T></Link>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Animated Background Element */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 pointer-events-none">

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { m, useScroll, useTransform } from 'motion/react';
 import fuzzyLineupImg from '../assets/images/web/ping-pong-fuzzy.webp';
 import { Img } from '../content';
 
@@ -18,7 +18,7 @@ const LogoParallax = () => {
       className="relative h-[80vh] md:h-[100vh] overflow-hidden bg-ink"
     >
       {/* Parallax Background */}
-      <motion.div 
+      <m.div 
         style={{ y: bgY }}
         className="absolute inset-x-0 -top-[20%] -bottom-[20%] z-0"
       >
@@ -30,7 +30,7 @@ const LogoParallax = () => {
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-      </motion.div>
+      </m.div>
 
       {/* Aesthetic Accents */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-burnt-orange/30 to-transparent" />

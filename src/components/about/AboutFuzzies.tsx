@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'motion/react';
 import { Link } from 'react-router-dom';
 import fuzziesTeamImg from '../../assets/images/web/fuzzy-collab.webp';
 import { Img, T } from '../../content';
@@ -27,18 +27,18 @@ export default function AboutFuzzies() {
             {/* CTA Button Link */}
             <div className="pt-4">
               <Link to="/services/ai-automation" className="inline-block">
-                <motion.button
+                <m.button
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   className="bg-burnt-orange text-black font-display font-bold text-sm tracking-[0.2em] px-10 py-5 rounded-full hover:bg-ink hover:text-white transition-all duration-300 uppercase shadow-lg cursor-pointer"
-                ><T k="about.fuzzies.explore-ai-automation" label="Link or button">{"Explore AI & Automation"}</T></motion.button>
+                ><T k="about.fuzzies.explore-ai-automation" label="Link or button">{"Explore AI & Automation"}</T></m.button>
               </Link>
             </div>
           </div>
           
           {/* Image Block */}
           <div className="lg:col-span-5 relative">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -53,7 +53,7 @@ export default function AboutFuzzies() {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-burnt-orange/5 mix-blend-multiply pointer-events-none" />
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

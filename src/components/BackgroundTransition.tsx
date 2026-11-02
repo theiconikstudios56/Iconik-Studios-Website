@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { useEffect, useState } from 'react';
 
 const COLORS = {
@@ -40,7 +40,7 @@ export default function BackgroundTransition() {
   }, []);
 
   return (
-    <motion.div
+    <m.div
       className="fixed inset-0 z-0 pointer-events-none"
       animate={{ backgroundColor: activeColor }}
       transition={{

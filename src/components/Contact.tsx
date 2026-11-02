@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowRight, Mail, MapPin, Phone, Instagram, Twitter, Linkedin } from 'lucide-react';
 import IconikLogo from './IconikLogo';
 
@@ -16,7 +16,7 @@ export default function Contact() {
         {/* Left Side: Info & Branding */}
         <div className="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-tan/10">
           <div>
-            <motion.div 
+            <m.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               className="mb-16"
@@ -25,7 +25,7 @@ export default function Contact() {
                 <IconikLogo color="#F5F2ED" />
               </div>
               <span className="text-[10px] font-mono text-burnt-orange tracking-[0.5em] uppercase">04 // CONTACT</span>
-            </motion.div>
+            </m.div>
 
             <h2 className="text-7xl md:text-[8vw] font-display leading-[0.85] mb-12 tracking-tighter uppercase">
               LET'S START <br />
@@ -57,14 +57,14 @@ export default function Contact() {
 
           <div className="mt-24 flex gap-8">
             {[Instagram, Twitter, Linkedin].map((Icon, i) => (
-              <motion.a
+              <m.a
                 key={i}
                 href="#"
                 whileHover={{ y: -4, color: "#cd7f32" }}
                 className="opacity-80 hover:opacity-100 transition-all"
               >
                 <Icon size={24} />
-              </motion.a>
+              </m.a>
             ))}
           </div>
         </div>
@@ -105,13 +105,13 @@ export default function Contact() {
                 />
               </div>
 
-              <motion.button 
+              <m.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full py-8 bg-burnt-orange text-ink font-display text-2xl tracking-widest flex items-center justify-center gap-4 hover:bg-white transition-all group"
               >
                 SEND MESSAGE <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
-              </motion.button>
+              </m.button>
             </form>
           </div>
         </div>

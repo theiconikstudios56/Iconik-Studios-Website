@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { useRef } from 'react';
 import mascotImg from '../../assets/images/web/fuzzy-squad.webp';
 import { Img, T } from '../../content';
@@ -11,7 +11,7 @@ export default function AboutStory() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -21,15 +21,15 @@ export default function AboutStory() {
                 <div className="w-12 h-[1px] bg-burnt-orange" />
                 <span className="font-mono text-xs text-burnt-orange uppercase tracking-[0.3em]"><T k="about.story.story">{"Story"}</T></span>
               </div>
-              <h3 className="text-5xl md:text-7xl font-display uppercase leading-none tracking-tighter"><T k="about.story.the-philosophy" em="text-burnt-orange italic" label="Subheading">{"The *Philosophy*"}</T></h3>
+              <h2 className="text-5xl md:text-7xl font-display uppercase leading-none tracking-tighter"><T k="about.story.the-philosophy" em="text-burnt-orange italic" label="Subheading">{"The *Philosophy*"}</T></h2>
               <div className="space-y-6 text-lg md:text-xl leading-relaxed opacity-90 font-sans">
                 <p><T k="about.story.the-internet-is-loud">{"The internet is loud. Everyone looks the same, sounds the same, and builds the same."}</T></p>
                 <p><T k="about.story.iconik-studios-was-founded">{"Iconik Studios was founded in 2019 with one conviction: careful, intentional work beats generic output, every time. For over six years, we've been quietly building something different — a studio where creative craftsmanship and technical precision aren't in tension, they're inseparable. Along the way Iconik Studios built 30+ websites for PatientNow's med spa clients, which is where our focus on med spas, and our understanding of how they book, comes from."}</T></p>
                 <p><T k="about.story.were-a-high-end">{"We're a high-end web design and AI automation agency, but that title barely covers it. We don't just build websites. We build the systems behind them. For small to medium-sized businesses ready to operate at a higher level, we blend striking visual design with intelligent backend automation so that every visitor is captured, every lead is nurtured, and every opportunity converts."}</T></p>
                 <p className="text-burnt-orange font-bold uppercase tracking-wider"><T k="about.story.no-missed-leads-no">{"No missed leads. No wasted traffic. Just results."}</T></p>
               </div>
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -50,7 +50,7 @@ export default function AboutStory() {
                   <div className="absolute top-8 right-8 w-16 h-16 border-t border-r border-burnt-orange/50" />
                   <div className="absolute bottom-8 left-8 w-16 h-16 border-b border-l border-burnt-orange/50" />
                </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

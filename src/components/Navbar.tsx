@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants/social';
 import { useEffect, useState } from 'react';
@@ -60,7 +60,7 @@ export default function Navbar() {
         {/* Logo Square */}
         <div className="flex-1 lg:flex-none">
           <Link to="/" className="pointer-events-auto inline-block">
-            <motion.div 
+            <m.div 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               className={`relative lg:w-28 lg:h-28 flex items-center justify-center group transition-[width,height] duration-300 ${scrolled ? 'w-24 h-12' : 'w-28 h-28'}`}
@@ -68,7 +68,7 @@ export default function Navbar() {
               <div className={`lg:w-24 lg:h-24 text-accent group-hover:scale-110 transition-[transform,width,height] duration-300 ${scrolled ? 'w-20 h-10' : 'w-24 h-24'}`}>
                  <IconikLogo color="#F5F2ED" />
               </div>
-            </motion.div>
+            </m.div>
           </Link>
         </div>
 
@@ -128,7 +128,7 @@ export default function Navbar() {
       {/* Full Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -154,7 +154,7 @@ export default function Navbar() {
               <span className="text-accent font-serif italic text-xl"><T k="shared.nav.menu">{"Menu"}</T></span>
               <div className="space-y-6">
                 {MENU_ITEMS.map((link, i) => (
-                  <motion.div
+                  <m.div
                     key={link.name}
                     initial={{ x: 50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -169,7 +169,7 @@ export default function Navbar() {
                         <span className={`relative z-10 group-hover:text-accent transition-colors ${location.pathname === link.path ? 'text-accent' : 'text-paper'}`}>
                           <T k={navKey(link.name)} label="Menu item">{link.name}</T>
                         </span>
-                        <motion.div 
+                        <m.div 
                           className="absolute bottom-0 left-0 h-1 bg-accent w-0 group-hover:w-full transition-all duration-500" 
                         />
                       </Link>
@@ -184,7 +184,7 @@ export default function Navbar() {
                           <span className={`relative z-10 transition-colors duration-300 ${isServicesHovered ? 'text-accent' : 'text-paper'}`}>
                             <T k={navKey(link.name)} label="Menu item">{link.name}</T>
                           </span>
-                          <motion.div 
+                          <m.div 
                             className="absolute bottom-0 left-0 h-1 bg-accent"
                             initial={{ width: 0 }}
                             animate={{ width: isServicesHovered ? '100%' : '0%' }}
@@ -193,7 +193,7 @@ export default function Navbar() {
                         </div>
                         
                         {isServicesHovered && (
-                          <motion.div
+                          <m.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
@@ -210,11 +210,11 @@ export default function Navbar() {
                                 <T k={navKey(sub.name)} label="Menu item">{sub.name}</T>
                               </Link>
                             ))}
-                          </motion.div>
+                          </m.div>
                         )}
                       </div>
                     )}
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
 
@@ -228,7 +228,7 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

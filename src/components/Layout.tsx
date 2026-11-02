@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring } from 'motion/react';
+import { m, useScroll, useSpring } from 'motion/react';
 import Navbar from './Navbar';
 import BackgroundTransition from './BackgroundTransition';
 import { ReactNode, useEffect } from 'react';
@@ -82,7 +82,7 @@ export default function Layout({ children, title: startTitle, description: start
       <BackgroundTransition />
 
       {/* Progress Bar */}
-      <motion.div 
+      <m.div 
         className="fixed top-0 left-0 right-0 h-1 bg-burnt-orange z-[60] origin-left"
         style={{ scaleX }}
       />
