@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
+import { m, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useProjects, useText, type ShownProject } from '../content';
@@ -83,7 +83,7 @@ export default function PortfolioPage() {
       <div ref={targetRef} className="relative" style={{ height: `${projects.length * 85}vh` }}>
         {/* The Sticky Viewport */}
         <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <motion.div
+          <m.div
             ref={containerRef}
             style={{ x }}
             className="flex gap-16 items-center px-[20vw] h-full"
@@ -95,7 +95,7 @@ export default function PortfolioPage() {
                 index={index} 
               />
             ))}
-          </motion.div>
+          </m.div>
 
           {/* Dynamic Progress Indicator */}
           <div className="absolute bottom-12 left-0 w-full px-[15vw] z-50 pointer-events-none">
@@ -109,7 +109,7 @@ export default function PortfolioPage() {
               </div>
               
               <div className="relative h-[2px] bg-white/5 w-full">
-                <motion.div 
+                <m.div 
                   style={{
                     scaleX: scrollYProgress,
                     originX: 0
@@ -143,14 +143,14 @@ interface ProjectSlideProps {
 
 function ProjectSlide({ project, index }: any) {
   return (
-    <motion.div 
+    <m.div 
       className="relative w-[70vw] md:w-[60vw] lg:w-[55vw] aspect-[16/10] flex-shrink-0 group select-none"
     >
       <Link 
         to={`/project/${project.id}`} 
         className="block w-full h-full relative overflow-hidden rounded-sm"
       >
-        <motion.img 
+        <m.img 
           src={project.image} 
           alt={project.title}
           className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0 group-hover:scale-110"
@@ -161,9 +161,9 @@ function ProjectSlide({ project, index }: any) {
         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-700" />
 
         <div className="absolute inset-0 flex items-center justify-center p-12 text-center pointer-events-none">
-          <h3 className="text-[12vw] leading-none font-display font-black uppercase text-white/5 group-hover:text-white transition-all duration-700 tracking-[-0.05em] drop-shadow-2xl">
+          <h2 className="text-[12vw] leading-none font-display font-black uppercase text-white/5 group-hover:text-white transition-all duration-700 tracking-[-0.05em] drop-shadow-2xl">
             {project.shortName}
-          </h3>
+          </h2>
         </div>
 
         <div className="absolute bottom-10 left-10 md:left-16">
@@ -177,6 +177,6 @@ function ProjectSlide({ project, index }: any) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </m.div>
   );
 }

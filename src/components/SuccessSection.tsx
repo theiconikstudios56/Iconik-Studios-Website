@@ -1,6 +1,6 @@
 import { DISCOVERY_CALL_URL } from '../constants/booking';
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { Activity, Mail, Database, Sparkles, ArrowRight, Zap, CheckCircle2, ShieldAlert } from 'lucide-react';
 import { T } from '../content';
 
@@ -79,7 +79,7 @@ const SuccessSection = () => {
                   <Zap size={20} />
                 </div>
                 <div>
-                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.instant-engagement-speed-to" label="Subheading">{"Instant Engagement (Speed to Lead)"}</T></h4>
+                  <h3 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.instant-engagement-speed-to" label="Subheading">{"Instant Engagement (Speed to Lead)"}</T></h3>
                   <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.a-lead-left-waiting">{"Every new inquiry gets an automatic reply within seconds, and your team is told straight away. The faster the reply, the warmer the lead."}</T></p>
                 </div>
               </div>
@@ -89,7 +89,7 @@ const SuccessSection = () => {
                   <Database size={20} />
                 </div>
                 <div>
-                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.seamless-data-flow-sync" label="Subheading">{"Seamless Data Flow & Sync"}</T></h4>
+                  <h3 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.seamless-data-flow-sync" label="Subheading">{"Seamless Data Flow & Sync"}</T></h3>
                   <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.no-more-manual-copy">{"No more copy-pasting. Every new client, booking and payment lands in Remedy, Iconik's own CRM, with the right tags and a deal in your pipeline."}</T></p>
                 </div>
               </div>
@@ -99,7 +99,7 @@ const SuccessSection = () => {
                   <Sparkles size={20} />
                 </div>
                 <div>
-                  <h4 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.hands-free-client-onboarding" label="Subheading">{"Hands-Free Client Onboarding"}</T></h4>
+                  <h3 className="font-mono text-sm uppercase tracking-wider font-bold text-ink"><T k="shared.success.hands-free-client-onboarding" label="Subheading">{"Hands-Free Client Onboarding"}</T></h3>
                   <p className="text-sm text-ink/70 leading-relaxed font-sans"><T k="shared.success.the-moment-a-client">{"The moment a client books, Remedy takes the deposit, sends reminders and the forms to fill in before the visit, and puts the appointment on your calendar."}</T></p>
                 </div>
               </div>
@@ -177,7 +177,7 @@ const SuccessSection = () => {
                         {/* Animated description expansion */}
                         <AnimatePresence>
                           {isActive && (
-                            <motion.div 
+                            <m.div 
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
@@ -187,7 +187,7 @@ const SuccessSection = () => {
                               <p className="text-[11px] text-white/80 leading-relaxed font-mono">
                                 <T k={`shared.success.step${idx + 1}.text`} label={`Step ${idx + 1}: text`}>{step.desc}</T>
                               </p>
-                            </motion.div>
+                            </m.div>
                           )}
                         </AnimatePresence>
                       </div>

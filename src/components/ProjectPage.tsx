@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import Navbar from './Navbar';
 import { useEffect, useState } from 'react';
@@ -57,7 +57,7 @@ export default function ProjectPage() {
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.h1 
+            <m.h1 
               key={project.id + 'short'}
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -66,13 +66,13 @@ export default function ProjectPage() {
               className="text-[15vw] md:text-[10vw] font-display text-tan leading-none select-none relative z-10"
             >
               {project.shortName}
-            </motion.h1>
+            </m.h1>
           </AnimatePresence>
         </div>
 
         {/* Middle Block: Client Info */}
         <div className="flex-1 bg-burnt-orange p-8 md:p-12 flex flex-col justify-between border-b border-ink/10">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : -20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -94,9 +94,9 @@ export default function ProjectPage() {
                 {project.description}
               </p>
             )}
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -113,7 +113,7 @@ export default function ProjectPage() {
                 <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-500" />
               </button>
             )}
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Bottom Block: Navigation */}
@@ -145,7 +145,7 @@ export default function ProjectPage() {
         <div className="flex-1 min-h-0 h-[85svh] md:h-full bg-ink p-4 md:p-8 md:pt-28 lg:p-10 lg:pt-32 flex">
           <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#111] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]">
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
-              <motion.img
+              <m.img
                 key={project.id + 'full'}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -161,7 +161,7 @@ export default function ProjectPage() {
       ) : (
       <div className="flex-1 h-full overflow-y-auto snap-y snap-mandatory hide-scrollbar bg-ink">
         <section className="h-full w-full snap-start relative overflow-hidden">
-          <motion.img 
+          <m.img 
             key={project.id + 'hero'}
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}

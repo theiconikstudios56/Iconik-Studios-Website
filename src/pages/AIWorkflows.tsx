@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import Layout from '../components/Layout';
 import { Brain, Activity, Layers, ArrowRight, Shield, Zap, Database, Search, Bot, CircuitBoard, Cpu, User, MessageSquare } from 'lucide-react';
 import AutomationProcess from '../components/about/AutomationProcess';
@@ -81,7 +81,7 @@ const AnimatedWorkflowDiagram = () => {
 
           {/* Active Animated Paths */}
           {activeStep >= 1 && (
-            <motion.line
+            <m.line
               x1="50"
               y1="20"
               x2="50"
@@ -94,7 +94,7 @@ const AnimatedWorkflowDiagram = () => {
             />
           )}
           {activeStep >= 2 && (
-            <motion.path
+            <m.path
               d="M 50 50 Q 35 66 20 80"
               stroke="#cd7f32"
               strokeWidth="2.5"
@@ -105,7 +105,7 @@ const AnimatedWorkflowDiagram = () => {
             />
           )}
           {activeStep >= 3 && (
-            <motion.path
+            <m.path
               d="M 50 50 Q 65 66 80 80"
               stroke="#cd7f32"
               strokeWidth="2.5"
@@ -218,7 +218,7 @@ const AIWorkflows = () => {
           </div>
 
           <div className="max-w-7xl mx-auto relative z-10 w-full">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -233,7 +233,7 @@ const AIWorkflows = () => {
               <div className="flex flex-col sm:flex-row gap-6">
                 <button className="bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="ai.automate-your-success" label="Button">{"Automate Your Success"}</T></button>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
 
@@ -268,7 +268,7 @@ const AIWorkflows = () => {
                   icon: CircuitBoard
                 }
               ].map((benefit, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -283,7 +283,7 @@ const AIWorkflows = () => {
                     <h3 className="text-2xl font-display uppercase leading-tight"><T k={`ai.benefits.${i + 1}.title`} label={`Benefit ${i + 1}: heading`}>{benefit.title}</T></h3>
                     <p className="opacity-100 leading-relaxed text-lg italic"><T k={`ai.benefits.${i + 1}.desc`} label={`Benefit ${i + 1}: text`}>{benefit.desc}</T></p>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
@@ -347,7 +347,7 @@ const AIWorkflows = () => {
                   tags: ["Email Drips", "Internal Reporting", "Task Automation"]
                 }
               ].map((item, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -377,7 +377,7 @@ const AIWorkflows = () => {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
@@ -391,7 +391,7 @@ const AIWorkflows = () => {
 
         {/* Final CTA */}
         <section className="py-48 text-center px-6 relative overflow-hidden bg-burnt-orange text-white">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="max-w-4xl mx-auto"
@@ -405,7 +405,7 @@ const AIWorkflows = () => {
                 <span className="font-mono text-xs uppercase tracking-widest"><T k="ai.iconik-grade-reliability">{"Iconik grade reliability."}</T></span>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </section>
 
         <LatestInsights />

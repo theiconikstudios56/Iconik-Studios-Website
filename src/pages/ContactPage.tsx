@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowUpRight, Mail, Phone, MapPin, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { trackLead } from '../lib/rmdTracking';
@@ -132,7 +132,7 @@ export default function ContactPage() {
                     <span><T k="contact.lets" label="Heading">{"let’s"}</T></span>{' '}
                     <span className="relative inline-block h-[1.3em] overflow-hidden min-w-[250px] md:min-w-[350px] lg:min-w-[450px]">
                       <AnimatePresence mode="wait">
-                        <motion.span
+                        <m.span
                           key={words[index]}
                           initial={{ x: '30%', opacity: 0 }}
                           animate={{ x: '0%', opacity: 1 }}
@@ -144,7 +144,7 @@ export default function ContactPage() {
                           className="text-burnt-orange absolute inset-0 flex items-center whitespace-nowrap"
                         >
                           {words[index]}
-                        </motion.span>
+                        </m.span>
                       </AnimatePresence>
                     </span>{' '}
                     <br className="hidden lg:block w-full" />
@@ -205,7 +205,7 @@ export default function ContactPage() {
                 
                 <AnimatePresence mode="wait">
                   {status === 'success' ? (
-                    <motion.div 
+                    <m.div 
                       key="success"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -219,9 +219,9 @@ export default function ContactPage() {
                         onClick={() => setStatus('idle')}
                         className="mt-4 px-6 py-3 border border-white/20 hover:border-white font-mono text-[10px] uppercase tracking-widest transition-colors"
                       ><T k="contact.send-another-message" label="Button">{"Send Another Message"}</T></button>
-                    </motion.div>
+                    </m.div>
                   ) : (
-                    <motion.form 
+                    <m.form 
                       key="form"
                       onSubmit={handleSubmit} 
                       className="space-y-8"
@@ -330,7 +330,7 @@ export default function ContactPage() {
                         </div>
                       )}
 
-                      <motion.button 
+                      <m.button 
                         type="submit"
                         disabled={status === 'submitting'}
                         whileHover={status !== 'submitting' ? { scale: 1.02 } : undefined}
@@ -346,8 +346,8 @@ export default function ContactPage() {
                             <T k="contact.send-message" label="Button">Send Message</T> <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                           </>
                         )}
-                      </motion.button>
-                    </motion.form>
+                      </m.button>
+                    </m.form>
                   )}
                 </AnimatePresence>
 

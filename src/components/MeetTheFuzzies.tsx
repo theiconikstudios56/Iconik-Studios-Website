@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { m, useMotionValue, useReducedMotion, useTransform, type MotionValue } from 'motion/react';
 import { T } from '../content';
 import { FUZZY_CLIPS, type FuzzyClip } from '../constants/fuzzyClips';
 
@@ -125,7 +125,10 @@ export default function MeetTheFuzzies({ tall = false, zoom }: { tall?: boolean;
   const firstRef = useRef<HTMLVideoElement>(null);
   const secondRef = useRef<HTMLVideoElement>(null);
   const reduced = useReducedMotion();
-  const order = useMemo(() => shuffled(FUZZY_CLIPS), []);
+  // Shuffled once the site runs: the page arrives drawn with the clips in their own order, and a
+  // shuffle while drawing would pick different clips in the build and in the browser.
+  const [order, setOrder] = useState(FUZZY_CLIPS);
+  useEffect(() => setOrder(shuffled(FUZZY_CLIPS)), []);
   // Which of the two videos is showing; the other waits with the next clip.
   const [front, setFront] = useState(0);
 
@@ -225,7 +228,7 @@ export default function MeetTheFuzzies({ tall = false, zoom }: { tall?: boolean;
       </div>
 
       {/* Black everywhere but the letters */}
-      <motion.div
+      <m.div
         ref={maskRef}
         style={zoom ? { scale, opacity: maskOpacity, transformOrigin: target ? `${target.x}px ${target.y}px` : '50% 50%' } : undefined}
         className={`relative flex items-center justify-center bg-ink px-4 mix-blend-multiply ${tall ? 'min-h-[100svh] py-16' : 'py-16 md:py-40'}`}
@@ -233,7 +236,7 @@ export default function MeetTheFuzzies({ tall = false, zoom }: { tall?: boolean;
         <h2 ref={headingRef} className="text-center font-display uppercase text-white leading-[0.9] tracking-[0.01em] text-[24vw] md:text-[17vw] xl:text-[15vw]">
           <T k="home.fuzzies.title" label="Heading">{"Meet the\nFuzzies"}</T>
         </h2>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

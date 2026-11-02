@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { m, useScroll, useTransform } from 'motion/react';
 import defaultHeroBg from '../assets/images/web/fuzzy-chillin.webp';
 import { Img } from '../content';
 
@@ -30,7 +30,7 @@ export default function ParallaxLogoSection({ bgImage = defaultHeroBg, imageKey 
       data-bg="dark"
     >
       {/* Parallax Background Image */}
-      <motion.div
+      <m.div
         style={{ y, scale }}
         className="absolute inset-0 w-full h-[120%] -top-[10%]"
       >
@@ -48,7 +48,7 @@ export default function ParallaxLogoSection({ bgImage = defaultHeroBg, imageKey 
           className="w-full h-full object-cover brightness-[0.9] contrast-105"
           referrerPolicy="no-referrer"
         />
-      </motion.div>
+      </m.div>
 
       {/* Decorative Blurred Blobs */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-burnt-orange/10 rounded-full blur-[120px] animate-pulse" />

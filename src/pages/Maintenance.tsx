@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { Shield, Clock, HardDrive, RefreshCw, CheckCircle2, Lock, Monitor, Zap, HeartPulse, ChevronRight } from 'lucide-react';
@@ -53,7 +53,7 @@ const Maintenance = () => {
           </div>
 
           <div className="max-w-7xl mx-auto relative z-10 w-full">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -68,7 +68,7 @@ const Maintenance = () => {
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link to="/contact" className="inline-block text-center bg-burnt-orange text-white px-12 py-6 rounded-full font-display text-lg tracking-[0.2em] font-bold hover:scale-105 transition-all duration-500 uppercase shadow-[0_20px_50px_rgba(234,88,12,0.3)]"><T k="maintenance.secure-my-website" label="Button">{"Secure My Website"}</T></Link>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
 
@@ -188,7 +188,7 @@ const Maintenance = () => {
 
         {/* Final CTA */}
         <section className="py-48 text-center px-6 relative overflow-hidden bg-burnt-orange text-white">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="max-w-4xl mx-auto"
@@ -201,7 +201,7 @@ const Maintenance = () => {
                 <span className="font-mono text-xs uppercase tracking-widest"><T k="maintenance.secured-by-iconik-studios">{"Secured by Iconik Studios."}</T></span>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </section>
 
         <LatestInsights />

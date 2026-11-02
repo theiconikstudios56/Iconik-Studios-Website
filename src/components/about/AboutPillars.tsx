@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Shield, Zap, Target, Palette } from 'lucide-react';
 import { T } from '../../content';
 
@@ -44,7 +44,7 @@ export default function AboutPillars() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {pillars.map((pillar, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -58,7 +58,7 @@ export default function AboutPillars() {
                 <h3 className="text-2xl font-display uppercase mb-4"><T k={`about.pillars.${i + 1}.title`} label={`Pillar ${i + 1}: heading`}>{pillar.title}</T></h3>
                 <p className="opacity-80 leading-relaxed font-light italic"><T k={`about.pillars.${i + 1}.description`} label={`Pillar ${i + 1}: text`}>{pillar.description}</T></p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -158,6 +158,15 @@ export function pageHeads(command: 'build' | 'serve'): Plugin {
       await renderer.done();
       if (undrawn.length) this.warn(`pages left for the browser to draw: ${undrawn.join(', ')}`);
 
+      // The stylesheet (one file, about 16 KB compressed) goes inside each drawn page, so the
+      // browser can paint it without first waiting for another download.
+      const STYLESHEET = /<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/;
+      const sheet = shell.match(STYLESHEET);
+      if (sheet) {
+        const css = (await readFile(join(outDir, sheet[1]), 'utf8')).replace(/<\/style/gi, '<\\/style');
+        for (const page of pages) page.html = page.html.replace(STYLESHEET, () => `<style>${css}</style>`);
+      }
+
       // The shell for every other address (blog articles, a page not found), untouched.
       await writeFile(join(outDir, 'app.html'), shell);
       for (const { path, html } of pages) {

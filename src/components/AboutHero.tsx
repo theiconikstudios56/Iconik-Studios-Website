@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { m, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import studioFuzzyImage from '../assets/images/web/studio-fuzzy.webp';
@@ -31,22 +31,22 @@ export default function AboutHero() {
 
 
         {/* Main Text Content - Positions IN FRONT of the expanding image */}
-        <motion.div 
+        <m.div 
           style={{ scale: textScale }}
           className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none"
         >
           <h1 className="text-[20vw] font-display font-black leading-none tracking-normal mix-blend-difference opacity-85"><T k="about.hero.about" label="Heading">{"ABOUT"}</T><span className="sr-only"> Iconik Studios</span></h1>
-        </motion.div>
+        </m.div>
 
         {/* The Expanding Image Container */}
-        <motion.div 
+        <m.div 
           style={{ 
             width: stripWidth,
             height: stripHeight,
           }}
           className="relative z-20 overflow-hidden shadow-2xl"
         >
-          <motion.img 
+          <m.img 
             style={{ scale: imageScale }}
             {...heroImage}
             className="w-full h-full object-cover brightness-75 contrast-125"
@@ -54,7 +54,7 @@ export default function AboutHero() {
           />
           {/* Overlay to keep it moody */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-        </motion.div>
+        </m.div>
 
         {/* Corners Content - Bottom Left */}
         <div className="absolute bottom-10 left-10 z-30 max-w-[280px]">
@@ -63,14 +63,14 @@ export default function AboutHero() {
 
         {/* Corners Content - Bottom Right (wide screens: on a phone it covered the intro) */}
         <div className="absolute bottom-10 right-10 z-30 hidden md:block">
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <m.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               to="/contact"
               className="w-32 h-32 bg-burnt-orange flex flex-col items-center justify-center text-center p-4 rounded-sm"
             >
               <span className="font-mono text-[10px] font-bold text-black uppercase leading-tight"><T k="about.hero.colab-with-us">{"Collab\nWith Us"}</T></span>
             </Link>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Subtle Vignette */}

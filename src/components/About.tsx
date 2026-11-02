@@ -1,4 +1,4 @@
-import { motion, useInView } from 'motion/react';
+import { m, useInView } from 'motion/react';
 import { useRef } from 'react';
 
 export default function About({ reversed = false, dark = false, staticBg = false }: { reversed?: boolean, dark?: boolean, staticBg?: boolean }) {
@@ -19,7 +19,7 @@ export default function About({ reversed = false, dark = false, staticBg = false
       id={reversed ? "about-reversed" : "about"} 
       className={`relative min-h-screen flex items-center py-20 lg:py-32 overflow-hidden bg-tan`}
     >
-      <motion.div 
+      <m.div 
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -110,7 +110,7 @@ export default function About({ reversed = false, dark = false, staticBg = false
             </div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

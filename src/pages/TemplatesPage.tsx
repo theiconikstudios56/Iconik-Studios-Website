@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, MousePointer2 } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
@@ -31,7 +31,7 @@ export default function TemplatesPage() {
         <section className="relative overflow-hidden px-6 pb-16 pt-36 lg:px-12 lg:pb-20 lg:pt-44">
           <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-16 lg:grid-cols-12">
             {/* Slides in but is never invisible, so the page counts as loaded as soon as it shows. */}
-            <motion.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-6">
+            <m.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-6">
               <div className="mb-8 flex items-center gap-4">
                 <div className="h-[1px] w-12 bg-burnt-orange" />
                 <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange"><T k="templates.eyebrow">{"Website Templates"}</T></span>
@@ -50,7 +50,7 @@ export default function TemplatesPage() {
                   Or have us build it <ArrowUpRight size={16} />
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
             {shop && <HeroFan />}
           </div>
           {shop && <Facts />}
@@ -169,7 +169,7 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
   const number = String(shop!.templates.indexOf(template) + 1).padStart(2, '0');
   const palette = [template.colors.background, template.colors.brand, template.colors.text];
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
@@ -235,14 +235,14 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
           </a>
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
 /** The other way to get a site: Iconik builds it, with the systems behind it. */
 function BuiltForYouCard() {
   return (
-    <motion.aside
+    <m.aside
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
@@ -275,7 +275,7 @@ function BuiltForYouCard() {
           Talk to us <ArrowRight size={16} />
         </Link>
       </div>
-    </motion.aside>
+    </m.aside>
   );
 }
 
@@ -294,7 +294,7 @@ function HeroFan() {
   return (
     <div className="group relative hidden h-[34rem] lg:col-span-6 lg:block" aria-hidden>
       {fan.map((t, i) => (
-        <motion.div
+        <m.div
           key={t.key}
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -304,7 +304,7 @@ function HeroFan() {
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#111] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)]">
             <img src={pictureOf(t.slug, 'hero')} alt="" decoding="async" className="block aspect-[16/10] w-full object-cover object-top" />
           </div>
-        </motion.div>
+        </m.div>
       ))}
     </div>
   );
@@ -320,7 +320,7 @@ function Facts() {
     [money(shop!.plans.yearly), 'A year, hosting included'],
   ];
   return (
-    <motion.dl
+    <m.dl
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5 }}
@@ -333,6 +333,6 @@ function Facts() {
           <dd className="mt-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">{label}</dd>
         </div>
       ))}
-    </motion.dl>
+    </m.dl>
   );
 }

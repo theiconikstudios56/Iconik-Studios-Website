@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Check, Crown, Globe2, History, Mail, MousePointerClick, PenLine, ShieldCheck } from 'lucide-react';
 
 /** A screenshot in a plain browser window, the way a buyer will see their site. */
@@ -32,7 +32,7 @@ export function Included() {
   return (
     <div className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
       {INCLUDED.map((item, i) => (
-        <motion.div
+        <m.div
           key={item.title}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export function Included() {
           <item.icon className="text-burnt-orange" size={28} strokeWidth={1.5} />
           <h3 className="font-display text-2xl uppercase leading-tight text-ink">{item.title}</h3>
           <p className="leading-relaxed text-ink/75">{item.text}</p>
-        </motion.div>
+        </m.div>
       ))}
     </div>
   );

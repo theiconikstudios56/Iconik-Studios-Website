@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { SlidersHorizontal, X, Search } from 'lucide-react';
 import { T } from '../content';
 import { fetchArticles, type Article } from '../lib/rmdArticles';
@@ -133,7 +133,7 @@ export default function BlogPage() {
 
                   <AnimatePresence>
                     {dropdownOpen && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
@@ -176,7 +176,7 @@ export default function BlogPage() {
                         ) : (
                           <p className="px-4 py-3 font-mono text-[10px] text-white/20 tracking-widest uppercase"><T k="blog.no-results">{"No results"}</T></p>
                         )}
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -195,7 +195,7 @@ export default function BlogPage() {
               </div>
             ) : (
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={activeCategory || 'all'}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -204,7 +204,7 @@ export default function BlogPage() {
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16"
                 >
                   {filteredArticles.map((article, idx) => (
-                    <motion.article
+                    <m.article
                       key={article.id}
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -218,7 +218,7 @@ export default function BlogPage() {
                           </div>
                         </div>
 
-                        <motion.img
+                        <m.img
                           src={article.image_url || blogPlaceholder(idx)}
                           alt={article.title}
                           className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:brightness-110"
@@ -246,12 +246,12 @@ export default function BlogPage() {
                         <p className="mt-3 text-white/80 text-sm font-light leading-relaxed line-clamp-3">
                           {getExcerpt(article.body)}
                         </p>
-                        <motion.div className="h-[1px] bg-burnt-orange mt-4 w-0 group-hover:w-full transition-all duration-500 origin-left" />
+                        <m.div className="h-[1px] bg-burnt-orange mt-4 w-0 group-hover:w-full transition-all duration-500 origin-left" />
                       </div>
                     </Link>
-                    </motion.article>
+                    </m.article>
                   ))}
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             )}
 
@@ -270,11 +270,11 @@ export default function BlogPage() {
                 placeholder="YOUR EMAIL ADDRESS"
                 className="w-full md:w-80 bg-white/5 border border-white/10 px-8 py-6 rounded-none font-mono text-xs focus:border-burnt-orange outline-none transition-colors"
               />
-              <motion.button
+              <m.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full md:w-auto px-12 py-6 bg-white text-black font-mono text-xs tracking-[0.4em] uppercase hover:bg-burnt-orange hover:text-white transition-all duration-300 font-bold"
-              ><T k="blog.access-dispatch">{"Access Dispatch"}</T></motion.button>
+              ><T k="blog.access-dispatch">{"Access Dispatch"}</T></m.button>
             </div>
           </div>
         </section>

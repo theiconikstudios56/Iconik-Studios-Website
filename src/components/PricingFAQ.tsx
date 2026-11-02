@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { Check, X } from 'lucide-react';
 import { useState } from 'react';
 import { T, useText } from '../content';
@@ -34,7 +34,7 @@ export const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {plans.map((plan) => (
-            <motion.div 
+            <m.div 
               key={plan.name}
               whileHover={{ y: -10 }}
               className={`p-12 h-fit rounded-[40px] border border-white/10 space-y-12 ${plan.featured ? 'bg-white text-ink' : 'bg-white/5'}`}
@@ -56,7 +56,7 @@ export const Pricing = () => {
                 ))}
               </ul>
               <button className={`w-full py-6 rounded-full font-display text-xl uppercase transition-all ${plan.featured ? 'bg-ink text-paper hover:bg-accent' : 'bg-paper text-ink hover:bg-accent'}`}><T k="home.faq.get-started" label="Button">{"Get Started"}</T></button>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>
@@ -111,20 +111,20 @@ export const FAQ = () => {
                   <span className="font-display opacity-80">0{i + 1}</span>
                   <span className="text-base md:text-lg font-mono uppercase"><T k={`home.faq.${i + 1}.q`} label={`Question ${i + 1}`}>{startQuestions[i].q}</T></span>
                 </div>
-                <motion.div animate={{ rotate: active === i ? 45 : 0 }} className="text-paper">
+                <m.div animate={{ rotate: active === i ? 45 : 0 }} className="text-paper">
                   <X size={24} />
-                </motion.div>
+                </m.div>
               </button>
               <AnimatePresence>
                 {active === i && (
-                  <motion.div 
+                  <m.div 
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
                     exit={{ height: 0 }}
                     className="px-8 pb-8"
                   >
                     <p className="text-lg opacity-100 font-light leading-relaxed text-paper"><T k={`home.faq.${i + 1}.a`} label={`Question ${i + 1}: answer`}>{startQuestions[i].a}</T></p>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>

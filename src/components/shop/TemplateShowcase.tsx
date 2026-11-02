@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react';
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { T } from '../../content';
 import { industries, money, pictureOf, shop, type ShopTemplate } from '../../lib/shop';
@@ -33,7 +33,7 @@ export default function TemplateShowcase() {
 
       <div className="relative px-6 lg:px-12">
         <div className="mx-auto mb-16 grid max-w-7xl grid-cols-1 items-end gap-10 md:mb-24 lg:grid-cols-12 lg:gap-16">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -47,8 +47,8 @@ export default function TemplateShowcase() {
             <h2 id="home-templates-title" className="font-display text-[3.25rem] uppercase leading-[1.05] tracking-tighter text-tan sm:text-6xl md:text-[6vw] lg:text-[5.5vw]">
               <T k="home.templates.title" em="text-accent italic" label="Heading">{"Launch Faster.\n*Start Ready‑Made.*"}</T>
             </h2>
-          </motion.div>
-          <motion.div
+          </m.div>
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -61,7 +61,7 @@ export default function TemplateShowcase() {
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/60 md:tracking-[0.3em]">
               {money(lowest)} once <span className="text-accent">/</span> then {money(shop.plans.yearly)} a year
             </p>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
@@ -100,14 +100,14 @@ export default function TemplateShowcase() {
 
 function ShowcaseRow({ templates, x, className = '' }: { templates: ShopTemplate[]; x: MotionValue<string>; className?: string }) {
   return (
-    <motion.ul style={{ x }} className={`flex w-max gap-5 md:gap-8 ${className}`}>
+    <m.ul style={{ x }} className={`flex w-max gap-5 md:gap-8 ${className}`}>
       {templates.map((t, i) => (
         // The repeated half is for looks only: one link per template for keyboards and screen readers.
         <li key={`${t.key}-${i}`} aria-hidden={i >= templates.length / 2 || undefined}>
           <ShowcaseCard template={t} hidden={i >= templates.length / 2} />
         </li>
       ))}
-    </motion.ul>
+    </m.ul>
   );
 }
 
