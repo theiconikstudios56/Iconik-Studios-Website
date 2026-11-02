@@ -191,9 +191,10 @@ function RmdTracking() {
   return null;
 }
 
-export default function App() {
+/** Every page. The browser runs it in its router (App); the build draws each page at its address (entry-server.tsx). */
+export function AppRoutes() {
   return (
-    <Router>
+    <>
       <RmdTracking />
       <ScrollToTop />
       {/* While a page's code loads: the site's dark background, no flash of white. */}
@@ -223,6 +224,14 @@ export default function App() {
       </Routes>
       </Suspense>
       <ChatLauncher />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <AppRoutes />
     </Router>
   );
 }

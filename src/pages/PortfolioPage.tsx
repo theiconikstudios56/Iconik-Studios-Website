@@ -76,6 +76,8 @@ export default function PortfolioPage() {
       className="bg-[#0b0b0b] selection:bg-burnt-orange selection:text-white"
     >
       <Navbar />
+      {/* The page's main heading, for screen readers and Google: the projects speak for themselves on screen. */}
+      <h1 className="sr-only">Our work: websites and automation by Iconik Studios</h1>
 
       {/* The Scroll Track */}
       <div ref={targetRef} className="relative" style={{ height: `${projects.length * 85}vh` }}>

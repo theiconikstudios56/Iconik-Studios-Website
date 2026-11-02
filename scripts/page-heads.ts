@@ -1,6 +1,8 @@
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
-import type { Plugin } from 'vite';
+import { pathToFileURL } from 'node:url';
+import react from '@vitejs/plugin-react';
+import { build, type Plugin, type ResolvedConfig } from 'vite';
 import { SITE, withHead } from '../api/_head.js';
 import { PAGE_SEO, projectSeo } from '../src/seo';
 import { CLIENT_PROJECTS, templateProject, type ProjectText } from '../src/constants/projectText';
@@ -15,17 +17,48 @@ import { industryList, type Catalog } from './shop-catalog';
 // rewrites, so /about is dist/about/index.html. The home page becomes
 // index.html; the untouched shell is kept as app.html for every other address
 // (vercel.json), and /api/blog-page fills it in for each article.
+//
+// Each page's content is drawn into it too (src/entry-server.tsx): its
+// headings, words and links are in the file, for Google, AI search, link
+// previews and site audits, and the site takes the page over as it is
+// (main.tsx). The drawing uses the same RMD content and catalogue as the build.
 
 type Content = { values: Record<string, string> };
 
+/** Draws each page with the site's own code, built once more for the server. */
+async function pageRenderer(config: ResolvedConfig, baked: Record<string, unknown>) {
+  const outDir = join(config.root, 'node_modules', '.page-heads');
+  await build({
+    configFile: false,
+    root: config.root,
+    mode: config.mode,
+    logLevel: 'warn',
+    define: config.define,
+    resolve: { alias: config.resolve.alias },
+    plugins: [
+      react(),
+      {
+        name: 'baked-content',
+        resolveId: (id) => (id in baked ? `\0${id}` : undefined),
+        load: (id) => (id.startsWith('\0') && id.slice(1) in baked ? `export default ${JSON.stringify(baked[id.slice(1)])};` : undefined),
+      },
+    ],
+    build: { ssr: 'src/entry-server.tsx', outDir, emptyOutDir: true, rollupOptions: { output: { entryFileNames: 'entry-server.js' } } },
+  });
+  const { render } = (await import(pathToFileURL(join(outDir, 'entry-server.js')).href)) as { render: (path: string) => Promise<string> };
+  return { render, done: () => rm(outDir, { recursive: true, force: true }) };
+}
+
 export function pageHeads(command: 'build' | 'serve'): Plugin {
   let outDir = 'dist';
+  let resolved: ResolvedConfig;
   let content: () => Content | null = () => null;
   let catalog: () => Catalog | null = () => null;
   return {
     name: 'page-heads',
     apply: 'build',
     configResolved(config) {
+      resolved = config;
       outDir = resolve(config.root, config.build.outDir);
       content = config.plugins.find((p) => p.name === 'site-content')?.api?.content ?? content;
       catalog = config.plugins.find((p) => p.name === 'shop-catalog')?.api?.catalog ?? catalog;
@@ -109,6 +142,21 @@ export function pageHeads(command: 'build' | 'serve'): Plugin {
         const image = own || picture(p.id === 'digital-wave-media-solutions' ? 'digital-wave-hero' : p.id === 'mint-cannabis' ? 'mint-cannabis-hero' : `${p.id.replace(/-template$/, '')}-hero`);
         add({ path: `/project/${p.id}`, title, description, image });
       }
+
+      // Each page's content. A page that can't be drawn keeps the empty shell (the site draws it in the browser, as before).
+      const renderer = await pageRenderer(resolved, { 'virtual:site-content': content() ?? { version: null, values: {} }, 'virtual:shop-catalog': shop });
+      const ROOT = '<div id="root"></div>';
+      const undrawn: string[] = [];
+      for (const page of pages) {
+        try {
+          const body = await renderer.render(page.path);
+          page.html = page.html.replace(ROOT, () => `<div id="root">${body}</div>`);
+        } catch (error) {
+          undrawn.push(`${page.path} (${error instanceof Error ? error.message : error})`);
+        }
+      }
+      await renderer.done();
+      if (undrawn.length) this.warn(`pages left for the browser to draw: ${undrawn.join(', ')}`);
 
       // The shell for every other address (blog articles, a page not found), untouched.
       await writeFile(join(outDir, 'app.html'), shell);

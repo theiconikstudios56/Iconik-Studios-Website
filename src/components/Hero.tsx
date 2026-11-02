@@ -36,9 +36,16 @@ export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [previous, setPrevious] = useState<number | null>(null);
   // Videos play unless the visitor asked for less motion or the browser won't autoplay; then the pictures take turns.
-  const [still, setStill] = useState(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const [narrow] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 1023px)').matches);
+  // The page arrives already drawn (scripts/page-heads.ts) with only the first picture; the screen is known
+  // once the site runs, and the scenes for it are added then.
+  const [still, setStill] = useState(false);
+  const [narrow, setNarrow] = useState<boolean | null>(null);
   const videos = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    setStill(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    setNarrow(window.matchMedia('(max-width: 1023px)').matches);
+  }, []);
   const advancing = useRef(false);
 
   const advance = useCallback(() => {
@@ -61,7 +68,7 @@ export default function Hero() {
     // Once the fade is over, the one beneath stops and hides.
     const done = window.setTimeout(() => setPrevious(null), FADE_S * 1000 + 100);
     return () => window.clearTimeout(done);
-  }, [current, still]);
+  }, [current, still, narrow]);
 
   useEffect(() => {
     if (previous === null) videos.current.forEach((v, i) => i !== current && v?.pause());
@@ -106,7 +113,7 @@ export default function Hero() {
             className="absolute inset-0 w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
-          {HERO_VIDEOS.map((video, i) =>
+          {narrow !== null && HERO_VIDEOS.map((video, i) =>
             still ? (
               <img
                 key={i}
