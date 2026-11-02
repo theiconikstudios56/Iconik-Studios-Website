@@ -1,5 +1,5 @@
 import { m, AnimatePresence } from 'motion/react';
-import { Check, X } from 'lucide-react';
+import { Check, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { T, useText } from '../content';
 
@@ -112,8 +112,9 @@ export const FAQ = () => {
                   <span className="font-display opacity-80">0{i + 1}</span>
                   <span className="text-base md:text-lg font-mono uppercase"><T k={`home.faq.${i + 1}.q`} label={`Question ${i + 1}`}>{startQuestions[i].q}</T></span>
                 </div>
+                {/* A plus while closed; it turns into a cross when the answer is open. */}
                 <m.div animate={{ rotate: active === i ? 45 : 0 }} className="text-paper">
-                  <X size={24} />
+                  <Plus size={24} />
                 </m.div>
               </button>
               <AnimatePresence>
