@@ -40,7 +40,7 @@ const PHONE = '(max-width: 639px)';
  * look below, the site's own: black, a hairline border, Anton for the title,
  * Inter to read, small spaced mono labels, underlined fields, bronze pills.
  * The picture at the top (and beside Iconik's messages) is the logo uploaded
- * in RMD, or the gold Fuzzy.
+ * in RMD, or the green Fuzzy.
  */
 export default function ChatWidget() {
   const [config, setConfig] = useState<ChatConfig | null>(null);
@@ -289,13 +289,13 @@ const label = 'block font-mono text-[9px] uppercase tracking-[0.3em] text-[var(-
 const button =
   'rounded-[var(--cw-r-control)] bg-[var(--cw-accent)] text-[var(--cw-on-accent)] transition hover:brightness-110 disabled:opacity-60';
 
-/** The logo uploaded in RMD, or the gold Fuzzy: round, with a bronze ring. */
+/** The logo uploaded in RMD, or the green Fuzzy: in a circle. */
 function Avatar({ look, size }: { look: ChatWidgetSettings; size: string }) {
   return (
     <img
       src={look.logo_url || fuzzyAvatar}
       alt=""
-      className={`${size} shrink-0 rounded-full bg-[var(--cw-msg)] object-cover ring-1 ring-[var(--cw-accent)] ring-offset-2 ring-offset-[var(--cw-bg)]`}
+      className={`${size} shrink-0 rounded-full bg-[var(--cw-msg)] object-cover`}
     />
   );
 }
