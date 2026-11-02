@@ -128,7 +128,8 @@ export default function ContactPage() {
                 {/* Animated Text CTA */}
                 <div className="mb-12">
                   <h1 className="text-5xl md:text-6xl lg:text-7xl font-display uppercase tracking-tight leading-[1.1] flex flex-wrap items-center gap-x-4">
-                    <span><T k="contact.lets" label="Heading">{"let’s"}</T></span>
+                    {/* The spaces are for Google and screen readers; the row's gap spaces the words on screen. */}
+                    <span><T k="contact.lets" label="Heading">{"let’s"}</T></span>{' '}
                     <span className="relative inline-block h-[1.3em] overflow-hidden min-w-[250px] md:min-w-[350px] lg:min-w-[450px]">
                       <AnimatePresence mode="wait">
                         <motion.span
@@ -145,7 +146,7 @@ export default function ContactPage() {
                           {words[index]}
                         </motion.span>
                       </AnimatePresence>
-                    </span>
+                    </span>{' '}
                     <br className="hidden lg:block w-full" />
                     <span><T k="contact.together" label="Heading">{"together"}</T></span>
                   </h1>
