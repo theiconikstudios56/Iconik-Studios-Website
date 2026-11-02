@@ -13,6 +13,10 @@ export default function PortfolioCarousel() {
   const springX = useSpring(x, { stiffness: 100, damping: 30, mass: 0.5 });
   
   const [containerWidth, setContainerWidth] = useState(0);
+  // The water ripple, only with a mouse (it shows while dragging). iPhones drew nothing at all through
+  // the SVG filter, so touch screens get the plain strip; set once the site runs, so the drawn page matches.
+  const [ripple, setRipple] = useState(false);
+  useEffect(() => setRipple(window.matchMedia('(hover: hover) and (pointer: fine)').matches), []);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -81,54 +85,59 @@ export default function PortfolioCarousel() {
         </defs>
       </svg>
 
-      <m.div
-        ref={containerRef}
-        className="flex gap-4 md:gap-8 px-4 md:px-8"
-        style={{ x: springX, filter: 'url(#water-filter)' }}
-        drag="x"
-        dragConstraints={{ left: -containerWidth * 3, right: containerWidth }}
-        dragElastic={0.1}
-      >
-        {ITEMS.map((item, i) => (
-          <div 
-            key={`${item.id}-${i}`}
-            className="flex-shrink-0 w-[70vw] md:w-[40vw] aspect-video relative group overflow-hidden rounded-sm bg-white/5"
-          >
-            <Link 
-              to={`/project/${item.id}`}
-              className="block w-full h-full relative"
+      {/* The filter sits on this still frame, the size of what's on screen, not on the moving strip:
+          the strip is thousands of pixels wide and slides far off to the left, and Safari only filters
+          (and shows) the area around an element's own box. */}
+      <div style={ripple ? { filter: 'url(#water-filter)' } : undefined}>
+        <m.div
+          ref={containerRef}
+          className="flex gap-4 md:gap-8 px-4 md:px-8"
+          style={{ x: springX }}
+          drag="x"
+          dragConstraints={{ left: -containerWidth * 3, right: containerWidth }}
+          dragElastic={0.1}
+        >
+          {ITEMS.map((item, i) => (
+            <div 
+              key={`${item.id}-${i}`}
+              className="flex-shrink-0 w-[70vw] md:w-[40vw] aspect-video relative group overflow-hidden rounded-sm bg-white/5"
             >
-              <img 
-                src={item.image} 
-                alt={item.title}
-                className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0 group-hover:scale-110"
-                draggable="false"
-                referrerPolicy="no-referrer"
-              />
+              <Link 
+                to={`/project/${item.id}`}
+                className="block w-full h-full relative"
+              >
+                <img 
+                  src={item.image} 
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0 group-hover:scale-110"
+                  draggable="false"
+                  referrerPolicy="no-referrer"
+                />
               
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-700" />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-700" />
 
-              <div className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none">
-                <h3 className="text-6xl md:text-[6vw] leading-none font-display font-black uppercase text-white/5 group-hover:text-white transition-all duration-700 tracking-[-0.05em] drop-shadow-2xl">
-                  {item.shortName}
-                </h3>
-              </div>
-
-              <div className="absolute bottom-6 left-6 md:left-10 text-left pointer-events-none">
-                <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white opacity-100 mb-1">{item.category}</p>
-                <p className="font-display text-sm text-white opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">{item.year}</p>
-              </div>
-
-              <div className="absolute top-6 right-6 md:right-10 opacity-0 group-hover:opacity-100 transition-all duration-700 -translate-y-2 group-hover:translate-y-0">
-                <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white backdrop-blur-md">
-                  <ArrowUpRight size={18} />
+                <div className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none">
+                  <h3 className="text-6xl md:text-[6vw] leading-none font-display font-black uppercase text-white/5 group-hover:text-white transition-all duration-700 tracking-[-0.05em] drop-shadow-2xl">
+                    {item.shortName}
+                  </h3>
                 </div>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </m.div>
-      
+
+                <div className="absolute bottom-6 left-6 md:left-10 text-left pointer-events-none">
+                  <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white opacity-100 mb-1">{item.category}</p>
+                  <p className="font-display text-sm text-white opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">{item.year}</p>
+                </div>
+
+                <div className="absolute top-6 right-6 md:right-10 opacity-0 group-hover:opacity-100 transition-all duration-700 -translate-y-2 group-hover:translate-y-0">
+                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white backdrop-blur-md">
+                    <ArrowUpRight size={18} />
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </m.div>
+      </div>
+
       {/* Scroll indicator or instructions */}
       <div className="mt-6 flex justify-center">
         <div className="flex items-center gap-4 text-white opacity-100 font-mono text-[9px] uppercase tracking-[0.4em]">
