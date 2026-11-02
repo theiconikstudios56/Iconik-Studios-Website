@@ -7,29 +7,30 @@
 // can't be reached, the plain shell goes out and the page fills itself in as
 // before.
 
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { escapeHtml, withHead } from './_head.js';
 
 const RMD_ARTICLES = 'https://winicrmzmcgfwrrynoxd.supabase.co/functions/v1/website-articles';
 
-let cached = { origin: '', shell: '', at: 0 };
+let cached = '';
 
-/** This deployment's shell (its own asset files), kept for 5 minutes. */
-async function shellFrom(origin) {
-  if (cached.origin === origin && Date.now() - cached.at < 300_000) return cached.shell;
-  const response = await fetch(`${origin}/app.html`, { signal: AbortSignal.timeout(5000) });
-  if (!response.ok) throw new Error(`app.html answered ${response.status}`);
-  cached = { origin, shell: await response.text(), at: Date.now() };
-  return cached.shell;
+/** This deployment's own shell, bundled with the function (vercel.json includeFiles), so it names this build's files. */
+async function readShell() {
+  if (cached) return cached;
+  const shell = await readFile(join(process.cwd(), 'dist', 'app.html'), 'utf8');
+  if (!shell.includes('<div id="root">')) throw new Error('app.html isn’t the site’s shell');
+  cached = shell;
+  return shell;
 }
 
 export default async function handler(req, res) {
-  const origin = `https://${req.headers['x-forwarded-host'] || req.headers.host}`;
   const slug = String(req.query.slug ?? '');
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
   let shell;
   try {
-    shell = await shellFrom(origin);
+    shell = await readShell();
   } catch {
     // Without the shell there's no page to send; the browser tries again.
     res.setHeader('Cache-Control', 'no-store');
