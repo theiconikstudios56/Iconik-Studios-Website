@@ -13,7 +13,7 @@
 @theme {
   --font-serif: "Cormorant Garamond", serif;
   --font-sans: "Inter", sans-serif;
-  --font-display: "Anton", sans-serif;
+  --font-display: "Anton", "Anton Fallback", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
   --color-tan: #ffffff;

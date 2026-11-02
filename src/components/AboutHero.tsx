@@ -35,7 +35,7 @@ export default function AboutHero() {
           style={{ scale: textScale }}
           className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none"
         >
-          <h1 className="text-[20vw] font-display font-black leading-none tracking-normal mix-blend-difference opacity-85"><T k="about.hero.about" label="Heading">{"ABOUT"}</T></h1>
+          <h1 className="text-[20vw] font-display font-black leading-none tracking-normal mix-blend-difference opacity-85"><T k="about.hero.about" label="Heading">{"ABOUT"}</T><span className="sr-only"> Iconik Studios</span></h1>
         </motion.div>
 
         {/* The Expanding Image Container */}

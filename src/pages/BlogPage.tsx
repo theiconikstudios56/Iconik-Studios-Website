@@ -95,6 +95,8 @@ export default function BlogPage() {
       description={PAGE_SEO.blog.description}
     >
       <div className="bg-[#000000] min-h-screen text-white font-sans selection:bg-burnt-orange selection:text-white" data-bg="black">
+        {/* The page's main heading, for screen readers and Google; the articles lead on screen. */}
+        <h1 className="sr-only">The Iconik Studios blog: websites, booking and follow-up for local businesses</h1>
         <div className="h-24 md:h-32" />
 
         <section className="py-12 px-4 md:px-8">
