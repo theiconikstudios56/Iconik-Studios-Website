@@ -76,6 +76,8 @@ async function open(url, width, height) {
     Promise.all([...document.images].map((img) => { img.loading = 'eager'; return img.complete ? 0 : new Promise((r) => { img.onload = img.onerror = r; }); })),
     new Promise((r) => setTimeout(r, 15000)),
   ])`);
+  // The demo's "Make it yours" bar (RMD-crm SH-D5) leads back here; the shop's own pictures leave it out.
+  await run(`document.querySelector('.fx-demobar')?.remove()`);
   await sleep(500);
 }
 
