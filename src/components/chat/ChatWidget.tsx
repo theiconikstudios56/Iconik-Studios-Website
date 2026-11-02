@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
-import { MessageCircle, Send, X } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { ArrowRight, ArrowUp, MessageCircle, X } from 'lucide-react';
 import { trackLead } from '../../lib/rmdTracking';
 import {
   askAssistant,
@@ -17,6 +17,7 @@ import {
   type SavedChat,
 } from '../../lib/rmdChat';
 import { chatWidgetStyle, resolveChatWidget, turnstileTheme, type ChatWidgetSettings } from '../../lib/chatWidget';
+import fuzzyAvatar from '../../assets/images/web/chat-fuzzy.webp';
 
 // Replies show up within seconds while the chat is open; quieter after a
 // couple of minutes, and not at all while the tab is hidden. With the panel
@@ -36,7 +37,10 @@ const PHONE = '(max-width: 639px)';
  * message and shows "typing…"), and the team can take over at any time.
  * Its wording, colours, corners, side, logo and business-name field come from
  * RMD's Settings → Chat widget (lib/chatWidget.ts); unchanged ones keep the
- * look below.
+ * look below, the site's own: black, a hairline border, Anton for the title,
+ * Inter to read, small spaced mono labels, underlined fields, bronze pills.
+ * The picture at the top (and beside Iconik's messages) is the logo uploaded
+ * in RMD, or the gold Fuzzy.
  */
 export default function ChatWidget() {
   const [config, setConfig] = useState<ChatConfig | null>(null);
@@ -201,14 +205,17 @@ export default function ChatWidget() {
           ref={panel}
           role="dialog"
           aria-label={look.title}
-          className="flex h-[min(36rem,calc(100svh-6.5rem))] w-[calc(100vw-2rem)] max-w-[24rem] flex-col overflow-hidden overscroll-contain rounded-[var(--cw-r-panel)] border border-[var(--cw-line)] bg-[var(--cw-bg)] text-[var(--cw-text)] shadow-2xl shadow-black/60 max-sm:fixed max-sm:inset-x-0 max-sm:top-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:rounded-none max-sm:border-0 max-sm:shadow-none"
+          className="flex h-[min(46rem,calc(100svh-7rem))] w-[calc(100vw-2rem)] max-w-[25rem] flex-col overflow-hidden overscroll-contain rounded-[var(--cw-r-panel)] border border-[var(--cw-line)] bg-[var(--cw-bg)] font-sans text-[var(--cw-text)] shadow-2xl shadow-black/70 max-sm:fixed max-sm:inset-x-0 max-sm:top-0 max-sm:h-dvh max-sm:w-full max-sm:max-w-none max-sm:rounded-none max-sm:border-0 max-sm:shadow-none"
         >
-          <header className="flex shrink-0 items-start justify-between gap-3 bg-[var(--cw-accent)] px-5 py-4 text-[var(--cw-on-accent)]">
-            <div className="flex min-w-0 items-center gap-3">
-              {look.logo_url && <img src={look.logo_url} alt="" className="size-10 shrink-0 rounded-[min(var(--cw-r-control),8px)] object-contain" />}
+          <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--cw-line-soft)] px-5 py-4">
+            <div className="flex min-w-0 items-center gap-3.5">
+              <Avatar look={look} size="size-12" />
               <div className="min-w-0">
-                <h2 className="font-display text-3xl uppercase leading-none tracking-tight break-words">{look.title}</h2>
-                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em]">{config?.assistant ? look.tagline_ai : look.tagline_people}</p>
+                <h2 className="font-display text-[1.65rem] uppercase leading-none tracking-tight break-words">{look.title}</h2>
+                <div className="mt-1.5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--cw-mark)]">
+                  <span className="size-1.5 shrink-0 rounded-full bg-[var(--cw-accent)]" aria-hidden />
+                  {config?.assistant ? look.tagline_ai : look.tagline_people}
+                </div>
               </div>
             </div>
             <button
@@ -218,9 +225,9 @@ export default function ChatWidget() {
                 bubble.current?.focus();
               }}
               aria-label="Close the chat"
-              className="-mr-1 rounded-full p-1.5 transition-colors hover:bg-[color-mix(in_srgb,var(--cw-on-accent)_15%,transparent)]"
+              className="flex size-9 shrink-0 items-center justify-center rounded-full border border-[var(--cw-line)] transition-colors hover:border-[var(--cw-accent)] hover:text-[var(--cw-mark)]"
             >
-              <X size={20} />
+              <X size={16} />
             </button>
           </header>
 
@@ -254,7 +261,7 @@ export default function ChatWidget() {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close the chat' : unread ? `Open the chat, ${unread} new ${unread === 1 ? 'reply' : 'replies'}` : look.launcher_text || 'Chat with us'}
         aria-expanded={open}
-        className={`relative flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--cw-accent)] text-[var(--cw-on-accent)] shadow-lg shadow-black/40 transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cw-accent)] ${look.launcher_text && !open ? 'px-5' : 'w-14'} ${open ? 'max-sm:hidden' : ''}`}
+        className={`relative flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--cw-accent)] text-[var(--cw-on-accent)] shadow-xl shadow-black/50 ring-1 ring-white/15 transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cw-accent)] ${look.launcher_text && !open ? 'px-5' : 'w-14'} ${open ? 'max-sm:hidden' : ''}`}
       >
         {open ? (
           <X size={24} />
@@ -263,7 +270,7 @@ export default function ChatWidget() {
         ) : (
           <MessageCircle size={26} />
         )}
-        {!open && look.launcher_text && <span className="text-sm font-bold">{look.launcher_text}</span>}
+        {!open && look.launcher_text && <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em]">{look.launcher_text}</span>}
         {!open && unread > 0 && (
           <span className="absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full bg-paper font-mono text-[11px] font-bold text-ink" aria-hidden>
             {unread}
@@ -274,10 +281,39 @@ export default function ChatWidget() {
   );
 }
 
+// Underlined, like the contact page; 16px on phones so iOS doesn't zoom in.
 const field =
-  'w-full rounded-[var(--cw-r-control)] border border-[var(--cw-line)] bg-[var(--cw-field)] px-3 py-2.5 font-mono text-base text-[var(--cw-text)] sm:text-sm placeholder:text-[var(--cw-text-40)] focus:border-[var(--cw-accent)] focus:outline-none';
+  'w-full border-0 border-b border-[var(--cw-line)] bg-transparent px-0 py-2 font-sans text-base text-[var(--cw-text)] sm:text-[15px] placeholder:text-[var(--cw-text-40)] focus:border-[var(--cw-accent)] focus:outline-none';
+const label = 'block font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--cw-text)]';
+// The chat's text sits in divs, not paragraphs: the site's stylesheet sets every <p> to 14–16px.
 const button =
   'rounded-[var(--cw-r-control)] bg-[var(--cw-accent)] text-[var(--cw-on-accent)] transition hover:brightness-110 disabled:opacity-60';
+
+/** The logo uploaded in RMD, or the gold Fuzzy: round, with a bronze ring. */
+function Avatar({ look, size }: { look: ChatWidgetSettings; size: string }) {
+  return (
+    <img
+      src={look.logo_url || fuzzyAvatar}
+      alt=""
+      className={`${size} shrink-0 rounded-full bg-[var(--cw-msg)] object-cover ring-1 ring-[var(--cw-accent)] ring-offset-2 ring-offset-[var(--cw-bg)]`}
+    />
+  );
+}
+
+/** One of Iconik's messages: the picture beside it, the name above. */
+function FromUs({ look, name, children }: { look: ChatWidgetSettings; name: string; children: ReactNode }) {
+  return (
+    <div className="flex items-end gap-2.5">
+      <Avatar look={look} size="size-7" />
+      <div className="flex min-w-0 flex-col items-start">
+        <span className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--cw-mark)]">{name}</span>
+        <div className="max-w-[17rem] whitespace-pre-wrap break-words rounded-[var(--cw-r-bubble)] rounded-bl-md border border-[var(--cw-line-soft)] bg-[var(--cw-msg)] px-4 py-3 text-[14px] leading-relaxed">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function StartForm({
   look,
@@ -339,38 +375,55 @@ function StartForm({
   };
 
   return (
-    <form onSubmit={submit} className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain p-5">
-      <p className="font-mono text-sm leading-relaxed">{greeting}</p>
-      {assistant && <p className="font-mono text-[11px] leading-relaxed text-[var(--cw-text-60)]">{look.ai_notice}</p>}
-      <label className="sr-only" htmlFor="chat-name">{look.name_placeholder}</label>
-      <input id="chat-name" className={field} placeholder={look.name_placeholder} autoComplete="name" required maxLength={120} value={values.name} onChange={set('name')} />
-      <label className="sr-only" htmlFor="chat-email">{look.email_placeholder}</label>
-      <input id="chat-email" className={field} type="email" placeholder={look.email_placeholder} autoComplete="email" required maxLength={254} value={values.email} onChange={set('email')} />
-      {look.company_field !== 'hidden' && (
-        <>
-          <label className="sr-only" htmlFor="chat-company">{look.company_placeholder}</label>
-          <input
-            id="chat-company"
-            className={field}
-            placeholder={look.company_field === 'optional' ? `${look.company_placeholder} (optional)` : look.company_placeholder}
-            autoComplete="organization"
-            required={look.company_field === 'required'}
-            maxLength={200}
-            value={values.company}
-            onChange={set('company')}
-          />
-        </>
+    <form onSubmit={submit} className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 pt-5 pb-4">
+      {greeting && (
+        <FromUs look={look} name={look.team_name}>
+          <Linked text={greeting} />
+        </FromUs>
       )}
-      <label className="sr-only" htmlFor="chat-message">{look.message_placeholder}</label>
-      <textarea id="chat-message" className={`${field} min-h-24 resize-none`} placeholder={look.message_placeholder} required maxLength={2000} value={values.message} onChange={set('message')} />
+      {assistant && <div className="font-mono text-[10px] leading-relaxed tracking-wide text-[var(--cw-text-60)]">{look.ai_notice}</div>}
+      <div className="space-y-3.5">
+        <div>
+          <label className={label} htmlFor="chat-name">{look.name_placeholder}</label>
+          <input id="chat-name" className={field} autoComplete="name" required maxLength={120} value={values.name} onChange={set('name')} />
+        </div>
+        <div>
+          <label className={label} htmlFor="chat-email">{look.email_placeholder}</label>
+          <input id="chat-email" className={field} type="email" autoComplete="email" required maxLength={254} value={values.email} onChange={set('email')} />
+        </div>
+        {look.company_field !== 'hidden' && (
+          <div>
+            <label className={label} htmlFor="chat-company">
+              {look.company_placeholder}
+              {look.company_field === 'optional' && <span className="text-[var(--cw-text-60)]"> (optional)</span>}
+            </label>
+            <input
+              id="chat-company"
+              className={field}
+              autoComplete="organization"
+              required={look.company_field === 'required'}
+              maxLength={200}
+              value={values.company}
+              onChange={set('company')}
+            />
+          </div>
+        )}
+        <div>
+          <label className={label} htmlFor="chat-message">{look.message_placeholder}</label>
+          <textarea id="chat-message" rows={2} className={`${field} resize-none`} required maxLength={2000} value={values.message} onChange={set('message')} />
+        </div>
+      </div>
       {/* People never see this; bots fill it in. */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" value={values.website} onChange={set('website')} />
       <div ref={box} className="min-h-[65px]" />
-      {error && <p role="alert" className="font-mono text-xs text-[var(--cw-mark)]">{error}</p>}
-      <button type="submit" disabled={sending} className={`${button} mt-auto px-5 py-3.5 text-xs font-bold uppercase tracking-[0.25em]`}>
-        {sending ? 'Starting…' : look.start_button}
-      </button>
-      <p className="font-mono text-[10px] leading-relaxed text-[var(--cw-text-50)]">{look.privacy_note}</p>
+      {error && <div role="alert" className="font-mono text-[11px] text-[var(--cw-mark)]">{error}</div>}
+      <div className="mt-auto space-y-3">
+        <button type="submit" disabled={sending} className={`${button} flex w-full items-center justify-center gap-3 px-6 py-4 font-display text-lg uppercase tracking-[0.08em]`}>
+          {sending ? 'Starting…' : look.start_button}
+          {!sending && <ArrowRight size={18} aria-hidden />}
+        </button>
+        <div className="text-center font-mono text-[9px] leading-relaxed tracking-wide text-[var(--cw-text-60)]">{look.privacy_note}</div>
+      </div>
     </form>
   );
 }
@@ -423,43 +476,37 @@ function Conversation({
 
   return (
     <>
-      <div ref={list} className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain p-4" aria-live="polite">
+      <div ref={list} className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 py-5" aria-live="polite">
         {messages.map((m) => {
-          const mine = m.kind === 'visitor';
+          if (m.kind === 'visitor')
+            return (
+              <div key={m.id} className="flex justify-end">
+                <div className="max-w-[80%] whitespace-pre-wrap break-words rounded-[var(--cw-r-bubble)] rounded-br-md bg-[var(--cw-accent)] px-4 py-3 text-[14px] leading-relaxed text-[var(--cw-on-accent)]">{m.body}</div>
+              </div>
+            );
           return (
-            <div key={m.id} className={`flex flex-col ${mine ? 'items-end' : 'items-start'}`}>
-              {!mine && (
-                <span className="mb-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--cw-mark)]">
-                  {look.logo_url && <img src={look.logo_url} alt="" className="size-4 rounded-full object-cover" />}
-                  {m.kind === 'team' ? `${m.author} · ${look.team_name}` : m.kind === 'ai' ? look.ai_name : look.team_name}
-                </span>
-              )}
-              <p
-                className={`max-w-[85%] whitespace-pre-wrap break-words rounded-[var(--cw-r-bubble)] px-3.5 py-2.5 text-sm leading-relaxed ${
-                  mine ? 'bg-[var(--cw-accent)] text-[var(--cw-on-accent)]' : 'border border-[var(--cw-line-soft)] bg-[var(--cw-msg)] text-[var(--cw-text)]'
-                }`}
-              >
-                {mine ? m.body : <Linked text={m.body} />}
-              </p>
-            </div>
+            <FromUs key={m.id} look={look} name={m.kind === 'team' ? `${m.author} · ${look.team_name}` : m.kind === 'ai' ? look.ai_name : look.team_name}>
+              <Linked text={m.body} />
+            </FromUs>
           );
         })}
         {typing ? (
-          <p className="flex items-center gap-2 font-mono text-[11px] text-[var(--cw-text-60)]" role="status">
-            <span className="flex gap-1" aria-hidden>
+          <div className="flex items-center gap-2.5" role="status">
+            <Avatar look={look} size="size-7" />
+            <span className="flex items-center gap-1 rounded-[var(--cw-r-bubble)] rounded-bl-md border border-[var(--cw-line-soft)] bg-[var(--cw-msg)] px-4 py-3.5" aria-hidden>
               <span className="size-1.5 animate-bounce rounded-full bg-[var(--cw-accent)] [animation-delay:-0.3s]" />
               <span className="size-1.5 animate-bounce rounded-full bg-[var(--cw-accent)] [animation-delay:-0.15s]" />
               <span className="size-1.5 animate-bounce rounded-full bg-[var(--cw-accent)]" />
             </span>
-            {look.team_name} is typing…
-          </p>
+            <span className="sr-only">{look.team_name} is typing…</span>
+          </div>
         ) : (
-          waiting && <p className="font-mono text-[11px] text-[var(--cw-text-50)]">{look.waiting_text.replaceAll('{first_name}', chat.firstName)}</p>
+          waiting && <div className="text-center font-mono text-[10px] leading-relaxed tracking-wide text-[var(--cw-text-60)]">{look.waiting_text.replaceAll('{first_name}', chat.firstName)}</div>
         )}
       </div>
-      <form onSubmit={send} className="shrink-0 border-t border-[var(--cw-line-soft)] p-3">
-        {(error || problem) && <p role="alert" className="mb-2 font-mono text-xs text-[var(--cw-mark)]">{error ?? problem}</p>}
-        <div className="flex items-end gap-2">
+      <form onSubmit={send} className="shrink-0 border-t border-[var(--cw-line-soft)] px-4 pt-3 pb-3">
+        {(error || problem) && <div role="alert" className="mb-2 font-mono text-[11px] text-[var(--cw-mark)]">{error ?? problem}</div>}
+        <div className="flex items-end gap-2 rounded-[var(--cw-r-control)] border border-[var(--cw-line)] bg-[var(--cw-field)] py-1.5 pr-1.5 pl-4 transition-colors focus-within:border-[var(--cw-accent)]">
           <label className="sr-only" htmlFor="chat-reply">{look.reply_placeholder}</label>
           <textarea
             id="chat-reply"
@@ -474,18 +521,18 @@ function Conversation({
               }
             }}
             placeholder={look.reply_placeholder}
-            className={`${field} max-h-32 min-h-11 resize-none`}
+            className="max-h-32 min-h-9 flex-1 resize-none border-0 bg-transparent py-2 font-sans text-base text-[var(--cw-text)] placeholder:text-[var(--cw-text-40)] focus:outline-none sm:text-[15px]"
           />
           <button
             type="submit"
             disabled={!body.trim() || sending}
             aria-label="Send"
-            className={`${button} flex size-11 shrink-0 items-center justify-center`}
+            className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--cw-accent)] text-[var(--cw-on-accent)] transition hover:brightness-110 disabled:opacity-40"
           >
-            <Send size={18} />
+            <ArrowUp size={18} />
           </button>
         </div>
-        <button type="button" onClick={onNewChat} className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--cw-text-40)] hover:text-[var(--cw-text-60)]">
+        <button type="button" onClick={onNewChat} className="mt-2.5 w-full text-center font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--cw-text-60)] hover:text-[var(--cw-mark)]">
           Not {chat.firstName}? Start a new chat
         </button>
       </form>

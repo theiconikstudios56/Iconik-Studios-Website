@@ -1,9 +1,8 @@
 import type { CSSProperties } from 'react';
 
 // The chat's look and wording from RMD (Settings → Chat widget). RMD sends
-// only what's been changed; everything else is the default below, which is
-// the chat as it was before the configurator. RMD keeps the same defaults in
-// src/features/chatWidget/config.ts: keep the two in step.
+// only what's been changed; everything else is the default below. RMD keeps
+// the same defaults in src/features/chatWidget/config.ts: keep the two in step.
 
 export type ChatWidgetSettings = {
   title: string;
@@ -48,7 +47,8 @@ export const DEFAULT_CHAT_WIDGET: ChatWidgetSettings = {
   reply_placeholder: 'Write a message…',
   accent: '#cd7f32',
   background: '#000000',
-  corners: 'square',
+  // Rounded panel and bubbles, pill buttons: the site's cards and buttons (2026-11-02, was square).
+  corners: 'pill',
   position: 'right',
   launcher_icon: 'chat',
   company_field: 'required',
