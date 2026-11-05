@@ -52,11 +52,8 @@ export default function LivePreview({ demo, name, onName, picture, templateName 
 
   return (
     <div>
-      <label htmlFor="your-name" className="mb-3 block font-display text-3xl uppercase leading-none tracking-tight md:text-4xl">
-        See it with <span className="text-burnt-orange">your</span> name on it
-      </label>
-      <p className="mb-5 text-base leading-relaxed text-white">Type your business name and watch {templateName} become yours.</p>
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+      <label htmlFor="your-name" className="sr-only">Your business name</label>
+      <div className="mx-auto mb-8 flex max-w-3xl flex-col gap-3 sm:flex-row">
         <input
           id="your-name"
           type="text"

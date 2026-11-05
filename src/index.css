@@ -15,6 +15,8 @@
   --font-sans: "Inter", sans-serif;
   --font-display: "Anton", "Anton Fallback", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-thin: "Oswald", "Arial Narrow", sans-serif;
+  --font-script: "Yellowtail", cursive;
   
   --color-tan: #ffffff;
   --color-steel: #F0F4F8; /* Light gray with a slight blue tint */

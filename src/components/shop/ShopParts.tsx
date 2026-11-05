@@ -42,7 +42,7 @@ export function Included() {
         >
           <item.icon className="text-burnt-orange" size={28} strokeWidth={1.5} />
           <h3 className="font-display text-2xl uppercase leading-tight text-ink">{item.title}</h3>
-          <p className="leading-relaxed text-ink/75">{item.text}</p>
+          <p className="leading-relaxed text-ink">{item.text}</p>
         </m.div>
       ))}
     </div>
@@ -77,7 +77,7 @@ export function Questions() {
             <span className={`shrink-0 font-mono text-xl text-burnt-orange transition-transform duration-300 ${open === i ? 'rotate-45' : ''}`}>+</span>
           </button>
           <div className={`grid transition-all duration-500 ${open === i ? 'grid-rows-[1fr] pb-7' : 'grid-rows-[0fr]'}`}>
-            <p className="overflow-hidden max-w-3xl leading-relaxed text-white/70">{a}</p>
+            <p className="overflow-hidden max-w-3xl leading-relaxed text-white">{a}</p>
           </div>
         </div>
       ))}
@@ -109,7 +109,7 @@ export function HowItWorks({ className = '' }: { className?: string }) {
 /** Beside every Buy button: the 14-day refund (Sites' refund policy). */
 export function MoneyBack() {
   return (
-    <p className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white/60">
+    <p className="flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white">
       <ShieldCheck size={14} className="text-burnt-orange" /> 14-day money-back guarantee
     </p>
   );
@@ -125,7 +125,7 @@ export const FOUNDING_OPEN = true;
 export function FoundingOffer() {
   if (!FOUNDING_OPEN) return null;
   return (
-    <p className="flex items-center justify-center gap-2 text-center text-xs leading-relaxed text-white/75">
+    <p className="flex items-center justify-center gap-2 text-center text-xs leading-relaxed text-white">
       <Crown size={14} className="shrink-0 text-burnt-orange" /> Founding offer: our first 10 buyers get a free 20-minute setup call with us.
     </p>
   );
@@ -135,7 +135,7 @@ export function Checks({ items }: { items: string[] }) {
   return (
     <ul className="space-y-3">
       {items.map((item) => (
-        <li key={item} className="flex gap-3 text-sm leading-relaxed text-white/75">
+        <li key={item} className="flex gap-3 text-sm leading-relaxed text-white">
           <Check size={16} className="mt-0.5 shrink-0 text-burnt-orange" />
           {item}
         </li>
