@@ -317,7 +317,7 @@ function Facts() {
     [String(shop!.templates.length), 'Templates'],
     [String(industries.length), 'Industries'],
     [money(lowest), 'Once, per template'],
-    [money(shop!.plans.yearly), 'A year, hosting included'],
+    [money(shop!.plans.monthly), 'A month, hosting included'],
   ];
   return (
     <m.dl
