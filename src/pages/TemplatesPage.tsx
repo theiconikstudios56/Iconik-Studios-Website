@@ -166,6 +166,10 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
     const ms = Math.max(SCROLL_MIN_MS, Math.round((travel / SCROLL_PX_PER_SECOND) * 1000));
     img.style.setProperty('--scroll-ms', `${ms}ms`);
   };
+  // The pre-drawn page can finish the picture before React is listening for its load.
+  useEffect(() => {
+    if (shot.current?.complete) timeTheScroll();
+  });
   const number = String(shop!.templates.indexOf(template) + 1).padStart(2, '0');
   const palette = [template.colors.background, template.colors.brand, template.colors.text];
   return (
