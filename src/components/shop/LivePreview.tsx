@@ -32,7 +32,7 @@ function TipUp({ children }: { children: ReactNode }) {
  * "See it with your name on it": the template's live demo, framed as a laptop
  * screen or a phone, re-drawn with the visitor's business name as they type.
  */
-export default function LivePreview({ demo, name, onName, picture, templateName }: { demo: string; name: string; onName: (name: string) => void; picture?: string; templateName: string }) {
+export default function LivePreview({ demo, name, onName, picture, templateName, placeholder = 'Your business name' }: { demo: string; name: string; onName: (name: string) => void; picture?: string; templateName: string; placeholder?: string }) {
   const [device, setDevice] = useState<'desktop' | 'phone'>('desktop');
   const [shown, setShown] = useState(name); // the name the frame is showing, a moment behind the typing
   const [loading, setLoading] = useState(true);
@@ -76,7 +76,7 @@ export default function LivePreview({ demo, name, onName, picture, templateName 
           value={name}
           maxLength={40}
           autoComplete="organization"
-          placeholder="Your business name"
+          placeholder={placeholder}
           onChange={(e) => onName(e.target.value)}
           className="min-w-0 flex-1 rounded-full border border-white/25 bg-white/[0.06] px-6 py-4 text-lg text-white placeholder:text-white/60 focus:border-burnt-orange focus:outline-none"
         />

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { m } from 'motion/react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Loader2, MessageCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Loader2, MessageCircle } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
 import { Checks, Included, FOUNDING_OPEN, MoneyBack, Questions } from '../components/shop/ShopParts';
@@ -67,31 +67,26 @@ export default function TemplatePage() {
 
           <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }} className="mt-10 flex flex-col items-center text-center">
             <BronzeLabel>{money(template.price)} · Yours to keep</BronzeLabel>
-            <div className="mt-7 max-w-2xl text-lg leading-relaxed text-white md:text-xl">{template.summary}</div>
-            <div className="mt-9 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
-              <button type="button" onClick={toPrice} className="flex w-full items-center justify-center gap-3 rounded-full bg-burnt-orange px-9 py-5 font-display text-lg uppercase tracking-[0.15em] text-white transition-all hover:bg-paper hover:text-ink sm:w-auto">
-                Make it yours <ArrowRight size={18} />
-              </button>
-              <button type="button" onClick={ask} className="flex w-full items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-5 font-display text-base uppercase tracking-widest text-white transition-colors hover:border-white sm:w-auto">
-                <MessageCircle size={17} /> Not sure yet? Ask us
-              </button>
-            </div>
-            <div className="mt-6">
-              <MoneyBack />
+            <div className="mt-7 max-w-2xl text-lg leading-relaxed text-white md:text-xl">
+              {template.summary} Type your business name and watch {template.name} become yours. It’s the real site: scroll it, click around.
             </div>
           </m.div>
 
-          {/* The live site with the visitor's name on it, tipping up as it scrolls in (it replaced the screenshot window). */}
-          <div className="mx-auto mt-24 max-w-6xl">
-            <Editorial thin="See it with" heavy="Your name" script="on it" />
-            <div className="mx-auto mb-10 mt-8 max-w-xl text-center text-lg leading-relaxed text-white">
-              Type your business name and watch {template.name} become yours. It’s the real site: scroll it, click around.
-            </div>
-            <LivePreview demo={template.demo} name={yourName} onName={setYourName} picture={hero} templateName={template.name} />
-            <div className="mt-10 flex justify-center">
-              <button type="button" onClick={toPrice} className="inline-flex items-center gap-2 border-b border-white/50 py-1 font-display text-sm uppercase tracking-widest text-white hover:border-burnt-orange hover:text-burnt-orange">
-                Looks good? See the price <ArrowDown size={14} />
-              </button>
+          {/* The live site with the visitor's name on it, tipping up as it scrolls in; the buttons wait underneath. */}
+          <div className="mx-auto mt-14 max-w-6xl">
+            <LivePreview demo={template.demo} name={yourName} onName={setYourName} picture={hero} templateName={template.name} placeholder="See it with your name on it" />
+            <div className="mt-12 flex flex-col items-center text-center">
+              <div className="flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+                <button type="button" onClick={toPrice} className="flex w-full items-center justify-center gap-3 rounded-full bg-burnt-orange px-9 py-5 font-display text-lg uppercase tracking-[0.15em] text-white transition-all hover:bg-paper hover:text-ink sm:w-auto">
+                  Make it yours <ArrowRight size={18} />
+                </button>
+                <button type="button" onClick={ask} className="flex w-full items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-5 font-display text-base uppercase tracking-widest text-white transition-colors hover:border-white sm:w-auto">
+                  <MessageCircle size={17} /> Not sure yet? Ask us
+                </button>
+              </div>
+              <div className="mt-6">
+                <MoneyBack />
+              </div>
             </div>
           </div>
         </div>
