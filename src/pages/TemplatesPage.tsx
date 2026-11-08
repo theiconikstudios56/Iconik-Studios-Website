@@ -157,7 +157,7 @@ const SCROLL_MIN_MS = 7000;
 function TemplateCard({ template, index }: { template: ShopTemplate; index: number }) {
   const full = pictureOf(template.slug, 'full');
   const shot = useRef<HTMLImageElement>(null);
-  // Measured on hover: the picture's travel at the card's size right now
+  // Measured when the picture loads and again on hover: the picture's travel at the card's size right now
   const timeTheScroll = () => {
     const img = shot.current;
     const frame = img?.parentElement;
@@ -190,7 +190,9 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
                 // Tall full-page screenshots: never ahead of the page's own text, fonts and code.
                 fetchPriority="low"
                 decoding="async"
-                className="absolute inset-x-0 top-0 w-full transition-transform duration-1000 ease-[cubic-bezier(0.3,0.05,0.7,0.95)] group-hover:duration-(--scroll-ms) group-hover:-translate-y-[calc(100%-20rem)] md:group-hover:-translate-y-[calc(100%-24rem)] motion-reduce:transition-none"
+                // Timed as soon as the picture is in, so the very first hover glides instead of jumping to the footer.
+                onLoad={timeTheScroll}
+                className="absolute inset-x-0 top-0 w-full transition-transform duration-1000 ease-[cubic-bezier(0.3,0.05,0.7,0.95)] group-hover:duration-[var(--scroll-ms,7000ms)] group-hover:-translate-y-[calc(100%-20rem)] md:group-hover:-translate-y-[calc(100%-24rem)] motion-reduce:transition-none"
               />
             )}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-0" />
