@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { m, useScroll, useTransform } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Loader2, MessageCircle } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
@@ -53,8 +53,8 @@ export default function TemplatePage() {
       title={`${template.name}: ${template.industry} Website Template | Iconik Studios`}
       description={`${template.summary} Every page written for you, hosting and your own domain included.`}
     >
-      {/* 1. The hero: the post headline, the price label, two buttons, then the site itself. */}
-      <section className="relative overflow-hidden bg-ink px-6 pb-24 pt-28 text-white lg:px-12 lg:pt-36">
+      {/* 1. The hero: the post headline, the price label, two buttons, then the live site with your name on it. */}
+      <section className="relative overflow-hidden bg-ink px-6 pb-40 pt-28 text-white lg:px-12 lg:pt-36">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 flex flex-wrap items-center justify-between gap-4">
             <Link to="/templates" className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-white transition-colors hover:text-burnt-orange">
@@ -81,22 +81,18 @@ export default function TemplatePage() {
             </div>
           </m.div>
 
-          <HeroShot picture={hero} address={template.demo.replace('https://', '')} name={template.name} />
-        </div>
-      </section>
-
-      {/* 2. See it with your name on it: the live site. */}
-      <section className="bg-ink px-6 pb-32 text-white lg:px-12">
-        <div className="mx-auto max-w-6xl">
-          <Editorial thin="See it with" heavy="Your name" script="on it" />
-          <div className="mx-auto mb-10 mt-8 max-w-xl text-center text-lg leading-relaxed text-white">
-            Type your business name and watch {template.name} become yours. It’s the real site: scroll it, click around.
-          </div>
-          <LivePreview demo={template.demo} name={yourName} onName={setYourName} picture={hero} templateName={template.name} />
-          <div className="mt-10 flex justify-center">
-            <button type="button" onClick={toPrice} className="inline-flex items-center gap-2 border-b border-white/50 py-1 font-display text-sm uppercase tracking-widest text-white hover:border-burnt-orange hover:text-burnt-orange">
-              Looks good? See the price <ArrowDown size={14} />
-            </button>
+          {/* The live site with the visitor's name on it, tipping up as it scrolls in (it replaced the screenshot window). */}
+          <div className="mx-auto mt-24 max-w-6xl">
+            <Editorial thin="See it with" heavy="Your name" script="on it" />
+            <div className="mx-auto mb-10 mt-8 max-w-xl text-center text-lg leading-relaxed text-white">
+              Type your business name and watch {template.name} become yours. It’s the real site: scroll it, click around.
+            </div>
+            <LivePreview demo={template.demo} name={yourName} onName={setYourName} picture={hero} templateName={template.name} />
+            <div className="mt-10 flex justify-center">
+              <button type="button" onClick={toPrice} className="inline-flex items-center gap-2 border-b border-white/50 py-1 font-display text-sm uppercase tracking-widest text-white hover:border-burnt-orange hover:text-burnt-orange">
+                Looks good? See the price <ArrowDown size={14} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -193,27 +189,6 @@ export default function TemplatePage() {
       <PriceBar template={template} />
       <AskUs open={asking} onClose={closeAsk} templateName={template.name} industry={template.industry} />
     </Layout>
-  );
-}
-
-/** The template's home page in a browser window that tips up flat as it scrolls into view. */
-function HeroShot({ picture, address, name }: { picture?: string; address: string; name: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 0.35'] });
-  const rotateX = useTransform(scrollYProgress, [0, 1], [22, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
-  return (
-    <div ref={ref} className="mx-auto mt-20 max-w-6xl [perspective:1400px]">
-      <m.div style={{ rotateX, scale }} className="origin-bottom overflow-hidden rounded-2xl border border-white/15 bg-[#111] shadow-[0_60px_140px_-40px_rgba(205,127,50,0.35)]">
-        <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-          <span className="size-2.5 rounded-full bg-white/25" />
-          <span className="size-2.5 rounded-full bg-white/25" />
-          <span className="size-2.5 rounded-full bg-white/25" />
-          <span className="ml-3 truncate rounded-full bg-white/[0.07] px-3 py-1 font-mono text-[10px] tracking-wider text-white">{address}</span>
-        </div>
-        {picture ? <img src={picture} alt={`The ${name} template’s home page`} fetchPriority="high" decoding="async" className="block w-full" /> : <div className="aspect-[16/10] bg-white/5" />}
-      </m.div>
-    </div>
   );
 }
 

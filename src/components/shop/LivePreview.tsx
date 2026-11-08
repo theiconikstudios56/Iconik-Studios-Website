@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { m, useScroll, useTransform } from 'motion/react';
 import { Loader2, Monitor, Smartphone } from 'lucide-react';
 
 /** The live demo with ?yourname= and ?embed=1 (Sites shows the visitor's name and drops its shop bar). */
@@ -11,6 +12,21 @@ export function demoWithName(demo: string, name: string, embed = false) {
 
 const DESKTOP = 1280;
 const PHONE = 390;
+
+/** The window tips up flat as it scrolls into view (the template page's hero effect). */
+function TipUp({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 0.35'] });
+  const rotateX = useTransform(scrollYProgress, [0, 1], [22, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
+  return (
+    <div ref={ref} className="[perspective:1400px]">
+      <m.div style={{ rotateX, scale }} className="origin-bottom">
+        {children}
+      </m.div>
+    </div>
+  );
+}
 
 /**
  * "See it with your name on it": the template's live demo, framed as a laptop
@@ -83,8 +99,9 @@ export default function LivePreview({ demo, name, onName, picture, templateName 
         </div>
       </div>
 
+      <TipUp>
       <div className={device === 'phone' ? 'mx-auto w-full max-w-[310px]' : ''}>
-        <div className={device === 'phone' ? 'rounded-[44px] border border-white/20 bg-[#0d0d0d] p-3 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]' : 'overflow-hidden rounded-2xl border border-white/15 bg-[#111] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]'}>
+        <div className={device === 'phone' ? 'rounded-[44px] border border-white/20 bg-[#0d0d0d] p-3 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]' : 'overflow-hidden rounded-2xl border border-white/15 bg-[#111] shadow-[0_40px_110px_-40px_rgba(205,127,50,0.35)]'}>
           {device === 'desktop' && (
             <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
               <span className="size-2.5 rounded-full bg-white/25" />
@@ -115,6 +132,7 @@ export default function LivePreview({ demo, name, onName, picture, templateName 
           </div>
         </div>
       </div>
+      </TipUp>
       <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-white">Scroll and click around: it’s the real site</p>
     </div>
   );
