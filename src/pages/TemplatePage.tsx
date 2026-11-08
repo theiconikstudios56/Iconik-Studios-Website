@@ -123,7 +123,7 @@ export default function TemplatePage() {
       </section>
 
       {/* 5. The name reel: a breath between the sell and the people. */}
-      <NameReel name={template.name} picture={hero} />
+      <NameReel name={template.name} picture={pictureOf(template.slug, 'reel') ?? hero} />
 
       {/* 6. Made by people, on paper. */}
       <section className="bg-[#f6f3ef] px-6 py-32 text-ink lg:px-12">
