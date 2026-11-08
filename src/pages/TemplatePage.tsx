@@ -236,7 +236,7 @@ function PriceBar({ template }: { template: ShopTemplate }) {
       <div className="flex items-center justify-between gap-3 rounded-full border border-white/15 bg-ink/95 py-2 pl-5 pr-2 text-white shadow-2xl backdrop-blur">
         <div className="min-w-0 leading-tight">
           <div className="truncate font-script text-2xl text-burnt-orange">{template.name}</div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-white">{money(template.price)} + {money(shop!.plans.monthly)}/mo</div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-white">{money(template.price)} · first month free</div>
         </div>
         <button type="button" onClick={toPrice} className="shrink-0 rounded-full bg-burnt-orange px-5 py-3 font-display text-sm uppercase tracking-widest text-white">Make it yours</button>
       </div>
@@ -267,7 +267,7 @@ function Purchase({ template, yourName, onAsk }: { template: ShopTemplate; yourN
   return (
     <div className="rounded-3xl border border-white/15 bg-white/[0.04] p-7 md:p-9">
       <div className="text-center text-lg leading-relaxed text-white">
-        Then {money(planPrice)} a {per} covers hosting, the editor, your own domain and forms.
+        Your first month of hosting is on us. Then {money(planPrice)} a {per} covers hosting, the editor, your own domain and forms.
       </div>
       <div role="radiogroup" aria-label="Sites plan" className="my-7 grid grid-cols-2 gap-2 rounded-full bg-white/[0.07] p-1">
         {(['monthly', 'yearly'] as const).map((p) => (
@@ -290,16 +290,17 @@ function Purchase({ template, yourName, onAsk }: { template: ShopTemplate; yourN
         </div>
         <div className="flex justify-between gap-4">
           <span>Hosting, editor, domain, forms</span>
-          <span>
-            {money(planPrice)} / {per}
+          <span className="text-right">
+            Free for 30 days
+            <span className="block text-xs text-white">then {money(planPrice)} / {per}</span>
           </span>
         </div>
         <div className="flex items-baseline justify-between gap-4 border-t border-white/15 pt-4">
           <span className="font-display text-2xl uppercase">Today</span>
-          <span className="font-display text-4xl">{money(template.price + planPrice)}</span>
+          <span className="font-display text-4xl">{money(template.price)}</span>
         </div>
       </div>
-      <div className="mt-2 text-xs text-white">Plus sales tax where it applies. Then {money(planPrice)} a {per}; cancel any time.</div>
+      <div className="mt-2 text-xs text-white">Plus sales tax where it applies. Hosting is free for 30 days, then {money(planPrice)} a {per}; cancel any time.</div>
 
       <button
         type="button"

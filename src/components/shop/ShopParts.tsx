@@ -51,11 +51,11 @@ export function Included() {
 
 const QUESTIONS = [
   ['Do I need to know code?', 'No. If you can edit a document, you can edit your site. You click on what you want to change and type. Each template comes with its pages already written for your industry.'],
-  ['What do I pay, and when?', 'The template once, and the Sites plan yearly or monthly (two months free on yearly). The plan covers hosting, the editor, your domain connection, forms and version history. Sales tax is added where it applies.'],
+  ['What do I pay, and when?', 'The template once, today. The Sites plan starts 30 days later, monthly or yearly (two months free on yearly), so your first month of hosting is free. The plan covers hosting, the editor, your domain connection, forms and version history. Sales tax is added where it applies.'],
   ['Can I use my own domain?', 'Yes. Your site is live straight away on a free address, and you can connect a domain you already own whenever you like. Sites shows you the two settings to copy into the company where you bought it, and checks them for you. Your email isn’t affected.'],
   ['What if I want changes later?', 'Make them yourself, any time: change words, photos, colours and pages in the editor, then publish again. Every version is kept, so you can always go back. Want something bigger built for you? Ask us for a quote.'],
   ['Will Google find my site?', 'Every site is set up for search from day one: page titles and descriptions, a sitemap, and your business name, phone, address and hours handed to Google in a form it reads directly.'],
-  ['What if it isn’t right for me?', 'Ask for a refund within 14 days of buying and you get the template and your first payment back.'],
+  ['What if it isn’t right for me?', 'Ask for a refund within 14 days of buying and you get your money back for the template.'],
   ['Can I leave?', 'Yes. Cancel any time from your account; your site stays up until the end of the period you’ve paid for. After 12 months on the plan you can also download your site as plain files to host anywhere.'],
   ['How do I get help?', 'Email us with your site’s address and a real person replies within 1–2 business days. Step-by-step help articles sit inside Sites, any time.'],
   ['I’d rather someone built it for me.', 'We do that too, along with booking, follow-up emails and a CRM that captures every lead. Tell us about your business on the contact page.'],
