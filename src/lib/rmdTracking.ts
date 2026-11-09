@@ -130,6 +130,16 @@ export function trackPage(pathname: string, search: string) {
   current = view
 }
 
+/**
+ * A step in buying a template, for RMD's website report: "shop-price-seen",
+ * "shop-buy-tap", "shop-checkout-open", "shop-checkout-error". Stored with the
+ * lead moments but never counted as leads (RMD leaves out names starting "shop-").
+ */
+export function trackShopStep(step: 'price-seen' | 'buy-tap' | 'checkout-open' | 'checkout-error') {
+  if (!ENDPOINT || typeof window === 'undefined') return
+  void send({ t: 'lead', name: `shop-${step}`, path: window.location.pathname })
+}
+
 /** A lead moment: the contact form sent, a chat started… ("contact-form", "chat"). */
 export function trackLead(name: string) {
   if (!ENDPOINT || typeof window === 'undefined') return

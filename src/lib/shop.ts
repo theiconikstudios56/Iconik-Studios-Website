@@ -7,6 +7,7 @@
 import catalog, { type ShopTemplate } from 'virtual:shop-catalog';
 import { arrival } from './arrival';
 import { metaIds, metaInitiateCheckout } from './metaPixel';
+import { trackShopStep } from './rmdTracking';
 
 export type { ShopTemplate };
 export type ShopPlan = 'monthly' | 'yearly';
@@ -37,6 +38,7 @@ export const templateBySlug = (slug: string | undefined) => shop?.templates.find
 export async function buy(template: ShopTemplate, plan: ShopPlan): Promise<void> {
   if (!CHECKOUT) throw new Error('The shop opens soon. Please check back shortly.');
   metaInitiateCheckout(template, plan, shop?.currency ?? 'usd');
+  trackShopStep('buy-tap');
   let response: Response;
   try {
     response = await fetch(CHECKOUT, {
@@ -45,9 +47,14 @@ export async function buy(template: ShopTemplate, plan: ShopPlan): Promise<void>
       body: JSON.stringify({ template_key: template.key, plan, attribution: arrival, meta: metaIds() }),
     });
   } catch {
+    trackShopStep('checkout-error');
     throw new Error('We couldn’t reach checkout. Check your connection and try again.');
   }
   const body = (await response.json().catch(() => ({}))) as { url?: string; message?: string };
-  if (!response.ok || !body.url?.startsWith('https://')) throw new Error(body.message ?? 'Checkout didn’t open. Please try again in a moment.');
+  if (!response.ok || !body.url?.startsWith('https://')) {
+    trackShopStep('checkout-error');
+    throw new Error(body.message ?? 'Checkout didn’t open. Please try again in a moment.');
+  }
+  trackShopStep('checkout-open');
   window.location.assign(body.url);
 }

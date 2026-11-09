@@ -12,6 +12,7 @@ import AskUs from '../components/shop/AskUs';
 import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
 import { metaViewContent } from '../lib/metaPixel';
+import { trackShopStep } from '../lib/rmdTracking';
 import lineup from '../assets/images/web/fuzzy-lineup-2026.webp';
 
 // Where Sites' own pages (terms, refunds, help) live (RMD-crm 11.12).
@@ -43,6 +44,22 @@ export default function TemplatePage() {
   useEffect(() => {
     if (template && shop) metaViewContent(template, shop.currency);
   }, [template, shop]);
+  // RMD's website report: did this visitor reach the price box? Once per template page.
+  useEffect(() => {
+    const price = document.getElementById('price');
+    if (!price || typeof IntersectionObserver === 'undefined') return;
+    const watch = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          trackShopStep('price-seen');
+          watch.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    watch.observe(price);
+    return () => watch.disconnect();
+  }, [slug]);
   if (!template || !shop) return <NotFoundPage />;
   const others = shop.templates.filter((t) => t.key !== template.key);
   const number = shop.templates.findIndex((t) => t.key === template.key) + 1;
