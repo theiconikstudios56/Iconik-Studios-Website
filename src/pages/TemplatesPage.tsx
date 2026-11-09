@@ -20,6 +20,9 @@ export default function TemplatesPage() {
   const [params] = useSearchParams();
   const current = industries.find((i) => i.slug === params.get('industry'));
   const shown = shop?.templates.filter((t) => !current || t.industry === current.label) ?? [];
+  // From an ad or post for one trade: that trade's templates first, then the rest of the drop below,
+  // so nobody hits a dead end if theirs isn't quite right.
+  const rest = current ? shop?.templates.filter((t) => t.industry !== current.label) ?? [] : [];
 
   return (
     <Layout
@@ -28,7 +31,7 @@ export default function TemplatesPage() {
       description={`Complete, ready-to-edit websites for ${industryList} businesses. Every page written for your industry, hosting and your own domain included.`}
     >
       <div className="bg-ink text-paper">
-        <section className="relative overflow-hidden px-6 pb-16 pt-36 lg:px-12 lg:pb-20 lg:pt-44">
+        <section className="relative overflow-hidden px-6 pb-6 pt-28 lg:px-12 lg:pb-20 lg:pt-44">
           <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 items-center gap-16 lg:grid-cols-12">
             {/* Slides in but is never invisible, so the page counts as loaded as soon as it shows. */}
             <m.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8 }} className="lg:col-span-6">
@@ -36,13 +39,21 @@ export default function TemplatesPage() {
                 <div className="h-[1px] w-12 bg-burnt-orange" />
                 <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange"><T k="templates.eyebrow">{"Website Templates"}</T></span>
               </div>
-              <h1 className="mb-10 font-display text-6xl uppercase leading-[0.95] tracking-tighter md:text-8xl lg:text-[6.5rem]">
-                <T k="templates.title" em="text-burnt-orange italic" label="Heading">{"Your next website,\n*ready today.*"}</T>
+              <h1 className="mb-6 font-display text-5xl uppercase leading-[0.95] tracking-tighter md:mb-10 md:text-8xl lg:text-[6.5rem]">
+                {current ? (
+                  <>
+                    {current.label} websites,
+                    <br />
+                    <span className="italic text-burnt-orange">ready today.</span>
+                  </>
+                ) : (
+                  <T k="templates.title" em="text-burnt-orange italic" label="Heading">{"Your next website,\n*ready today.*"}</T>
+                )}
               </h1>
-              <p className="mb-12 max-w-xl text-lg leading-relaxed text-white/80 md:text-xl">
-                <T k="templates.intro">{"Complete websites designed by our studio for local businesses. Pick the one that fits, make it yours in a simple editor, and go live on your own domain. Your first month of hosting is free."}</T>
+              <p className="mb-8 max-w-xl text-base leading-relaxed text-white/80 md:mb-12 md:text-xl">
+                {current ? `Complete ${current.label.replace(/^[A-Z][a-z]/, (c) => c.toLowerCase())} websites designed by our studio, every page already written. Make it yours in a simple editor and go live on your own domain. Your first month of hosting is free.` : <T k="templates.intro">{"Complete websites designed by our studio for local businesses. Pick the one that fits, make it yours in a simple editor, and go live on your own domain. Your first month of hosting is free."}</T>}
               </p>
-              <div className="flex flex-wrap items-center gap-6">
+              <div className={`${current ? 'hidden lg:flex' : 'flex'} flex-wrap items-center gap-6`}>
                 <a href="#templates" className="group inline-flex items-center gap-3 rounded-full bg-paper px-10 py-5 font-display text-lg uppercase text-ink transition-all hover:bg-burnt-orange hover:text-white">
                   Browse templates <ArrowDown size={18} className="transition-transform group-hover:translate-y-0.5" />
                 </a>
@@ -53,19 +64,33 @@ export default function TemplatesPage() {
             </m.div>
             {shop && <HeroFan />}
           </div>
-          {shop && <Facts />}
+          {shop && !current && <Facts className="hidden lg:grid" />}
         </section>
 
         {shop ? (
-          <section id="templates" className="scroll-mt-28 px-6 pb-32 pt-8 lg:px-12">
+          <section id="templates" className="scroll-mt-28 px-6 pb-32 pt-4 lg:px-12 lg:pt-8">
             {industries.length > 1 && <IndustryFilter current={current?.slug} total={shop.templates.length} />}
             <div className="mx-auto grid max-w-[88rem] grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:gap-y-20">
               {shown.map((template, i) => (
                 <TemplateCard key={template.key} template={template} index={i} />
               ))}
               {/* An odd number of templates leaves a gap; the made-for-you option fills it. */}
-              {shown.length % 2 === 1 && <BuiltForYouCard />}
+              {shown.length % 2 === 1 && rest.length === 0 && <BuiltForYouCard />}
             </div>
+            {rest.length > 0 && (
+              <>
+                <div className="mx-auto mb-12 mt-24 max-w-[88rem] border-t border-white/10 pt-12">
+                  <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange">More from Drop 001</span>
+                </div>
+                <div className="mx-auto grid max-w-[88rem] grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:gap-y-20">
+                  {rest.map((template, i) => (
+                    <TemplateCard key={template.key} template={template} index={i} />
+                  ))}
+                  {rest.length % 2 === 1 && <BuiltForYouCard />}
+                </div>
+              </>
+            )}
+            <Facts className="lg:hidden" />
           </section>
         ) : (
           <section className="px-6 pb-32 lg:px-12">
@@ -130,14 +155,14 @@ function IndustryFilter({ current, total }: { current: string | undefined; total
     }`;
   const count = (n: number, active: boolean) => <span className={active ? 'text-ink/50' : 'text-burnt-orange'}>{n}</span>;
   return (
-    <nav aria-label="Templates by industry" className="mx-auto mb-16 max-w-[88rem]">
+    <nav aria-label="Templates by industry" className="mx-auto mb-10 max-w-[88rem] lg:mb-16">
       <ul className="-mx-6 flex gap-3 overflow-x-auto px-6 pb-1 [scrollbar-width:none] lg:mx-0 lg:flex-wrap lg:px-0 [&::-webkit-scrollbar]:hidden">
         <li className="shrink-0">
           <Link to="/templates" aria-current={!current ? 'page' : undefined} className={pill(!current)}>
             All {count(total, !current)}
           </Link>
         </li>
-        {industries.map((i) => (
+        {[...industries].sort((a, b) => Number(b.slug === current) - Number(a.slug === current)).map((i) => (
           <li key={i.slug} className="shrink-0">
             <Link to={`/templates?industry=${i.slug}`} aria-current={current === i.slug ? 'page' : undefined} className={pill(current === i.slug)}>
               {i.label} {count(i.count, current === i.slug)}
@@ -317,7 +342,7 @@ function HeroFan() {
 }
 
 /** The shop in four numbers, all from Sites' own catalogue. */
-function Facts() {
+function Facts({ className = '' }: { className?: string }) {
   const lowest = Math.min(...shop!.templates.map((t) => t.price));
   const facts = [
     [String(shop!.templates.length), 'Templates'],
@@ -330,7 +355,7 @@ function Facts() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5 }}
-      className="relative mx-auto mt-20 grid max-w-[88rem] grid-cols-2 border-y border-white/10 lg:mt-24 lg:grid-cols-4"
+      className={`relative mx-auto mt-20 max-w-[88rem] grid-cols-2 border-y border-white/10 lg:mt-24 lg:grid-cols-4 ${className.includes('hidden') ? '' : 'grid'} ${className}`}
     >
       {facts.map(([value, label], i) => (
         <div key={label} className={`px-2 py-8 md:px-8 ${i % 2 ? 'border-l border-white/10' : ''} ${i === 2 ? 'border-t border-white/10 lg:border-l lg:border-t-0' : ''} ${i === 3 ? 'border-t border-white/10 lg:border-t-0' : ''}`}>
