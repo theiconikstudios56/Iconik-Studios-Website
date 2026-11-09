@@ -137,7 +137,10 @@ export function trackPage(pathname: string, search: string) {
  */
 export function trackShopStep(step: 'price-seen' | 'buy-tap' | 'checkout-open' | 'checkout-error') {
   if (!ENDPOINT || typeof window === 'undefined') return
-  void send({ t: 'lead', name: `shop-${step}`, path: window.location.pathname })
+  const body = { t: 'lead', name: `shop-${step}`, path: window.location.pathname }
+  // RMD files a step under the visit, so wait until the page view is in (a step can come in the same instant).
+  if (!current || current.resolved) void send(body)
+  else void current.id.then(() => send(body))
 }
 
 /** A lead moment: the contact form sent, a chat started… ("contact-form", "chat"). */
