@@ -18,7 +18,7 @@ const rungs = [
     step: '01',
     name: 'Template',
     price: '$129 to own',
-    text: 'A finished website for your trade, every page already written, live on your own domain this week. Hosting is $15 a month or $150 a year.',
+    text: 'A finished website for your trade, every page already written, live on your own domain this week. Your first month of hosting is free, then $15 a month or $150 a year.',
     cta: 'See the templates',
     to: '/templates',
   },

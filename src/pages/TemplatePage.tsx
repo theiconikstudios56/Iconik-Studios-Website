@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { m } from 'motion/react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Loader2, MessageCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Crown, Loader2, MessageCircle } from 'lucide-react';
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
 import { Checks, Included, FOUNDING_OPEN, MoneyBack, Questions } from '../components/shop/ShopParts';
@@ -281,6 +281,16 @@ function Purchase({ template, yourName, onAsk }: { template: ShopTemplate; yourN
         {busy ? <Loader2 size={18} className="animate-spin" /> : null}
         {!canBuy ? 'Opening soon' : busy ? 'Opening checkout…' : <>Buy {template.name} <ArrowRight size={18} /></>}
       </button>
+      {FOUNDING_OPEN && (
+        <div className="mt-4 flex items-start gap-3 rounded-2xl border border-burnt-orange/70 bg-burnt-orange/10 p-4 text-left">
+          <Crown size={18} className="mt-0.5 shrink-0 text-burnt-orange" />
+          <div className="text-sm leading-relaxed text-white">
+            <span className="font-display uppercase tracking-widest text-burnt-orange">Founding offer</span>
+            <br />
+            Our first 10 buyers get a free 20-minute setup call with Ricky, who builds these. You’ll be live by the end of it.
+          </div>
+        </div>
+      )}
       <button type="button" onClick={onAsk} className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-4 font-display text-sm uppercase tracking-widest text-white transition-colors hover:border-white">
         <MessageCircle size={16} /> Not sure yet? Ask us
       </button>

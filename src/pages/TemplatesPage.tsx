@@ -40,7 +40,7 @@ export default function TemplatesPage() {
                 <T k="templates.title" em="text-burnt-orange italic" label="Heading">{"Your next website,\n*ready today.*"}</T>
               </h1>
               <p className="mb-12 max-w-xl text-lg leading-relaxed text-white/80 md:text-xl">
-                <T k="templates.intro">{"Complete websites designed by our studio for local businesses. Pick the one that fits, make it yours in a simple editor, and go live on your own domain. Hosting included."}</T>
+                <T k="templates.intro">{"Complete websites designed by our studio for local businesses. Pick the one that fits, make it yours in a simple editor, and go live on your own domain. Your first month of hosting is free."}</T>
               </p>
               <div className="flex flex-wrap items-center gap-6">
                 <a href="#templates" className="group inline-flex items-center gap-3 rounded-full bg-paper px-10 py-5 font-display text-lg uppercase text-ink transition-all hover:bg-burnt-orange hover:text-white">
@@ -200,7 +200,7 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
               />
             )}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-0" />
-            <span className="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-2 rounded-full border border-white/15 bg-ink/70 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-white/70 backdrop-blur transition-opacity duration-300 group-hover:opacity-0 md:inline-flex">
+            <span className="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-2 rounded-full border border-white/15 bg-ink/70 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-white/70 backdrop-blur transition-opacity duration-300 group-hover:opacity-0 [@media(hover:hover)_and_(pointer:fine)]:inline-flex">
               <MousePointer2 size={11} /> Hover to scroll
             </span>
           </div>
@@ -323,7 +323,7 @@ function Facts() {
     [String(shop!.templates.length), 'Templates'],
     [String(industries.length), 'Industries'],
     [money(lowest), 'Once, per template'],
-    [money(shop!.plans.monthly), 'A month, hosting included'],
+    ['Free', `First month of hosting, then ${money(shop!.plans.monthly)} a month`],
   ];
   return (
     <m.dl
