@@ -20,6 +20,14 @@ export default function ContactPage() {
   const [phone, setPhone] = useState('');
   const [company, setCompany] = useState('');
   const [message, setMessage] = useState('');
+  // The templates page's "Don't see yours?" box arrives with its question written (?message=…).
+  useEffect(() => {
+    const asked = new URLSearchParams(window.location.search).get('message');
+    if (!asked) return;
+    setMessage(asked.slice(0, 500));
+    // Straight to the form, where only their name and details are left to fill in.
+    setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({ block: 'start' }), 300);
+  }, []);
   const [textConsent, setTextConsent] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -199,7 +207,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right Half: Form */}
-            <div className="p-8 md:p-12 lg:p-16 bg-white/5 overflow-y-auto">
+            <div id="contact-form" className="scroll-mt-20 p-8 md:p-12 lg:p-16 bg-white/5 overflow-y-auto">
               <div className="max-w-xl">
                 <span className="font-mono text-[10px] tracking-[0.4em] uppercase opacity-100 mb-8 block"><T k="contact.send-a-message">{"/ Send a Message"}</T></span>
                 

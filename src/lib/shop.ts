@@ -20,7 +20,7 @@ export const canBuy = Boolean(shop && CHECKOUT);
 
 // Each template's pictures, taken from its live demo (in src/assets/images/web/templates).
 const pictures = import.meta.glob<string>('../assets/images/web/templates/*.webp', { eager: true, import: 'default' });
-export const pictureOf = (slug: string, kind: 'hero' | 'full' | 'reel') => pictures[`../assets/images/web/templates/${slug}-${kind}.webp`];
+export const pictureOf = (slug: string, kind: 'hero' | 'full' | 'reel' | 'phone') => pictures[`../assets/images/web/templates/${slug}-${kind}.webp`];
 
 export const money = (cents: number) => `$${(cents / 100).toLocaleString('en-US', { minimumFractionDigits: cents % 100 ? 2 : 0 })}`;
 

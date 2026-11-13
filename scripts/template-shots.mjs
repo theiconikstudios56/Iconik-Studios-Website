@@ -6,7 +6,8 @@
 //   node scripts/template-shots.mjs --all      every template again
 //
 // For each: <slug>-hero.webp (the top of the home page, 1200×750) and
-// <slug>-full.webp (the whole home page, 960 wide) in
+// <slug>-full.webp (the whole home page, 960 wide) and <slug>-phone.webp (the
+// top of the home page on a phone, 390×844 drawn at 2×, for the gallery on phones) in
 // src/assets/images/web/templates. Headless Chrome through its DevTools
 // protocol, with reduced motion so every section is drawn at rest; needs
 // google-chrome and ffmpeg with libwebp. SITES_CATALOG_URL as for the build.
@@ -26,7 +27,7 @@ const args = process.argv.slice(2);
 const all = args.includes('--all');
 const named = args.filter((a) => !a.startsWith('--'));
 const templates = catalog.templates.filter((t) => /^[a-z0-9-]+$/.test(t.slug) && /^https:\/\/[a-z0-9-]+\.iconik\.site$/.test(t.demo)).filter((t) =>
-  named.length ? named.includes(t.slug) : all || !existsSync(`${OUT}${t.slug}-hero.webp`) || !existsSync(`${OUT}${t.slug}-full.webp`),
+  named.length ? named.includes(t.slug) : all || ['hero', 'full', 'phone'].some((k) => !existsSync(`${OUT}${t.slug}-${k}.webp`)),
 );
 if (!templates.length) {
   console.log('Every template already has its pictures (use --all to take them again).');
@@ -56,16 +57,16 @@ ws.addEventListener('message', (e) => {
 const send = (method, params = {}) => new Promise((r) => (pending.set(++id, r), ws.send(JSON.stringify({ id, method, params }))));
 const run = async (expression) => (await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true })).result?.result?.value;
 
-async function save(name, width, height, full) {
-  const { result } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: full, clip: { x: 0, y: 0, width, height, scale: 1 } });
+async function save(name, width, height, full, scale = 1) {
+  const { result } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: full, clip: { x: 0, y: 0, width, height, scale } });
   const png = join(profile, `${name}.png`);
   writeFileSync(png, Buffer.from(result.data, 'base64'));
   execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', png, '-c:v', 'libwebp', '-quality', full ? '72' : '80', `${OUT}${name}.webp`]);
 }
 
 /** Opens the demo's home page at this width and waits for its fonts and photos. */
-async function open(url, width, height) {
-  await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
+async function open(url, width, height, mobile = false) {
+  await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: mobile ? 2 : 1, mobile });
   await send('Page.navigate', { url });
   for (let i = 0; i < 100 && (await run('document.readyState')) !== 'complete'; i++) await sleep(150);
   await run('document.fonts.ready.then(() => true)');
@@ -95,7 +96,9 @@ try {
     await run(`[...document.querySelectorAll('body *')].filter((el) => getComputedStyle(el).position === 'fixed' && el.getBoundingClientRect().top > innerHeight / 2).forEach((el) => (el.style.display = 'none'))`);
     const height = await run('document.documentElement.scrollHeight');
     await save(`${t.slug}-full`, 960, height, true);
-    console.log(`  ${t.slug}: hero and full page (${height}px tall)`);
+    await open(t.demo, 390, 844, true);
+    await save(`${t.slug}-phone`, 390, 844, false);
+    console.log(`  ${t.slug}: hero, full page (${height}px tall) and phone`);
   }
 } finally {
   ws.close();

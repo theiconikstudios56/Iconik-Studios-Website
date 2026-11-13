@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { m } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, MousePointer2 } from 'lucide-react';
 import Layout from '../components/Layout';
@@ -19,10 +19,10 @@ export default function TemplatesPage() {
   // post can link to one industry and Back steps through the filters.
   const [params] = useSearchParams();
   const current = industries.find((i) => i.slug === params.get('industry'));
-  const shown = shop?.templates.filter((t) => !current || t.industry === current.label) ?? [];
+  const shown = byTrade(shop?.templates.filter((t) => !current || t.industry === current.label) ?? []);
   // From an ad or post for one trade: that trade's templates first, then the rest of the drop below,
   // so nobody hits a dead end if theirs isn't quite right.
-  const rest = current ? shop?.templates.filter((t) => t.industry !== current.label) ?? [] : [];
+  const rest = current ? byTrade(shop?.templates.filter((t) => t.industry !== current.label) ?? []) : [];
 
   return (
     <Layout
@@ -70,6 +70,7 @@ export default function TemplatesPage() {
         {shop ? (
           <section id="templates" className="scroll-mt-28 px-6 pb-32 pt-4 lg:px-12 lg:pt-8">
             {industries.length > 1 && <IndustryFilter current={current?.slug} total={shop.templates.length} />}
+            <MissingTrade />
             <div className="mx-auto grid max-w-[88rem] grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:gap-y-20">
               {shown.map((template, i) => (
                 <TemplateCard key={template.key} template={template} index={i} />
@@ -141,6 +142,19 @@ export default function TemplatesPage() {
   );
 }
 
+// The gallery leads with the trades our ads speak to; med spas, the first ones built, come last (Ricky, 2026-11-13).
+// Each card keeps its drop number (No. 04 stays No. 04); only the order on this page changes.
+// An industry not listed here (a new drop's) sits after the listed trades, before agency and med spa.
+const TRADE_ORDER = ['HVAC & plumbing', 'Roofing', 'Auto detailing', 'Real estate', 'Dental', 'Bakery'];
+const LAST = ['Agency', 'Med spa'];
+const rank = (industry: string) => {
+  const i = TRADE_ORDER.indexOf(industry);
+  if (i >= 0) return i;
+  const j = LAST.indexOf(industry);
+  return j >= 0 ? 100 + j : 50;
+};
+const byTrade = <T extends { industry: string }>(list: T[]) => [...list].sort((a, b) => rank(a.industry) - rank(b.industry));
+
 // "med spa, real estate, HVAC & plumbing and bakery" (… businesses) for the page's search description.
 const industryList = (() => {
   const names = industries.map((i) => i.label.replace(/^[A-Z][a-z]/, (c) => c.toLowerCase()));
@@ -150,19 +164,21 @@ const industryList = (() => {
 /** "All" and a button per industry, with counts; one row that scrolls sideways on phones. */
 function IndustryFilter({ current, total }: { current: string | undefined; total: number }) {
   const pill = (active: boolean) =>
-    `inline-flex shrink-0 items-center gap-2.5 rounded-full border px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.25em] transition-colors ${
-      active ? 'border-paper bg-paper text-ink' : 'border-white/15 text-white/70 hover:border-burnt-orange hover:text-paper'
+    `inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors md:gap-2.5 md:px-5 md:tracking-[0.25em] ${
+      active ? 'border-paper bg-paper text-ink' : 'border-white/25 text-white/85 hover:border-burnt-orange hover:text-paper'
     }`;
   const count = (n: number, active: boolean) => <span className={active ? 'text-ink/50' : 'text-burnt-orange'}>{n}</span>;
   return (
-    <nav aria-label="Templates by industry" className="mx-auto mb-10 max-w-[88rem] lg:mb-16">
-      <ul className="-mx-6 flex gap-3 overflow-x-auto px-6 pb-1 [scrollbar-width:none] lg:mx-0 lg:flex-wrap lg:px-0 [&::-webkit-scrollbar]:hidden">
+    <nav aria-label="Templates by industry" className="mx-auto mb-6 max-w-[88rem]">
+      <p className="mb-4 font-display text-2xl uppercase tracking-tight md:text-3xl">What’s your business?</p>
+      {/* Every trade in view at once, wrapping on phones, so nobody has to find the sideways scroll. */}
+      <ul className="flex flex-wrap gap-2.5 md:gap-3">
         <li className="shrink-0">
           <Link to="/templates" aria-current={!current ? 'page' : undefined} className={pill(!current)}>
             All {count(total, !current)}
           </Link>
         </li>
-        {[...industries].sort((a, b) => Number(b.slug === current) - Number(a.slug === current)).map((i) => (
+        {byTrade(industries.map((i) => ({ ...i, industry: i.label }))).map((i) => (
           <li key={i.slug} className="shrink-0">
             <Link to={`/templates?industry=${i.slug}`} aria-current={current === i.slug ? 'page' : undefined} className={pill(current === i.slug)}>
               {i.label} {count(i.count, current === i.slug)}
@@ -174,6 +190,38 @@ function IndustryFilter({ current, total }: { current: string | undefined; total
   );
 }
 
+/** For a visitor whose trade isn't in the shop yet: name it, and the contact form opens with the question written. */
+function MissingTrade() {
+  const [trade, setTrade] = useState('');
+  const navigate = useNavigate();
+  const ask = (e: FormEvent) => {
+    e.preventDefault();
+    const what = trade.trim();
+    const message = what
+      ? `I run a ${what} business. Do you have (or are you making) a website template for it?`
+      : 'I don’t see a template for my kind of business. Do you have one coming?';
+    navigate(`/contact?message=${encodeURIComponent(message)}`);
+  };
+  return (
+    <form onSubmit={ask} className="mx-auto mb-12 flex max-w-[88rem] flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 lg:mb-16">
+      <label htmlFor="missing-trade" className="text-base text-white/85">Don’t see yours? Tell us what you do:</label>
+      <div className="flex flex-1 gap-2 sm:max-w-md">
+        <input
+          id="missing-trade"
+          value={trade}
+          onChange={(e) => setTrade(e.target.value)}
+          maxLength={60}
+          placeholder="e.g. landscaping"
+          className="min-w-0 flex-1 rounded-full border border-white/25 bg-transparent px-5 py-3 text-base text-paper placeholder:text-white/50 focus:border-burnt-orange focus:outline-none"
+        />
+        <button type="submit" className="inline-flex shrink-0 items-center gap-2 rounded-full border border-burnt-orange px-5 py-3 font-display text-sm uppercase tracking-widest text-paper transition-colors hover:bg-burnt-orange">
+          Ask us <ArrowRight size={16} />
+        </button>
+      </div>
+    </form>
+  );
+}
+
 // The hover scroll moves at one speed for every template, so a long page takes longer instead of racing
 // past (7 s for the short ones, as before; Corbel's 15 screens about 25 s). Leaving goes back up in 1 s.
 const SCROLL_PX_PER_SECOND = 340;
@@ -181,6 +229,7 @@ const SCROLL_MIN_MS = 7000;
 
 function TemplateCard({ template, index }: { template: ShopTemplate; index: number }) {
   const full = pictureOf(template.slug, 'full');
+  const phone = pictureOf(template.slug, 'phone');
   const shot = useRef<HTMLImageElement>(null);
   // Measured when the picture loads and again on hover: the picture's travel at the card's size right now
   const timeTheScroll = () => {
@@ -209,7 +258,16 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
       <Link to={`/templates/${template.slug}`} className="block" aria-label={`${template.name}: see the template`}>
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#111]">
           {/* The whole home page glides past on hover, like scrolling the real site. */}
-          <div className="relative h-[20rem] overflow-hidden md:h-[24rem]">
+          {/* Phones see the template as it looks on a phone: a handset rising from the bottom of the panel. */}
+          {phone && (
+            <div className="relative h-[24rem] overflow-hidden bg-[radial-gradient(ellipse_at_50%_100%,rgba(255,255,255,0.08),transparent_70%)] md:hidden">
+              <div className="absolute left-1/2 top-7 w-[15.5rem] -translate-x-1/2 rounded-t-[2.4rem] border-x-[7px] border-t-[7px] border-[#2a2a2a] bg-[#2a2a2a] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9)]">
+                <img src={phone} alt={`The ${template.name} template on a phone`} loading="lazy" fetchPriority="low" decoding="async" className="block w-full rounded-t-[1.9rem]" />
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink/80 to-transparent" />
+            </div>
+          )}
+          <div className={`relative h-[20rem] overflow-hidden md:h-[24rem] ${phone ? 'hidden md:block' : ''}`}>
             {full && (
               <img
                 ref={shot}
