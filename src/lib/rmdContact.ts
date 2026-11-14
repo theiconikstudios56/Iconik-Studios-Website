@@ -48,3 +48,27 @@ export async function sendContact(answers: ContactAnswers, turnstile: string, we
   }
   throw new ContactError(FALLBACK)
 }
+
+/**
+ * "Email me this template": RMD's form `email-me-template` (email + the
+ * template's short name in a hidden field). RMD saves the contact, tags them
+ * template-saved and its "Saved template follow-up" automation emails the link.
+ */
+export async function saveTemplate(email: string, template: string, turnstile: string, website: string): Promise<void> {
+  if (!ENDPOINT) throw new ContactError('The form isn’t connected in development (set VITE_RMD_FORM_URL).')
+  let response: Response
+  try {
+    response = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'submit', slug: 'email-me-template', answers: { email, template }, attribution: arrival, turnstile, website }),
+      credentials: 'omit',
+    })
+  } catch {
+    throw new ContactError('We couldn’t send it just now. Please try again in a moment.')
+  }
+  const data = await response.json().catch(() => ({}))
+  if (response.ok) return
+  if (response.status === 422 || response.status === 403 || response.status === 429) throw new ContactError(data.fields?.email ?? data.message ?? 'Please check your email address.')
+  throw new ContactError('We couldn’t send it just now. Please try again in a moment.')
+}

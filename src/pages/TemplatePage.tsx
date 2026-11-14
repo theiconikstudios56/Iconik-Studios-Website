@@ -9,6 +9,7 @@ import Editorial, { BronzeLabel } from '../components/shop/Editorial';
 import NameReel from '../components/shop/NameReel';
 import LivePreview, { demoWithName } from '../components/shop/LivePreview';
 import AskUs from '../components/shop/AskUs';
+import SaveTemplate from '../components/shop/SaveTemplate';
 import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
 import { metaViewContent } from '../lib/metaPixel';
@@ -331,6 +332,7 @@ function Purchase({ template, yourName, onAsk }: { template: ShopTemplate; yourN
       <button type="button" onClick={onAsk} className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-4 font-display text-sm uppercase tracking-widest text-white transition-colors hover:border-white">
         <MessageCircle size={16} /> Not sure yet? Ask us
       </button>
+      <SaveTemplate slug={template.slug} name={template.name} />
       <div className="mt-5">
         <MoneyBack />
       </div>
