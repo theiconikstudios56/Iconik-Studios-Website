@@ -9,8 +9,8 @@ export type PageSeo = { path: string; title: string; description: string; /** A 
 export const PAGE_SEO = {
   home: {
     path: '/',
-    title: 'Med Spa Website Design & AI Automation | Iconik Studios',
-    description: 'Med spa websites, online booking and AI follow-up that turn ad clicks into booked appointments. Built in Phoenix, Arizona, and run on Remedy, our own CRM.',
+    title: 'Contractor & Home Service Websites + Automation | Iconik Studios',
+    description: 'Websites and automations for contractors, home service companies and local businesses, from roofing and HVAC to med spas. Templates or custom, built in Phoenix.',
     picture: 'fuzzy-lineup-2026',
   },
   about: {
