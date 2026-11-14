@@ -68,7 +68,7 @@ export default function TemplatePage() {
   const priceSection = (
     <section id="price" className={`scroll-mt-24 bg-ink px-6 text-white lg:px-12 ${isPhone ? 'pb-28 pt-6' : 'py-32'}`}>
       <div className="mx-auto max-w-7xl">
-        <Editorial thin="One template" heavy={money(template.price)} script="yours to keep" />
+        <Editorial thin="One template" heavy={money(template.price)} script="first month free" />
         <div className="mx-auto mt-14 max-w-xl">
           <Purchase template={template} yourName={yourName} onAsk={ask} />
         </div>
@@ -94,7 +94,7 @@ export default function TemplatePage() {
           <Editorial as="h1" size="hero" thin={template.industry} heavy="Website" script={template.name} />
 
           <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }} className="mt-10 flex flex-col items-center text-center">
-            <BronzeLabel>{money(template.price)} · Yours to keep</BronzeLabel>
+            <BronzeLabel>{money(template.price)} + {money(shop.plans.monthly)}/mo · First month free</BronzeLabel>
             <div className="mt-7 max-w-2xl text-lg leading-relaxed text-white md:text-xl">
               {template.summary} Type your business name and watch {template.name} become yours. It’s the real site: scroll it, click around.
             </div>
