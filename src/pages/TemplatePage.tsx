@@ -35,6 +35,7 @@ export default function TemplatePage() {
   const template = templateBySlug(slug);
   const [yourName, setYourName] = useState('');
   const [asking, setAsking] = useState(false);
+  const isPhone = useIsPhone();
   const closeAsk = useCallback(() => setAsking(false), []);
   const ask = useCallback(() => setAsking(true), []);
   useEffect(() => {
@@ -64,6 +65,16 @@ export default function TemplatePage() {
   const others = shop.templates.filter((t) => t.key !== template.key);
   const number = shop.templates.findIndex((t) => t.key === template.key) + 1;
   const hero = pictureOf(template.slug, 'hero');
+  const priceSection = (
+    <section id="price" className={`scroll-mt-24 bg-ink px-6 text-white lg:px-12 ${isPhone ? 'pb-28 pt-6' : 'py-32'}`}>
+      <div className="mx-auto max-w-7xl">
+        <Editorial thin="One template" heavy={money(template.price)} script="yours to keep" />
+        <div className="mx-auto mt-14 max-w-xl">
+          <Purchase template={template} yourName={yourName} onAsk={ask} />
+        </div>
+      </div>
+    </section>
+  );
 
   return (
     <Layout
@@ -71,7 +82,7 @@ export default function TemplatePage() {
       description={`${template.summary} Every page written for you, hosting and your own domain included.`}
     >
       {/* 1. The hero: the post headline, the price label, two buttons, then the live site with your name on it. */}
-      <section className="relative overflow-hidden bg-ink px-6 pb-40 pt-28 text-white lg:px-12 lg:pt-36">
+      <section className="relative overflow-hidden bg-ink px-6 pb-16 pt-28 text-white md:pb-40 lg:px-12 lg:pt-36">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 flex flex-wrap items-center justify-between gap-4">
             <Link to="/templates" className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-white transition-colors hover:text-burnt-orange">
@@ -109,6 +120,9 @@ export default function TemplatePage() {
         </div>
       </section>
 
+      {/* Phones: the price comes straight after the hero (11-14: 9 in 10 phone visitors never scrolled down to it). */}
+      {isPhone && priceSection}
+
       {/* 3. What you get, on the warm paper colourway. */}
       <section className="rounded-t-[36px] bg-[#f6f3ef] px-6 py-32 text-ink lg:px-12">
         <div className="mx-auto max-w-7xl">
@@ -129,15 +143,8 @@ export default function TemplatePage() {
         </div>
       </section>
 
-      {/* 4. The price. */}
-      <section id="price" className="scroll-mt-24 bg-ink px-6 py-32 text-white lg:px-12">
-        <div className="mx-auto max-w-7xl">
-          <Editorial thin="One template" heavy={money(template.price)} script="yours to keep" />
-          <div className="mx-auto mt-14 max-w-xl">
-            <Purchase template={template} yourName={yourName} onAsk={ask} />
-          </div>
-        </div>
-      </section>
+      {/* 4. The price (desktop: after what you get). */}
+      {!isPhone && priceSection}
 
       {/* 5. The name reel: a breath between the sell and the people. */}
       <NameReel name={template.name} picture={pictureOf(template.slug, 'reel') ?? hero} />
@@ -202,6 +209,19 @@ export default function TemplatePage() {
       <AskUs open={asking} onClose={closeAsk} templateName={template.name} industry={template.industry} />
     </Layout>
   );
+}
+
+/** True under the md breakpoint (phones), read at once so the price box mounts in its phone spot from the first render. */
+function useIsPhone() {
+  const query = '(max-width: 767px)';
+  const [phone, setPhone] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const on = () => setPhone(mq.matches);
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  return phone;
 }
 
 /** Phones: a slim bar with the price and a way to it, once the hero's buttons have scrolled away. */
