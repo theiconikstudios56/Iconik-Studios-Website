@@ -45,14 +45,14 @@ export const PAGE_SEO = {
   },
   blog: {
     path: '/blog',
-    title: 'Med Spa Marketing & Automation Blog | Iconik Studios',
-    description: 'Ideas for med spa owners on websites, online booking, lead follow-up and AI automation that keep the calendar full.',
+    title: 'Website & Automation Tips for Local Businesses | Iconik Studios',
+    description: 'Plain-English tips for contractors, home service companies and local businesses on websites, online booking, lead follow-up and automation.',
     picture: 'fuzzy-work',
   },
   contact: {
     path: '/contact',
-    title: 'Contact Iconik Studios | Med Spa Website & Automation Quote',
-    description: "Tell us about your med spa and get a quote for a website, online booking and automated follow-up. You'll hear from a real person within one business day.",
+    title: 'Contact Iconik Studios | Website & Automation Quote',
+    description: "Tell us about your business and get a quote for a website, online booking and automated follow-up. You'll hear from a real person within one business day.",
     picture: 'convo-fuzzy',
   },
 } satisfies Record<string, PageSeo>;
