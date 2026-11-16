@@ -5,7 +5,7 @@ import { ArrowDown, ArrowRight, ArrowUpRight, MousePointer2 } from 'lucide-react
 import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
 import { HowItWorks, Included, Questions } from '../components/shop/ShopParts';
-import { industries, money, pictureOf, shop, templateBySlug, type ShopTemplate } from '../lib/shop';
+import { dropLabel, dropNumber, industries, money, pictureOf, shop, templateBySlug, type ShopTemplate } from '../lib/shop';
 import { Img, T } from '../content';
 import deskFuzzy from '../assets/images/web/fuzzy-automation.webp';
 
@@ -81,7 +81,7 @@ export default function TemplatesPage() {
             {rest.length > 0 && (
               <>
                 <div className="mx-auto mb-12 mt-24 max-w-[88rem] border-t border-white/10 pt-12">
-                  <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange">More from Drop 001</span>
+                  <span className="font-mono text-xs uppercase tracking-[0.4em] text-burnt-orange">More templates</span>
                 </div>
                 <div className="mx-auto grid max-w-[88rem] grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:gap-y-20">
                   {rest.map((template, i) => (
@@ -153,7 +153,8 @@ const rank = (industry: string) => {
   const j = LAST.indexOf(industry);
   return j >= 0 ? 100 + j : 50;
 };
-const byTrade = <T extends { industry: string }>(list: T[]) => [...list].sort((a, b) => rank(a.industry) - rank(b.industry));
+// The newest drop leads the gallery (Drop 002, 2026-11-18); within a drop, the trade order above.
+const byTrade = <T extends { industry: string; drop?: number }>(list: T[]) => [...list].sort((a, b) => (b.drop ?? 0) - (a.drop ?? 0) || rank(a.industry) - rank(b.industry));
 
 // "med spa, real estate, HVAC & plumbing and bakery" (… businesses) for the page's search description.
 const industryList = (() => {
@@ -211,7 +212,7 @@ function MissingTrade() {
           value={trade}
           onChange={(e) => setTrade(e.target.value)}
           maxLength={60}
-          placeholder="e.g. landscaping"
+          placeholder="e.g. painting"
           className="min-w-0 flex-1 rounded-full border border-white/25 bg-transparent px-5 py-3 text-base text-paper placeholder:text-white/50 focus:border-burnt-orange focus:outline-none"
         />
         <button type="submit" className="inline-flex shrink-0 items-center gap-2 rounded-full border border-burnt-orange px-5 py-3 font-display text-sm uppercase tracking-widest text-paper transition-colors hover:bg-burnt-orange">
@@ -244,7 +245,7 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
   useEffect(() => {
     if (shot.current?.complete) timeTheScroll();
   });
-  const number = String(shop!.templates.indexOf(template) + 1).padStart(2, '0');
+  const number = `${dropLabel(template.drop).replace('Drop ', '')} · ${dropNumber(template)}`;
   const palette = [template.colors.background, template.colors.brand, template.colors.text];
   return (
     <m.article

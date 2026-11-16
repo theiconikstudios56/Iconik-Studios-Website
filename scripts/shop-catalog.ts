@@ -38,6 +38,7 @@ function clean(raw: unknown) {
       name: text(x.name, 40),
       slug,
       industry: text(x.industry, 40),
+      drop: typeof x.drop === 'number' && Number.isInteger(x.drop) && x.drop > 0 && x.drop < 1000 ? x.drop : 1,
       summary: text(x.summary),
       price,
       demo,

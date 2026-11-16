@@ -5,6 +5,8 @@ declare module 'virtual:shop-catalog' {
     name: string;
     slug: string;
     industry: string;
+    /** The numbered drop it shipped in (Drop 001, Drop 002…). */
+    drop: number;
     summary: string;
     /** In cents. */
     price: number;

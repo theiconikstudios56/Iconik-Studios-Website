@@ -32,6 +32,12 @@ export const industries = (shop?.templates ?? []).reduce<{ label: string; slug: 
   return list;
 }, []);
 
+/** "Drop 002": always three digits (Ricky, 2026-11-02). */
+export const dropLabel = (drop: number) => `Drop ${String(drop).padStart(3, '0')}`;
+/** The templates in one drop, in the order they shipped. */
+export const inDrop = (drop: number) => shop?.templates.filter((t) => t.drop === drop) ?? [];
+/** A template's number within its own drop ("01" of Drop 002). */
+export const dropNumber = (template: ShopTemplate) => String(inDrop(template.drop).findIndex((t) => t.key === template.key) + 1).padStart(2, '0');
 export const templateBySlug = (slug: string | undefined) => shop?.templates.find((t) => t.slug === slug);
 
 /** Opens Stripe Checkout for the template and plan, or throws with a message to show. */

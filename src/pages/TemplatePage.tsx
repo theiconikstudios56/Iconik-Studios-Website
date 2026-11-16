@@ -10,7 +10,7 @@ import NameReel from '../components/shop/NameReel';
 import LivePreview, { demoWithName } from '../components/shop/LivePreview';
 import AskUs from '../components/shop/AskUs';
 import SaveTemplate from '../components/shop/SaveTemplate';
-import { buy, canBuy, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
+import { buy, canBuy, dropLabel, dropNumber, inDrop, money, pictureOf, shop, templateBySlug, type ShopPlan, type ShopTemplate } from '../lib/shop';
 import NotFoundPage from './NotFoundPage';
 import { metaViewContent } from '../lib/metaPixel';
 import { trackShopStep } from '../lib/rmdTracking';
@@ -63,8 +63,8 @@ export default function TemplatePage() {
     return () => watch.disconnect();
   }, [slug]);
   if (!template || !shop) return <NotFoundPage />;
-  const others = shop.templates.filter((t) => t.key !== template.key);
-  const number = shop.templates.findIndex((t) => t.key === template.key) + 1;
+  // More from the same drop: Drop 002's page shows the rest of Drop 002.
+  const others = inDrop(template.drop).filter((t) => t.key !== template.key);
   const hero = pictureOf(template.slug, 'hero');
   const priceSection = (
     <section id="price" className={`scroll-mt-24 bg-ink px-6 text-white lg:px-12 ${isPhone ? 'pb-28 pt-6' : 'py-32'}`}>
@@ -89,7 +89,7 @@ export default function TemplatePage() {
             <Link to="/templates" className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-white transition-colors hover:text-burnt-orange">
               <ArrowLeft size={14} /> All templates
             </Link>
-            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-burnt-orange">Drop 001 · No. {String(number).padStart(2, '0')} of {shop.templates.length}</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-burnt-orange">{dropLabel(template.drop)} · No. {dropNumber(template)} of {String(inDrop(template.drop).length).padStart(2, '0')}</span>
           </div>
 
           <Editorial as="h1" size="hero" thin={template.industry} heavy="Website" script={template.name} />
@@ -178,7 +178,7 @@ export default function TemplatePage() {
       {/* 7. More from the drop, then questions. */}
       <section className="bg-ink px-6 py-32 text-white lg:px-12">
         <div className="mx-auto max-w-7xl">
-          <Editorial thin="More from" heavy="The drop" script="Drop 001" />
+          <Editorial thin="More from" heavy="The drop" script={dropLabel(template.drop)} />
           <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {others.map((t, i) => (
               <m.div key={t.key} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 4) * 0.08 }}>
