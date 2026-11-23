@@ -12,7 +12,23 @@ import { trackShopStep } from './rmdTracking';
 export type { ShopTemplate };
 export type ShopPlan = 'monthly' | 'yearly';
 
-export const shop = catalog;
+/**
+ * Black Friday (Ricky, 2026-11-23): every template $89 instead of $129, through Cyber Monday.
+ * Stripe takes the $40 off at Checkout (Sites shop-checkout: SHOP_SALE_COUPON, until SHOP_SALE_ENDS),
+ * so the two must end together. Outside the window the shop shows its normal prices again by itself.
+ */
+export const SALE = {
+  name: 'Black Friday',
+  starts: Date.parse('2026-11-23T07:00:00Z'), // Mon Nov 23, 12:00 AM Arizona
+  ends: Date.parse('2026-12-01T07:00:00Z'), // Mon Nov 30, 11:59 PM Arizona
+  off: 4000,
+  endsLabel: 'Mon, Nov 30',
+};
+export const saleOn = (now = Date.now()) => now >= SALE.starts && now < SALE.ends;
+
+export const shop = catalog && saleOn()
+  ? { ...catalog, templates: catalog.templates.map((t) => ({ ...t, was: t.price, price: Math.max(0, t.price - SALE.off) })) }
+  : catalog;
 
 /** Set once the Sites project is online (Vercel: VITE_SHOP_CHECKOUT_URL); until then Buy says it's opening soon. */
 const CHECKOUT: string | undefined = import.meta.env.VITE_SHOP_CHECKOUT_URL || undefined;

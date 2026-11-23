@@ -10,6 +10,8 @@ declare module 'virtual:shop-catalog' {
     summary: string;
     /** In cents. */
     price: number;
+    /** The usual price in cents while a sale is on (lib/shop SALE); unset otherwise. */
+    was?: number;
     demo: string;
     pages: { path: string; title: string }[];
     pageLimit: number;

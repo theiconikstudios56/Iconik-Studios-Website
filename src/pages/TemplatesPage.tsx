@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import FinalCTA from '../components/FinalCTA';
 import { HowItWorks, Included, Questions } from '../components/shop/ShopParts';
 import { dropLabel, dropNumber, industries, money, pictureOf, shop, templateBySlug, type ShopTemplate } from '../lib/shop';
+import { SaleBanner, Was } from '../components/shop/SaleBadge';
 import { Img, T } from '../content';
 import deskFuzzy from '../assets/images/web/fuzzy-automation.webp';
 
@@ -53,6 +54,7 @@ export default function TemplatesPage() {
               <p className="mb-8 max-w-xl text-base leading-relaxed text-white/80 md:mb-12 md:text-xl">
                 {current ? `Complete ${current.label.replace(/^[A-Z][a-z]/, (c) => c.toLowerCase())} websites designed by our studio, every page already written. Make it yours in a simple editor and go live on your own domain. Your first month of hosting is free.` : <T k="templates.intro">{"Complete websites designed by our studio for local businesses. Pick the one that fits, make it yours in a simple editor, and go live on your own domain. Your first month of hosting is free."}</T>}
               </p>
+              <SaleBanner className="mb-8" />
               <div className={`${current ? 'hidden lg:flex' : 'flex'} flex-wrap items-center gap-6`}>
                 <a href="#templates" className="group inline-flex items-center gap-3 rounded-full bg-paper px-10 py-5 font-display text-lg uppercase text-ink transition-all hover:bg-burnt-orange hover:text-white">
                   Browse templates <ArrowDown size={18} className="transition-transform group-hover:translate-y-0.5" />
@@ -295,7 +297,7 @@ function TemplateCard({ template, index }: { template: ShopTemplate; index: numb
           <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-burnt-orange">
             <span className="text-white/40">{number}</span> <span className="mx-1.5 text-white/20">/</span> {template.industry}
           </p>
-          <p className="rounded-full border border-white/15 px-4 py-1.5 font-display text-lg leading-none">{money(template.price)}</p>
+          <p className="rounded-full border border-white/15 px-4 py-1.5 font-display text-lg leading-none"><Was template={template} />{money(template.price)}</p>
         </div>
         <h2 className="font-display text-4xl uppercase tracking-tight md:text-5xl">
           <Link to={`/templates/${template.slug}`} className="transition-colors hover:text-burnt-orange">{template.name}</Link>
